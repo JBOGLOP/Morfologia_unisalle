@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Movimientos Articulares — Figura Humana Interactiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050914;
+    --panel:#0b1525;
+    --panel2:#0f1c31;
+    --panel3:#142744;
+    --line:#1b3253;
+    --line2:#244775;
+    --text:#a9c2df;
+    --text-soft:#7f9bbb;
+    --text-dim:#4f6f93;
+    --cyan:#00e4ff;
+    --amber:#ffb347;
+    --green:#6fe4b2;
+    --danger:#ff6f8c;
+    --bone:#8fb2d7;
+    --bone2:#648bb6;
+    --ink:#07111f;
+    --card-shadow:0 12px 40px rgba(0,0,0,.28);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:'IBM Plex Mono', monospace;overflow:hidden}
+  button,input{font:inherit}
+
+  .app{display:grid;grid-template-rows:auto 1fr auto;height:100vh}
+  .topbar{
+    display:flex;align-items:center;gap:18px;padding:12px 18px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(14,25,44,.96), rgba(8,16,30,.96));backdrop-filter:blur(12px)
+  }
+  .title-wrap{display:flex;flex-direction:column;gap:2px}
+  .title{font-family:'Crimson Text', serif;font-size:1.6rem;font-weight:700;color:#e7f2ff;letter-spacing:.02em}
+  .subtitle{font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim)}
+  .tag{
+    margin-left:auto;border:1px solid rgba(0,228,255,.5);color:var(--cyan);padding:5px 10px;border-radius:999px;
+    font-size:.62rem;letter-spacing:.14em;text-transform:uppercase
+  }
+
+  .main{display:grid;grid-template-columns:260px 1fr 330px;min-height:0}
+
+  .panel{
+    background:linear-gradient(180deg, rgba(11,21,37,.96), rgba(8,15,27,.96));
+    min-height:0;overflow:auto
+  }
+  .panel::-webkit-scrollbar{width:8px;height:8px}
+  .panel::-webkit-scrollbar-thumb{background:#1b2d49;border-radius:20px}
+  .left{border-right:1px solid var(--line);padding:14px 10px 20px}
+  .right{border-left:1px solid var(--line);padding:16px 16px 26px}
+
+  .search{
+    width:100%;background:var(--ink);border:1px solid var(--line);color:var(--text);padding:10px 12px;border-radius:12px;
+    outline:none;transition:border-color .2s, box-shadow .2s
+  }
+  .search:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,228,255,.08)}
+  .help{
+    margin-top:12px;padding:10px 12px;background:rgba(17,30,54,.7);border:1px solid var(--line);border-radius:14px;
+    font-size:.65rem;line-height:1.8;color:var(--text-soft)
+  }
+  .sec{margin-top:14px}
+  .sec-label{
+    padding:10px 8px 6px;color:var(--text-dim);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid var(--line)
+  }
+  .move-btn{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;
+    background:none;border:1px solid transparent;color:var(--text);padding:9px 10px;border-radius:12px;cursor:pointer;
+    margin-top:4px;transition:.18s ease
+  }
+  .move-btn:hover{background:rgba(15,28,49,.9);border-color:var(--line)}
+  .move-btn.active{background:rgba(0,228,255,.08);border-color:rgba(0,228,255,.45);color:#defbff}
+  .move-left{display:flex;align-items:center;gap:10px;min-width:0}
+  .dot{width:8px;height:8px;border-radius:50%;background:#29476d;box-shadow:0 0 0 3px rgba(41,71,109,.18)}
+  .move-btn.active .dot{background:var(--cyan);box-shadow:0 0 0 4px rgba(0,228,255,.16)}
+  .move-name{font-size:.71rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .move-region{font-size:.55rem;color:var(--text-dim);letter-spacing:.09em;text-transform:uppercase;flex-shrink:0}
+
+  .center{
+    position:relative;display:flex;align-items:flex-start;justify-content:center;overflow:auto;
+    background:
+      radial-gradient(circle at 50% 22%, rgba(16,41,78,.72) 0%, rgba(7,15,28,.96) 42%, rgba(4,8,17,1) 82%),
+      linear-gradient(180deg, rgba(6,12,23,.9), rgba(3,7,15,1));
+  }
+  .figure-shell{
+    width:min(100%, 980px);min-height:100%;display:grid;grid-template-rows:auto auto auto auto;justify-items:center;
+    padding:18px 16px 16px;gap:10px
+  }
+  #fig{max-width:100%;width:min(100%, 430px);height:auto;max-height:58vh;filter:drop-shadow(0 20px 45px rgba(0,0,0,.33))}
+  .figure-caption{
+    width:min(100%, 760px);display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--text-dim);
+    font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding-top:4px;flex-wrap:wrap
+  }
+  .caption-chip{
+    border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:rgba(8,18,31,.8)
+  }
+
+  .segment-lab{
+    width:min(100%, 860px);display:grid;grid-template-columns:1fr;gap:12px;margin-top:2px
+  }
+  .seg-card{
+    width:100%;background:linear-gradient(180deg, rgba(10,20,35,.96), rgba(7,14,26,.98));
+    border:1px solid rgba(73,105,142,.42);border-radius:22px;box-shadow:0 16px 34px rgba(0,0,0,.26);padding:14px 14px 12px
+  }
+  .seg-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+  .seg-title{font-family:'Crimson Text', serif;font-size:1.28rem;line-height:1;color:#eef6ff}
+  .seg-subtitle{font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-top:4px}
+  .segment-tag{
+    border:1px solid rgba(0,228,255,.24);background:rgba(0,228,255,.05);color:#bfefff;padding:6px 9px;border-radius:999px;
+    font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap
+  }
+  .seg-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(165px, 1fr));gap:10px}
+  .segment-mini{
+    background:linear-gradient(180deg, rgba(13,24,42,.96), rgba(8,16,28,.96));border:1px solid rgba(50,79,115,.52);
+    border-radius:16px;padding:10px 10px 8px
+  }
+  .seg-mini-title{font-size:.68rem;color:#e6f3ff;letter-spacing:.05em;margin-bottom:2px}
+  .seg-mini-sub{font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px}
+  .seg-svg{width:100%;height:178px;display:block}
+  .seg-svg text{font-family:'IBM Plex Mono', monospace}
+  .seg-body{stroke:#8fb2d7;stroke-width:11;stroke-linecap:round;fill:none}
+  .seg-body-thin{stroke:#8fb2d7;stroke-width:7;stroke-linecap:round;fill:none}
+  .seg-ghost{stroke:#324a66;stroke-width:10;stroke-linecap:round;fill:none;opacity:.58}
+  .seg-ghost-thin{stroke:#324a66;stroke-width:7;stroke-linecap:round;fill:none;opacity:.58}
+  .seg-joint{fill:#07162c;stroke:#7adfff;stroke-width:2}
+  .seg-joint-soft{fill:#07162c;stroke:#3e668b;stroke-width:2}
+  .seg-arc{fill:none;stroke:rgba(255,179,71,.78);stroke-width:2;stroke-dasharray:4 5}
+  .seg-axis{fill:#7e9cc1;font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+  .seg-note{margin-top:10px;font-size:.66rem;line-height:1.8;color:var(--text-soft)}
+  .seg-note b{color:#eaf5ff;font-weight:500}
+
+  .floating-legend{
+    position:static;display:flex;gap:8px;flex-wrap:wrap;max-width:860px;justify-self:start
+  }
+  .legend-pill{
+    background:rgba(7,15,28,.84);border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:.58rem;color:var(--text-soft)
+  }
+
+  .card{
+    background:linear-gradient(180deg, rgba(15,28,49,.95), rgba(9,18,32,.95));
+    border:1px solid var(--line);border-radius:18px;box-shadow:var(--card-shadow)
+  }
+  .hero{padding:16px 16px 14px}
+  .eyebrow{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+  .hero h2{margin:6px 0 2px;font-family:'Crimson Text', serif;font-size:2rem;line-height:1;color:#f1f7ff}
+  .hero .subinfo{font-size:.66rem;color:var(--text-soft);line-height:1.7}
+  .desc{margin-top:12px;padding-left:12px;border-left:2px solid rgba(0,228,255,.35);font-size:.72rem;line-height:1.85;color:var(--text)}
+
+  .grid{display:grid;gap:12px;margin-top:12px}
+  .mini{padding:14px}
+  .mini-title{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:7px}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{padding:6px 9px;border-radius:999px;border:1px solid rgba(0,228,255,.2);background:rgba(0,228,255,.05);font-size:.62rem;color:#bdeefa}
+  .note{font-size:.68rem;line-height:1.8;color:var(--text-soft)}
+  .key-list{display:grid;gap:8px}
+  .key-item{display:flex;gap:8px;align-items:flex-start;font-size:.68rem;line-height:1.7;color:var(--text-soft)}
+  .key-item b{color:#dfeeff;font-weight:500}
+
+  .joint-map{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+  .joint-btn{
+    background:rgba(7,15,28,.72);border:1px solid var(--line);color:var(--text-soft);padding:8px 10px;border-radius:12px;
+    text-align:left;cursor:pointer;transition:.18s ease;font-size:.64rem
+  }
+  .joint-btn:hover{border-color:var(--line2);color:#def7ff;background:rgba(11,24,43,.94)}
+
+  .empty{padding:18px;font-size:.7rem;line-height:1.85;color:var(--text-soft)}
+
+  .bottombar{
+    display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(8,16,29,.96), rgba(7,12,21,.96))
+  }
+  .ctrl{
+    background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:12px;cursor:pointer;transition:.18s ease
+  }
+  .ctrl:hover{border-color:var(--line2);color:#ebf7ff}
+  .ctrl.primary{border-color:rgba(0,228,255,.42);color:var(--cyan)}
+  .speed{
+    background:var(--ink);color:var(--text);border:1px solid var(--line);padding:8px 10px;border-radius:12px
+  }
+  .status{margin-left:auto;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim)}
+
+  .hotspot{cursor:pointer}
+  .hotspot-core{fill:rgba(0,228,255,.16);stroke:rgba(0,228,255,.9);stroke-width:1.5}
+  .hotspot-halo{fill:none;stroke:rgba(0,228,255,.18);stroke-width:6}
+  .hotspot:hover .hotspot-core{fill:rgba(0,228,255,.32)}
+  .hotspot-label{font-size:7px;letter-spacing:.12em;fill:#8fdfff;text-transform:uppercase;pointer-events:none}
+
+  .trajectory{fill:none;stroke:rgba(255,179,71,.72);stroke-width:2;stroke-dasharray:5 7;opacity:0;filter:url(#glow)}
+  .trajectory.show{opacity:1;animation:dash 1.8s linear infinite}
+
+  @keyframes dash{to{stroke-dashoffset:-24}}
+  @keyframes ringPulse{0%,100%{opacity:.26;stroke-width:2}50%{opacity:1;stroke-width:4}}
+  @keyframes fxElbow{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-112deg)}}
+  @keyframes fxKnee{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-98deg)}}
+  @keyframes extElbow{0%{transform:rotate(-72deg)}60%{transform:rotate(10deg)}100%{transform:rotate(0deg)}}
+  @keyframes abdArm{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-76deg)}}
+  @keyframes addArm{0%{transform:rotate(-38deg)}55%{transform:rotate(18deg)}100%{transform:rotate(0deg)}}
+  @keyframes rotation{0%{transform:rotate(-16deg)}50%{transform:rotate(36deg)}100%{transform:rotate(-16deg)}}
+  @keyframes pronation{0%,100%{transform:rotate(0deg)}50%{transform:rotate(92deg)}}
+  @keyframes supination{0%,100%{transform:rotate(80deg)}50%{transform:rotate(0deg)}}
+  @keyframes circumduction{0%{transform:rotate(0deg)}25%{transform:rotate(-70deg)}50%{transform:rotate(-140deg)}75%{transform:rotate(-70deg) translateX(12px)}100%{transform:rotate(0deg)}}
+  @keyframes thumbOpposition{0%,100%{transform:rotate(0deg)}50%{transform:rotate(60deg)}}
+  @keyframes elevate{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+  @keyframes depress{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
+  @keyframes eversion{0%,100%{transform:rotate(0deg)}50%{transform:rotate(34deg)}}
+  @keyframes inversion{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-34deg)}}
+  @keyframes antepulsion{0%,100%{transform:translateX(0)}50%{transform:translateX(-20px)}}
+  @keyframes retropulsion{0%,100%{transform:translateX(0)}50%{transform:translateX(18px)}}
+  @keyframes nutation{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-9deg)}}
+  @keyframes counternutation{0%,100%{transform:rotate(0deg)}50%{transform:rotate(9deg)}}
+  @keyframes protrusion{0%,100%{transform:translateX(0)}50%{transform:translateX(11px)}}
+  @keyframes retrusion{0%,100%{transform:translateX(0)}50%{transform:translateX(-9px)}}
+  @keyframes diduction{0%{transform:translateX(0)}25%{transform:translateX(13px)}75%{transform:translateX(-13px)}100%{transform:translateX(0)}}
+  @keyframes legAbduction{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-30deg)}}
+  @keyframes headOpen{0%,100%{transform:rotate(0deg)}50%{transform:rotate(22deg)}}
+
+  @media (max-width: 1180px){
+    .main{grid-template-columns:240px 1fr 300px}
+  }
+  @media (max-width: 980px){
+    html,body{overflow:auto}
+    .app{height:auto;min-height:100vh}
+    .main{grid-template-columns:1fr;grid-template-rows:auto minmax(520px, 74vh) auto}
+    .left,.right{border:none}
+    .left{border-bottom:1px solid var(--line)}
+    .right{border-top:1px solid var(--line)}
+    .figure-shell{padding-top:10px}
+    .floating-legend{position:static;margin-top:10px;padding:0 14px 14px}
+    .bottombar{flex-wrap:wrap}
+    .status{width:100%;margin-left:0}
+  }
+  @media (max-width: 1220px){
+    .main{grid-template-columns:240px 1fr 310px}
+  }
+  @media (max-width: 1024px){
+    html,body{overflow:auto}
+    .app{height:auto;min-height:100vh}
+    .main{grid-template-columns:1fr;grid-template-rows:auto auto auto}
+    .left,.right{border:none;border-top:1px solid var(--line)}
+    .center{min-height:unset}
+    #fig{max-height:50vh}
+  }
+  @media (max-width: 760px){
+    .title{font-size:1.3rem}
+    .figure-caption{justify-content:flex-start}
+    .segment-lab{width:100%}
+    .seg-grid{grid-template-columns:1fr}
+    .floating-legend{max-width:100%}
+    .bottombar{flex-wrap:wrap}
+    .status{width:100%;margin-left:0}
+  }
+
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="title-wrap">
+      <div class="title">Movimientos articulares</div>
+      <div class="subtitle">Figura humana interactiva · Morfología general · Anatomía funcional</div>
+    </div>
+    <div class="tag">Modelo interactivo</div>
+  </header>
+
+  <section class="main">
+    <aside class="panel left">
+      <input id="search" class="search" type="text" placeholder="Buscar movimiento…" aria-label="Buscar movimiento" />
+      <div class="help">
+        Selecciona un movimiento desde la lista o haz clic sobre una articulación en la figura. Debajo del modelo general verás tarjetas segmentarias más claras para comparar la posición neutra con el movimiento.
+      </div>
+      <div id="leftPanel"></div>
+    </aside>
+
+    <main class="center">
+      <div class="figure-shell">
+        <svg id="fig" viewBox="0 0 400 660" xmlns="http://www.w3.org/2000/svg" aria-labelledby="svgTitle svgDesc" role="img">
+          <title id="svgTitle">Figura humana interactiva con demostración de movimientos articulares</title>
+          <desc id="svgDesc">Modelo anatómico simplificado que permite visualizar movimientos articulares del hombro, codo, mano, pelvis, rodilla, tobillo y mandíbula.</desc>
+          <defs>
+            <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle cx="10" cy="10" r=".55" fill="#173050"/>
+            </pattern>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <rect width="400" height="660" fill="url(#dots)" opacity=".85"/>
+          <line x1="200" y1="10" x2="200" y2="650" stroke="#14243c" stroke-width="1" stroke-dasharray="6,7"/>
+          <line x1="20" y1="340" x2="380" y2="340" stroke="#10203a" stroke-width="1" stroke-dasharray="4,8"/>
+
+          <!-- trajectories -->
+          <path id="tCirc" class="trajectory" d="M270 160 Q338 170 330 260 Q325 325 282 330" />
+          <path id="tDidu" class="trajectory" d="M175 92 Q200 104 225 92" />
+          <path id="tThumb" class="trajectory" d="M272 340 Q280 345 283 352" />
+          <path id="tFoot" class="trajectory" d="M246 630 Q255 618 292 628" />
+
+          <!-- HEAD -->
+          <g id="gHead">
+            <ellipse cx="200" cy="68" rx="40" ry="47" fill="#0d1e38" stroke="#4878a8" stroke-width="1.5"/>
+            <ellipse cx="200" cy="68" rx="36" ry="42" fill="#16284a" opacity=".42"/>
+            <ellipse cx="186" cy="61" rx="7.5" ry="5.5" fill="#050d1a" stroke="#2a56a0" stroke-width="1"/>
+            <ellipse cx="214" cy="61" rx="7.5" ry="5.5" fill="#050d1a" stroke="#2a56a0" stroke-width="1"/>
+            <circle cx="186" cy="61" r="3" fill="#1458c0" opacity=".9"/>
+            <circle cx="214" cy="61" r="3" fill="#1458c0" opacity=".9"/>
+            <path d="M197 70 L193 79 L200 79 L207 79 L203 70" fill="none" stroke="#305880" stroke-width="1"/>
+            <path d="M158 73 Q175 82 179 78" fill="none" stroke="#1e3860" stroke-width="1"/>
+            <path d="M242 73 Q225 82 221 78" fill="none" stroke="#1e3860" stroke-width="1"/>
+            <path d="M163 40 Q180 30 200 28 Q220 30 237 40" fill="none" stroke="#1e3860" stroke-width="1"/>
+            <g id="gJaw" style="transform-origin:200px 84px">
+              <path d="M163 84 Q183 98 200 102 Q217 98 237 84" fill="none" stroke="#4070a0" stroke-width="2"/>
+              <path d="M172 90 Q200 120 228 90" fill="#0d1e38" stroke="#4070a0" stroke-width="1.5"/>
+            </g>
+          </g>
+
+          <g id="gNeck">
+            <rect x="188" y="114" width="24" height="31" rx="5" fill="#0d1e38" stroke="#305880" stroke-width="1.5"/>
+            <line x1="200" y1="118" x2="200" y2="141" stroke="#1c4080" stroke-width="1.8" stroke-dasharray="4,3"/>
+          </g>
+
+          <g id="gTorso">
+            <path d="M130 152 L114 266 L138 342 L262 342 L286 266 L270 152 Z" fill="#0a1830" stroke="#243c60" stroke-width="1.5"/>
+            <rect x="193" y="152" width="14" height="110" rx="3" fill="#0f1e38" stroke="#1a3460" stroke-width="1"/>
+            <path d="M193 177 Q158 196 128 215" fill="none" stroke="#162840" stroke-width="1.5"/>
+            <path d="M190 200 Q152 222 124 244" fill="none" stroke="#132238" stroke-width="1.5"/>
+            <path d="M187 225 Q146 250 122 275" fill="none" stroke="#102038" stroke-width="1"/>
+            <path d="M207 177 Q242 196 272 215" fill="none" stroke="#162840" stroke-width="1.5"/>
+            <path d="M210 200 Q248 222 276 244" fill="none" stroke="#132238" stroke-width="1.5"/>
+            <path d="M213 225 Q254 250 278 275" fill="none" stroke="#102038" stroke-width="1"/>
+            <line x1="200" y1="152" x2="130" y2="160" stroke="#4878b0" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="200" y1="152" x2="270" y2="160" stroke="#4878b0" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="200" y1="155" x2="200" y2="340" stroke="#1c3868" stroke-width="1.5" stroke-dasharray="3,4"/>
+          </g>
+
+          <g id="gPelvis" style="transform-origin:200px 360px">
+            <path d="M138 342 Q95 368 115 404 Q148 432 200 428 Q252 432 285 404 Q305 368 262 342 Z" fill="#08152a" stroke="#1e3860" stroke-width="1.5"/>
+            <ellipse cx="200" cy="365" rx="21" ry="27" fill="#060e1e" stroke="#162f58" stroke-width="1.5"/>
+            <line x1="200" y1="342" x2="200" y2="390" stroke="#162f58" stroke-width="1" stroke-dasharray="3,3"/>
+            <path d="M138 342 Q122 330 130 314" fill="none" stroke="#203858" stroke-width="1.5"/>
+            <path d="M262 342 Q278 330 270 314" fill="none" stroke="#203858" stroke-width="1.5"/>
+            <path d="M170 424 Q200 436 230 424" fill="none" stroke="#1a3460" stroke-width="2"/>
+          </g>
+
+          <!-- right arm -->
+          <g id="gRShoulder" style="transform-origin:130px 160px">
+            <circle cx="130" cy="160" r="9" fill="#07162c" stroke="#255090" stroke-width="2"/>
+            <g id="gRArmFull" style="transform-origin:130px 160px">
+              <line x1="130" y1="160" x2="122" y2="253" stroke="#7898c0" stroke-width="11" stroke-linecap="round"/>
+              <circle cx="122" cy="253" r="8" fill="#07162c" stroke="#255090" stroke-width="2"/>
+              <g id="gRForearm" style="transform-origin:122px 253px">
+                <line x1="122" y1="253" x2="117" y2="330" stroke="#7898c0" stroke-width="8" stroke-linecap="round"/>
+                <circle cx="117" cy="330" r="6" fill="#07162c" stroke="#255090" stroke-width="1.5"/>
+                <rect x="107" y="330" width="20" height="23" rx="4" fill="#6088b0" stroke="#486090" stroke-width="1"/>
+                <line x1="108" y1="353" x2="106" y2="369" stroke="#6088b0" stroke-width="4" stroke-linecap="round"/>
+                <line x1="112" y1="353" x2="111" y2="374" stroke="#6088b0" stroke-width="4" stroke-linecap="round"/>
+                <line x1="117" y1="353" x2="117" y2="375" stroke="#6088b0" stroke-width="4" stroke-linecap="round"/>
+                <line x1="122" y1="353" x2="123" y2="373" stroke="#6088b0" stroke-width="4" stroke-linecap="round"/>
+                <line x1="126" y1="353" x2="128" y2="369" stroke="#6088b0" stroke-width="4" stroke-linecap="round"/>
+              </g>
+            </g>
+          </g>
+
+          <!-- left arm -->
+          <g id="gLShoulder" style="transform-origin:270px 160px">
+            <circle cx="270" cy="160" r="9" fill="#07162c" stroke="#255090" stroke-width="2"/>
+            <g id="gLArmFull" style="transform-origin:270px 160px">
+              <line x1="270" y1="160" x2="278" y2="253" stroke="#8aacd0" stroke-width="11" stroke-linecap="round"/>
+              <circle cx="278" cy="253" r="8" fill="#07162c" stroke="#255090" stroke-width="2"/>
+              <g id="gLForearm" style="transform-origin:278px 253px">
+                <line x1="278" y1="253" x2="283" y2="330" stroke="#8aacd0" stroke-width="8" stroke-linecap="round"/>
+                <circle cx="283" cy="330" r="6" fill="#07162c" stroke="#255090" stroke-width="1.5"/>
+                <rect x="273" y="330" width="20" height="23" rx="4" fill="#6e9abc" stroke="#507094" stroke-width="1"/>
+                <line x1="274" y1="353" x2="272" y2="369" stroke="#6e9abc" stroke-width="4" stroke-linecap="round"/>
+                <line x1="278" y1="353" x2="277" y2="374" stroke="#6e9abc" stroke-width="4" stroke-linecap="round"/>
+                <line x1="283" y1="353" x2="283" y2="375" stroke="#6e9abc" stroke-width="4" stroke-linecap="round"/>
+                <line x1="288" y1="353" x2="289" y2="373" stroke="#6e9abc" stroke-width="4" stroke-linecap="round"/>
+                <line x1="292" y1="353" x2="294" y2="369" stroke="#6e9abc" stroke-width="4" stroke-linecap="round"/>
+                <g id="gLThumb" style="transform-origin:273px 339px">
+                  <line x1="273" y1="339" x2="262" y2="354" stroke="#6e9abc" stroke-width="5" stroke-linecap="round"/>
+                </g>
+              </g>
+            </g>
+          </g>
+
+          <!-- right leg -->
+          <g id="gRHip" style="transform-origin:152px 424px">
+            <circle cx="152" cy="424" r="10" fill="#07162c" stroke="#204888" stroke-width="2"/>
+            <g id="gRLegFull" style="transform-origin:152px 424px">
+              <line x1="152" y1="424" x2="147" y2="537" stroke="#6a90b8" stroke-width="14" stroke-linecap="round"/>
+              <circle cx="147" cy="537" r="10" fill="#07162c" stroke="#204888" stroke-width="2"/>
+              <g id="gRLowerLeg" style="transform-origin:147px 537px">
+                <line x1="147" y1="537" x2="145" y2="630" stroke="#6a90b8" stroke-width="10" stroke-linecap="round"/>
+                <circle cx="145" cy="630" r="7" fill="#07162c" stroke="#204888" stroke-width="1.5"/>
+                <g id="gRFoot" style="transform-origin:145px 630px">
+                  <path d="M135 628 L97 624 Q93 634 97 638 L135 640 Z" fill="#5880a0" stroke="#446080" stroke-width="1.5"/>
+                </g>
+              </g>
+            </g>
+          </g>
+
+          <!-- left leg -->
+          <g id="gLHip" style="transform-origin:248px 424px">
+            <circle cx="248" cy="424" r="10" fill="#07162c" stroke="#204888" stroke-width="2"/>
+            <g id="gLLegFull" style="transform-origin:248px 424px">
+              <line x1="248" y1="424" x2="253" y2="537" stroke="#7aa0c8" stroke-width="14" stroke-linecap="round"/>
+              <circle cx="253" cy="537" r="10" fill="#07162c" stroke="#204888" stroke-width="2"/>
+              <g id="gLLowerLeg" style="transform-origin:253px 537px">
+                <line x1="253" y1="537" x2="255" y2="630" stroke="#7aa0c8" stroke-width="10" stroke-linecap="round"/>
+                <circle cx="255" cy="630" r="7" fill="#07162c" stroke="#204888" stroke-width="1.5"/>
+                <g id="gLFoot" style="transform-origin:255px 630px">
+                  <path d="M245 628 L293 624 Q297 634 293 638 L245 640 Z" fill="#6892b8" stroke="#507098" stroke-width="1.5"/>
+                </g>
+              </g>
+            </g>
+          </g>
+
+          <!-- rings -->
+          <g id="rings" style="pointer-events:none">
+            <circle id="rLSh"  cx="270" cy="160" r="15" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rRSh"  cx="130" cy="160" r="15" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rLElb" cx="278" cy="253" r="12" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rRElb" cx="122" cy="253" r="12" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rLWri" cx="283" cy="330" r="9" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rLHip" cx="248" cy="424" r="14" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rRHip" cx="152" cy="424" r="14" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rLKne" cx="253" cy="537" r="13" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rLAnk" cx="255" cy="630" r="10" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rJaw"  cx="200" cy="97" r="14" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+            <circle id="rPelv" cx="200" cy="365" r="18" fill="none" stroke="#00e5ff" stroke-width="0" opacity="0"/>
+          </g>
+
+          <!-- subtle labels -->
+          <g opacity=".22" font-family="'IBM Plex Mono', monospace" font-size="7.5" letter-spacing="1" fill="#4070a0">
+            <text x="14" y="163">HOMBRO D</text>
+            <text x="14" y="260">CODO D</text>
+            <text x="14" y="430">CADERA D</text>
+            <text x="14" y="540">RODILLA D</text>
+            <text x="14" y="633">TOBILLO D</text>
+            <text x="386" y="163" text-anchor="end">HOMBRO I</text>
+            <text x="386" y="260" text-anchor="end">CODO I</text>
+            <text x="386" y="430" text-anchor="end">CADERA I</text>
+            <text x="386" y="540" text-anchor="end">RODILLA I</text>
+            <text x="386" y="633" text-anchor="end">TOBILLO I</text>
+            <text x="200" y="20" text-anchor="middle">PLANO SAGITAL</text>
+          </g>
+
+          <!-- hotspots -->
+          <g id="hotspots">
+            <g class="hotspot" data-target="abduccion">
+              <circle class="hotspot-halo" cx="270" cy="160" r="13"></circle>
+              <circle class="hotspot-core" cx="270" cy="160" r="6"></circle>
+            </g>
+            <g class="hotspot" data-target="flexion">
+              <circle class="hotspot-halo" cx="278" cy="253" r="12"></circle>
+              <circle class="hotspot-core" cx="278" cy="253" r="5"></circle>
+            </g>
+            <g class="hotspot" data-target="oposicion">
+              <circle class="hotspot-halo" cx="283" cy="330" r="10"></circle>
+              <circle class="hotspot-core" cx="283" cy="330" r="4.5"></circle>
+            </g>
+            <g class="hotspot" data-target="abduccion">
+              <circle class="hotspot-halo" cx="248" cy="424" r="12"></circle>
+              <circle class="hotspot-core" cx="248" cy="424" r="5"></circle>
+            </g>
+            <g class="hotspot" data-target="flexion">
+              <circle class="hotspot-halo" cx="253" cy="537" r="12"></circle>
+              <circle class="hotspot-core" cx="253" cy="537" r="5"></circle>
+            </g>
+            <g class="hotspot" data-target="eversion">
+              <circle class="hotspot-halo" cx="255" cy="630" r="10"></circle>
+              <circle class="hotspot-core" cx="255" cy="630" r="4.5"></circle>
+            </g>
+            <g class="hotspot" data-target="nutacion">
+              <circle class="hotspot-halo" cx="200" cy="365" r="15"></circle>
+              <circle class="hotspot-core" cx="200" cy="365" r="5"></circle>
+            </g>
+            <g class="hotspot" data-target="protrusion">
+              <circle class="hotspot-halo" cx="200" cy="97" r="12"></circle>
+              <circle class="hotspot-core" cx="200" cy="97" r="5"></circle>
+            </g>
+          </g>
+
+          <rect x="118" y="648" width="164" height="12" rx="6" fill="#0c1e36" stroke="#182944" stroke-width="1"/>
+          <text x="200" y="657" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="6.5" fill="#324f70" letter-spacing=".8">VISTA ANTERIOR · POSICIÓN ANATÓMICA</text>
+        </svg>
+
+        <div class="figure-caption">
+          <span class="caption-chip" id="captionRegion">Región activa: —</span>
+          <span class="caption-chip" id="captionType">Plano / eje: —</span>
+          <span class="caption-chip" id="captionHint">Haz clic en la figura o en el listado</span>
+        </div>
+
+        <div class="segment-lab" id="segmentLab"></div>
+      </div>
+
+      <div class="floating-legend">
+        <div class="legend-pill">● Articulación resaltada</div>
+        <div class="legend-pill">Línea discontinua = trayectoria</div>
+        <div class="legend-pill">Modelo esquemático con fines docentes</div>
+      </div>
+    </main>
+
+    <aside class="panel right">
+      <div id="emptyState" class="card empty">
+        Este panel mostrará la definición del movimiento, su plano y eje, las articulaciones implicadas y una nota anatómica. Selecciona un movimiento para comenzar.
+      </div>
+      <div id="detailPane" style="display:none;">
+        <div class="card hero">
+          <div class="eyebrow" id="moveCat">—</div>
+          <h2 id="moveTitle">—</h2>
+          <div class="subinfo" id="moveType">—</div>
+          <div class="desc" id="moveDesc">—</div>
+        </div>
+
+        <div class="grid">
+          <div class="card mini">
+            <div class="mini-title">Articulaciones implicadas</div>
+            <div class="chips" id="moveJoints"></div>
+          </div>
+          <div class="card mini">
+            <div class="mini-title">Nota anatómica</div>
+            <div class="note" id="moveNote"></div>
+          </div>
+          <div class="card mini">
+            <div class="mini-title">Claves rápidas</div>
+            <div class="key-list" id="moveKeys"></div>
+          </div>
+          <div class="card mini">
+            <div class="mini-title">Ir a otra región</div>
+            <div class="joint-map">
+              <button class="joint-btn" data-target="abduccion">Hombro</button>
+              <button class="joint-btn" data-target="flexion">Codo / rodilla</button>
+              <button class="joint-btn" data-target="pronacion">Antebrazo</button>
+              <button class="joint-btn" data-target="oposicion">Mano</button>
+              <button class="joint-btn" data-target="eversion">Pie</button>
+              <button class="joint-btn" data-target="nutacion">Pelvis / sacro</button>
+              <button class="joint-btn" data-target="protrusion">Mandíbula</button>
+              <button class="joint-btn" data-target="circunduccion">Movimiento complejo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <footer class="bottombar">
+    <button class="ctrl" id="prevBtn">◀ Anterior</button>
+    <button class="ctrl primary" id="playBtn">▶ Auto</button>
+    <button class="ctrl" id="nextBtn">Siguiente ▶</button>
+    <button class="ctrl" id="resetBtn">Reiniciar</button>
+    <select id="speedSel" class="speed" aria-label="Velocidad de animación">
+      <option value="0.75">Rápida</option>
+      <option value="1" selected>Media</option>
+      <option value="1.35">Lenta</option>
+    </select>
+    <div class="status" id="statusText">20 movimientos disponibles</div>
+  </footer>
+</div>
+
+<script>
+const movements = [
+  {
+    id:'flexion',
+    name:'Flexión',
+    cat:'Movimientos básicos',
+    region:'Codo y rodilla',
+    type:'Plano sagital · eje frontal',
+    desc:'Indica el doblez o la disminución del ángulo formado entre huesos o partes del cuerpo.',
+    joints:['Codo','Rodilla','Hombro','Cadera','Columna'],
+    note:'En el modelo se demuestra con codo y rodilla para que el cambio angular sea más evidente.',
+    keys:[['Qué ocurre','El segmento distal se aproxima al proximal.'],['Opuesto','Extensión.'],['Ejemplo','Doblar el codo o llevar el talón hacia el muslo.']],
+    rings:['rLElb','rLKne'],
+    trails:[],
+    anim(speed){ applyAnim('gLForearm', `fxElbow ${2*speed}s ease-in-out infinite`); applyAnim('gLLowerLeg', `fxKnee ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'extension',
+    name:'Extensión',
+    cat:'Movimientos básicos',
+    region:'Codo',
+    type:'Plano sagital · eje frontal',
+    desc:'Indica el enderezamiento o aumento del ángulo formado entre huesos o partes del cuerpo.',
+    joints:['Codo','Rodilla','Cadera','Columna'],
+    note:'La hiperextensión supera la posición anatómica neutra cuando la articulación lo permite.',
+    keys:[['Qué ocurre','Aumenta el ángulo entre los segmentos.'],['Opuesto','Flexión.'],['Ejemplo','Estirar el antebrazo hasta alinearlo con el brazo.']],
+    rings:['rLElb'],
+    trails:[],
+    anim(speed){ applyAnim('gLForearm', `extElbow ${2.15*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'abduccion',
+    name:'Abducción',
+    cat:'Movimientos básicos',
+    region:'Hombro y cadera',
+    type:'Plano frontal · eje sagital',
+    desc:'Se aleja del plano sagital mediano; es un movimiento de separación.',
+    joints:['Hombro','Cadera','Dedos'],
+    note:'En el hombro, superar aproximadamente 90° exige la participación coordinada de la escápula.',
+    keys:[['Qué ocurre','El segmento se separa de la línea media.'],['Opuesto','Aducción.'],['Ejemplo','Levantar el brazo lateralmente.']],
+    rings:['rLSh','rLHip'],
+    trails:[],
+    anim(speed){ applyAnim('gLArmFull', `abdArm ${2*speed}s ease-in-out infinite`); applyAnim('gLLegFull', `legAbduction ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'aduccion',
+    name:'Aducción',
+    cat:'Movimientos básicos',
+    region:'Hombro',
+    type:'Plano frontal · eje sagital',
+    desc:'Se dirige hacia el plano sagital mediano; es un movimiento de aproximación.',
+    joints:['Hombro','Cadera','Dedos'],
+    note:'La aducción devuelve el segmento hacia la línea media y puede cruzarla en algunos casos.',
+    keys:[['Qué ocurre','El segmento vuelve o se acerca al eje corporal.'],['Opuesto','Abducción.'],['Ejemplo','Bajar el brazo hacia el costado.']],
+    rings:['rLSh'],
+    trails:[],
+    anim(speed){ applyAnim('gLArmFull', `addArm ${2.15*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'rotacion',
+    name:'Rotación',
+    cat:'Movimientos básicos',
+    region:'Hombro',
+    type:'Plano transversal · eje longitudinal',
+    desc:'Movimiento de un segmento alrededor de su eje longitudinal. Puede ser medial o lateral.',
+    joints:['Hombro','Cadera','Columna','Atlanto-axoidea'],
+    note:'El modelo muestra una rotación del miembro superior para representar el giro sobre el eje propio del segmento.',
+    keys:[['Qué ocurre','El segmento gira sobre sí mismo.'],['Variantes','Medial (interna) y lateral (externa).'],['Ejemplo','Girar el brazo hacia adentro o hacia afuera.']],
+    rings:['rLSh'],
+    trails:[],
+    anim(speed){ applyAnim('gLArmFull', `rotation ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'pronacion',
+    name:'Pronación',
+    cat:'Antebrazo',
+    region:'Antebrazo y mano',
+    type:'Radiocubital · giro longitudinal',
+    desc:'Movimiento del antebrazo y de la mano que rota al radio medialmente alrededor de su eje longitudinal, de manera que la palma quede hacia atrás.',
+    joints:['Radiocubital proximal','Radiocubital distal'],
+    note:'En la pronación el radio cruza por delante del cúbito.',
+    keys:[['Qué ocurre','La palma rota hacia atrás o hacia abajo.'],['Estructura clave','El radio se desplaza alrededor del cúbito.'],['Ejemplo','Colocar la palma mirando al piso.']],
+    rings:['rLElb','rLWri'],
+    trails:[],
+    anim(speed){ applyAnim('gLForearm', `pronation ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'supinacion',
+    name:'Supinación',
+    cat:'Antebrazo',
+    region:'Antebrazo y mano',
+    type:'Radiocubital · giro longitudinal',
+    desc:'Movimiento del antebrazo y de la mano que rota al radio lateralmente alrededor de su eje longitudinal, de manera que la palma quede hacia adelante.',
+    joints:['Radiocubital proximal','Radiocubital distal'],
+    note:'La supinación corresponde a la posición anatómica de referencia del antebrazo y la mano.',
+    keys:[['Qué ocurre','La palma rota hacia adelante o hacia arriba.'],['Opuesto','Pronación.'],['Ejemplo','Sostener una bandeja con la palma hacia arriba.']],
+    rings:['rLElb','rLWri'],
+    trails:[],
+    anim(speed){ applyAnim('gLForearm', `supination ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'circunduccion',
+    name:'Circunducción',
+    cat:'Movimientos complejos',
+    region:'Hombro',
+    type:'Multiplanar',
+    desc:'Resulta de la sucesión de los movimientos precedentes. Puede efectuarse hacia adelante o hacia atrás.',
+    joints:['Hombro','Cadera','Muñeca','Metacarpofalángicas'],
+    note:'La punta del segmento distal describe una figura cónica en el espacio.',
+    keys:[['Qué ocurre','Se encadenan flexión, abducción, extensión y aducción.'],['Tipo','Movimiento compuesto.'],['Ejemplo','Hacer círculos amplios con el brazo.']],
+    rings:['rLSh'],
+    trails:['tCirc'],
+    anim(speed){ applyAnim('gLArmFull', `circumduction ${3*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'oposicion',
+    name:'Oposición',
+    cat:'Mano',
+    region:'Pulgar',
+    type:'Movimiento especial · pulgar',
+    desc:'Es el movimiento por el cual se aproximan el pulpejo del pulgar al pulpejo de cualquier otro dedo de la mano.',
+    joints:['Carpometacarpiana del pulgar','Metacarpofalángica del pulgar'],
+    note:'Es un movimiento decisivo para la prensión de precisión y la destreza manual.',
+    keys:[['Qué ocurre','El pulgar se dirige hacia los otros dedos.'],['Función','Permite pinza y manipulación fina.'],['Ejemplo','Tocar la yema del índice con el pulgar.']],
+    rings:['rLWri'],
+    trails:['tThumb'],
+    anim(speed){ applyAnim('gLThumb', `thumbOpposition ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'elevacion',
+    name:'Elevación',
+    cat:'Traslaciones',
+    region:'Cintura escapular',
+    type:'Desplazamiento vertical ascendente',
+    desc:'Es el movimiento que desplaza un segmento del cuerpo hacia arriba.',
+    joints:['Esternoclavicular','Acromioclavicular','ATM'],
+    note:'Puede verse en la cintura escapular al encoger los hombros y, en otro contexto, en la mandíbula al cerrar la boca.',
+    keys:[['Qué ocurre','El segmento asciende.'],['Opuesto','Descenso o depresión.'],['Ejemplo','Encoger los hombros.']],
+    rings:['rLSh','rRSh'],
+    trails:[],
+    anim(speed){ applyAnim('gLShoulder', `elevate ${2*speed}s ease-in-out infinite`); applyAnim('gRShoulder', `elevate ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'descenso',
+    name:'Descenso / depresión',
+    cat:'Traslaciones',
+    region:'Cintura escapular',
+    type:'Desplazamiento vertical descendente',
+    desc:'Es el movimiento que desplaza un segmento hacia abajo. También se lo denomina depresión.',
+    joints:['Esternoclavicular','Acromioclavicular','ATM'],
+    note:'En la mandíbula se asocia con la apertura bucal; en la cintura escapular, con llevar los hombros hacia abajo.',
+    keys:[['Qué ocurre','El segmento desciende.'],['Opuesto','Elevación.'],['Ejemplo','Bajar los hombros desde una elevación.']],
+    rings:['rLSh','rRSh'],
+    trails:[],
+    anim(speed){ applyAnim('gLShoulder', `depress ${2*speed}s ease-in-out infinite`); applyAnim('gRShoulder', `depress ${2*speed}s ease-in-out infinite`); applyAnim('gJaw', `headOpen ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'eversion',
+    name:'Eversión',
+    cat:'Pie',
+    region:'Pie y tobillo',
+    type:'Subastragalina · mediotarsiana',
+    desc:'Es el movimiento que aleja a la planta del pie del plano mediano del cuerpo, ubicándola lateralmente.',
+    joints:['Subastragalina','Mediotarsiana','Calcaneocuboidea'],
+    note:'La cara plantar tiende a orientarse hacia afuera.',
+    keys:[['Qué ocurre','La planta se aleja del plano medio.'],['Opuesto','Inversión.'],['Ejemplo','Volcar la planta hacia lateral.']],
+    rings:['rLAnk'],
+    trails:['tFoot'],
+    anim(speed){ applyAnim('gLFoot', `eversion ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'inversion',
+    name:'Inversión',
+    cat:'Pie',
+    region:'Pie y tobillo',
+    type:'Subastragalina · mediotarsiana',
+    desc:'Es el movimiento que aproxima la planta del pie al plano mediano del cuerpo, ubicándola medialmente.',
+    joints:['Subastragalina','Mediotarsiana','Tibioastragalina'],
+    note:'Es el patrón que suele asociarse a muchos esguinces laterales de tobillo.',
+    keys:[['Qué ocurre','La planta mira más hacia adentro.'],['Opuesto','Eversión.'],['Ejemplo','Volcar la planta hacia medial.']],
+    rings:['rLAnk'],
+    trails:['tFoot'],
+    anim(speed){ applyAnim('gLFoot', `inversion ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'antepulsion',
+    name:'Antepulsión / protracción',
+    cat:'Traslaciones',
+    region:'Hombro',
+    type:'Desplazamiento anteroposterior',
+    desc:'Es el movimiento de desplazamiento de un segmento hacia adelante. También se lo denomina protracción en el caso del hombro.',
+    joints:['Esternoclavicular','Acromioclavicular'],
+    note:'En la cintura escapular, la escápula se desliza hacia adelante sobre la pared torácica.',
+    keys:[['Qué ocurre','El segmento avanza.'],['Término asociado','Protracción en hombro.'],['Ejemplo','Llevar el hombro hacia adelante como al empujar.']],
+    rings:['rLSh'],
+    trails:[],
+    anim(speed){ applyAnim('gLShoulder', `antepulsion ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'retropulsion',
+    name:'Retropulsión / retracción',
+    cat:'Traslaciones',
+    region:'Hombro',
+    type:'Desplazamiento anteroposterior',
+    desc:'Es el movimiento de desplazamiento de un segmento hacia atrás. También se lo denomina retracción en el caso del hombro.',
+    joints:['Esternoclavicular','Acromioclavicular'],
+    note:'En la cintura escapular, la escápula vuelve o se aproxima hacia la columna.',
+    keys:[['Qué ocurre','El segmento retrocede.'],['Término asociado','Retracción en hombro.'],['Ejemplo','Llevar los hombros hacia atrás.']],
+    rings:['rLSh'],
+    trails:[],
+    anim(speed){ applyAnim('gLShoulder', `retropulsion ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'nutacion',
+    name:'Nutación',
+    cat:'Pelvis y sacro',
+    region:'Sacro',
+    type:'Balanceo sacroilíaco',
+    desc:'Consiste en el movimiento de balanceo del hueso sacro alrededor de un eje transversal, donde el promontorio se dirige hacia abajo y el vértice hacia arriba y atrás.',
+    joints:['Sacroilíaca bilateral'],
+    note:'Favorece la antepulsión del pubis y aumenta el diámetro anteroposterior de la abertura inferior de la pelvis.',
+    keys:[['Qué ocurre','La base del sacro desciende hacia adelante.'],['Resultado','Aumenta el estrecho inferior.'],['Contexto','Importante en biomecánica pélvica y obstetricia.']],
+    rings:['rPelv'],
+    trails:[],
+    anim(speed){ applyAnim('gPelvis', `nutation ${2.5*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'contranutacion',
+    name:'Contranutación',
+    cat:'Pelvis y sacro',
+    region:'Sacro',
+    type:'Balanceo sacroilíaco',
+    desc:'Es el movimiento de balanceo del sacro en el cual la base de este hueso se dirige hacia arriba y su vértice hacia abajo y adelante.',
+    joints:['Sacroilíaca bilateral'],
+    note:'Esta acción produce la retropulsión del pubis.',
+    keys:[['Qué ocurre','La base del sacro asciende.'],['Resultado','Disminuye el patrón opuesto a la nutación.'],['Opuesto','Nutación.']],
+    rings:['rPelv'],
+    trails:[],
+    anim(speed){ applyAnim('gPelvis', `counternutation ${2.5*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'protrusion',
+    name:'Protrusión',
+    cat:'Mandíbula (ATM)',
+    region:'Mandíbula',
+    type:'Traslación anterior',
+    desc:'Es el movimiento hacia adelante, realizado por la mandíbula.',
+    joints:['Articulación temporomandibular'],
+    note:'El cóndilo mandibular se desplaza anteriormente junto con el disco articular.',
+    keys:[['Qué ocurre','La mandíbula avanza.'],['Opuesto','Retrusión.'],['Ejemplo','Llevar la barbilla hacia adelante.']],
+    rings:['rJaw'],
+    trails:['tDidu'],
+    anim(speed){ applyAnim('gJaw', `protrusion ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'retrusion',
+    name:'Retrusión',
+    cat:'Mandíbula (ATM)',
+    region:'Mandíbula',
+    type:'Traslación posterior',
+    desc:'Es el movimiento hacia atrás, realizado por la mandíbula.',
+    joints:['Articulación temporomandibular'],
+    note:'Corresponde al retorno posterior del complejo cóndilo-disco.',
+    keys:[['Qué ocurre','La mandíbula retrocede.'],['Opuesto','Protrusión.'],['Ejemplo','Llevar la barbilla discretamente hacia atrás.']],
+    rings:['rJaw'],
+    trails:['tDidu'],
+    anim(speed){ applyAnim('gJaw', `retrusion ${2*speed}s ease-in-out infinite`); }
+  },
+  {
+    id:'diduccion',
+    name:'Diducción',
+    cat:'Mandíbula (ATM)',
+    region:'Mandíbula',
+    type:'Excursión lateral',
+    desc:'Son los movimientos de lado a lado de la mandíbula; corresponden a la excursión lateral mandibular.',
+    joints:['ATM bilateral'],
+    note:'Durante este gesto un cóndilo rota y el otro se traslada.',
+    keys:[['Qué ocurre','La mandíbula se mueve lateralmente.'],['Función','Importante en masticación y trituración.'],['Ejemplo','Desplazar la mandíbula de derecha a izquierda.']],
+    rings:['rJaw'],
+    trails:['tDidu'],
+    anim(speed){ applyAnim('gJaw', `diduction ${2.4*speed}s ease-in-out infinite`); }
+  }
+];
+
+const byId = Object.fromEntries(movements.map(m => [m.id, m]));
+const grouped = movements.reduce((acc, m) => {
+  (acc[m.cat] ??= []).push(m);
+  return acc;
+}, {});
+
+let currentIndex = 0;
+let autoTimer = null;
+let animatedEls = [];
+let ringEls = [];
+let trailEls = [];
+
+const leftPanel = document.getElementById('leftPanel');
+const detailPane = document.getElementById('detailPane');
+const emptyState = document.getElementById('emptyState');
+const statusText = document.getElementById('statusText');
+const speedSel = document.getElementById('speedSel');
+const searchInput = document.getElementById('search');
+const playBtn = document.getElementById('playBtn');
+const segmentLab = document.getElementById('segmentLab');
+
+function applyAnim(id, value){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.style.animation = value;
+  animatedEls.push(el);
+}
+
+function clearAnimations(){
+  animatedEls.forEach(el => el.style.animation = '');
+  animatedEls = [];
+  ringEls.forEach(el => {
+    el.style.animation = '';
+    el.setAttribute('opacity', '0');
+    el.setAttribute('stroke-width', '0');
+  });
+  ringEls = [];
+  trailEls.forEach(el => el.classList.remove('show'));
+  trailEls = [];
+}
+
+function activateRings(ids=[]){
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.setAttribute('opacity', '1');
+    el.setAttribute('stroke-width', '2.8');
+    el.style.animation = 'ringPulse 1.25s ease-in-out infinite';
+    ringEls.push(el);
+  });
+}
+
+function activateTrails(ids=[]){
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.add('show');
+    trailEls.push(el);
+  });
+}
+
+function updateButtons(id){
+  document.querySelectorAll('.move-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.id === id));
+}
+
+
+function segmentSvg(inner, viewBox='0 0 170 180'){
+  return `<svg class="seg-svg" viewBox="${viewBox}" aria-hidden="true">${inner}</svg>`;
+}
+
+function armShoulderView(mode){
+  const duration = dur(1);
+  const values = mode === 'flexion'
+    ? `0 66 44;-74 66 44;0 66 44`
+    : `0 66 44;28 66 44;0 66 44`;
+  const arc = mode === 'flexion'
+    ? `<path class="seg-arc" d="M66 24 A34 34 0 0 1 112 56"/>`
+    : `<path class="seg-arc" d="M40 54 A34 34 0 0 1 66 24"/>`;
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Vista lateral</text>
+    <path d="M56 18 Q68 20 74 36 L72 130 Q62 140 42 142" fill="rgba(18,34,58,.88)" stroke="#213957" stroke-width="1.2"/>
+    <line x1="66" y1="44" x2="66" y2="130" class="seg-ghost" />
+    <g>
+      <line x1="66" y1="44" x2="78" y2="100" class="seg-body"/>
+      <line x1="78" y1="100" x2="86" y2="148" class="seg-body-thin"/>
+      <animateTransform attributeName="transform" type="rotate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <line x1="66" y1="44" x2="78" y2="100" class="seg-ghost"/>
+    <line x1="78" y1="100" x2="86" y2="148" class="seg-ghost-thin"/>
+    ${arc}
+    <circle cx="66" cy="44" r="6" class="seg-joint"/>
+    <text x="18" y="159" class="seg-axis">Referencia neutra en gris</text>
+  `);
+}
+
+function elbowView(mode){
+  const duration = dur(1);
+  const values = mode === 'flexion'
+    ? `0 84 100;-112 84 100;0 84 100`
+    : `-96 84 100;0 84 100;-96 84 100`;
+  const ghostForearm = mode === 'extension'
+    ? `<line x1="84" y1="100" x2="136" y2="100" class="seg-ghost-thin"/>`
+    : `<line x1="84" y1="100" x2="88" y2="152" class="seg-ghost-thin"/>`;
+  const arc = mode === 'flexion'
+    ? `<path class="seg-arc" d="M80 66 A34 34 0 0 1 120 100"/>`
+    : `<path class="seg-arc" d="M86 70 A34 34 0 0 1 120 100"/>`;
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Plano sagital</text>
+    <line x1="62" y1="38" x2="84" y2="100" class="seg-body"/>
+    ${ghostForearm}
+    <g>
+      <line x1="84" y1="100" x2="88" y2="152" class="seg-body-thin"/>
+      <animateTransform attributeName="transform" type="rotate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <circle cx="84" cy="100" r="6" class="seg-joint"/>
+    <circle cx="62" cy="38" r="4.8" class="seg-joint-soft"/>
+    ${arc}
+    <text x="18" y="159" class="seg-axis">Cierre / apertura del ángulo</text>
+  `);
+}
+
+function hipView(mode){
+  const duration = dur(1.05);
+  const values = mode === 'flexion'
+    ? `0 72 54;-42 72 54;0 72 54`
+    : `0 72 54;22 72 54;0 72 54`;
+  const arc = mode === 'flexion'
+    ? `<path class="seg-arc" d="M72 26 A42 42 0 0 1 122 60"/>`
+    : `<path class="seg-arc" d="M38 58 A38 38 0 0 1 72 28"/>`;
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Vista lateral</text>
+    <path d="M58 18 Q78 18 88 42 L84 76 L58 78 L48 58 Z" fill="rgba(18,34,58,.88)" stroke="#213957" stroke-width="1.2"/>
+    <line x1="72" y1="54" x2="78" y2="118" class="seg-ghost"/>
+    <line x1="78" y1="118" x2="80" y2="154" class="seg-ghost-thin"/>
+    <g>
+      <line x1="72" y1="54" x2="78" y2="118" class="seg-body"/>
+      <line x1="78" y1="118" x2="80" y2="154" class="seg-body-thin"/>
+      <animateTransform attributeName="transform" type="rotate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    ${arc}
+    <circle cx="72" cy="54" r="6" class="seg-joint"/>
+    <text x="18" y="159" class="seg-axis">Cadera</text>
+  `);
+}
+
+function kneeView(mode){
+  const duration = dur(1.05);
+  const values = mode === 'flexion'
+    ? `0 86 102;-104 86 102;0 86 102`
+    : `-92 86 102;0 86 102;-92 86 102`;
+  const ghostTibia = mode === 'extension'
+    ? `<line x1="86" y1="102" x2="134" y2="104" class="seg-ghost-thin"/>`
+    : `<line x1="86" y1="102" x2="92" y2="154" class="seg-ghost-thin"/>`;
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Plano sagital</text>
+    <line x1="64" y1="34" x2="86" y2="102" class="seg-body"/>
+    ${ghostTibia}
+    <g>
+      <line x1="86" y1="102" x2="92" y2="154" class="seg-body-thin"/>
+      <animateTransform attributeName="transform" type="rotate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <circle cx="86" cy="102" r="6" class="seg-joint"/>
+    <circle cx="64" cy="34" r="4.8" class="seg-joint-soft"/>
+    <path class="seg-arc" d="M84 64 A36 36 0 0 1 122 102"/>
+    <text x="18" y="159" class="seg-axis">Rodilla</text>
+  `);
+}
+
+function shoulderFrontal(mode){
+  const duration = dur(1);
+  const values = mode === 'abduccion'
+    ? `0 84 40;-78 84 40;0 84 40`
+    : `-72 84 40;0 84 40;-72 84 40`;
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Plano frontal</text>
+    <line x1="84" y1="28" x2="84" y2="132" class="seg-ghost"/>
+    <line x1="84" y1="40" x2="84" y2="122" class="seg-ghost"/>
+    <g>
+      <line x1="84" y1="40" x2="84" y2="112" class="seg-body"/>
+      <line x1="84" y1="112" x2="84" y2="148" class="seg-body-thin"/>
+      <animateTransform attributeName="transform" type="rotate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <circle cx="84" cy="40" r="6" class="seg-joint"/>
+    <path class="seg-arc" d="M84 18 A44 44 0 0 1 132 64"/>
+    <text x="18" y="159" class="seg-axis">Hombro</text>
+  `);
+}
+
+function hipFrontal(mode){
+  const duration = dur(1.05);
+  const values = mode === 'abduccion'
+    ? `0 84 48;-28 84 48;0 84 48`
+    : `-26 84 48;0 84 48;-26 84 48`;
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Plano frontal</text>
+    <path d="M58 24 Q84 14 110 24 L104 48 L64 48 Z" fill="rgba(18,34,58,.88)" stroke="#213957" stroke-width="1.2"/>
+    <line x1="84" y1="48" x2="84" y2="146" class="seg-ghost"/>
+    <g>
+      <line x1="84" y1="48" x2="84" y2="126" class="seg-body"/>
+      <line x1="84" y1="126" x2="84" y2="154" class="seg-body-thin"/>
+      <animateTransform attributeName="transform" type="rotate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <circle cx="84" cy="48" r="6" class="seg-joint"/>
+    <path class="seg-arc" d="M84 26 A40 40 0 0 1 118 58"/>
+    <text x="18" y="159" class="seg-axis">Cadera</text>
+  `);
+}
+
+function rotationView(){
+  const duration = dur(1.1);
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Eje longitudinal</text>
+    <ellipse cx="84" cy="42" rx="18" ry="10" fill="rgba(18,34,58,.88)" stroke="#213957" stroke-width="1.2"/>
+    <path d="M56 46 L50 118 Q84 140 118 118 L112 46 Z" fill="rgba(18,34,58,.88)" stroke="#213957" stroke-width="1.2"/>
+    <g>
+      <path d="M56 46 L50 118 Q84 140 118 118 L112 46 Z" fill="rgba(84,132,176,.18)" stroke="#8fb2d7" stroke-width="1.6"/>
+      <animateTransform attributeName="transform" type="rotate" values="-14 84 82;18 84 82;-14 84 82" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <path class="seg-arc" d="M46 36 Q84 12 122 36"/>
+    <text x="18" y="159" class="seg-axis">Rotación axial</text>
+  `);
+}
+
+function forearmRotationView(mode){
+  const duration = dur(1);
+  const label = mode === 'pronacion' ? 'Palma gira hacia atrás' : 'Palma gira hacia adelante';
+  const values = mode === 'pronacion' ? `0 84 92;180 84 92;0 84 92` : `180 84 92;0 84 92;180 84 92`;
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Antebrazo / mano</text>
+    <line x1="30" y1="92" x2="64" y2="92" class="seg-body"/>
+    <g>
+      <ellipse cx="100" cy="92" rx="28" ry="18" fill="rgba(84,132,176,.18)" stroke="#8fb2d7" stroke-width="1.8"/>
+      <line x1="72" y1="92" x2="128" y2="92" class="seg-body-thin"/>
+      <line x1="100" y1="74" x2="100" y2="110" stroke="#d6f3ff" stroke-width="2" stroke-linecap="round"/>
+      <animateTransform attributeName="transform" type="rotate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <ellipse cx="100" cy="92" rx="28" ry="18" fill="none" stroke="#324a66" stroke-width="1.8" stroke-dasharray="4 4"/>
+    <path class="seg-arc" d="M70 60 Q100 42 130 60"/>
+    <text x="18" y="159" class="seg-axis">${label}</text>
+  `);
+}
+
+function circumductionView(){
+  const duration = dur(1.15);
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Sucesión de movimientos</text>
+    <circle cx="84" cy="40" r="6" class="seg-joint"/>
+    <path class="seg-arc" d="M84 42 C122 38 136 72 126 104 C118 132 86 142 62 122 C36 98 42 62 84 42"/>
+    <g>
+      <line x1="84" y1="40" x2="116" y2="118" class="seg-body"/>
+      <animateMotion dur="${duration}" repeatCount="indefinite" path="M0 0 C24 -4 42 26 36 54 C28 82 -6 90 -22 74 C-46 52 -34 14 0 0" rotate="auto"/>
+    </g>
+    <text x="18" y="159" class="seg-axis">Circunducción del hombro</text>
+  `);
+}
+
+function thumbOppositionView(){
+  const duration = dur(1);
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Pulgar hacia otros dedos</text>
+    <path d="M36 118 Q46 62 78 50 Q112 40 130 78 Q136 96 124 126 Q94 138 58 130 Z" fill="rgba(18,34,58,.88)" stroke="#213957" stroke-width="1.2"/>
+    <line x1="90" y1="118" x2="90" y2="70" class="seg-body-thin"/>
+    <line x1="104" y1="118" x2="104" y2="72" class="seg-body-thin"/>
+    <line x1="118" y1="114" x2="118" y2="78" class="seg-body-thin"/>
+    <g>
+      <line x1="64" y1="112" x2="40" y2="82" class="seg-body-thin"/>
+      <animateTransform attributeName="transform" type="rotate" values="0 64 112;52 64 112;0 64 112" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <path class="seg-arc" d="M42 102 Q56 84 76 86"/>
+    <text x="18" y="159" class="seg-axis">Oposición del pulgar</text>
+  `);
+}
+
+function scapulaElevationView(mode){
+  const duration = dur(1);
+  const values = mode === 'elevacion' ? '0 0;-14 -14;0 0' : '0 0;12 12;0 0';
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Cintura escapular</text>
+    <path d="M48 44 L122 44 L132 124 L38 124 Z" fill="rgba(18,34,58,.58)" stroke="#213957" stroke-width="1.2"/>
+    <path d="M54 52 Q70 70 62 96 Q78 104 82 120" class="seg-ghost-thin"/>
+    <path d="M114 52 Q98 70 106 96 Q90 104 86 120" class="seg-ghost-thin"/>
+    <g>
+      <path d="M54 52 Q70 70 62 96 Q78 104 82 120" class="seg-body-thin"/>
+      <path d="M114 52 Q98 70 106 96 Q90 104 86 120" class="seg-body-thin"/>
+      <animateTransform attributeName="transform" type="translate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <text x="18" y="159" class="seg-axis">Elevación / descenso</text>
+  `);
+}
+
+function footFrontalView(mode){
+  const duration = dur(1);
+  const values = mode === 'eversion' ? `0 82 98;22 82 98;0 82 98` : `0 82 98;-22 82 98;0 82 98`;
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Retropié / pie</text>
+    <line x1="82" y1="34" x2="82" y2="96" class="seg-body"/>
+    <g>
+      <path d="M82 96 Q108 96 128 110 Q104 128 72 122 Q58 110 82 96" fill="rgba(84,132,176,.18)" stroke="#8fb2d7" stroke-width="1.8"/>
+      <animateTransform attributeName="transform" type="rotate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <path d="M82 96 Q108 96 128 110 Q104 128 72 122 Q58 110 82 96" fill="none" stroke="#324a66" stroke-width="1.8" stroke-dasharray="4 4"/>
+    <path class="seg-arc" d="M72 82 Q84 70 96 82"/>
+    <text x="18" y="159" class="seg-axis">Planta del pie</text>
+  `);
+}
+
+function scapulaGlideView(mode){
+  const duration = dur(1);
+  const values = mode === 'antepulsion' ? `0 0;-14 0;0 0` : `0 0;14 0;0 0`;
+  const label = mode === 'antepulsion' ? 'Antepulsión / protracción' : 'Retropulsión / retracción';
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Cintura escapular</text>
+    <path d="M44 38 Q70 28 98 38 L112 126 Q84 136 52 126 Z" fill="rgba(18,34,58,.58)" stroke="#213957" stroke-width="1.2"/>
+    <path d="M58 56 Q72 80 64 106 Q82 112 84 126" class="seg-ghost-thin"/>
+    <g>
+      <path d="M58 56 Q72 80 64 106 Q82 112 84 126" class="seg-body-thin"/>
+      <animateTransform attributeName="transform" type="translate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <path class="seg-arc" d="M50 44 Q82 34 114 44"/>
+    <text x="18" y="159" class="seg-axis">${label}</text>
+  `);
+}
+
+function pelvisTiltView(mode){
+  const duration = dur(1.1);
+  const values = mode === 'nutacion' ? `0 84 84;-10 84 84;0 84 84` : `0 84 84;10 84 84;0 84 84`;
+  const label = mode === 'nutacion' ? 'Promontorio hacia abajo' : 'Promontorio hacia arriba';
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">Sacro / pelvis</text>
+    <path d="M46 92 Q54 56 84 48 Q114 56 122 92 Q106 124 84 130 Q62 124 46 92 Z" fill="rgba(18,34,58,.78)" stroke="#213957" stroke-width="1.2"/>
+    <g>
+      <path d="M76 54 Q84 72 84 112 Q94 100 98 74 Q94 58 84 48 Z" fill="rgba(84,132,176,.18)" stroke="#8fb2d7" stroke-width="1.8"/>
+      <animateTransform attributeName="transform" type="rotate" values="${values}" dur="${duration}" repeatCount="indefinite"/>
+    </g>
+    <path class="seg-arc" d="M64 42 Q84 28 104 42"/>
+    <text x="18" y="159" class="seg-axis">${label}</text>
+  `);
+}
+
+function jawView(mode){
+  const duration = dur(1);
+  let anim = '';
+  let label = '';
+  if(mode === 'protrusion'){
+    anim = `<animateTransform attributeName="transform" type="translate" values="0 0;12 0;0 0" dur="${duration}" repeatCount="indefinite"/>`;
+    label = 'Mandíbula hacia adelante';
+  }else if(mode === 'retrusion'){
+    anim = `<animateTransform attributeName="transform" type="translate" values="0 0;-10 0;0 0" dur="${duration}" repeatCount="indefinite"/>`;
+    label = 'Mandíbula hacia atrás';
+  }else{
+    anim = `<animateTransform attributeName="transform" type="translate" values="0 0;12 0;-12 0;0 0" dur="${dur(1.2)}" repeatCount="indefinite"/>`;
+    label = 'Excursión lateral';
+  }
+  return segmentSvg(`
+    <rect x="8" y="8" width="154" height="164" rx="16" fill="rgba(8,16,28,.42)" stroke="#18304d"/>
+    <text x="18" y="24" class="seg-axis">ATM / mandíbula</text>
+    <path d="M50 46 Q84 18 118 46 Q126 68 118 88 Q102 100 84 100 Q66 100 50 88 Q42 68 50 46" fill="rgba(18,34,58,.78)" stroke="#213957" stroke-width="1.2"/>
+    <g>
+      <path d="M58 84 Q84 112 110 84" fill="rgba(84,132,176,.18)" stroke="#8fb2d7" stroke-width="1.8"/>
+      ${anim}
+    </g>
+    <path class="seg-arc" d="M60 110 Q84 122 108 110"/>
+    <text x="18" y="159" class="seg-axis">${label}</text>
+  `);
+}
+
+function segmentCard(title, subtitle, views, note=''){
+  return `
+    <article class="seg-card">
+      <div class="seg-head">
+        <div>
+          <div class="seg-title">${title}</div>
+          <div class="seg-subtitle">${subtitle}</div>
+        </div>
+        <div class="segment-tag">Comparación segmentaria</div>
+      </div>
+      <div class="seg-grid">
+        ${views.map(v => `
+          <div class="segment-mini">
+            <div class="seg-mini-title">${v.title}</div>
+            <div class="seg-mini-sub">${v.sub || ''}</div>
+            ${v.svg}
+          </div>
+        `).join('')}
+      </div>
+      ${note ? `<div class="seg-note">${note}</div>` : ''}
+    </article>`;
+}
+
+function renderSegmentLab(m){
+  if(!segmentLab) return;
+  let html = '';
+  if(m.id === 'flexion'){
+    html = segmentCard(
+      'Flexión por segmentos',
+      'Aproximación más clara de miembro superior e inferior',
+      [
+        {title:'Miembro superior · hombro', sub:'Vista lateral', svg:armShoulderView('flexion')},
+        {title:'Miembro superior · codo', sub:'Plano sagital', svg:elbowView('flexion')},
+        {title:'Miembro inferior · cadera', sub:'Vista lateral', svg:hipView('flexion')},
+        {title:'Miembro inferior · rodilla', sub:'Plano sagital', svg:kneeView('flexion')}
+      ],
+      '<b>Lectura:</b> la referencia gris marca la posición neutra. El trazado activo en cian deja ver con más claridad cómo disminuye el ángulo en cada articulación.'
+    );
+  }else if(m.id === 'extension'){
+    html = segmentCard(
+      'Extensión por segmentos',
+      'Visualización específica para miembro superior e inferior',
+      [
+        {title:'Miembro superior · hombro', sub:'Vista lateral', svg:armShoulderView('extension')},
+        {title:'Miembro superior · codo', sub:'Plano sagital', svg:elbowView('extension')},
+        {title:'Miembro inferior · cadera', sub:'Vista lateral', svg:hipView('extension')},
+        {title:'Miembro inferior · rodilla', sub:'Plano sagital', svg:kneeView('extension')}
+      ],
+      '<b>Lectura:</b> aquí el contraste muestra el aumento del ángulo. En codo y rodilla la animación parte de una posición flexionada para que el enderezamiento sea más evidente.'
+    );
+  }else if(m.id === 'abduccion' || m.id === 'aduccion'){
+    const mode = m.id;
+    html = segmentCard(
+      `${m.name} por segmentos`,
+      'Separación o aproximación respecto al plano medio',
+      [
+        {title:'Hombro', sub:'Plano frontal', svg:shoulderFrontal(mode)},
+        {title:'Cadera', sub:'Plano frontal', svg:hipFrontal(mode)}
+      ],
+      '<b>Lectura:</b> estas vistas frontales ayudan a seguir el desplazamiento lateral del miembro con respecto al plano sagital mediano.'
+    );
+  }else if(m.id === 'rotacion'){
+    html = segmentCard('Rotación axial', 'Movimiento alrededor del eje longitudinal', [
+      {title:'Cuello / tronco', sub:'Vista superior simplificada', svg:rotationView()}
+    ], '<b>Lectura:</b> la pieza activa gira alrededor del eje longitudinal del segmento.' );
+  }else if(m.id === 'pronacion' || m.id === 'supinacion'){
+    html = segmentCard(
+      `${m.name} del antebrazo`,
+      'Relación radio-ulna y orientación de la palma',
+      [{title:'Antebrazo y mano', sub:'Vista axial', svg:forearmRotationView(m.id)}],
+      '<b>Lectura:</b> la elipse punteada conserva la referencia neutra mientras la pieza activa rota sobre su eje longitudinal.'
+    );
+  }else if(m.id === 'circunduccion'){
+    html = segmentCard('Circunducción', 'Trayectoria combinada', [
+      {title:'Hombro', sub:'Recorrido cónico', svg:circumductionView()}
+    ], '<b>Lectura:</b> el extremo distal recorre una trayectoria amplia como resultado de flexión, extensión, abducción y aducción sucesivas.' );
+  }else if(m.id === 'oposicion'){
+    html = segmentCard('Oposición', 'Movimiento fino de la mano', [
+      {title:'Pulgar', sub:'Pulpejo hacia otros dedos', svg:thumbOppositionView()}
+    ], '<b>Lectura:</b> el pulgar se aproxima a los dedos largos para permitir prensión y pinza.' );
+  }else if(m.id === 'elevacion' || m.id === 'descenso'){
+    html = segmentCard(
+      `${m.name} de la cintura escapular`,
+      'Desplazamiento vertical',
+      [{title:'Escápulas / hombros', sub:'Vista posterior simplificada', svg:scapulaElevationView(m.id === 'elevacion' ? 'elevacion' : 'descenso')}],
+      '<b>Lectura:</b> la cintura escapular asciende o desciende como un bloque funcional.'
+    );
+  }else if(m.id === 'eversion' || m.id === 'inversion'){
+    html = segmentCard(
+      `${m.name} del pie`,
+      'Relación de la planta con el plano medio',
+      [{title:'Pie', sub:'Vista frontal', svg:footFrontalView(m.id === 'eversion' ? 'eversion' : 'inversion')}],
+      '<b>Lectura:</b> la planta se orienta lateralmente en eversión y medialmente en inversión.'
+    );
+  }else if(m.id === 'antepulsion' || m.id === 'retropulsion'){
+    html = segmentCard(
+      `${m.name} escapular`,
+      'Deslizamiento anteroposterior',
+      [{title:'Cintura escapular', sub:'Vista superior simplificada', svg:scapulaGlideView(m.id)}],
+      '<b>Lectura:</b> el complejo escapular se desplaza hacia adelante o hacia atrás sobre la parrilla costal.'
+    );
+  }else if(m.id === 'nutacion' || m.id === 'contranutacion'){
+    html = segmentCard(
+      `${m.name} del sacro`,
+      'Balanceo pélvico',
+      [{title:'Sacro y pelvis', sub:'Vista sagital simplificada', svg:pelvisTiltView(m.id)}],
+      '<b>Lectura:</b> el movimiento altera la orientación del promontorio y modifica la relación con el pubis.'
+    );
+  }else if(['protrusion','retrusion','diduccion'].includes(m.id)){
+    html = segmentCard(
+      `${m.name} mandibular`,
+      'Movimiento de la ATM',
+      [{title:'Mandíbula', sub:'Vista frontal simplificada', svg:jawView(m.id)}],
+      '<b>Lectura:</b> esta tarjeta destaca el componente anterior, posterior o lateral de la mandíbula.'
+    );
+  }
+
+  segmentLab.innerHTML = html;
+}
+
+function dur(mult=1){
+  return `${(2.1 * mult * Number(speedSel.value || '1')).toFixed(2)}s`;
+}
+
+function renderDetails(m){
+  document.getElementById('moveCat').textContent = m.cat.toUpperCase();
+  document.getElementById('moveTitle').textContent = m.name;
+  document.getElementById('moveType').textContent = `${m.region} · ${m.type}`;
+  document.getElementById('moveDesc').textContent = m.desc;
+  document.getElementById('moveJoints').innerHTML = m.joints.map(j => `<span class="chip">${j}</span>`).join('');
+  document.getElementById('moveNote').textContent = m.note;
+  document.getElementById('moveKeys').innerHTML = m.keys.map(([a,b]) => `<div class="key-item"><span>•</span><div><b>${a}:</b> ${b}</div></div>`).join('');
+  renderSegmentLab(m);
+  document.getElementById('captionRegion').textContent = `Región activa: ${m.region}`;
+  document.getElementById('captionType').textContent = `Plano / eje: ${m.type}`;
+  document.getElementById('captionHint').textContent = `Movimiento ${currentIndex + 1} de ${movements.length}`;
+  emptyState.style.display = 'none';
+  detailPane.style.display = 'block';
+}
+
+function selectMovement(id, {scroll=true} = {}){
+  const movement = byId[id];
+  if(!movement) return;
+  currentIndex = movements.findIndex(m => m.id === id);
+  clearAnimations();
+  const speed = Number(speedSel.value || '1');
+  activateRings(movement.rings);
+  activateTrails(movement.trails);
+  movement.anim(speed);
+  updateButtons(id);
+  renderDetails(movement);
+  statusText.textContent = `${movement.name} · ${movement.cat}`;
+  if(scroll){
+    const btn = document.querySelector(`.move-btn[data-id="${id}"]`);
+    btn?.scrollIntoView({block:'nearest'});
+  }
+}
+
+function buildPanel(filter=''){
+  const q = filter.trim().toLowerCase();
+  leftPanel.innerHTML = '';
+  Object.entries(grouped).forEach(([cat, items]) => {
+    const filtered = items.filter(m => {
+      const haystack = [m.name, m.cat, m.region, ...m.joints].join(' ').toLowerCase();
+      return !q || haystack.includes(q);
+    });
+    if(!filtered.length) return;
+
+    const sec = document.createElement('div');
+    sec.className = 'sec';
+    const lab = document.createElement('div');
+    lab.className = 'sec-label';
+    lab.textContent = cat;
+    sec.appendChild(lab);
+
+    filtered.forEach(m => {
+      const btn = document.createElement('button');
+      btn.className = 'move-btn';
+      btn.dataset.id = m.id;
+      btn.innerHTML = `
+        <span class="move-left">
+          <span class="dot"></span>
+          <span class="move-name">${m.name}</span>
+        </span>
+        <span class="move-region">${m.region}</span>`;
+      btn.addEventListener('click', () => selectMovement(m.id));
+      sec.appendChild(btn);
+    });
+    leftPanel.appendChild(sec);
+  });
+  updateButtons(movements[currentIndex]?.id || movements[0].id);
+}
+
+function stopAuto(){
+  if(autoTimer){
+    clearInterval(autoTimer);
+    autoTimer = null;
+    playBtn.textContent = '▶ Auto';
+    playBtn.classList.add('primary');
+  }
+}
+
+function startAuto(){
+  stopAuto();
+  playBtn.textContent = '❚❚ Pausar';
+  playBtn.classList.add('primary');
+  autoTimer = setInterval(() => {
+    currentIndex = (currentIndex + 1) % movements.length;
+    selectMovement(movements[currentIndex].id, {scroll:true});
+  }, 2600 * Number(speedSel.value || '1'));
+}
+
+function next(){
+  currentIndex = (currentIndex + 1) % movements.length;
+  selectMovement(movements[currentIndex].id);
+}
+function prev(){
+  currentIndex = (currentIndex - 1 + movements.length) % movements.length;
+  selectMovement(movements[currentIndex].id);
+}
+
+buildPanel();
+selectMovement(movements[0].id, {scroll:false});
+
+searchInput.addEventListener('input', e => buildPanel(e.target.value));
+document.getElementById('nextBtn').addEventListener('click', () => { stopAuto(); next(); });
+document.getElementById('prevBtn').addEventListener('click', () => { stopAuto(); prev(); });
+document.getElementById('resetBtn').addEventListener('click', () => { stopAuto(); clearAnimations(); selectMovement(movements[0].id, {scroll:false}); });
+speedSel.addEventListener('change', () => { selectMovement(movements[currentIndex].id, {scroll:false}); if(autoTimer) startAuto(); });
+playBtn.addEventListener('click', () => autoTimer ? stopAuto() : startAuto());
+
+document.querySelectorAll('.hotspot, .joint-btn').forEach(el => {
+  el.addEventListener('click', () => {
+    stopAuto();
+    selectMovement(el.dataset.target);
+  });
+});
+</script>
+</body>
+</html>
