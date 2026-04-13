@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asistencia · Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FDF6E3;
+  --parchment: #F5E6C8;
+  --amber: #D4A853;
+  --amber-light: #E8C97A;
+  --amber-dark: #B8922E;
+  --ink: #2C1810;
+  --ink-light: #5C4033;
+  --dark: #1A0F09;
+  --success: #4A7C59;
+  --success-light: #E8F5E9;
+  --danger: #9B2C2C;
+  --danger-light: #FDE8E8;
+  --warm-gray: #8B7D6B;
+  --warm-gray-light: #C4B9A8;
+  --shadow-sm: 0 1px 3px rgba(44,24,16,0.08);
+  --shadow-md: 0 4px 12px rgba(44,24,16,0.12);
+  --shadow-lg: 0 8px 24px rgba(44,24,16,0.16);
+  --radius: 8px;
+  --radius-lg: 12px;
+  --g1-accent: #2E6B5A;
+  --g1-accent-light: #E6F2EE;
+  --g2-accent: #4A5899;
+  --g2-accent-light: #E8EAF6;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--ink) 60%, var(--ink-light) 100%);
+  color: var(--cream);
+  padding: 2rem 1.5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(212,168,83,0.03) 20px,
+    rgba(212,168,83,0.03) 40px
+  );
+}
+.header-content {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.25rem;
+}
+.header-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--amber-light);
+  opacity: 0.9;
+}
+.header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--parchment);
+}
+.header-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* DATE SELECTOR */
+.date-bar {
+  max-width: 1000px;
+  margin: 1.5rem auto 0;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.date-bar label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.date-bar input[type="date"] {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--warm-gray-light);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  outline: none;
+  transition: border var(--transition);
+}
+.date-bar input[type="date"]:focus {
+  border-color: var(--amber);
+}
+
+/* TABS */
+.tabs-container {
+  max-width: 1000px;
+  margin: 1.5rem auto 0;
+  padding: 0 1.5rem;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tab-btn {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--parchment);
+  color: var(--ink-light);
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+  bottom: -2px;
+}
+.tab-btn:hover {
+  background: var(--cream);
+  color: var(--ink);
+}
+.tab-btn.active-g1 {
+  background: var(--cream);
+  border-color: var(--g1-accent);
+  color: var(--g1-accent);
+}
+.tab-btn.active-g2 {
+  background: var(--cream);
+  border-color: var(--g2-accent);
+  color: var(--g2-accent);
+}
+.tab-indicator {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  margin-left: 0.4rem;
+  opacity: 0.7;
+}
+
+/* MAIN PANEL */
+.panel-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+}
+.panel {
+  background: #fff;
+  border: 2px solid var(--warm-gray-light);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: none;
+}
+.panel.active { display: block; }
+.panel.border-g1 { border-color: var(--g1-accent); }
+.panel.border-g2 { border-color: var(--g2-accent); }
+
+/* TOOLBAR */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--cream);
+  border-bottom: 1px solid var(--parchment);
+}
+.search-box {
+  flex: 1;
+  min-width: 180px;
+  position: relative;
+}
+.search-box input {
+  width: 100%;
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem 0.5rem 2rem;
+  border: 1.5px solid var(--warm-gray-light);
+  border-radius: var(--radius);
+  background: #fff;
+  outline: none;
+  transition: border var(--transition);
+}
+.search-box input:focus { border-color: var(--amber); }
+.search-box::before {
+  content: '🔍';
+  position: absolute;
+  left: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+.bulk-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+.btn {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border: 1.5px solid;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn-present {
+  background: var(--success-light);
+  border-color: var(--success);
+  color: var(--success);
+}
+.btn-present:hover { background: var(--success); color: #fff; }
+.btn-absent {
+  background: var(--danger-light);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.btn-absent:hover { background: var(--danger); color: #fff; }
+.btn-reset {
+  background: var(--cream);
+  border-color: var(--warm-gray-light);
+  color: var(--warm-gray);
+}
+.btn-reset:hover { background: var(--warm-gray); color: #fff; }
+
+/* COUNTER */
+.counter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--cream);
+  border-bottom: 1px solid var(--parchment);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--ink-light);
+}
+.counter-item { display: flex; align-items: center; gap: 0.35rem; }
+.counter-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.counter-dot.present { background: var(--success); }
+.counter-dot.absent { background: var(--danger); }
+.counter-dot.unmarked { background: var(--warm-gray-light); }
+
+/* STUDENT LIST */
+.student-list { padding: 0.5rem 0; }
+.student-row {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1.25rem;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  transition: background var(--transition);
+  cursor: pointer;
+  user-select: none;
+}
+.student-row:hover { background: rgba(212,168,83,0.06); }
+.student-row:last-child { border-bottom: none; }
+.student-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--warm-gray);
+  width: 2rem;
+  text-align: right;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+.student-name {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+.student-email {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--warm-gray);
+  margin-right: 1rem;
+  display: none;
+}
+@media (min-width: 700px) {
+  .student-email { display: block; }
+}
+.status-toggle {
+  display: flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+.status-btn {
+  width: 36px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1.5px solid var(--warm-gray-light);
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+.status-btn:hover { transform: scale(1.08); }
+.status-btn.selected-present {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(74,124,89,0.3);
+}
+.status-btn.selected-absent {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(155,44,44,0.3);
+}
+
+/* HIGHLIGHTED ROW */
+.student-row.is-present { background: rgba(74,124,89,0.05); }
+.student-row.is-absent { background: rgba(155,44,44,0.04); }
+.student-row.hidden { display: none; }
+
+/* FOOTER ACTIONS */
+.footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--cream);
+  border-top: 1px solid var(--parchment);
+}
+.btn-action {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.btn-save {
+  background: var(--amber);
+  border-color: var(--amber-dark);
+  color: var(--dark);
+}
+.btn-save:hover { background: var(--amber-dark); color: var(--cream); }
+.btn-load {
+  background: #fff;
+  border-color: var(--amber);
+  color: var(--ink);
+}
+.btn-load:hover { background: var(--amber-light); }
+.btn-export {
+  background: var(--ink);
+  border-color: var(--dark);
+  color: var(--cream);
+}
+.btn-export:hover { background: var(--dark); }
+.btn-copy-emails {
+  background: var(--parchment);
+  border-color: var(--warm-gray-light);
+  color: var(--ink);
+}
+.btn-copy-emails:hover { background: var(--warm-gray-light); }
+.btn-whatsapp {
+  background: #25D366;
+  border-color: #1DA851;
+  color: #fff;
+}
+.btn-whatsapp:hover { background: #1DA851; }
+.btn-sheets {
+  background: #0F9D58;
+  border-color: #0B8043;
+  color: #fff;
+}
+.btn-sheets:hover { background: #0B8043; }
+.btn-sheets.sending {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-lg);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+.toast.success { background: var(--success); }
+.toast.info { background: var(--ink); }
+.toast.error { background: var(--danger); }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,15,9,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 900;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 500px;
+  width: 100%;
+  overflow: hidden;
+  animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.modal-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--parchment);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.modal-body {
+  padding: 1.25rem;
+  max-height: 50vh;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+.modal-body textarea {
+  width: 100%;
+  min-height: 120px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  padding: 0.75rem;
+  border: 1.5px solid var(--warm-gray-light);
+  border-radius: var(--radius);
+  resize: vertical;
+  outline: none;
+}
+.modal-body textarea:focus { border-color: var(--amber); }
+.modal-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--parchment);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.saved-sessions-list { list-style: none; }
+.saved-sessions-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--parchment);
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: background var(--transition);
+}
+.saved-sessions-list li:hover { background: var(--cream); }
+.saved-sessions-list li:last-child { border-bottom: none; }
+.session-label { font-weight: 600; font-size: 0.9rem; }
+.session-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--warm-gray);
+}
+.session-delete {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: background var(--transition);
+}
+.session-delete:hover { background: var(--danger-light); }
+
+/* CREDITS */
+.credits {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--warm-gray);
+}
+.credits a { color: var(--amber-dark); text-decoration: none; }
+
+/* PRINT */
+@media print {
+  .header { background: #333 !important; -webkit-print-color-adjust: exact; }
+  .toolbar, .footer-actions, .btn, .status-toggle { display: none !important; }
+  .student-row { padding: 0.3rem 1rem; }
+  .student-email { display: block !important; }
+  .panel { border: 1px solid #ccc; box-shadow: none; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .header { padding: 1.5rem 1rem 1rem; }
+  .date-bar, .tabs-container, .panel-container { padding-left: 1rem; padding-right: 1rem; }
+  .toolbar { padding: 0.75rem; }
+  .student-row { padding: 0.5rem 0.75rem; }
+  .footer-actions { padding: 0.75rem; }
+  .bulk-actions { width: 100%; justify-content: space-between; }
+  .btn-action { font-size: 0.78rem; padding: 0.5rem 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-content">
+    <h1>Registro de Asistencia</h1>
+    <div class="header-sub">Morfología General · 2026-I · Universidad de La Salle</div>
+    <div class="header-meta">
+      <span>📋 Docente: Dr. Jorge Bogoya</span>
+      <span>🎓 Optometría — Primer Semestre</span>
+    </div>
+  </div>
+</header>
+
+<!-- DATE -->
+<div class="date-bar">
+  <label for="sessionDate">📅 Fecha de clase:</label>
+  <input type="date" id="sessionDate">
+</div>
+
+<!-- TABS -->
+<div class="tabs-container">
+  <div class="tabs">
+    <button class="tab-btn active-g1" id="tabG1" onclick="switchTab('g1')">
+      G1 — Jueves<span class="tab-indicator">(25)</span>
+    </button>
+    <button class="tab-btn" id="tabG2" onclick="switchTab('g2')">
+      G2 — Miércoles<span class="tab-indicator">(28)</span>
+    </button>
+  </div>
+</div>
+
+<!-- PANELS -->
+<div class="panel-container">
+
+  <!-- G1 PANEL -->
+  <div class="panel active border-g1" id="panelG1">
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" placeholder="Buscar estudiante…" oninput="filterStudents('g1', this.value)">
+      </div>
+      <div class="bulk-actions">
+        <button class="btn btn-present" onclick="bulkMark('g1','present')">✓ Todos</button>
+        <button class="btn btn-absent" onclick="bulkMark('g1','absent')">✗ Todos</button>
+        <button class="btn btn-reset" onclick="bulkMark('g1','reset')">↺ Limpiar</button>
+      </div>
+    </div>
+    <div class="counter-bar" id="counterG1">
+      <div class="counter-item"><span class="counter-dot present"></span> Presentes: <strong id="countPresentG1">0</strong></div>
+      <div class="counter-item"><span class="counter-dot absent"></span> Ausentes: <strong id="countAbsentG1">0</strong></div>
+      <div class="counter-item"><span class="counter-dot unmarked"></span> Sin marcar: <strong id="countUnmarkedG1">25</strong></div>
+    </div>
+    <div class="student-list" id="listG1"></div>
+    <div class="footer-actions">
+      <button class="btn-action btn-save" onclick="saveSession()">💾 Guardar local</button>
+      <button class="btn-action btn-sheets" onclick="sendToGoogleSheets()">📊 Enviar a Sheets</button>
+      <button class="btn-action btn-load" onclick="showLoadModal()">📂 Cargar sesión</button>
+      <button class="btn-action btn-export" onclick="exportCSV()">📥 Exportar CSV</button>
+      <button class="btn-action btn-copy-emails" onclick="copyEmails('absent')">📧 Emails ausentes</button>
+      <button class="btn-action btn-copy-emails" onclick="copyEmails('present')">📧 Emails presentes</button>
+      <button class="btn-action btn-whatsapp" onclick="shareWhatsApp()">💬 WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- G2 PANEL -->
+  <div class="panel border-g2" id="panelG2">
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" placeholder="Buscar estudiante…" oninput="filterStudents('g2', this.value)">
+      </div>
+      <div class="bulk-actions">
+        <button class="btn btn-present" onclick="bulkMark('g2','present')">✓ Todos</button>
+        <button class="btn btn-absent" onclick="bulkMark('g2','absent')">✗ Todos</button>
+        <button class="btn btn-reset" onclick="bulkMark('g2','reset')">↺ Limpiar</button>
+      </div>
+    </div>
+    <div class="counter-bar" id="counterG2">
+      <div class="counter-item"><span class="counter-dot present"></span> Presentes: <strong id="countPresentG2">0</strong></div>
+      <div class="counter-item"><span class="counter-dot absent"></span> Ausentes: <strong id="countAbsentG2">0</strong></div>
+      <div class="counter-item"><span class="counter-dot unmarked"></span> Sin marcar: <strong id="countUnmarkedG2">28</strong></div>
+    </div>
+    <div class="student-list" id="listG2"></div>
+    <div class="footer-actions">
+      <button class="btn-action btn-save" onclick="saveSession()">💾 Guardar local</button>
+      <button class="btn-action btn-sheets" onclick="sendToGoogleSheets()">📊 Enviar a Sheets</button>
+      <button class="btn-action btn-load" onclick="showLoadModal()">📂 Cargar sesión</button>
+      <button class="btn-action btn-export" onclick="exportCSV()">📥 Exportar CSV</button>
+      <button class="btn-action btn-copy-emails" onclick="copyEmails('absent')">📧 Emails ausentes</button>
+      <button class="btn-action btn-copy-emails" onclick="copyEmails('present')">📧 Emails presentes</button>
+      <button class="btn-action btn-whatsapp" onclick="shareWhatsApp()">💬 WhatsApp</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LOAD MODAL -->
+<div class="modal-overlay" id="loadModal">
+  <div class="modal">
+    <div class="modal-header">📂 Sesiones guardadas</div>
+    <div class="modal-body" id="loadModalBody">
+      <p style="color:var(--warm-gray);">No hay sesiones guardadas aún.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-reset" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- JSON IMPORT/EXPORT MODAL -->
+<div class="modal-overlay" id="jsonModal">
+  <div class="modal">
+    <div class="modal-header" id="jsonModalTitle">📋 Datos JSON</div>
+    <div class="modal-body">
+      <textarea id="jsonTextarea" readonly></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-present" onclick="copyJsonToClipboard()">Copiar</button>
+      <button class="btn btn-reset" onclick="closeJsonModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="credits">
+  Morfología General 2026-I · Universidad de La Salle · Facultad de Ciencias de la Salud<br>
+  Herramienta desarrollada por <strong>Dr. Jorge Bogoya</strong>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════
+// STUDENT DATA
+// ══════════════════════════════════════════════════
+const STUDENTS = {
+  g1: [
+    { num: 1,  name: 'Acosta Alarcón Juan Andrés', email: 'jacosta82@unisalle.edu.co' },
+    { num: 2,  name: 'Álvarez Fuentes Daniel Santiago', email: 'dalvarez73@unisalle.edu.co' },
+    { num: 3,  name: 'Arandía Cañón María José', email: 'marandia40@unisalle.edu.co' },
+    { num: 4,  name: 'Ballén Garzón Zamy Gabriela', email: 'zballen33@unisalle.edu.co' },
+    { num: 5,  name: 'Barreto Contreras Carlos Andrés', email: 'cbarreto06@unisalle.edu.co' },
+    { num: 6,  name: 'Fonseca Montaño Daniel', email: 'dfonseca06@unisalle.edu.co' },
+    { num: 7,  name: 'García Ramírez Johan Stiven', email: 'jgarcia99@unisalle.edu.co' },
+    { num: 8,  name: 'Gutiérrez Moreno Andrea Sofía', email: 'angutierrez75@unisalle.edu.co' },
+    { num: 9,  name: 'Lancheros Culma Luz Adriana', email: 'llancheros09@unisalle.edu.co' },
+    { num: 10, name: 'López Plazas Darwin Samir', email: 'dalopez61@unisalle.edu.co' },
+    { num: 11, name: 'Murillo Saavedra Sara Sofía', email: 'smurillo25@unisalle.edu.co' },
+    { num: 12, name: 'Nieto García María Juliana', email: 'mnieto39@unisalle.edu.co' },
+    { num: 13, name: 'Reyes Montaño Juan Sebastián', email: 'jureyes50@unisalle.edu.co' },
+    { num: 14, name: 'Rodríguez Castellanos Sebastián Felipe', email: 'srodrigues49@unisalle.edu.co' },
+    { num: 15, name: 'Rodríguez Valencia María Juliana', email: 'marrodriguez08@unisalle.edu.co' },
+    { num: 16, name: 'Salamanca Bernal Sara Sofía', email: 'ssalamanca78@unisalle.edu.co' },
+    { num: 17, name: 'Salazar Sánchez Thaliana', email: 'tsalazar80@unisalle.edu.co' },
+    { num: 18, name: 'Sánchez Gómez Gabriela', email: 'gsanchez62@unisalle.edu.co' },
+    { num: 19, name: 'Sánchez Maldonado Luisa Alejandra', email: 'lusanchez21@unisalle.edu.co' },
+    { num: 20, name: 'Satoba Garzón Yeimy Alejandra', email: 'ysatoba46@unisalle.edu.co' },
+    { num: 21, name: 'Sierra Sánchez Isabela', email: 'isierra34@unisalle.edu.co' },
+    { num: 22, name: 'Tovar Vargas Santiago', email: 'stovarl1@unisalle.edu.co' },
+    { num: 23, name: 'Varón Cárdenas Sara Juliana', email: 'svaron05@unisalle.edu.co' },
+    { num: 24, name: 'Velandia Velandia Ángel Ricardo', email: 'avelandia31@unisalle.edu.co' },
+    { num: 25, name: 'Villanueva Amortegui Derek Alejandro', email: 'dvillanueva73@unisalle.edu.co' }
+  ],
+  g2: [
+    { num: 1,  name: 'Aulestia Cely Alejandro', email: 'aaulestia51@unisalle.edu.co' },
+    { num: 2,  name: 'Bautista Cortés Luisa Fernanda', email: 'lbautista61@unisalle.edu.co' },
+    { num: 3,  name: 'Cantor Rojas Angie Daniela', email: 'acantor30@unisalle.edu.co' },
+    { num: 4,  name: 'Cárdenas Arenas Juan Sebastián', email: 'jcardenas55@unisalle.edu.co' },
+    { num: 5,  name: 'Casas Rincón Samuel Nicolás', email: 'scasas77@unisalle.edu.co' },
+    { num: 6,  name: 'Castañeda Cárdenas Nelson Andrey', email: 'ncastaneda55@unisalle.edu.co' },
+    { num: 7,  name: 'Chicuasuque Abril Luis Miguel', email: 'lchicuasuque09@unisalle.edu.co' },
+    { num: 8,  name: 'Díaz Daza Thomas', email: 'tdiaz29@unisalle.edu.co' },
+    { num: 9,  name: 'Flórez Moreno Isabella', email: 'iflorez69@unisalle.edu.co' },
+    { num: 10, name: 'Garcés Gómez Danna Gabriela', email: 'dgarces56@unisalle.edu.co' },
+    { num: 11, name: 'García Romero Evelin Salomé', email: 'evgarcia55@unisalle.edu.co' },
+    { num: 12, name: 'González Díaz Laura Sofía', email: 'lagonzalez72@unisalle.edu.co' },
+    { num: 13, name: 'Hernández Neira María Alejandra', email: 'mhernandez75@unisalle.edu.co' },
+    { num: 14, name: 'Jiménez Castillo Bibian Alejandra', email: 'bjimenez93@unisalle.edu.co' },
+    { num: 15, name: 'Ladino Ardila Mitchell Tatiana', email: 'mladino79@unisalle.edu.co' },
+    { num: 16, name: 'Ladino García Tania Valentina', email: 'tladino74@unisalle.edu.co' },
+    { num: 17, name: 'León Marciales Juan Sebastián', email: 'juleon05@unisalle.edu.co' },
+    { num: 18, name: 'Melgarejo González Laura Sofía', email: 'lmelgarejo96@unisalle.edu.co' },
+    { num: 19, name: 'Montenegro González Sara Sofía', email: 'smontenegro01@unisalle.edu.co' },
+    { num: 20, name: 'Morantes Fernández Sara Sofía', email: 'smorantes62@unisalle.edu.co' },
+    { num: 21, name: 'Olivares Poveda Juan Sebastián', email: 'jolivares90@unisalle.edu.co' },
+    { num: 22, name: 'Parra Moreno Marly Rocío', email: 'mparra97@unisalle.edu.co' },
+    { num: 23, name: 'Pastrán Vaquiro Laura Sofía', email: 'lpastran29@unisalle.edu.co' },
+    { num: 24, name: 'Pedraza Rico Carla Mariana', email: 'cpedraza77@unisalle.edu.co' },
+    { num: 25, name: 'Pulido Martínez Carlos Andrés', email: 'cpulido34@unisalle.edu.co' },
+    { num: 26, name: 'Rodríguez Pachón Andrey Felipe', email: 'arodriguez98@unisalle.edu.co' },
+    { num: 27, name: 'Salinas Sierra Camila', email: 'csalinas81@unisalle.edu.co' },
+    { num: 28, name: 'Sanabria Torres Valerie Sharith', email: 'vsanabria67@unisalle.edu.co' }
+  ]
+};
+
+// ══════════════════════════════════════════════════
+// CONFIGURACIÓN GOOGLE SHEETS
+// ══════════════════════════════════════════════════
+// ⚠️ PEGA AQUÍ la URL de tu Apps Script después de implementarlo:
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxS7H1PG_Jhu0JKd1yRGjnZToTgYOjswYgt-IOYkAdCD5-CtQzVA4ANibi1F3QJtx5Ycw/exec';
+
+// ══════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════
+let currentTab = 'g1';
+const attendance = { g1: {}, g2: {} };
+
+// ══════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════
+function init() {
+  // Set today's date
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  document.getElementById('sessionDate').value = `${yyyy}-${mm}-${dd}`;
+
+  renderStudentList('g1');
+  renderStudentList('g2');
+  updateCounters('g1');
+  updateCounters('g2');
+}
+
+function renderStudentList(group) {
+  const container = document.getElementById(group === 'g1' ? 'listG1' : 'listG2');
+  container.innerHTML = '';
+  STUDENTS[group].forEach(s => {
+    const row = document.createElement('div');
+    row.className = 'student-row';
+    row.id = `row-${group}-${s.num}`;
+    row.setAttribute('data-name', s.name.toLowerCase());
+    row.innerHTML = `
+      <span class="student-num">${s.num}</span>
+      <span class="student-name">${s.name}</span>
+      <span class="student-email">${s.email}</span>
+      <div class="status-toggle">
+        <button class="status-btn" id="btn-${group}-${s.num}-p" title="Presente"
+          onclick="event.stopPropagation(); markStudent('${group}', ${s.num}, 'present')">✓</button>
+        <button class="status-btn" id="btn-${group}-${s.num}-a" title="Ausente"
+          onclick="event.stopPropagation(); markStudent('${group}', ${s.num}, 'absent')">✗</button>
+      </div>
+    `;
+    row.addEventListener('click', () => toggleStudent(group, s.num));
+    container.appendChild(row);
+  });
+}
+
+// ══════════════════════════════════════════════════
+// ATTENDANCE LOGIC
+// ══════════════════════════════════════════════════
+function markStudent(group, num, status) {
+  const current = attendance[group][num];
+  if (current === status) {
+    delete attendance[group][num];
+    status = null;
+  } else {
+    attendance[group][num] = status;
+  }
+  updateStudentUI(group, num, status);
+  updateCounters(group);
+}
+
+function toggleStudent(group, num) {
+  const current = attendance[group][num];
+  if (!current) markStudent(group, num, 'present');
+  else if (current === 'present') markStudent(group, num, 'absent');
+  else markStudent(group, num, null);
+}
+
+function updateStudentUI(group, num, status) {
+  const row = document.getElementById(`row-${group}-${num}`);
+  const btnP = document.getElementById(`btn-${group}-${num}-p`);
+  const btnA = document.getElementById(`btn-${group}-${num}-a`);
+
+  row.classList.remove('is-present', 'is-absent');
+  btnP.classList.remove('selected-present');
+  btnA.classList.remove('selected-absent');
+
+  if (status === 'present') {
+    row.classList.add('is-present');
+    btnP.classList.add('selected-present');
+  } else if (status === 'absent') {
+    row.classList.add('is-absent');
+    btnA.classList.add('selected-absent');
+  }
+}
+
+function bulkMark(group, action) {
+  STUDENTS[group].forEach(s => {
+    if (action === 'reset') {
+      delete attendance[group][s.num];
+      updateStudentUI(group, s.num, null);
+    } else {
+      attendance[group][s.num] = action;
+      updateStudentUI(group, s.num, action);
+    }
+  });
+  updateCounters(group);
+}
+
+function updateCounters(group) {
+  const total = STUDENTS[group].length;
+  let present = 0, absent = 0;
+  Object.values(attendance[group]).forEach(v => {
+    if (v === 'present') present++;
+    else if (v === 'absent') absent++;
+  });
+  const unmarked = total - present - absent;
+  const G = group.toUpperCase();
+  document.getElementById(`countPresent${G}`).textContent = present;
+  document.getElementById(`countAbsent${G}`).textContent = absent;
+  document.getElementById(`countUnmarked${G}`).textContent = unmarked;
+}
+
+// ══════════════════════════════════════════════════
+// SEARCH / FILTER
+// ══════════════════════════════════════════════════
+function filterStudents(group, query) {
+  const q = query.toLowerCase().trim();
+  const list = group === 'g1' ? 'listG1' : 'listG2';
+  document.querySelectorAll(`#${list} .student-row`).forEach(row => {
+    const name = row.getAttribute('data-name');
+    row.classList.toggle('hidden', q && !name.includes(q));
+  });
+}
+
+// ══════════════════════════════════════════════════
+// TAB SWITCHING
+// ══════════════════════════════════════════════════
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tabG1').className = tab === 'g1' ? 'tab-btn active-g1' : 'tab-btn';
+  document.getElementById('tabG2').className = tab === 'g2' ? 'tab-btn active-g2' : 'tab-btn';
+  document.getElementById('panelG1').classList.toggle('active', tab === 'g1');
+  document.getElementById('panelG2').classList.toggle('active', tab === 'g2');
+}
+
+// ══════════════════════════════════════════════════
+// SAVE / LOAD
+// ══════════════════════════════════════════════════
+function getSessionKey() {
+  const date = document.getElementById('sessionDate').value;
+  return `morfo_asist_${date}_${currentTab}`;
+}
+
+function saveSession() {
+  const date = document.getElementById('sessionDate').value;
+  if (!date) { showToast('Selecciona una fecha primero', 'error'); return; }
+  const key = getSessionKey();
+  const data = {
+    date,
+    group: currentTab,
+    groupLabel: currentTab === 'g1' ? 'G1 — Jueves' : 'G2 — Miércoles',
+    attendance: { ...attendance[currentTab] },
+    savedAt: new Date().toISOString(),
+    version: '2026I-v1'
+  };
+  // Save to localStorage
+  localStorage.setItem(key, JSON.stringify(data));
+  // Update index
+  const index = JSON.parse(localStorage.getItem('morfo_asist_index') || '[]');
+  if (!index.includes(key)) index.push(key);
+  localStorage.setItem('morfo_asist_index', JSON.stringify(index));
+
+  const present = Object.values(data.attendance).filter(v => v === 'present').length;
+  const absent = Object.values(data.attendance).filter(v => v === 'absent').length;
+  showToast(`Guardado: ${data.groupLabel} · ${date} (${present}P / ${absent}A)`, 'success');
+}
+
+// ══════════════════════════════════════════════════
+// ENVÍO A GOOGLE SHEETS
+// ══════════════════════════════════════════════════
+async function sendToGoogleSheets() {
+  if (GOOGLE_SHEETS_URL === 'PEGA_TU_URL_AQUI') {
+    showToast('⚠️ Configura la URL de Google Sheets primero', 'error');
+    return;
+  }
+
+  const date = document.getElementById('sessionDate').value;
+  if (!date) { showToast('Selecciona una fecha primero', 'error'); return; }
+
+  const group = currentTab;
+  const att = attendance[group];
+  const markedCount = Object.keys(att).length;
+
+  if (markedCount === 0) {
+    showToast('No hay asistencia marcada para enviar', 'error');
+    return;
+  }
+
+  // Convertir keys numéricos a strings para el script
+  const attStr = {};
+  Object.entries(att).forEach(([k, v]) => { attStr[String(k)] = v; });
+
+  const payload = {
+    group: group,
+    date: date,
+    attendance: attStr,
+    savedAt: new Date().toISOString()
+  };
+
+  // Visual feedback
+  const btns = document.querySelectorAll('.btn-sheets');
+  btns.forEach(b => { b.classList.add('sending'); b.textContent = '⏳ Enviando…'; });
+
+  try {
+    const response = await fetch(GOOGLE_SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',  // Apps Script requiere no-cors
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    // Con no-cors no podemos leer la respuesta, pero si no hubo error de red, asumimos éxito
+    const groupLabel = group === 'g1' ? 'G1 — Jueves' : 'G2 — Miércoles';
+    const present = Object.values(att).filter(v => v === 'present').length;
+    const absent = Object.values(att).filter(v => v === 'absent').length;
+    showToast(`✅ Enviado a Sheets: ${groupLabel} · ${date} (${present}P / ${absent}A)`, 'success');
+
+    // También guardar localmente como backup
+    saveSession();
+
+  } catch (error) {
+    console.error('Error enviando a Google Sheets:', error);
+    showToast('❌ Error de conexión. Datos guardados localmente.', 'error');
+    saveSession(); // Guardar local como respaldo
+  } finally {
+    btns.forEach(b => { b.classList.remove('sending'); b.textContent = '📊 Enviar a Sheets'; });
+  }
+}
+
+function showLoadModal() {
+  const index = JSON.parse(localStorage.getItem('morfo_asist_index') || '[]');
+  const body = document.getElementById('loadModalBody');
+
+  if (index.length === 0) {
+    body.innerHTML = '<p style="color:var(--warm-gray); text-align:center; padding:1rem;">No hay sesiones guardadas aún.</p>';
+  } else {
+    const sessions = index.map(key => {
+      const d = JSON.parse(localStorage.getItem(key));
+      return d ? { key, ...d } : null;
+    }).filter(Boolean).sort((a, b) => b.date.localeCompare(a.date));
+
+    let html = '<ul class="saved-sessions-list">';
+    sessions.forEach(s => {
+      const present = Object.values(s.attendance).filter(v => v === 'present').length;
+      const absent = Object.values(s.attendance).filter(v => v === 'absent').length;
+      html += `<li onclick="loadSession('${s.key}')">
+        <div>
+          <div class="session-label">${s.groupLabel} · ${s.date}</div>
+          <div class="session-meta">${present} presentes · ${absent} ausentes · guardado ${new Date(s.savedAt).toLocaleString('es-CO')}</div>
+        </div>
+        <button class="session-delete" onclick="event.stopPropagation(); deleteSession('${s.key}')" title="Eliminar">🗑</button>
+      </li>`;
+    });
+    html += '</ul>';
+    body.innerHTML = html;
+  }
+  document.getElementById('loadModal').classList.add('show');
+}
+
+function loadSession(key) {
+  const data = JSON.parse(localStorage.getItem(key));
+  if (!data) { showToast('Sesión no encontrada', 'error'); return; }
+
+  const group = data.group;
+  document.getElementById('sessionDate').value = data.date;
+  switchTab(group);
+
+  // Reset
+  attendance[group] = {};
+  STUDENTS[group].forEach(s => updateStudentUI(group, s.num, null));
+
+  // Apply
+  Object.entries(data.attendance).forEach(([num, status]) => {
+    const n = parseInt(num);
+    attendance[group][n] = status;
+    updateStudentUI(group, n, status);
+  });
+  updateCounters(group);
+  closeModal();
+  showToast(`Cargado: ${data.groupLabel} · ${data.date}`, 'info');
+}
+
+function deleteSession(key) {
+  if (!confirm('¿Eliminar esta sesión?')) return;
+  localStorage.removeItem(key);
+  const index = JSON.parse(localStorage.getItem('morfo_asist_index') || '[]');
+  const updated = index.filter(k => k !== key);
+  localStorage.setItem('morfo_asist_index', JSON.stringify(updated));
+  showLoadModal(); // refresh
+  showToast('Sesión eliminada', 'info');
+}
+
+function closeModal() {
+  document.getElementById('loadModal').classList.remove('show');
+}
+
+// ══════════════════════════════════════════════════
+// EXPORT CSV
+// ══════════════════════════════════════════════════
+function exportCSV() {
+  const date = document.getElementById('sessionDate').value;
+  const group = currentTab;
+  const groupLabel = group === 'g1' ? 'G1_Jueves' : 'G2_Miércoles';
+
+  let csv = 'N°,Nombre,Email,Estado\n';
+  STUDENTS[group].forEach(s => {
+    const status = attendance[group][s.num] || 'sin marcar';
+    const statusLabel = status === 'present' ? 'Presente' : status === 'absent' ? 'Ausente' : 'Sin marcar';
+    csv += `${s.num},"${s.name}",${s.email},${statusLabel}\n`;
+  });
+
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `asistencia_${groupLabel}_${date}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('CSV descargado', 'success');
+}
+
+// ══════════════════════════════════════════════════
+// COPY EMAILS
+// ══════════════════════════════════════════════════
+function copyEmails(filter) {
+  const group = currentTab;
+  const emails = [];
+  STUDENTS[group].forEach(s => {
+    const status = attendance[group][s.num];
+    if (filter === 'all' || status === filter) {
+      emails.push(s.email);
+    }
+  });
+
+  if (emails.length === 0) {
+    showToast(`No hay estudiantes ${filter === 'present' ? 'presentes' : 'ausentes'} marcados`, 'error');
+    return;
+  }
+
+  const text = emails.join('; ');
+  navigator.clipboard.writeText(text).then(() => {
+    const label = filter === 'present' ? 'presentes' : 'ausentes';
+    showToast(`${emails.length} emails (${label}) copiados`, 'success');
+  }).catch(() => {
+    // Fallback: show in modal
+    document.getElementById('jsonModalTitle').textContent = `📧 Emails (${filter})`;
+    document.getElementById('jsonTextarea').value = text;
+    document.getElementById('jsonTextarea').removeAttribute('readonly');
+    document.getElementById('jsonModal').classList.add('show');
+  });
+}
+
+// ══════════════════════════════════════════════════
+// WHATSAPP SHARE
+// ══════════════════════════════════════════════════
+function shareWhatsApp() {
+  const date = document.getElementById('sessionDate').value;
+  const group = currentTab;
+  const groupLabel = group === 'g1' ? 'G1 — Jueves' : 'G2 — Miércoles';
+
+  const present = [], absent = [];
+  STUDENTS[group].forEach(s => {
+    const status = attendance[group][s.num];
+    if (status === 'present') present.push(s.name);
+    else if (status === 'absent') absent.push(s.name);
+  });
+
+  let msg = `📋 *Asistencia Morfología General*\n`;
+  msg += `📅 ${date} · ${groupLabel}\n\n`;
+  msg += `✅ *Presentes (${present.length}):*\n`;
+  present.forEach(n => msg += `  • ${n}\n`);
+  msg += `\n❌ *Ausentes (${absent.length}):*\n`;
+  absent.forEach(n => msg += `  • ${n}\n`);
+  msg += `\n📊 Total: ${present.length}/${STUDENTS[group].length}`;
+
+  const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+
+// ══════════════════════════════════════════════════
+// JSON MODAL
+// ══════════════════════════════════════════════════
+function copyJsonToClipboard() {
+  const textarea = document.getElementById('jsonTextarea');
+  navigator.clipboard.writeText(textarea.value).then(() => {
+    showToast('Copiado al portapapeles', 'success');
+  });
+}
+
+function closeJsonModal() {
+  document.getElementById('jsonModal').classList.remove('show');
+}
+
+// ══════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════
+function showToast(message, type = 'info') {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = `toast ${type} show`;
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ══════════════════════════════════════════════════
+// KEYBOARD SHORTCUT: Ctrl+S to save
+// ══════════════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    saveSession();
+  }
+});
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) {
+      overlay.classList.remove('show');
+    }
+  });
+});
+
+// GO
+init();
+</script>
+</body>
+</html>
