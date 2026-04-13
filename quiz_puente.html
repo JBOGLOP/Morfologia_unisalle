@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz de Ingreso — Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1714;--parchment:#f5f0e8;--cream:#faf7f2;
+  --amber:#c8a45c;--amber-light:#e8d5a0;--amber-dark:#8b6914;
+  --teal:#2a7a6e;--red-clinical:#b5413b;--blue-nerve:#3a5a8c;
+  --green-muscle:#4a7a4e;--shadow:rgba(26,23,20,0.12);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+  --g1:#2a7a6e;--g1-bg:#eaf6f4;--g1-border:#1d5c52;
+  --g2:#3a5a8c;--g2-bg:#eaf0f8;--g2-border:#2a4268;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--ink);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--teal));z-index:1001;transition:width 0.1s;width:0}
+
+/* ── HERO ── */
+.hero{min-height:44vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(170deg,var(--ink) 0%,#2a2520 40%,#3a3028 100%);color:var(--parchment);padding:2rem;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(200,164,92,0.15) 0%,transparent 60%),radial-gradient(ellipse at 70% 60%,rgba(42,122,110,0.1) 0%,transparent 50%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:750px}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1.1;margin-bottom:0.4rem}
+.hero h1 .accent{color:var(--amber)}
+.hero .subtitle{font-family:var(--font-display);font-style:italic;font-size:clamp(1rem,2.5vw,1.5rem);color:var(--amber-light);margin-bottom:1rem;opacity:0.9}
+.hero .meta{font-family:var(--font-mono);font-size:0.78rem;color:rgba(245,240,232,0.5);letter-spacing:0.05em;margin-bottom:0.5rem}
+.hero .meta span{color:var(--amber)}
+.hero .dyn-badge{display:inline-block;background:var(--teal);color:white;font-family:var(--font-mono);font-size:0.82rem;padding:0.4rem 1.2rem;border-radius:30px;margin-top:0.8rem;letter-spacing:0.06em;text-transform:uppercase}
+
+/* ── REGISTRO ── */
+.reg-wrap{max-width:680px;margin:0 auto;padding:2.5rem 1.5rem}
+.reg-card{background:var(--cream);border-radius:16px;box-shadow:0 6px 32px var(--shadow);overflow:hidden}
+.reg-header{background:var(--ink);color:var(--parchment);padding:1.6rem 2rem}
+.reg-header h2{font-family:var(--font-display);font-size:1.55rem;margin-bottom:0.2rem}
+.reg-header p{font-family:var(--font-mono);font-size:0.75rem;color:rgba(245,240,232,0.45);letter-spacing:0.04em}
+.reg-body{padding:1.8rem 2rem}
+
+/* Grupo selector */
+.group-selector{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.4rem;margin-bottom:1.6rem}
+.group-opt{border:2px solid rgba(200,164,92,0.3);border-radius:12px;padding:1rem;text-align:center;cursor:pointer;transition:all 0.25s;background:var(--parchment);user-select:none}
+.group-opt:hover{border-color:var(--amber);background:var(--amber-light)}
+.group-opt.selected.g1{border-color:var(--g1);background:var(--g1-bg);box-shadow:0 0 0 3px rgba(42,122,110,0.15)}
+.group-opt.selected.g2{border-color:var(--g2);background:var(--g2-bg);box-shadow:0 0 0 3px rgba(58,90,140,0.15)}
+.group-opt .g-code{font-family:var(--font-display);font-size:2rem;font-weight:900;line-height:1}
+.group-opt .g-day{font-family:var(--font-mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.07em;margin-top:0.15rem;opacity:0.55}
+.group-opt .g-hour{font-family:var(--font-mono);font-size:0.65rem;opacity:0.45;margin-top:0.05rem}
+.group-opt.g1 .g-code{color:var(--g1)}
+.group-opt.g2 .g-code{color:var(--g2)}
+
+/* Etiquetas y campos */
+.field-group{margin-bottom:1.3rem}
+.field-group label{display:block;font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber-dark);margin-bottom:0.38rem}
+.field-group select,
+.field-group input{width:100%;padding:0.72rem 1rem;border:1.5px solid rgba(200,164,92,0.3);border-radius:8px;background:var(--parchment);font-family:var(--font-body);font-size:0.97rem;color:var(--ink);outline:none;transition:border-color 0.2s,box-shadow 0.2s;appearance:none;-webkit-appearance:none}
+.field-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%238b6914' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
+.field-group select:focus,
+.field-group input:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(200,164,92,0.12)}
+.field-group select.error,
+.field-group input.error{border-color:var(--red-clinical);box-shadow:0 0 0 3px rgba(181,65,59,0.1)}
+.field-group select:disabled{opacity:0.4;cursor:not-allowed}
+.field-hint{font-family:var(--font-mono);font-size:0.68rem;color:rgba(26,23,20,0.38);margin-top:0.25rem}
+.field-hint.verified{color:var(--green-muscle)}
+
+/* Correo editable notice */
+.email-note{display:flex;align-items:center;gap:0.5rem;background:rgba(200,164,92,0.08);border:1px solid rgba(200,164,92,0.25);border-radius:6px;padding:0.5rem 0.8rem;margin-top:0.35rem;font-family:var(--font-mono);font-size:0.7rem;color:var(--amber-dark)}
+.email-note svg{flex-shrink:0}
+
+.btn-start{width:100%;padding:1rem;background:var(--amber);color:var(--ink);font-family:var(--font-mono);font-size:0.95rem;font-weight:500;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.07em;text-transform:uppercase;transition:all 0.3s;margin-top:0.3rem}
+.btn-start:hover{background:var(--amber-dark);color:white;transform:translateY(-1px);box-shadow:0 4px 16px rgba(139,105,20,0.25)}
+.btn-start:disabled{opacity:0.35;cursor:not-allowed;transform:none;box-shadow:none}
+.reg-error{background:#f8d7da;color:#721c24;font-family:var(--font-mono);font-size:0.78rem;padding:0.7rem 1rem;border-radius:6px;margin-bottom:1rem;display:none}
+
+/* ── QUIZ ── */
+.quiz-wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.quiz-header-bar{background:var(--ink);color:var(--parchment);border-radius:12px;padding:1.2rem 1.8rem;margin-bottom:1.6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem}
+.student-info .s-name{font-family:var(--font-display);font-size:1.05rem;color:var(--amber);font-weight:700}
+.student-info .s-detail{font-family:var(--font-mono);font-size:0.7rem;color:rgba(245,240,232,0.45);letter-spacing:0.04em;margin-top:0.1rem}
+.timer-box{text-align:right}
+.timer-display{font-family:var(--font-mono);font-size:2.4rem;font-weight:500;color:var(--amber);letter-spacing:0.05em;line-height:1}
+.timer-label{font-family:var(--font-mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;opacity:0.4;margin-top:0.1rem}
+.timer-display.urgent{color:#ff6b6b;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.55}}
+
+.progress-quiz{height:5px;background:rgba(200,164,92,0.15);border-radius:3px;margin-bottom:1.6rem;overflow:hidden}
+.progress-quiz-fill{height:100%;background:linear-gradient(90deg,var(--amber),var(--teal));border-radius:3px;transition:width 0.4s;width:0}
+.q-counter{font-family:var(--font-mono);font-size:0.72rem;color:var(--amber-dark);text-align:right;margin-bottom:0.4rem;letter-spacing:0.05em}
+
+/* Preguntas */
+.quiz-q{background:var(--cream);border:1px solid rgba(200,164,92,0.2);border-radius:12px;padding:1.6rem;margin-bottom:1.2rem;animation:fadeIn 0.4s ease-out}
+.quiz-q h4{font-family:var(--font-display);font-size:1.05rem;margin-bottom:0.9rem;line-height:1.5}
+.quiz-q .q-num{font-family:var(--font-mono);font-size:0.68rem;color:var(--amber-dark);display:block;margin-bottom:0.35rem;letter-spacing:0.05em}
+.quiz-options{list-style:none;padding:0}
+.quiz-options li{padding:0.6rem 1rem;margin:0.35rem 0;border:1.5px solid rgba(200,164,92,0.3);border-radius:8px;cursor:pointer;transition:all 0.22s;font-size:0.93rem}
+.quiz-options li:hover{background:var(--amber-light);border-color:var(--amber)}
+.quiz-options li.correct{background:#d4edda;border-color:var(--green-muscle);color:#155724;font-weight:600}
+.quiz-options li.incorrect{background:#f8d7da;border-color:var(--red-clinical);color:#721c24}
+.quiz-options li.disabled{pointer-events:none;opacity:0.62}
+.quiz-feedback{margin-top:0.8rem;padding:0.8rem 1rem;border-radius:8px;font-size:0.86rem;display:none;line-height:1.65}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct-fb{background:#d4edda;color:#155724}
+.quiz-feedback.incorrect-fb{background:#f8d7da;color:#721c24}
+
+/* Score panel */
+.score-panel{display:none;text-align:center;padding:2.5rem;background:var(--cream);border-radius:16px;border:2px solid var(--amber);margin-top:2rem}
+.score-big{font-family:var(--font-display);font-size:4.5rem;font-weight:900;color:var(--amber-dark);line-height:1;margin-bottom:0.2rem}
+.score-fraction{font-family:var(--font-mono);font-size:0.95rem;color:rgba(26,23,20,0.45);margin-bottom:1.2rem}
+.score-msg{font-family:var(--font-display);font-size:1.3rem;font-style:italic;margin-bottom:0.3rem}
+.detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin:1.5rem 0}
+.detail-item{background:var(--parchment);border-radius:8px;padding:0.7rem 0.4rem}
+.detail-item .di-val{font-family:var(--font-display);font-size:1.45rem;font-weight:700}
+.detail-item .di-val.c{color:var(--green-muscle)}
+.detail-item .di-val.i{color:var(--red-clinical)}
+.detail-item .di-label{font-family:var(--font-mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.48;margin-top:0.1rem}
+.send-status{font-family:var(--font-mono);font-size:0.78rem;margin-top:1.2rem;padding:0.6rem 1.2rem;border-radius:6px;display:inline-block}
+.send-status.sending{background:#fff8e1;color:#856404}
+.send-status.ok{background:#d4edda;color:#155724}
+.send-status.fail{background:#f8d7da;color:#721c24}
+.btn-retry{font-family:var(--font-mono);font-size:0.8rem;padding:0.6rem 1.5rem;border:1.5px solid var(--amber-dark);background:transparent;color:var(--amber-dark);border-radius:8px;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.3s;margin-top:0.8rem}
+.btn-retry:hover{background:var(--amber-dark);color:white}
+
+/* Footer */
+.footer{background:var(--ink);color:rgba(245,240,232,0.4);text-align:center;padding:2rem;font-family:var(--font-mono);font-size:0.73rem}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){
+  .reg-body{padding:1.4rem 1.2rem}
+  .detail-grid{grid-template-columns:repeat(2,1fr)}
+  .quiz-header-bar{flex-direction:column;text-align:center}
+  .timer-box{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="meta">UNIVERSIDAD DE LA SALLE · OPTOMETRÍA · <span>MORFOLOGÍA GENERAL 2026-I</span></div>
+    <h1>Quiz de <span class="accent">Ingreso</span></h1>
+    <p class="subtitle">Clase Puente — Del Músculo al Nervio</p>
+    <div class="meta">Dr. Jorge Bogoya · Docente Diana Paola Ramírez Arcos</div>
+    <div class="dyn-badge" id="heroBadge">⏳ Identifícate para comenzar</div>
+  </div>
+</header>
+
+<!-- ══ REGISTRO ══ -->
+<div class="reg-wrap" id="regSection">
+  <div class="reg-card">
+    <div class="reg-header">
+      <h2>Identificación del estudiante</h2>
+      <p>MORFOLOGÍA GENERAL · PERIODO 2026-I · OPTOMETRÍA</p>
+    </div>
+    <div class="reg-body">
+
+      <div class="reg-error" id="regError">Por favor completa todos los campos.</div>
+
+      <!-- PASO 1: Grupo -->
+      <div class="field-group">
+        <label>1 — Selecciona tu grupo</label>
+        <div class="group-selector">
+          <div class="group-opt g1" id="optG1" onclick="selectGroup('G1')">
+            <div class="g-code">G1</div>
+            <div class="g-day">Jueves</div>
+            <div class="g-hour">07:00 – 08:59</div>
+          </div>
+          <div class="group-opt g2" id="optG2" onclick="selectGroup('G2')">
+            <div class="g-code">G2</div>
+            <div class="g-day">Miércoles</div>
+            <div class="g-hour">09:00 – 10:59</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 2: Nombre (desplegable) -->
+      <div class="field-group">
+        <label>2 — Selecciona tu nombre</label>
+        <select id="selectNombre" onchange="onStudentSelect()" disabled>
+          <option value="">— Primero elige tu grupo —</option>
+        </select>
+        <div class="field-hint" id="hintNombre">Selecciona el grupo para ver la lista.</div>
+      </div>
+
+      <!-- PASO 3: Correo -->
+      <div class="field-group">
+        <label>3 — Confirma o corrige tu correo</label>
+        <input type="email" id="correo" placeholder="usuario@unisalle.edu.co" autocomplete="email" disabled>
+        <div class="email-note" id="emailNote" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Corrige si tu correo institucional es diferente al registrado.
+        </div>
+      </div>
+
+      <button class="btn-start" id="btnStart" onclick="startQuiz()" disabled>
+        → Comenzar quiz · 15 minutos
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div class="quiz-wrap" id="quizSection" style="display:none">
+
+  <div class="quiz-header-bar">
+    <div class="student-info">
+      <div class="s-name" id="dispNombre">—</div>
+      <div class="s-detail" id="dispDetalle">—</div>
+    </div>
+    <div class="timer-box">
+      <div class="timer-display" id="timerDisplay">15:00</div>
+      <div class="timer-label">Tiempo restante</div>
+    </div>
+  </div>
+
+  <div class="q-counter" id="qCounter">Pregunta 0 de 8 respondida</div>
+  <div class="progress-quiz"><div class="progress-quiz-fill" id="qProgress"></div></div>
+
+  <div id="quizFinal">
+
+    <div class="quiz-q" data-correct="2">
+      <span class="q-num">Pregunta 1 · Unión Neuromuscular (G1)</span>
+      <h4>¿Cuál es la proteína vesicular que actúa como sensor de calcio para desencadenar la liberación de acetilcolina en la unión neuromuscular?</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Sintaxina</li>
+        <li data-idx="1">B) SNAP-25</li>
+        <li data-idx="2">C) Sinaptotagmina</li>
+        <li data-idx="3">D) Tropomiosina</li>
+      </ul>
+      <div class="quiz-feedback">La <strong>sinaptotagmina</strong> es el sensor de Ca²⁺ en la membrana vesicular. Al unirse al calcio activa el complejo SNARE (sintaxina + SNAP-25 + sinaptobrevina) provocando la fusión vesicular y la liberación de ACh. <em>(Khalil et al., StatPearls 2025)</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="3">
+      <span class="q-num">Pregunta 2 · SNC vs SNP — Control pupilar (G2)</span>
+      <h4>¿Cuál de las siguientes afirmaciones sobre el sistema nervioso autónomo es CORRECTA respecto al ojo?</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) El simpático produce miosis a través del esfínter pupilar</li>
+        <li data-idx="1">B) El parasimpático produce midriasis vía el NC III</li>
+        <li data-idx="2">C) Ambos sistemas actúan sobre el mismo músculo pupilar</li>
+        <li data-idx="3">D) El simpático dilata la pupila (dilatador) y el parasimpático la contrae (esfínter vía NC III)</li>
+      </ul>
+      <div class="quiz-feedback">El <strong>simpático</strong> activa el músculo <strong>dilatador de la pupila</strong> → midriasis. El <strong>parasimpático</strong> (fibras NC III → ganglio ciliar) activa el <strong>esfínter pupilar</strong> → miosis. Actúan sobre músculos diferentes con efectos opuestos. <em>(Moore, Cap. 10; Tortora, Cap. 15)</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="1">
+      <span class="q-num">Pregunta 3 · Encéfalo (G3)</span>
+      <h4>Un paciente sufre un ACV que afecta el lóbulo occipital izquierdo. ¿Qué alteración visual es más probable?</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Ceguera total del ojo izquierdo</li>
+        <li data-idx="1">B) Hemianopsia homónima derecha</li>
+        <li data-idx="2">C) Ptosis palpebral bilateral</li>
+        <li data-idx="3">D) Midriasis izquierda</li>
+      </ul>
+      <div class="quiz-feedback">El lóbulo occipital izquierdo procesa el campo visual <strong>derecho</strong> (cruce parcial en el quiasma óptico). Su lesión produce <strong>hemianopsia homónima derecha</strong>, detectable con campimetría. <em>(Moore, Cap. 8; Tortora, Cap. 14)</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="0">
+      <span class="q-num">Pregunta 4 · Meninges (G4)</span>
+      <h4>Un paciente presenta midriasis unilateral derecha súbita y arreactiva. El signo más preocupante es:</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Herniación uncal derecha que comprime el NC III contra el tentorio</li>
+        <li data-idx="1">B) Parálisis de Bell del lado derecho</li>
+        <li data-idx="2">C) Síndrome de Horner derecho</li>
+        <li data-idx="3">D) Miastenia gravis ocular</li>
+      </ul>
+      <div class="quiz-feedback"><strong>Midriasis unilateral arreactiva</strong> indica herniación del uncus temporal comprimiendo el NC III ipsilateral — emergencia neuroquirúrgica. Horner produce miosis, no midriasis. <em>(Moore, Cap. 8)</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="2">
+      <span class="q-num">Pregunta 5 · Pares Craneales II, III, IV (G5)</span>
+      <h4>Una paciente de 58 años presenta ptosis derecha severa, midriasis derecha y ojo desviado «abajo y afuera». ¿Qué par craneal está lesionado y cuál es la causa más urgente a descartar?</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) NC IV — fractura orbitaria</li>
+        <li data-idx="1">B) NC VI — hipertensión intracraneal</li>
+        <li data-idx="2">C) NC III — aneurisma de la arteria comunicante posterior</li>
+        <li data-idx="3">D) NC II — neuritis óptica</li>
+      </ul>
+      <div class="quiz-feedback">La tríada <strong>ptosis + midriasis + ojo «abajo y afuera»</strong> es patognomónica de parálisis completa del <strong>NC III</strong>. La midriasis implica compresión extrínseca de fibras parasimpáticas superficiales. Causa más urgente: <strong>aneurisma de la arteria comunicante posterior</strong>. <em>(Fang et al., JAMA Ophthalmol 2017)</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="1">
+      <span class="q-num">Pregunta 6 · Pares Craneales V₁, VI, VII (G6)</span>
+      <h4>Un niño de 8 años presenta esotropía izquierda con cefalea matutina y vómitos. La parálisis del NC VI en este contexto sugiere:</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Miastenia gravis congénita</li>
+        <li data-idx="1">B) Hipertensión intracraneal por tumor de fosa posterior</li>
+        <li data-idx="2">C) Parálisis microvascular por diabetes juvenil</li>
+        <li data-idx="3">D) Fractura de la base del cráneo</li>
+      </ul>
+      <div class="quiz-feedback">En niños ~50% de parálisis del NC VI son neoplásicas. El NC VI tiene el <strong>recorrido subaracnoideo más largo</strong> y es signo de falsa localización: la HIC lo estira contra el borde petroso. Cefalea matutina + vómitos → neuroimagen urgente. <em>(Holmes et al., Am J Ophthalmol 1999)</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="3">
+      <span class="q-num">Pregunta 7 · Integrador — Bell's palsy</span>
+      <h4>A patient with acute left-sided Bell's palsy, lagophthalmos of 5 mm, and inferior punctate keratitis. The most urgent initial management is:</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Immediate surgical tarsorrhaphy</li>
+        <li data-idx="1">B) Topical antibiotics only</li>
+        <li data-idx="2">C) MRI of the brain before any treatment</li>
+        <li data-idx="3">D) Corneal lubrication + oral corticosteroids within 72 hours</li>
+      </ul>
+      <div class="quiz-feedback"><strong>Corneal protection</strong> (preservative-free tears + nighttime ointment + lid taping) and <strong>oral corticosteroids</strong> (prednisone 50–60 mg/day × 5 days, then taper) must be initiated within 72 hours. Recovery &gt;95% with prompt treatment. <em>(de Almeida et al., CMAJ 2014)</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="2">
+      <span class="q-num">Pregunta 8 · Integrador — Horner vs NC III</span>
+      <h4>¿Cuál de las siguientes afirmaciones diferencia CORRECTAMENTE el síndrome de Horner de la parálisis del NC III?</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) En ambos hay midriasis, pero en Horner es bilateral</li>
+        <li data-idx="1">B) Ambos producen ptosis severa con diplopía</li>
+        <li data-idx="2">C) Horner produce miosis y ptosis parcial; NC III produce midriasis y ptosis severa</li>
+        <li data-idx="3">D) El síndrome de Horner produce ojo «hacia abajo y afuera»</li>
+      </ul>
+      <div class="quiz-feedback"><strong>Horner = miosis + ptosis parcial (1–2 mm)</strong> por déficit simpático. <strong>NC III = midriasis + ptosis severa</strong> por déficit parasimpático y motor. Horner no afecta los movimientos oculares. La pupila es la clave diferencial. <em>(Kanagalingam &amp; Miller, Eye Brain 2015; Moore, Cap. 10)</em></div>
+    </div>
+
+  </div><!-- /quizFinal -->
+
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scorePct">—%</div>
+    <div class="score-fraction" id="scoreFraction">— / 8 correctas</div>
+    <div class="score-msg" id="scoreMsg">—</div>
+    <div class="detail-grid">
+      <div class="detail-item"><div class="di-val c" id="dCorrectas">—</div><div class="di-label">Correctas</div></div>
+      <div class="detail-item"><div class="di-val i" id="dIncorrectas">—</div><div class="di-label">Incorrectas</div></div>
+      <div class="detail-item"><div class="di-val" id="dTiempo" style="color:var(--blue-nerve)">—</div><div class="di-label">Tiempo</div></div>
+      <div class="detail-item"><div class="di-val" id="dGrupo" style="color:var(--amber-dark)">—</div><div class="di-label">Grupo</div></div>
+    </div>
+    <div class="send-status sending" id="sendStatus">⏳ Enviando resultado…</div>
+    <br>
+    <button class="btn-retry" onclick="location.reload()">↺ Volver al inicio</button>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>Universidad de La Salle · Optometría · Morfología General 2026-I</p>
+  <p style="margin-top:0.3rem">Dr. Jorge Bogoya · Docente Diana Paola Ramírez Arcos</p>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  ↓ ACTUALIZA ESTA URL CON LA DE TU APPS SCRIPT
+// ════════════════════════════════════════════════════════════════
+const SHEETS_URL   = "https://script.google.com/macros/s/AKfycbxcIpMyPx6i4BN9FXeK8NNwmMfFFHH7sf-a7tardMRl8CObj-ygqmHF51hhti3YBWhEIA/exec";
+const EXAM_MINUTES = 15;
+
+// ════════════════════════════════════════════════════════════════
+//  BASE DE DATOS DE ESTUDIANTES
+//  { apellidos, nombres, codigo, correo }
+// ════════════════════════════════════════════════════════════════
+const STUDENTS = {
+  G1: [
+    { apellidos:"ACOSTA ALARCON",          nombres:"JUAN ANDRES",          codigo:"001014670982", correo:"jacosta82@unisalle.edu.co" },
+    { apellidos:"ALVAREZ FUENTES",         nombres:"DANIEL SANTIAGO",       codigo:"001028489073", correo:"dalvarez73@unisalle.edu.co" },
+    { apellidos:"ARANDIA CAÑON",           nombres:"MARIA JOSE",            codigo:"001019606740", correo:"marandia40@unisalle.edu.co" },
+    { apellidos:"BALLEN GARZON",           nombres:"ZAMY GABRIELA",         codigo:"001033721333", correo:"zballen33@unisalle.edu.co" },
+    { apellidos:"BARRETO CONTRERAS",       nombres:"CARLOS ANDRES",         codigo:"001043141206", correo:"cbarreto06@unisalle.edu.co" },
+    { apellidos:"FONSECA MONTAÑO",         nombres:"DANIEL",                codigo:"001028900106", correo:"dfonseca06@unisalle.edu.co" },
+    { apellidos:"GARCIA RAMIREZ",          nombres:"JOHAN STIVEN",          codigo:"001025654399", correo:"jgarcia99@unisalle.edu.co" },
+    { apellidos:"GUTIERREZ MORENO",        nombres:"ANDREA SOFIA",          codigo:"001078827075", correo:"angutierrez75@unisalle.edu.co" },
+    { apellidos:"LANCHEROS CULMA",         nombres:"LUZ ADRIANA",           codigo:"001021514109", correo:"llancheros09@unisalle.edu.co" },
+    { apellidos:"LOPEZ PLAZAS",            nombres:"DARWIN SAMIR",          codigo:"001012919861", correo:"dalopez61@unisalle.edu.co" },
+    { apellidos:"MURILLO SAAVEDRA",        nombres:"SARA SOFIA",            codigo:"001029648425", correo:"smurillo25@unisalle.edu.co" },
+    { apellidos:"NIETO GARCIA",            nombres:"MARIA JULIANA",         codigo:"001141517739", correo:"mnieto39@unisalle.edu.co" },
+    { apellidos:"REYES MONTAÑO",           nombres:"JUAN SEBASTIAN",        codigo:"001019992850", correo:"jureyes50@unisalle.edu.co" },
+    { apellidos:"RODRIGUEZ CASTELLANOS",   nombres:"SEBASTIAN FELIPE",      codigo:"001021674349", correo:"srodrigues49@unisalle.edu.co" },
+    { apellidos:"RODRIGUEZ VALENCIA",      nombres:"MARIA JULIANA",         codigo:"001022365908", correo:"marrodriguez08@unisalle.edu.co" },
+    { apellidos:"SALAMANCA BERNAL",        nombres:"SARA SOFIA",            codigo:"001029650678", correo:"ssalamanca78@unisalle.edu.co" },
+    { apellidos:"SALAZAR SANCHEZ",         nombres:"THALIANA",              codigo:"001091664180", correo:"tsalazar80@unisalle.edu.co" },
+    { apellidos:"SANCHEZ GOMEZ",           nombres:"GABRIELA",              codigo:"001013123462", correo:"gsanchez62@unisalle.edu.co" },
+    { apellidos:"SANCHEZ MALDONADO",       nombres:"LUISA ALEJANDRA",       codigo:"001001217921", correo:"lusanchez21@unisalle.edu.co" },
+    { apellidos:"SATOBA GARZON",           nombres:"YEIMY ALEJANDRA",       codigo:"001031165346", correo:"ysatoba46@unisalle.edu.co" },
+    { apellidos:"SIERRA SANCHEZ",          nombres:"ISABELA",               codigo:"001029147034", correo:"isierra34@unisalle.edu.co" },
+    { apellidos:"TOVAR VARGAS",            nombres:"SANTIAGO",              codigo:"001014991611", correo:"stovar11@unisalle.edu.co" },
+    { apellidos:"VARON CARDENAS",          nombres:"SARA JULIANA",          codigo:"001021314605", correo:"svaron05@unisalle.edu.co" },
+    { apellidos:"VELANDIA VELANDIA",       nombres:"ANGEL RICARDO",         codigo:"001023383631", correo:"avelandia31@unisalle.edu.co" },
+    { apellidos:"VILLANUEVA AMORTEGUI",    nombres:"DEREK ALEJANDRO",       codigo:"001027527173", correo:"dvillanueva73@unisalle.edu.co" }
+  ],
+  G2: [
+    { apellidos:"AULESTIA CELY",           nombres:"ALEJANDRO",             codigo:"001052840351", correo:"aaulestia51@unisalle.edu.co" },
+    { apellidos:"BAUTISTA CORTES",         nombres:"LUISA FERNANDA",        codigo:"001014977061", correo:"lbautista61@unisalle.edu.co" },
+    { apellidos:"CANTOR ROJAS",            nombres:"ANGIE DANIELA",         codigo:"001024495530", correo:"acantor30@unisalle.edu.co" },
+    { apellidos:"CARDENAS ARENAS",         nombres:"JUAN SEBASTIAN",        codigo:"001011101155", correo:"jcardenas55@unisalle.edu.co" },
+    { apellidos:"CASAS RINCON",            nombres:"SAMUEL NICOLAS",        codigo:"001014480977", correo:"scasas77@unisalle.edu.co" },
+    { apellidos:"CASTAÑEDA CARDENAS",      nombres:"NELSON ANDREY",         codigo:"001121916455", correo:"ncastaneda55@unisalle.edu.co" },
+    { apellidos:"CHICUASUQUE ABRIL",       nombres:"LUIS MIGUEL",           codigo:"001000225309", correo:"lchicuasuque09@unisalle.edu.co" },
+    { apellidos:"DIAZ DAZA",               nombres:"THOMAS",                codigo:"001077725429", correo:"tdiaz29@unisalle.edu.co" },
+    { apellidos:"FLOREZ MORENO",           nombres:"ISABELLA",              codigo:"001076506069", correo:"iflorez69@unisalle.edu.co" },
+    { apellidos:"GARCES GOMEZ",            nombres:"DANNA GABRIELA",        codigo:"001019765056", correo:"dgarces568@unisalle.edu.co" },
+    { apellidos:"GARCIA ROMERO",           nombres:"EVELIN SALOME",         codigo:"001027526555", correo:"evgarcia55@unisalle.edu.co" },
+    { apellidos:"GONZALEZ DIAZ",           nombres:"LAURA SOFIA",           codigo:"001077231172", correo:"lagonzalez72@unisalle.edu.co" },
+    { apellidos:"HERNANDEZ NEIRA",         nombres:"MARIA ALEJANDRA",       codigo:"001033103275", correo:"mhernandez75@unisalle.edu.co" },
+    { apellidos:"JIMENEZ CASTILLO",        nombres:"BIBIAN ALEJANDRA",      codigo:"001014219693", correo:"bjimenez93@unisalle.edu.co" },
+    { apellidos:"LADINO AROILA",           nombres:"MICHELL TALIANA",       codigo:"001029990679", correo:"mladino79@unisalle.edu.co" },
+    { apellidos:"LADINO GARCIA",           nombres:"TANIA VALENTINA",       codigo:"001023380574", correo:"tladino74@unisalle.edu.co" },
+    { apellidos:"LEON MARCIALES",          nombres:"JUAN SEBASTIAN",        codigo:"001014658705", correo:"juleon05@unisalle.edu.co" },
+    { apellidos:"MELGAREJO GONZALEZ",      nombres:"LAURA SOFIA",           codigo:"001121712496", correo:"lmelgarejo96@unisalle.edu.co" },
+    { apellidos:"MONTENEGRO GONZALEZ",     nombres:"SARA SOFIA",            codigo:"001021675001", correo:"smontenegro01@unisalle.edu.co" },
+    { apellidos:"MORANTES FERNANDEZ",      nombres:"SARA SOFIA",            codigo:"001022369062", correo:"smorantes62@unisalle.edu.co" },
+    { apellidos:"OLIVARES POVEDA",         nombres:"JUAN SEBASTIAN",        codigo:"001013124290", correo:"jolivares90@unisalle.edu.co" },
+    { apellidos:"PARRA MORENO",            nombres:"MARLY ROCIO",           codigo:"001110563297", correo:"mparra97@unisalle.edu.co" },
+    { apellidos:"PASTRAN VAQUIRO",         nombres:"LAURA SOFIA",           codigo:"001031423529", correo:"lpastran29@unisalle.edu.co" },
+    { apellidos:"PEDRAZA RICO",            nombres:"CARLA MARIANA",         codigo:"001032878177", correo:"cpedraza77@unisalle.edu.co" },
+    { apellidos:"PULIDO MARTINEZ",         nombres:"CARLOS ANDRES",         codigo:"001031814534", correo:"cpulido34@unisalle.edu.co" },
+    { apellidos:"RODRIGUEZ PACHON",        nombres:"ANDREY FELIPE",         codigo:"001028881898", correo:"arodriguez98@unisalle.edu.co" },
+    { apellidos:"SALINAS SIERRA",          nombres:"CAMILA",                codigo:"001034577981", correo:"csalinas81@unisalle.edu.co" },
+    { apellidos:"SANABRIA TORRES",         nombres:"VALERIE SHARITH",       codigo:"001140915367", correo:"vsanabria67@unisalle.edu.co" }
+  ]
+};
+
+// ════════════════════════════════════════════════════════════════
+//  ESTADO GLOBAL
+// ════════════════════════════════════════════════════════════════
+const state = {
+  grupo:"", nombres:"", apellidos:"", codigo:"", correo:"",
+  answered:0, correct:0, total:8,
+  responses: new Array(8).fill(null),
+  timerInterval:null, elapsedSec:0
+};
+
+// ════════════════════════════════════════════════════════════════
+//  SELECCIÓN DE GRUPO → llena el desplegable
+// ════════════════════════════════════════════════════════════════
+function selectGroup(g) {
+  state.grupo = g;
+  document.getElementById("optG1").classList.toggle("selected", g === "G1");
+  document.getElementById("optG2").classList.toggle("selected", g === "G2");
+
+  const sel   = document.getElementById("selectNombre");
+  const inp   = document.getElementById("correo");
+  const hint  = document.getElementById("hintNombre");
+
+  // Resetear
+  sel.innerHTML = `<option value="">— Selecciona tu nombre —</option>`;
+  inp.value     = "";
+  inp.disabled  = true;
+  document.getElementById("emailNote").style.display = "none";
+  document.getElementById("btnStart").disabled = true;
+
+  STUDENTS[g].forEach((s, i) => {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = `${s.apellidos}, ${s.nombres}`;
+    sel.appendChild(opt);
+  });
+
+  sel.disabled = false;
+  hint.textContent = `${STUDENTS[g].length} estudiantes registrados en este grupo.`;
+  hint.className   = "field-hint verified";
+}
+
+// ════════════════════════════════════════════════════════════════
+//  SELECCIÓN DE NOMBRE → pre-rellena correo
+// ════════════════════════════════════════════════════════════════
+function onStudentSelect() {
+  const sel  = document.getElementById("selectNombre");
+  const inp  = document.getElementById("correo");
+  const note = document.getElementById("emailNote");
+  const btn  = document.getElementById("btnStart");
+
+  if (sel.value === "") {
+    inp.value   = "";
+    inp.disabled = true;
+    note.style.display = "none";
+    btn.disabled = true;
+    return;
+  }
+
+  const s = STUDENTS[state.grupo][parseInt(sel.value)];
+  inp.value    = s.correo;
+  inp.disabled = false;
+  note.style.display = "flex";
+  btn.disabled = false;
+}
+
+// ════════════════════════════════════════════════════════════════
+//  INICIAR QUIZ
+// ════════════════════════════════════════════════════════════════
+function startQuiz() {
+  const sel    = document.getElementById("selectNombre");
+  const correo = document.getElementById("correo").value.trim();
+
+  // Validación
+  const errs = [];
+  if (!state.grupo)    errs.push("grupo");
+  if (sel.value === "") errs.push("selectNombre");
+  if (!correo || !correo.includes("@")) {
+    errs.push("correo");
+    document.getElementById("correo").classList.add("error");
+  } else {
+    document.getElementById("correo").classList.remove("error");
+  }
+
+  const errEl = document.getElementById("regError");
+  if (errs.length) {
+    errEl.textContent = errs.includes("grupo")
+      ? "Selecciona tu grupo antes de continuar."
+      : errs.includes("selectNombre")
+        ? "Selecciona tu nombre de la lista."
+        : "El correo electrónico no es válido.";
+    errEl.style.display = "block";
+    return;
+  }
+  errEl.style.display = "none";
+
+  const s = STUDENTS[state.grupo][parseInt(sel.value)];
+  state.apellidos = s.apellidos;
+  state.nombres   = s.nombres;
+  state.codigo    = s.codigo;
+  state.correo    = correo;
+
+  // Mostrar quiz
+  document.getElementById("regSection").style.display  = "none";
+  document.getElementById("quizSection").style.display = "block";
+  window.scrollTo({ top:0, behavior:"smooth" });
+
+  document.getElementById("dispNombre").textContent  = `${s.nombres} ${s.apellidos}`;
+  document.getElementById("dispDetalle").textContent = `${state.grupo} · ${s.codigo} · ${correo}`;
+  document.getElementById("heroBadge").textContent   = `${state.grupo} · ${s.nombres}`;
+  document.getElementById("dGrupo").textContent      = state.grupo;
+
+  startTimer(EXAM_MINUTES * 60);
+}
+
+// ════════════════════════════════════════════════════════════════
+//  TEMPORIZADOR
+// ════════════════════════════════════════════════════════════════
+function startTimer(totalSec) {
+  let remaining = totalSec;
+  const disp    = document.getElementById("timerDisplay");
+  const fmt     = n => String(n).padStart(2,"0");
+
+  state.timerInterval = setInterval(() => {
+    remaining--;
+    state.elapsedSec = totalSec - remaining;
+    disp.textContent = `${fmt(Math.floor(remaining/60))}:${fmt(remaining%60)}`;
+    if (remaining <= 60)  disp.classList.add("urgent");
+    if (remaining <= 0) { clearInterval(state.timerInterval); finishQuiz(true); }
+  }, 1000);
+}
+
+// ════════════════════════════════════════════════════════════════
+//  MOTOR DEL QUIZ
+// ════════════════════════════════════════════════════════════════
+(function initQuiz(){
+  document.querySelectorAll(".quiz-q").forEach((q, qi) => {
+    const ci   = parseInt(q.dataset.correct);
+    const opts = q.querySelectorAll(".quiz-options li");
+    const fb   = q.querySelector(".quiz-feedback");
+
+    opts.forEach(o => {
+      o.addEventListener("click", () => {
+        if (q.classList.contains("answered")) return;
+        q.classList.add("answered");
+        state.answered++;
+
+        const idx = parseInt(o.dataset.idx);
+        state.responses[qi] = idx;
+
+        if (idx === ci) { o.classList.add("correct");   fb.classList.add("correct-fb");   state.correct++; }
+        else            { o.classList.add("incorrect"); opts[ci].classList.add("correct"); fb.classList.add("incorrect-fb"); }
+
+        opts.forEach(x => x.classList.add("disabled"));
+        fb.classList.add("show");
+        updateProgress();
+        if (state.answered === state.total) setTimeout(() => finishQuiz(false), 700);
+      });
+    });
+  });
+})();
+
+function updateProgress(){
+  const pct = (state.answered / state.total) * 100;
+  document.getElementById("qProgress").style.width = pct + "%";
+  document.getElementById("qCounter").textContent  =
+    `Pregunta ${state.answered} de ${state.total} respondida`;
+}
+
+// ════════════════════════════════════════════════════════════════
+//  FINALIZAR
+// ════════════════════════════════════════════════════════════════
+function finishQuiz(byTimer){
+  clearInterval(state.timerInterval);
+  if (byTimer) state.elapsedSec = EXAM_MINUTES * 60;
+
+  const pct = Math.round((state.correct / state.total) * 100);
+  const inc = state.total - state.correct;
+  const em  = Math.floor(state.elapsedSec / 60);
+  const es  = state.elapsedSec % 60;
+
+  const msgs = [
+    [88, "¡Excelente dominio del tema! 🎯"],
+    [75, "Buen desempeño. Sigue reforzando. 👍"],
+    [50, "Resultado suficiente — revisa los temas fallidos. 📖"],
+    [ 0, "Repasa los grupos expuestos antes del parcial. 💡"]
+  ];
+  const msg = msgs.find(([t]) => pct >= t)[1];
+
+  document.getElementById("scorePct").textContent      = pct + "%";
+  document.getElementById("scoreFraction").textContent = `${state.correct} / ${state.total} correctas`;
+  document.getElementById("scoreMsg").textContent      = msg;
+  document.getElementById("dCorrectas").textContent    = state.correct;
+  document.getElementById("dIncorrectas").textContent  = inc;
+  document.getElementById("dTiempo").textContent       = `${em}m ${String(es).padStart(2,"0")}s`;
+
+  document.getElementById("scorePanel").style.display = "block";
+  document.getElementById("scorePanel").scrollIntoView({ behavior:"smooth", block:"center" });
+
+  sendToSheets(pct);
+}
+
+// ════════════════════════════════════════════════════════════════
+//  ENVÍO A GOOGLE SHEETS
+// ════════════════════════════════════════════════════════════════
+async function sendToSheets(pct){
+  const el = document.getElementById("sendStatus");
+  try {
+    await fetch(SHEETS_URL, {
+      method:"POST", mode:"no-cors",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        grupo:      state.grupo,
+        nombres:    state.nombres,
+        apellidos:  state.apellidos,
+        codigo:     state.codigo,
+        correo:     state.correo,
+        respuestas: state.responses,
+        correctas:  state.correct,
+        total:      state.total,
+        porcentaje: pct
+      })
+    });
+    el.className   = "send-status ok";
+    el.textContent = "✓ Resultado registrado en la hoja de cálculo.";
+  } catch(err){
+    el.className   = "send-status fail";
+    el.textContent = "⚠ No se pudo enviar automáticamente — muéstrale esta pantalla al docente.";
+  }
+}
+
+// Scroll progress
+window.addEventListener("scroll", () => {
+  const h = document.documentElement;
+  document.getElementById("progressBar").style.width =
+    (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + "%";
+});
+</script>
+</body>
+</html>
