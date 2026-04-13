@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase Puente: Tarjetas de Trabajo — Sesión Colaborativa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1714;
+  --parchment: #f5f0e8;
+  --cream: #faf7f2;
+  --amber: #c8a45c;
+  --amber-light: #e8d5a0;
+  --amber-dark: #8b6914;
+  --rust: #a0522d;
+  --teal: #2a7a6e;
+  --teal-light: #3aa08e;
+  --red-clinical: #b5413b;
+  --blue-nerve: #3a5a8c;
+  --green-muscle: #4a7a4e;
+  --purple-brain: #6b4a8a;
+  --shadow: rgba(26,23,20,0.12);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+  /* Group colors */
+  --g1: #2a7a6e; --g1-bg: #eaf6f4;
+  --g2: #3a5a8c; --g2-bg: #eaf0f8;
+  --g3: #6b4a8a; --g3-bg: #f2edf8;
+  --g4: #a0522d; --g4-bg: #f8f0ea;
+  --g5: #b5413b; --g5-bg: #f8eaea;
+  --g6: #8b6914; --g6-bg: #f6f2e6;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--ink);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(170deg,var(--ink) 0%,#2a2520 40%,#3a3028 100%);color:var(--parchment);padding:2rem;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(200,164,92,0.15) 0%,transparent 60%),radial-gradient(ellipse at 70% 60%,rgba(42,122,110,0.1) 0%,transparent 50%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:850px}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;line-height:1.1;margin-bottom:0.5rem;letter-spacing:-0.02em}
+.hero h1 .accent{color:var(--amber)}
+.hero .subtitle{font-family:var(--font-display);font-style:italic;font-size:clamp(1.1rem,2.8vw,1.7rem);color:var(--amber-light);margin-bottom:1.2rem;opacity:0.9}
+.hero .meta{font-family:var(--font-mono);font-size:0.82rem;color:rgba(245,240,232,0.55);letter-spacing:0.05em;margin-bottom:1rem}
+.hero .meta span{color:var(--amber)}
+.hero .dyn-badge{display:inline-block;background:var(--teal);color:white;font-family:var(--font-mono);font-size:0.85rem;padding:0.5rem 1.5rem;border-radius:30px;margin-top:1rem;letter-spacing:0.06em;text-transform:uppercase}
+
+/* ── NAV ── */
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(26,23,20,0.95);backdrop-filter:blur(12px);padding:0.5rem 1rem;display:flex;gap:0.4rem;justify-content:center;flex-wrap:wrap;border-bottom:1px solid rgba(200,164,92,0.2)}
+.nav-pill{font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--parchment);background:transparent;border:1px solid rgba(200,164,92,0.3);padding:0.3rem 0.7rem;border-radius:20px;cursor:pointer;transition:all 0.3s;text-decoration:none}
+.nav-pill:hover,.nav-pill.active{background:var(--amber);color:var(--ink);border-color:var(--amber)}
+
+/* ── SECTIONS ── */
+.section{max-width:1140px;margin:0 auto;padding:3.5rem 1.5rem}
+.section-header{margin-bottom:2rem;padding-bottom:0.8rem;border-bottom:2px solid var(--amber-light)}
+.section-tag{font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--amber-dark);margin-bottom:0.4rem;display:block}
+.section h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:700;line-height:1.2}
+
+/* ── TIMELINE ── */
+.timeline{display:flex;justify-content:center;flex-wrap:wrap;gap:0;margin:1.5rem 0 2rem;background:var(--cream);border-radius:12px;border:1px solid rgba(200,164,92,0.2);overflow:hidden}
+.tl-item{flex:1;min-width:140px;padding:0.8rem 1rem;text-align:center;border-right:1px solid rgba(200,164,92,0.15);position:relative;transition:background 0.3s}
+.tl-item:last-child{border-right:none}
+.tl-item.active{background:var(--amber-light)}
+.tl-time{font-family:var(--font-mono);font-size:0.7rem;color:var(--amber-dark);display:block;margin-bottom:0.2rem;letter-spacing:0.06em}
+.tl-label{font-size:0.85rem;font-weight:600}
+.tl-dur{font-family:var(--font-mono);font-size:0.65rem;color:rgba(26,23,20,0.5);margin-top:0.1rem}
+
+/* ── TIMER ── */
+.timer-wrap{text-align:center;margin:2rem 0;padding:2rem;background:var(--ink);border-radius:16px;color:var(--parchment)}
+.timer-display{font-family:var(--font-mono);font-size:clamp(3rem,8vw,5rem);font-weight:500;letter-spacing:0.05em;color:var(--amber)}
+.timer-label{font-family:var(--font-display);font-size:1.1rem;margin-bottom:0.8rem;opacity:0.8}
+.timer-btns{display:flex;gap:0.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.timer-btn{font-family:var(--font-mono);font-size:0.8rem;padding:0.5rem 1.5rem;border:1px solid var(--amber);background:transparent;color:var(--amber);border-radius:6px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;letter-spacing:0.06em}
+.timer-btn:hover{background:var(--amber);color:var(--ink)}
+.timer-btn.primary{background:var(--amber);color:var(--ink)}
+.timer-btn.primary:hover{background:var(--amber-light)}
+.timer-btn.danger{border-color:var(--red-clinical);color:var(--red-clinical)}
+.timer-btn.danger:hover{background:var(--red-clinical);color:white}
+.timer-phase{font-family:var(--font-mono);font-size:0.75rem;opacity:0.5;margin-top:0.5rem}
+
+/* ── GROUP CARDS ── */
+.group-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;margin:1.5rem 0}
+.group-card{border-radius:14px;padding:0;overflow:hidden;box-shadow:0 3px 16px var(--shadow);transition:transform 0.3s,box-shadow 0.3s;background:var(--cream);display:flex;flex-direction:column}
+.group-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px var(--shadow)}
+.gc-header{padding:1.2rem 1.5rem;color:white;display:flex;align-items:center;gap:0.8rem}
+.gc-num{font-family:var(--font-mono);font-size:1.8rem;font-weight:700;opacity:0.5;line-height:1}
+.gc-title{font-family:var(--font-display);font-size:1.15rem;font-weight:700;line-height:1.3}
+.gc-ra{font-size:0.78rem;opacity:0.85;margin-top:0.15rem;font-style:italic}
+.gc-body{padding:1.3rem 1.5rem;flex:1;display:flex;flex-direction:column}
+.gc-section-title{font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.5rem;margin-top:1rem;opacity:0.6}
+.gc-section-title:first-child{margin-top:0}
+.gc-body p{font-size:0.92rem;margin-bottom:0.5rem;line-height:1.7}
+.gc-body ul{list-style:none;padding:0;margin:0}
+.gc-body li{position:relative;padding-left:1.2rem;font-size:0.9rem;margin-bottom:0.4rem;line-height:1.6}
+.gc-body li::before{content:'▸';position:absolute;left:0;font-weight:700}
+.gc-q{background:rgba(200,164,92,0.08);border-left:3px solid var(--amber);padding:0.6rem 0.8rem;border-radius:0 6px 6px 0;margin:0.3rem 0;font-size:0.88rem;font-style:italic}
+.gc-ref{font-family:var(--font-mono);font-size:0.72rem;color:var(--amber-dark);margin-top:auto;padding-top:0.8rem;border-top:1px solid rgba(200,164,92,0.15)}
+.gc-clinical{background:rgba(181,65,59,0.06);border-left:3px solid var(--red-clinical);padding:0.6rem 0.8rem;border-radius:0 6px 6px 0;margin:0.5rem 0;font-size:0.88rem}
+.gc-clinical strong{color:var(--red-clinical)}
+
+/* Group-specific colors */
+.gc-g1 .gc-header{background:var(--g1)} .gc-g1 li::before{color:var(--g1)}
+.gc-g2 .gc-header{background:var(--g2)} .gc-g2 li::before{color:var(--g2)}
+.gc-g3 .gc-header{background:var(--g3)} .gc-g3 li::before{color:var(--g3)}
+.gc-g4 .gc-header{background:var(--g4)} .gc-g4 li::before{color:var(--g4)}
+.gc-g5 .gc-header{background:var(--g5)} .gc-g5 li::before{color:var(--g5)}
+.gc-g6 .gc-header{background:var(--g6)} .gc-g6 li::before{color:var(--g6)}
+
+/* ── EXPAND / COLLAPSE ── */
+.gc-toggle{display:none;font-family:var(--font-mono);font-size:0.75rem;background:transparent;border:1px solid rgba(200,164,92,0.3);padding:0.3rem 0.8rem;border-radius:4px;cursor:pointer;color:var(--ink);margin-top:0.8rem;transition:all 0.3s}
+.gc-toggle:hover{background:var(--amber-light)}
+.gc-collapse{max-height:0;overflow:hidden;transition:max-height 0.5s ease}
+.gc-collapse.open{max-height:4000px}
+
+/* ── PRESENTATION GUIDE ── */
+.pres-card{background:var(--ink);color:var(--parchment);border-radius:12px;padding:1.5rem;margin:0.8rem 0}
+.pres-card h4{font-family:var(--font-display);color:var(--amber);font-size:1.05rem;margin-bottom:0.5rem}
+.pres-card p,.pres-card li{font-size:0.9rem;line-height:1.7}
+.pres-card ul{list-style:none;padding:0}
+.pres-card li{padding-left:1.2rem;position:relative;margin-bottom:0.3rem}
+.pres-card li::before{content:'✓';position:absolute;left:0;color:var(--amber)}
+
+/* ── QUIZ ── */
+.quiz-q{background:var(--cream);border:1px solid rgba(200,164,92,0.2);border-radius:10px;padding:1.4rem;margin-bottom:1rem}
+.quiz-q h4{font-family:var(--font-display);font-size:1rem;margin-bottom:0.8rem}
+.quiz-q .q-num{font-family:var(--font-mono);font-size:0.72rem;color:var(--amber-dark);display:block;margin-bottom:0.3rem}
+.quiz-options{list-style:none}
+.quiz-options li{padding:0.55rem 0.9rem;margin:0.35rem 0;border:1px solid rgba(200,164,92,0.3);border-radius:6px;cursor:pointer;transition:all 0.3s;font-size:0.92rem}
+.quiz-options li:hover{background:var(--amber-light);border-color:var(--amber)}
+.quiz-options li.correct{background:#d4edda;border-color:var(--green-muscle);color:#155724}
+.quiz-options li.incorrect{background:#f8d7da;border-color:var(--red-clinical);color:#721c24}
+.quiz-options li.disabled{pointer-events:none;opacity:0.65}
+.quiz-feedback{margin-top:0.7rem;padding:0.7rem;border-radius:6px;font-size:0.87rem;display:none}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct-fb{background:#d4edda;color:#155724}
+.quiz-feedback.incorrect-fb{background:#f8d7da;color:#721c24}
+.score-display{text-align:center;font-family:var(--font-display);font-size:1.3rem;color:var(--amber-dark);margin:1.5rem 0;padding:1rem;background:var(--cream);border-radius:10px;border:2px solid var(--amber)}
+
+/* ── SYNTHESIS MAP ── */
+.map-wrap{background:var(--cream);border-radius:12px;border:1px solid rgba(200,164,92,0.2);padding:1rem;margin:1.5rem 0;text-align:center;overflow-x:auto}
+
+/* ── FOOTER ── */
+.footer{background:var(--ink);color:rgba(245,240,232,0.5);text-align:center;padding:2.5rem 1.5rem;font-family:var(--font-mono);font-size:0.78rem}
+.footer a{color:var(--amber);text-decoration:none}
+
+/* ── PROGRESS ── */
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--teal));z-index:1000;transition:width 0.1s}
+
+/* ── HELPERS ── */
+.hl-muscle{color:var(--green-muscle);font-weight:600}
+.hl-nerve{color:var(--blue-nerve);font-weight:600}
+.hl-brain{color:var(--purple-brain);font-weight:600}
+.hl-clinical{color:var(--red-clinical);font-weight:600}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn 0.6s ease-out}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .section{padding:2rem 1rem}
+  .group-grid{grid-template-columns:1fr}
+  .timeline{flex-direction:column}
+  .tl-item{border-right:none;border-bottom:1px solid rgba(200,164,92,0.15)}
+  .nav-bar{gap:0.25rem;padding:0.35rem 0.4rem}
+  .nav-pill{font-size:0.62rem;padding:0.2rem 0.45rem}
+}
+
+/* ── TABLE ── */
+.data-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin:1rem 0}
+.data-table th{background:var(--ink);color:var(--parchment);font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.07em;padding:0.7rem;text-align:left}
+.data-table td{padding:0.6rem 0.7rem;border-bottom:1px solid rgba(200,164,92,0.2);vertical-align:top}
+.data-table tr:nth-child(even){background:rgba(200,164,92,0.05)}
+.nc-badge{display:inline-block;background:var(--blue-nerve);color:white;font-family:var(--font-mono);font-size:0.68rem;padding:0.12rem 0.45rem;border-radius:4px}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero" id="inicio">
+  <div class="hero-content fade-in">
+    <div class="meta">UNIVERSIDAD DE LA SALLE · OPTOMETRÍA · MORFOLOGÍA GENERAL · <span>2026-I</span></div>
+    <h1>Del <span class="accent">Músculo</span> al <span class="accent">Nervio</span></h1>
+    <p class="subtitle">«Sin nervio no hay músculo»</p>
+    <div class="meta">Miércoles 09 de abril de 2026 · 90 minutos · Dr. Jorge Bogoya</div>
+    <div class="dyn-badge">⬡ Sesión Colaborativa · 6 Grupos</div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#dinamica" class="nav-pill">Dinámica</a>
+  <a href="#timer-section" class="nav-pill">⏱ Cronómetro</a>
+  <a href="#grupo1" class="nav-pill" style="border-color:var(--g1)">G1</a>
+  <a href="#grupo2" class="nav-pill" style="border-color:var(--g2)">G2</a>
+  <a href="#grupo3" class="nav-pill" style="border-color:var(--g3)">G3</a>
+  <a href="#grupo4" class="nav-pill" style="border-color:var(--g4)">G4</a>
+  <a href="#grupo5" class="nav-pill" style="border-color:var(--g5)">G5</a>
+  <a href="#grupo6" class="nav-pill" style="border-color:var(--g6)">G6</a>
+  <a href="#sintesis" class="nav-pill">Síntesis</a>
+</nav>
+
+<!-- ═══════════ DINÁMICA ═══════════ -->
+<section class="section" id="dinamica">
+  <div class="section-header">
+    <span class="section-tag">Organización de la sesión</span>
+    <h2>Dinámica Colaborativa</h2>
+  </div>
+
+  <p style="font-size:1.05rem;margin-bottom:1.5rem;">Cada grupo recibirá un tema específico con material de apoyo, preguntas guía y una conexión clínica con la optometría. Prepararán una <strong>exposición de ~7 minutos</strong> para sus compañeros. Al final, todos responderán un <strong>quiz integrador tipo Saber Pro</strong>.</p>
+
+  <h3 style="font-family:var(--font-display);margin-bottom:1rem;">Cronograma</h3>
+  <div class="timeline" id="timeline">
+    <div class="tl-item active" data-phase="org">
+      <span class="tl-time">0–5 min</span>
+      <div class="tl-label">Organización</div>
+      <div class="tl-dur">5 min</div>
+    </div>
+    <div class="tl-item" data-phase="work">
+      <span class="tl-time">5–30 min</span>
+      <div class="tl-label">Trabajo grupal</div>
+      <div class="tl-dur">25 min</div>
+    </div>
+    <div class="tl-item" data-phase="expo">
+      <span class="tl-time">30–72 min</span>
+      <div class="tl-label">Exposiciones</div>
+      <div class="tl-dur">6 × 7 min</div>
+    </div>
+    <div class="tl-item" data-phase="quiz">
+      <span class="tl-time">72–87 min</span>
+      <div class="tl-label">Quiz Saber Pro</div>
+      <div class="tl-dur">15 min</div>
+    </div>
+    <div class="tl-item" data-phase="close">
+      <span class="tl-time">87–90 min</span>
+      <div class="tl-label">Cierre</div>
+      <div class="tl-dur">3 min</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-top:1.5rem;">
+    <div class="pres-card">
+      <h4>📋 Instrucciones para cada grupo</h4>
+      <ul>
+        <li>Lean el material de apoyo de su tarjeta</li>
+        <li>Respondan las preguntas guía entre todos</li>
+        <li>Preparen una exposición oral de ~7 minutos</li>
+        <li>Incluyan la relevancia clínica para optometría</li>
+        <li>Todos los integrantes deben participar</li>
+      </ul>
+    </div>
+    <div class="pres-card">
+      <h4>🎯 Criterios de evaluación</h4>
+      <ul>
+        <li>Precisión del contenido anatómico</li>
+        <li>Claridad en la explicación a los compañeros</li>
+        <li>Conexión clínica con la optometría</li>
+        <li>Participación equitativa del grupo</li>
+        <li>Uso correcto de terminología anatómica</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ TIMER ═══════════ -->
+<section class="section" id="timer-section" style="padding-top:2rem;padding-bottom:2rem;">
+  <div class="timer-wrap">
+    <div class="timer-label" id="timerLabel">Fase de trabajo grupal</div>
+    <div class="timer-display" id="timerDisplay">25:00</div>
+    <div class="timer-btns">
+      <button class="timer-btn primary" id="btnStart" onclick="startTimer()">▶ Iniciar</button>
+      <button class="timer-btn" onclick="pauseTimer()">⏸ Pausar</button>
+      <button class="timer-btn" onclick="setTimer(25*60,'Trabajo grupal')">25 min — Trabajo</button>
+      <button class="timer-btn" onclick="setTimer(7*60,'Exposición del grupo')">7 min — Exposición</button>
+      <button class="timer-btn" onclick="setTimer(15*60,'Quiz Saber Pro')">15 min — Quiz</button>
+      <button class="timer-btn danger" onclick="resetTimer()">⟳ Reset</button>
+    </div>
+    <div class="timer-phase" id="timerPhase">Presiona «Iniciar» para comenzar la cuenta regresiva</div>
+  </div>
+</section>
+
+
+<!-- ═══════════ GRUPOS ═══════════ -->
+<section class="section" id="grupos-section" style="padding-top:1rem;">
+  <div class="section-header">
+    <span class="section-tag">Material de apoyo por grupo</span>
+    <h2>Tarjetas de Trabajo</h2>
+  </div>
+  <p style="margin-bottom:1.5rem;">Cada grupo consulta <strong>únicamente su tarjeta</strong>. Haz clic en el encabezado para expandir/colapsar el contenido.</p>
+
+  <div class="group-grid">
+
+    <!-- ══ GRUPO 1 ══ -->
+    <div class="group-card gc-g1" id="grupo1">
+      <div class="gc-header" onclick="toggleGroup('g1c')" style="cursor:pointer">
+        <span class="gc-num">01</span>
+        <div><div class="gc-title">Unión Neuromuscular</div><div class="gc-ra">RA: Explicar el mecanismo de la UNM como nexo entre ambos sistemas</div></div>
+      </div>
+      <div class="gc-body gc-collapse open" id="g1c">
+        <div class="gc-section-title">Contenido clave</div>
+        <ul>
+          <li><strong>Neurona motora somática:</strong> soma en tronco del encéfalo o médula espinal, axón mielínico hasta el músculo.</li>
+          <li><strong>Placa motora terminal:</strong> zona de contacto entre el axón y la fibra muscular. Contiene receptores nicotínicos de acetilcolina (nAChR).</li>
+          <li><strong>Secuencia de transmisión:</strong> impulso nervioso → apertura de canales de Ca²⁺ dependientes de voltaje → Ca²⁺ se une a sinaptotagmina → activación del complejo SNARE → exocitosis de vesículas con ACh (~5.000–10.000 moléculas/vesícula) → ACh cruza la hendidura sináptica (~50 nm) → se une a nAChR → apertura de canales de Na⁺ → despolarización → potencial de placa terminal → potencial de acción muscular.</li>
+          <li><strong>Acoplamiento excitación-contracción:</strong> potencial viaja por túbulos T → receptores DHP → receptores de rianodina (RyR) → liberación de Ca²⁺ del retículo sarcoplásmico → Ca²⁺ se une a troponina C → contracción.</li>
+          <li><strong>Acetilcolinesterasa (AChE):</strong> degrada ACh en la hendidura, terminando la señal.</li>
+          <li><strong>Unidad motora:</strong> 1 neurona + todas las fibras que inerva. Extraoculares: ~5–10 fibras (control fino). Cuádriceps: ~500–1000 fibras (fuerza).</li>
+        </ul>
+
+        <div class="gc-section-title">Preguntas guía para la exposición</div>
+        <div class="gc-q">1. ¿Cuáles son los 5 pasos de la transmisión en la UNM desde el impulso nervioso hasta la contracción?</div>
+        <div class="gc-q">2. ¿Por qué los músculos extraoculares tienen unidades motoras pequeñas y qué ventaja da esto para la visión?</div>
+        <div class="gc-q">3. ¿Qué pasaría si se destruyeran los receptores de ACh en la placa motora?</div>
+
+        <div class="gc-section-title">Conexión clínica optométrica</div>
+        <div class="gc-clinical"><strong>Miastenia gravis:</strong> Anticuerpos IgG destruyen los receptores de ACh → debilidad fatigable. Presentación inicial en &gt;50% de pacientes: ptosis y diplopía. La pupila está siempre normal (a diferencia de la parálisis del NC III). Test del hielo: mejoría ≥2 mm = positivo. El optometrista puede ser el primer clínico en detectarla.</div>
+
+        <div class="gc-ref">Ref: Tortora, 15ª ed., Cap. 10, pp. 338–345 · Khalil et al., StatPearls 2025 · Rodríguez Cruz et al., Front Mol Neurosci 2020 · Gilhus et al., Nat Rev Dis Primers 2019;5:30</div>
+      </div>
+    </div>
+
+    <!-- ══ GRUPO 2 ══ -->
+    <div class="group-card gc-g2" id="grupo2">
+      <div class="gc-header" onclick="toggleGroup('g2c')" style="cursor:pointer">
+        <span class="gc-num">02</span>
+        <div><div class="gc-title">SNC vs. SNP</div><div class="gc-ra">RA: Diferenciar sistema nervioso central de sistema nervioso periférico</div></div>
+      </div>
+      <div class="gc-body gc-collapse open" id="g2c">
+        <div class="gc-section-title">Contenido clave</div>
+        <ul>
+          <li><strong>SNC (Sistema Nervioso Central):</strong> Encéfalo (cerebro, cerebelo, tronco encefálico) + Médula espinal. Protegido por meninges, LCE y estructuras óseas. Función: centro integrador que recibe, procesa y genera respuestas.</li>
+          <li><strong>SNP (Sistema Nervioso Periférico):</strong> 12 pares craneales + 31 pares espinales + ganglios + plexos.</li>
+          <li><strong>División funcional del SNP:</strong>
+            <br>— <em>Sensitivo (aferente):</em> lleva información al SNC.
+            <br>— <em>Motor (eferente):</em> lleva impulsos del SNC a los efectores.
+            <br>— <em>Somático:</em> voluntario, inerva músculo esquelético.
+            <br>— <em>Autónomo:</em> involuntario, inerva músculo liso, glándulas, corazón.
+          </li>
+          <li><strong>Sistema autónomo:</strong> Simpático (lucha o huida: midriasis, ↑FC) vs. Parasimpático (reposo y digestión: miosis, ↓FC).</li>
+          <li><strong>Para optometría:</strong> El simpático dilata la pupila (músculo dilatador). El parasimpático la contrae (esfínter pupilar vía NC III). Este balance explica el reflejo fotomotor y condiciones como el síndrome de Horner (déficit simpático → miosis).</li>
+        </ul>
+
+        <div class="gc-section-title">Preguntas guía para la exposición</div>
+        <div class="gc-q">1. ¿Cuáles son las diferencias estructurales entre SNC y SNP?</div>
+        <div class="gc-q">2. Expliquen la diferencia entre somático y autónomo con un ejemplo ocular para cada uno.</div>
+        <div class="gc-q">3. ¿Cómo interactúan simpático y parasimpático en el control del tamaño pupilar?</div>
+
+        <div class="gc-section-title">Conexión clínica optométrica</div>
+        <div class="gc-clinical"><strong>Síndrome de Horner:</strong> Lesión de la vía oculosimpática → miosis + ptosis parcial (1–2 mm) + anhidrosis. Causa peligrosa: disección de la arteria carótida interna (44% debutan con Horner). Es lo opuesto a la midriasis del NC III. La pupila lo resuelve todo.</div>
+
+        <div class="gc-ref">Ref: Moore, 8ª ed., Cap. 1, pp. 112–115 · Tortora, 15ª ed., Caps. 12 y 15 · Kanagalingam &amp; Miller, Eye Brain 2015;7:35-46</div>
+      </div>
+    </div>
+
+    <!-- ══ GRUPO 3 ══ -->
+    <div class="group-card gc-g3" id="grupo3">
+      <div class="gc-header" onclick="toggleGroup('g3c')" style="cursor:pointer">
+        <span class="gc-num">03</span>
+        <div><div class="gc-title">Partes del Encéfalo</div><div class="gc-ra">RA: Enumerar las partes del encéfalo</div></div>
+      </div>
+      <div class="gc-body gc-collapse open" id="g3c">
+        <div class="gc-section-title">Contenido clave</div>
+        <ul>
+          <li><strong>Cerebro:</strong> 2 hemisferios, 4 lóbulos cada uno.
+            <br>— <em>Frontal:</em> funciones ejecutivas, motricidad voluntaria, personalidad.
+            <br>— <em>Parietal:</em> sensibilidad somática, integración sensorial.
+            <br>— <em>Temporal:</em> audición, memoria, comprensión del lenguaje.
+            <br>— <em>Occipital:</em> procesamiento visual — corteza visual primaria (V1). <strong>Relevancia directa para optometría.</strong>
+          </li>
+          <li><strong>Diencéfalo:</strong>
+            <br>— <em>Tálamo:</em> relevo sensorial (incluye cuerpo geniculado lateral para la vía visual).
+            <br>— <em>Hipotálamo:</em> regulación autonómica y endocrina. Conexión con hipófisis.
+          </li>
+          <li><strong>Tronco encefálico:</strong>
+            <br>— <em>Mesencéfalo:</em> NC III, IV. Colículos superiores (reflejos visuales).
+            <br>— <em>Puente:</em> NC V, VI, VII, VIII.
+            <br>— <em>Bulbo raquídeo:</em> NC IX, X, XI, XII. Centros vitales.
+          </li>
+          <li><strong>Cerebelo:</strong> Posterior al puente. Coordinación motora, equilibrio, tono muscular. Lesiones: ataxia, dismetría, nistagmo.</li>
+        </ul>
+
+        <div class="gc-section-title">Preguntas guía para la exposición</div>
+        <div class="gc-q">1. Nombren las 4 grandes regiones del encéfalo y la función principal de cada una.</div>
+        <div class="gc-q">2. ¿En qué lóbulo se procesa la información visual y por qué es relevante para optometría?</div>
+        <div class="gc-q">3. ¿Qué pares craneales se originan en cada parte del tronco encefálico?</div>
+
+        <div class="gc-section-title">Conexión clínica optométrica</div>
+        <div class="gc-clinical"><strong>Lesiones del lóbulo occipital</strong> (ACV, tumores) producen hemianopsias homónimas detectables en campimetría. Las lesiones del tronco encefálico pueden afectar múltiples pares craneales simultáneamente → estrabismo + ptosis + alteraciones sensitivas faciales.</div>
+
+        <div class="gc-ref">Ref: Moore, 8ª ed., Cap. 8 · Moore SNC, pp. 112–118 · Tortora, 15ª ed., Cap. 14</div>
+      </div>
+    </div>
+
+    <!-- ══ GRUPO 4 ══ -->
+    <div class="group-card gc-g4" id="grupo4">
+      <div class="gc-header" onclick="toggleGroup('g4c')" style="cursor:pointer">
+        <span class="gc-num">04</span>
+        <div><div class="gc-title">Meninges y LCE</div><div class="gc-ra">RA: Localizar las meninges y su función protectora</div></div>
+      </div>
+      <div class="gc-body gc-collapse open" id="g4c">
+        <div class="gc-section-title">Contenido clave</div>
+        <ul>
+          <li><strong>Duramadre (capa externa):</strong> Membrana fibrosa, gruesa y resistente. En el cráneo: 2 hojas (perióstica + meníngea). Forma repliegues:
+            <br>— <em>Falce del cerebro:</em> separa hemisferios cerebrales.
+            <br>— <em>Tentorio del cerebelo:</em> separa cerebro del cerebelo. Clave clínica: la herniación uncal a través del tentorio comprime el NC III.
+          </li>
+          <li><strong>Aracnoides (capa intermedia):</strong> Membrana delgada, avascular. El espacio subaracnoideo contiene el LCE.</li>
+          <li><strong>Piamadre (capa interna):</strong> Membrana vascular delicada, adherida a la superficie del encéfalo. Sigue surcos y cisuras.</li>
+          <li><strong>LCE:</strong> Producido por plexos coroideos (~500 mL/día, volumen total ~150 mL). Circula por ventrículos → espacio subaracnoideo → vellosidades aracnoideas. Función: amortiguación, nutrición, eliminación de desechos.</li>
+          <li><strong>Espacios clínicos:</strong>
+            <br>— Epidural: entre hueso y duramadre (hematoma epidural = arteria meníngea media).
+            <br>— Subdural: entre duramadre y aracnoides (hematoma subdural = venas puente).
+            <br>— Subaracnoideo: entre aracnoides y piamadre (hemorragia subaracnoidea = aneurisma).
+          </li>
+        </ul>
+
+        <div class="gc-section-title">Preguntas guía para la exposición</div>
+        <div class="gc-q">1. Nombren las 3 meninges de externa a interna y una característica de cada una.</div>
+        <div class="gc-q">2. ¿Qué es el espacio subaracnoideo y qué contiene?</div>
+        <div class="gc-q">3. ¿Por qué la herniación uncal a través del tentorio produce midriasis unilateral?</div>
+
+        <div class="gc-section-title">Conexión clínica optométrica</div>
+        <div class="gc-clinical"><strong>Midriasis unilateral arreactiva</strong> es signo de herniación uncal que comprime el NC III contra el borde libre del tentorio. Es una <strong>emergencia neuroquirúrgica</strong>. El optometrista puede ser el primero en detectar este hallazgo pupilar. También: el papiledema (edema de papila) indica hipertensión intracraneal por alteración del flujo de LCE.</div>
+
+        <div class="gc-ref">Ref: Moore, 8ª ed., Cap. 8 · Moore SNC, pp. 115–118 · Tortora, Cap. 14</div>
+      </div>
+    </div>
+
+    <!-- ══ GRUPO 5 ══ -->
+    <div class="group-card gc-g5" id="grupo5">
+      <div class="gc-header" onclick="toggleGroup('g5c')" style="cursor:pointer">
+        <span class="gc-num">05</span>
+        <div><div class="gc-title">Pares Craneales II, III, IV</div><div class="gc-ra">RA: Identificar pares craneales de relevancia optométrica — vía visual y motores oculares</div></div>
+      </div>
+      <div class="gc-body gc-collapse open" id="g5c">
+        <div class="gc-section-title">Contenido clave</div>
+        <ul>
+          <li><strong>NC II — Óptico:</strong> Nervio sensitivo especial (aferente) para la visión. Emerge del quiasma óptico. Técnicamente es un tracto del SNC (mielinizado por oligodendrocitos). Relevancia: agudeza visual, campimetría, brazo aferente del reflejo fotomotor.</li>
+          <li><strong>NC III — Oculomotor:</strong> Emerge del mesencéfalo. Inerva 5 músculos: recto superior, inferior, medial, oblicuo inferior, elevador del párpado. Además lleva fibras parasimpáticas → esfínter pupilar (miosis) y músculo ciliar (acomodación) vía ganglio ciliar.
+            <br><em>Parálisis completa del NC III:</em> ptosis severa + midriasis + ojo «abajo y afuera» (acción no contrarrestada del recto lateral [NC VI] y oblicuo superior [NC IV]).
+          </li>
+          <li><strong>NC IV — Troclear:</strong> El más delgado de los pares craneales. Único que emerge de la cara posterior del tronco. Inerva el oblicuo superior (intorsión + depresión en aducción).
+            <br><em>Parálisis del NC IV:</em> diplopía al bajar escaleras, inclinación compensatoria de cabeza.
+          </li>
+        </ul>
+
+        <div class="gc-section-title">Preguntas guía para la exposición</div>
+        <div class="gc-q">1. ¿Qué músculos inerva el NC III y qué ocurre clínicamente cuando se paraliza por completo?</div>
+        <div class="gc-q">2. ¿Por qué el ojo queda «abajo y afuera» en la parálisis del NC III? ¿Qué nervios/músculos quedan activos?</div>
+        <div class="gc-q">3. Expliquen cómo funciona el reflejo fotomotor y cuál es el papel del NC II y del NC III en este arco reflejo.</div>
+
+        <div class="gc-section-title">Conexión clínica optométrica</div>
+        <div class="gc-clinical"><strong>Regla de la pupila:</strong> Midriasis en parálisis del NC III → sospecha de compresión (aneurisma de la arteria comunicante posterior = emergencia). Pupila respetada → probable causa isquémica (diabetes, HTA). Las fibras parasimpáticas viajan superficialmente en el nervio → son las primeras afectadas por compresión externa. Incidencia: 4.0/100.000/año, sube a 12.5 en &gt;60 años.</div>
+
+        <div class="gc-ref">Ref: Moore, 8ª ed., Cap. 10, pp. 1189–1210 · Fang et al., JAMA Ophthalmol 2017;135(1):23-28 · Kim et al., Eur J Neurol 2024;31(6):e16261</div>
+      </div>
+    </div>
+
+    <!-- ══ GRUPO 6 ══ -->
+    <div class="group-card gc-g6" id="grupo6">
+      <div class="gc-header" onclick="toggleGroup('g6c')" style="cursor:pointer">
+        <span class="gc-num">06</span>
+        <div><div class="gc-title">Pares Craneales V₁, VI, VII</div><div class="gc-ra">RA: Identificar pares craneales de relevancia optométrica — sensibilidad, abducción, expresión facial</div></div>
+      </div>
+      <div class="gc-body gc-collapse open" id="g6c">
+        <div class="gc-section-title">Contenido clave</div>
+        <ul>
+          <li><strong>NC V₁ — Oftálmico (rama del trigémino):</strong> Sensitivo somático. Inerva córnea, conjuntiva, párpado superior, frente, dorso de la nariz. Es el brazo aferente del reflejo corneal (estímulo → V₁ → puente → NC VII → orbicular del ojo → parpadeo). Lesión: pérdida de sensibilidad corneal → queratitis neurógena.</li>
+          <li><strong>NC VI — Abducens:</strong> Motor somático puro. Inerva exclusivamente el recto lateral (abduce el ojo). Tiene el recorrido subaracnoideo más largo → muy vulnerable.
+            <br><em>Parálisis del NC VI:</em> esotropía (ojo desviado hacia medial), diplopía horizontal peor en abducción. Es la parálisis ocular motora más frecuente en adultos (11.3/100.000/año). <strong>Signo de falsa localización:</strong> la hipertensión intracraneal estira el NC VI contra el borde petroso sin que la lesión esté cerca del nervio.
+          </li>
+          <li><strong>NC VII — Facial:</strong> Motor branquial (músculos de expresión facial, incluido el orbicular del ojo) + sensitivo especial (gusto 2/3 anteriores de lengua) + parasimpático (glándulas lagrimales, submandibulares).
+            <br><em>Parálisis de Bell:</em> parálisis facial periférica idiopática del NC VII. Causa más probable: reactivación de HSV-1 en ganglio geniculado. Incidencia: 15–40/100.000/año.
+          </li>
+        </ul>
+
+        <div class="gc-section-title">Preguntas guía para la exposición</div>
+        <div class="gc-q">1. ¿Por qué la parálisis del NC VI se considera un «signo de falsa localización» y qué implica en un niño con cefalea?</div>
+        <div class="gc-q">2. ¿Qué es el lagoftalmos y por qué la parálisis de Bell es una urgencia para la córnea?</div>
+        <div class="gc-q">3. Expliquen el arco reflejo corneal: ¿cuál nervio es aferente y cuál es eferente?</div>
+
+        <div class="gc-section-title">Conexión clínica optométrica</div>
+        <div class="gc-clinical"><strong>Parálisis de Bell → lagoftalmos → queratitis por exposición</strong> (afecta ~40% de pacientes). El optometrista maneja la protección corneal: lágrimas artificiales sin conservantes, ungüento nocturno, cinta palpebral, lentes esclerales. NC VI en niños: ~50% causa neoplásica (gliomas pontinos) → neuroimagen urgente. Prednisona 50–60 mg/día dentro de 72 h → recuperación &gt;95%.</div>
+
+        <div class="gc-ref">Ref: Moore, 8ª ed., Cap. 10, pp. 1211–1218 · de Almeida et al., CMAJ 2014;186(12):917 · Gardner et al., Cureus 2025;17(1):e77656 · Patel et al., Ophthalmology 2004;111(2):369</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════ SÍNTESIS ═══════════ -->
+<section class="section" id="sintesis">
+  <div class="section-header">
+    <span class="section-tag">87–90 min · Cierre</span>
+    <h2>Mapa Integrador</h2>
+  </div>
+  <div class="map-wrap">
+    <svg viewBox="0 0 920 300" style="width:100%;max-width:920px;" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="120" width="110" height="50" rx="8" fill="#4a7a4e"/>
+      <text x="65" y="150" text-anchor="middle" fill="white" font-family="'Playfair Display',serif" font-size="14" font-weight="700">Músculo</text>
+      <polygon points="130,145 148,135 148,155" fill="#c8a45c"/>
+      <rect x="155" y="110" width="130" height="70" rx="8" fill="#2a7a6e"/>
+      <text x="220" y="142" text-anchor="middle" fill="white" font-family="'DM Mono',monospace" font-size="11">Unión</text>
+      <text x="220" y="160" text-anchor="middle" fill="white" font-family="'DM Mono',monospace" font-size="11">Neuromuscular</text>
+      <text x="220" y="90" text-anchor="middle" fill="#2a7a6e" font-family="'DM Mono',monospace" font-size="9" font-weight="500">GRUPO 1</text>
+      <polygon points="293,145 311,135 311,155" fill="#c8a45c"/>
+      <rect x="318" y="120" width="110" height="50" rx="8" fill="#3a5a8c"/>
+      <text x="373" y="142" text-anchor="middle" fill="white" font-family="'Playfair Display',serif" font-size="12" font-weight="700">Neurona</text>
+      <text x="373" y="158" text-anchor="middle" fill="white" font-family="'Playfair Display',serif" font-size="12">motora</text>
+      <text x="373" y="103" text-anchor="middle" fill="#3a5a8c" font-family="'DM Mono',monospace" font-size="9" font-weight="500">GRUPO 2</text>
+      <polygon points="436,145 454,135 454,155" fill="#c8a45c"/>
+      <rect x="461" y="120" width="100" height="50" rx="8" fill="#b5413b"/>
+      <text x="511" y="142" text-anchor="middle" fill="white" font-family="'Playfair Display',serif" font-size="12" font-weight="700">Pares</text>
+      <text x="511" y="158" text-anchor="middle" fill="white" font-family="'Playfair Display',serif" font-size="12">craneales</text>
+      <text x="511" y="103" text-anchor="middle" fill="#b5413b" font-family="'DM Mono',monospace" font-size="9" font-weight="500">GRUPOS 5–6</text>
+      <polygon points="569,145 587,135 587,155" fill="#c8a45c"/>
+      <rect x="594" y="110" width="110" height="70" rx="8" fill="#6b4a8a"/>
+      <text x="649" y="142" text-anchor="middle" fill="white" font-family="'Playfair Display',serif" font-size="12" font-weight="700">Tronco</text>
+      <text x="649" y="158" text-anchor="middle" fill="white" font-family="'Playfair Display',serif" font-size="12">encefálico</text>
+      <text x="649" y="92" text-anchor="middle" fill="#6b4a8a" font-family="'DM Mono',monospace" font-size="9" font-weight="500">GRUPO 3</text>
+      <polygon points="712,145 730,135 730,155" fill="#c8a45c"/>
+      <rect x="737" y="120" width="100" height="50" rx="8" fill="#a0522d"/>
+      <text x="787" y="142" text-anchor="middle" fill="white" font-family="'Playfair Display',serif" font-size="12" font-weight="700">Encéfalo</text>
+      <text x="787" y="158" text-anchor="middle" fill="white" font-family="'Playfair Display',serif" font-size="10">+ meninges</text>
+      <text x="787" y="103" text-anchor="middle" fill="#a0522d" font-family="'DM Mono',monospace" font-size="9" font-weight="500">GRUPOS 3–4</text>
+      <text x="460" y="230" text-anchor="middle" fill="#c8a45c" font-family="'Playfair Display',serif" font-size="16" font-style="italic">«Sin nervio no hay músculo»</text>
+      <text x="460" y="260" text-anchor="middle" fill="#8b6914" font-family="'DM Mono',monospace" font-size="10">Lectura: Latarjet, 5ª ed., Caps. 3–4 (SN) · Moore, Cap. 8 — Próxima clase: 15–16 abril</text>
+    </svg>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.5rem;">
+    <div class="pres-card">
+      <h4>📖 Lectura para la clase del 15–16 abril</h4>
+      <ul>
+        <li>Latarjet &amp; Ruiz Liard, 5ª ed., capítulos sobre Sistema Nervioso Central</li>
+        <li>Moore, Cap. 8: Encéfalo, meninges craneales y pares craneales</li>
+      </ul>
+    </div>
+    <div class="pres-card">
+      <h4>📚 Bibliografía de esta sesión</h4>
+      <p style="font-size:0.82rem;opacity:0.8;">Tortora (15ª ed.) Cap. 10, 14 · Moore (8ª ed.) Cap. 1, 8, 10 · Latarjet (5ª ed.) · Khalil et al., StatPearls 2025 · Gilhus et al., Nat Rev Dis Primers 2019 · Fang et al., JAMA Ophthalmol 2017 · de Almeida et al., CMAJ 2014 · Kanagalingam &amp; Miller, Eye Brain 2015</p>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <p>Universidad de La Salle · Optometría · Morfología General 2026-I</p>
+  <p style="margin-top:0.3rem;">Dr. Jorge Bogoya</p>
+  <p style="margin-top:0.6rem;opacity:0.4;">Clase Puente 09 abril 2026 · Parte 1: Tarjetas de Trabajo</p>
+</footer>
+
+<script>
+// ── PROGRESS BAR ──
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('progressBar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';
+});
+
+// ── TIMER ──
+let timerInterval=null, timerSeconds=25*60, timerRunning=false;
+
+function updateTimerDisplay(){
+  const m=Math.floor(timerSeconds/60), s=timerSeconds%60;
+  document.getElementById('timerDisplay').textContent=
+    String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  const d=document.getElementById('timerDisplay');
+  if(timerSeconds<=60) d.style.color='#b5413b';
+  else if(timerSeconds<=180) d.style.color='#e8a030';
+  else d.style.color='var(--amber)';
+}
+
+function startTimer(){
+  if(timerRunning) return;
+  timerRunning=true;
+  document.getElementById('timerPhase').textContent='⏱ En curso...';
+  timerInterval=setInterval(()=>{
+    if(timerSeconds<=0){
+      clearInterval(timerInterval);
+      timerRunning=false;
+      document.getElementById('timerPhase').textContent='⏰ ¡Tiempo terminado!';
+      document.getElementById('timerDisplay').style.color='#b5413b';
+      let flashes=0;
+      const flashI=setInterval(()=>{
+        document.getElementById('timerDisplay').style.opacity=flashes%2?'1':'0.3';
+        if(++flashes>10) clearInterval(flashI);
+      },300);
+      return;
+    }
+    timerSeconds--;
+    updateTimerDisplay();
+  },1000);
+}
+
+function pauseTimer(){
+  clearInterval(timerInterval);
+  timerRunning=false;
+  document.getElementById('timerPhase').textContent='⏸ Pausado';
+}
+
+function setTimer(secs,label){
+  clearInterval(timerInterval);
+  timerRunning=false;
+  timerSeconds=secs;
+  updateTimerDisplay();
+  document.getElementById('timerLabel').textContent=label;
+  document.getElementById('timerPhase').textContent='Presiona «Iniciar» para comenzar';
+}
+
+function resetTimer(){
+  clearInterval(timerInterval);
+  timerRunning=false;
+  timerSeconds=25*60;
+  updateTimerDisplay();
+  document.getElementById('timerLabel').textContent='Fase de trabajo grupal';
+  document.getElementById('timerPhase').textContent='Presiona «Iniciar» para comenzar';
+}
+
+updateTimerDisplay();
+
+// ── GROUP TOGGLE ──
+function toggleGroup(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ── TIMELINE HIGHLIGHT ──
+document.querySelectorAll('.timer-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const label=b.textContent.toLowerCase();
+    document.querySelectorAll('.tl-item').forEach(t=>t.classList.remove('active'));
+    if(label.includes('trabajo')) document.querySelector('[data-phase="work"]')?.classList.add('active');
+    else if(label.includes('exposición')) document.querySelector('[data-phase="expo"]')?.classList.add('active');
+    else if(label.includes('quiz')) document.querySelector('[data-phase="quiz"]')?.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
