@@ -57,7 +57,7 @@ La clase puente **"Del Músculo al Nervio"** integra los sistemas muscular y ner
 
 ---
 
-## 🛠️ Tecnologías
+<!-- ## 🛠️ Tecnologías
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
@@ -68,7 +68,7 @@ La clase puente **"Del Músculo al Nervio"** integra los sistemas muscular y ner
 - Archivos HTML estáticos autocontenidos (sin dependencias externas)
 - Tipografía: Playfair Display · Source Serif 4 · DM Mono (Google Fonts)
 - Envío automático de resultados del quiz → Google Sheets via Apps Script
-- Publicación: GitHub Pages (rama `main`)
+- Publicación: GitHub Pages (rama `main`)-->
 
 ---
 
