@@ -14,7 +14,7 @@
 | `0_Asistencia.html` | Control de asistencia G1 y G2 | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/0_Asistencia.html) |
 | `1_Puente.html` | Clase puente — Del Músculo al Nervio | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_Puente.html) |
 | `1_clase_puente.html` | Material interactivo Clase Puente | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_clase_puente.html) |
-| `1_quiz_puente.html` | Quiz de ingreso — 8 preguntas tipo Saber Pro |<!- [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_quiz_puente.html) |-->
+| `1_quiz_puente.html` | Quiz de ingreso — 8 preguntas tipo Saber Pro |<!-[▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_quiz_puente.html)--> |
 
 ---
 
