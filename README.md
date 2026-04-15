@@ -9,11 +9,27 @@
 <!-- -->
 ## 🔗 Acceso rápido
 
+### Herramientas del curso
 | Archivo | Descripción | Abrir |
 |---|---|---|
-| `1_Puente.html` | Clase puente — Del Músculo al Nervio | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_Puente.html) |
-| `1_clase_puente.html` | Material interactivo Clase Puente | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_clase_puente.html) |
+|<!--`0_Asistencia.html` | Control de asistencia G1 y G2 | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/0_Asistencia.html)--> |
 
+### Unidad 1 — Clase Puente: Del Músculo al Nervio
+| Archivo | Descripción | Abrir |
+|---|---|---|
+| `1_Puente.html` | Presentación general de la clase puente | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_Puente.html) |
+| `1_clase_puente.html` | Material interactivo Clase Puente | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_clase_puente.html) |
+| `1_quiz_puente.html` | Quiz de ingreso — 8 preguntas tipo Saber Pro | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_quiz_puente.html) |
+
+### Unidad 2 — Exposiciones por grupo
+| Archivo | Tema | Abrir |
+|---|---|---|
+| `2_grupo1_union_neuromuscular.html` | G1 · Unión Neuromuscular | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/2_grupo1_union_neuromuscular.html) |
+| `2_grupo2_snc_vs_snp.html` | G2 · SNC vs SNP | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/2_grupo2_snc_vs_snp.html) |
+| `2_grupo3_partes_del_encefalo.html` | G3 · Partes del Encéfalo | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/2_grupo3_partes_del_encefalo.html) |
+| `2_grupo4_meninges_lce_2.html` | G4 · Meninges y LCE | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/2_grupo4_meninges_lce_2.html) |
+| `2_grupo5_NC_II_III_IV.html` | G5 · Pares Craneales II, III, IV | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/2_grupo5_NC_II_III_IV.html) |
+| `2_grupo6_NC_V1_VI_VII.html` | G6 · Pares Craneales V₁, VI, VII | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/2_grupo6_NC_V1_VI_VII.html) |
 ---
 
 ## 📋 Grupos
