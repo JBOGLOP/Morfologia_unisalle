@@ -9,10 +9,6 @@
 <!-- -->
 ## 🔗 Acceso rápido
 
-### Herramientas del curso
-| Archivo | Descripción | Abrir |
-|---|---|---|
-
 ### Unidad 1 — Clase Puente: Del Músculo al Nervio
 | Archivo | Descripción | Abrir |
 |---|---|---|
