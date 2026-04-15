@@ -15,7 +15,6 @@
 |---|---|---|
 | `1_Puente.html` | Presentación general de la clase puente | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_Puente.html) |
 | `1_clase_puente.html` | Material interactivo Clase Puente | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_clase_puente.html) |
-| `1_quiz_puente.html` | Quiz de ingreso — 8 preguntas tipo Saber Pro | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/1_quiz_puente.html) |
 
 ### Unidad 2 — Exposiciones por grupo
 
