@@ -18,7 +18,7 @@
 
 | Recurso | Enlace |
 |---|---|
-| 📖 Generalidades | [1_Generalidades](https://jboglop.github.io/Morfologia_unisalle/1_Generalidades.html) |
+| 📖 Generalidades | [1_Generalidades.html](https://jboglop.github.io/Morfologia_unisalle/1_Generalidades.html) |
 | 🌉 Clase Puente — presentación | [1_Puente.html](https://jboglop.github.io/Morfologia_unisalle/1_Puente.html) |
 | 🏫 Clase Puente — grupos | [1_clase_puente.html](https://jboglop.github.io/Morfologia_unisalle/1_clase_puente.html) |
 
