@@ -13,11 +13,6 @@
 
 ### Unidad 0 — Gestión de curso
 
-| Recurso | Enlace |
-|---|---|
-| 📋 Control de asistencia | [0_Asistencia.html](https://jboglop.github.io/Morfologia_unisalle/0_Asistencia.html) |
-
----
 
 ### Unidad 1 — Del Músculo al Nervio *(Clase Puente)*
 
