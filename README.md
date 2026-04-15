@@ -28,11 +28,6 @@
 | `2_grupo5_NC_II_III_IV.html` | G5 · Pares Craneales II, III, IV | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/2_grupo5_NC_II_III_IV.html) |
 | `2_grupo6_NC_V1_VI_VII.html` | G6 · Pares Craneales V₁, VI, VII | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/2_grupo6_NC_V1_VI_VII.html) |
 
-### Herramientas
-
-| Archivo | Descripción | Abrir |
-|---|---|---|
-| `0_Asistencia.html` | Control de asistencia G1 y G2 | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/0_Asistencia.html) |
 
 ---
 
