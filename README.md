@@ -12,7 +12,6 @@
 ### Herramientas del curso
 | Archivo | Descripción | Abrir |
 |---|---|---|
-|<!--`0_Asistencia.html` | Control de asistencia G1 y G2 | [▶ Abrir](https://jboglop.github.io/Morfologia_unisalle/0_Asistencia.html)--> |
 
 ### Unidad 1 — Clase Puente: Del Músculo al Nervio
 | Archivo | Descripción | Abrir |
