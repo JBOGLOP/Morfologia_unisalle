@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tórax + Pericardio + Morfología Externa — Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--c:#FF6B6B;--cd:#C0392B;--cbg:#FFF5F5;--cg:rgba(255,107,107,.08);
+--dark:#1A1A2E;--text:#2D3436;--text2:#636E72;--bg:#FAFAFA;--card:#FFF;
+--red:#FF6B6B;--blue:#0984E3;--teal:#00B894;
+--radius:16px;--radius-sm:10px;--shadow:0 4px 24px rgba(0,0,0,.06);--tr:all .3s cubic-bezier(.4,0,.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;max-width:100vw}
+.hero{position:relative;padding:3rem 1.5rem;background:var(--dark);text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,107,107,.08),transparent 65%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:750px;margin:0 auto}
+.hero-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#FF6B6B;border:1px solid #FF6B6B44;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;background:#FF6B6B0A}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:.5rem;text-shadow:0 2px 30px #FF6B6B33}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:.3rem}
+.hero-meta{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.3)}
+.back-btn{position:fixed;top:1rem;left:1rem;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.4rem .8rem;border-radius:20px;border:1px solid #FF6B6B55;background:#C0392BEE;color:#fff;cursor:pointer;backdrop-filter:blur(8px);text-decoration:none;transition:var(--tr)}
+.back-btn:hover{background:#FF6B6B;transform:scale(1.05)}
+nav.toc{max-width:800px;margin:0 auto;padding:1rem 1.5rem;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+nav.toc a{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.3rem .7rem;border-radius:16px;background:#FF6B6B12;color:#C0392B;text-decoration:none;transition:var(--tr);border:1px solid #FF6B6B22;white-space:nowrap}
+nav.toc a:hover{background:#FF6B6B;color:#fff}
+.main{max-width:800px;margin:0 auto;padding:1.5rem 1.2rem 3rem}
+h2.section-title{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:#C0392B;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid #FF6B6B;scroll-margin-top:1rem}
+h3.sub{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text);margin:1.5rem 0 .6rem;padding-left:.8rem;border-left:3px solid #FF6B6B}
+p{margin-bottom:.7rem;font-size:.9rem;text-align:justify}
+p strong{color:#C0392B}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.2rem;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:var(--tr)}
+.card:hover{box-shadow:0 6px 30px rgba(0,0,0,.09);transform:translateY(-1px)}
+.card-head{padding:1rem 1.2rem;cursor:pointer;display:flex;align-items:center;gap:.7rem;transition:var(--tr)}
+.card-head:hover{background:#FFF5F5}
+.card-dot{width:10px;height:10px;border-radius:50%;background:#FF6B6B;flex-shrink:0}
+.card-t{font-weight:600;font-size:.92rem;flex:1}
+.card-arr{transition:var(--tr);color:var(--text2);font-size:.7rem;flex-shrink:0}
+.card.open .card-arr{transform:rotate(180deg);color:#FF6B6B}
+.card-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.card.open .card-body{max-height:8000px}
+.card-in{padding:0 1.2rem 1.2rem;font-size:.88rem;line-height:1.8}
+.card-in p{margin-bottom:.6rem}
+.kp{display:flex;gap:.5rem;align-items:flex-start;padding:.4rem 0}
+.kp-i{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;color:#fff;background:#FF6B6B;margin-top:2px;font-weight:700}
+.kp-t{font-size:.85rem}
+.cbox{border-radius:var(--radius-sm);padding:.9rem 1.1rem;margin:.8rem 0;border-left:3px solid}
+.cbox.opt{background:#EBF5FB;border-color:#2980B9}
+.cbox.warn{background:#FFF5F5;border-color:#E74C3C}
+.cbox.tip{background:#FFF5F5;border-color:#FF6B6B}
+.cbox-t{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:.25rem}
+.cbox.opt .cbox-t{color:#2980B9}.cbox.warn .cbox-t{color:#E74C3C}.cbox.tip .cbox-t{color:#C0392B}
+.cbox p{font-size:.82rem;font-style:italic;line-height:1.6;margin-bottom:0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:.7rem 0;max-width:100%}
+table.dt{width:100%;border-collapse:collapse;font-size:.8rem;min-width:320px}
+table.dt th{padding:.5rem .6rem;text-align:left;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.5px;text-transform:uppercase;color:#fff;background:#C0392B;white-space:nowrap}
+table.dt td{padding:.45rem .6rem;border-bottom:1px solid rgba(0,0,0,.04);word-break:break-word}
+table.dt tr:nth-child(even){background:#FFF5F5}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.8rem 0}
+.comp-card{background:var(--card);border-radius:var(--radius-sm);padding:1rem;border-top:3px solid}
+.comp-card h4{font-family:'Fraunces',serif;font-size:.92rem;margin-bottom:.4rem}
+.comp-card ul{list-style:none;font-size:.82rem;line-height:1.8}
+.comp-card ul li{padding-left:1rem;position:relative}
+.comp-card ul li::before{content:'→';position:absolute;left:0}
+.fig-ref{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text2);margin:.3rem 0;font-style:italic}
+.ref{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#AAA;font-style:italic;margin:.3rem 0}
+.ecg-svg{width:100%;height:50px;margin:.5rem 0}
+.quiz-sec{margin-top:3rem;padding-top:2rem;border-top:2px solid #FF6B6B}
+.quiz-sec h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:#C0392B;margin-bottom:1rem}
+.qi{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin-bottom:1.2rem;border:1px solid rgba(0,0,0,.04)}
+.qi-n{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#FF6B6B;letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;font-weight:600}
+.qi-q{font-size:.9rem;margin-bottom:.8rem;line-height:1.7}
+.qi-opts{display:flex;flex-direction:column;gap:.4rem}
+.qi-o{display:flex;align-items:flex-start;gap:.6rem;padding:.65rem .9rem;border-radius:var(--radius-sm);border:1.5px solid #FF6B6B33;cursor:pointer;transition:var(--tr);font-size:.85rem}
+.qi-o:hover{border-color:#FF6B6B;background:#FFF5F5}
+.qi-o.sel{border-color:#FF6B6B;background:#FF6B6B0F}
+.qi-o.ok{border-color:#27AE60;background:#27AE600D}
+.qi-o.no{border-color:#E74C3C;background:#E74C3C08}
+.qi-l{font-family:'JetBrains Mono',monospace;font-weight:600;color:#FF6B6B;min-width:18px;font-size:.8rem}
+.qi-btn{margin-top:.8rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.5rem 1.2rem;border-radius:20px;border:none;background:#FF6B6B;color:#fff;cursor:pointer;transition:var(--tr)}
+.qi-btn:hover{background:#C0392B;box-shadow:0 4px 15px #FF6B6B33}
+.qi-fb{margin-top:.7rem;padding:.8rem;border-radius:var(--radius-sm);font-size:.8rem;font-style:italic;display:none;line-height:1.6}
+.qi-fb.show{display:block}.qi-fb.ok{background:#27AE600D;border-left:3px solid #27AE60}.qi-fb.no{background:#E74C3C08;border-left:3px solid #E74C3C}
+.score-bar{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin:1.5rem 0;text-align:center;border:2px solid #FF6B6B33}
+.score-bar .sc-num{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:900;color:#FF6B6B}
+.score-bar .sc-lab{font-size:.8rem;color:var(--text2)}
+footer{text-align:center;padding:2rem 1rem;background:var(--dark);color:rgba(255,255,255,.25);font-size:.65rem;font-family:'JetBrains Mono',monospace}
+@media(max-width:768px){
+  .hero h1{font-size:1.6rem}.main{padding:1rem .8rem 2.5rem}
+  h2.section-title{font-size:1.25rem}h3.sub{font-size:.95rem}
+  .card-head{padding:.8rem .9rem}.card-in{padding:0 .9rem .9rem}
+  .comp{grid-template-columns:1fr}
+  table.dt{font-size:.72rem}table.dt th{font-size:.55rem;padding:.35rem .4rem}table.dt td{padding:.35rem .4rem}
+  .qi{padding:1rem}.qi-o{padding:.55rem .7rem;font-size:.8rem}
+  nav.toc{padding:.8rem}nav.toc a{font-size:.55rem;padding:.25rem .5rem}
+}
+@media(max-width:480px){
+  .hero{padding:2rem 1rem}.hero h1{font-size:1.4rem}
+  p{font-size:.84rem}.card-in{font-size:.84rem}
+  .kp-t{font-size:.82rem}.cbox p{font-size:.78rem}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:1.5rem 2rem}
+}
+html,body{max-width:100vw;overflow-x:hidden}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Grupo 1 — Actividad Colaborativa</div>
+    <h1>Tórax + Pericardio + Morfología Externa</h1>
+    <p class="hero-sub">Módulos 0 + 1.1 + 1.2 + 1.3 — Cavidad torácica, paredes, mediastino, pleuras, posición cardíaca, configuración externa, pericardio</p>
+    <p class="hero-meta">Dr. Jorge Bogoya · Universidad de La Salle · 22–23 abril 2026</p>
+  </div>
+</section>
+
+<nav class="toc">
+    <a href="#s0">Cavidad torácica</a>
+    <a href="#s1">Diafragma</a>
+    <a href="#s2">Mediastino</a>
+    <a href="#s3">Pleuras</a>
+    <a href="#s4">Posición cardíaca</a>
+    <a href="#s5">Config. externa</a>
+    <a href="#s6">Pericardio</a>
+    <a href="#quiz">📝 Quiz</a>
+</nav>
+
+<main class="main">
+<h2 class="section-title" id="s0">Cavidad torácica: definición y límites óseos</h2>
+
+<p>La <strong>cavidad torácica</strong> es el espacio delimitado por la pared osteocartilaginosa que alberga los pulmones, el corazón y los órganos mediastinales. Su forma es cilindrocónica, con el vértice superior estrecho (apertura torácica superior) y la base inferior amplia (cerrada por el diafragma). Comprender su arquitectura es fundamental para localizar el corazón y correlacionar la anatomía torácica con los hallazgos clínicos que el optometrista puede encontrar.</p>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Componentes óseos de la caja torácica</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>La caja torácica está formada por tres grupos de estructuras óseas y cartilaginosas:</p>
+<div class="kp"><div class="kp-i">1</div><span class="kp-t"><strong>Vértebras torácicas (T1–T12):</strong> Forman la pared posterior. Cada vértebra presenta fositas costales para articular con las cabezas de las costillas. Los procesos espinosos son largos e inclinados inferiormente, superponiéndose como tejas.</span></div>
+<div class="kp"><div class="kp-i">2</div><span class="kp-t"><strong>Esternón:</strong> Hueso plano anterior con tres segmentos — <strong>manubrio</strong> (superior, se articula con clavículas y 1.ª costilla), <strong>cuerpo</strong> (medio, articulación con cartílagos costales 2.º–7.º), <strong>proceso xifoides</strong> (inferior, referencia del ángulo infraesternal).</span></div>
+<div class="kp"><div class="kp-i">3</div><span class="kp-t"><strong>Costillas (12 pares):</strong> Arcos óseos que se articulan posteriormente con las vértebras y anteriormente con el esternón a través de cartílagos costales.</span></div>
+<div class="tw"><table class="dt"><tr><th>Tipo</th><th>Costillas</th><th>Articulación con esternón</th><th>Características</th></tr><tr><td><strong>Verdaderas</strong></td><td>1.ª a 7.ª</td><td>Directa (cartílagos independientes)</td><td>La 1.ª es corta, ancha y horizontal; la 2.ª marca el ángulo esternal</td></tr><tr><td><strong>Falsas</strong></td><td>8.ª a 10.ª</td><td>Indirecta (arco costal → 7.ª)</td><td>Sus cartílagos se unen formando el arco costal</td></tr><tr><td><strong>Flotantes</strong></td><td>11.ª y 12.ª</td><td>Sin articulación anterior</td><td>Solo se articulan con vértebras; la 12.ª es muy corta</td></tr></table></div>
+<p class="ref">[Ref: Latarjet & Ruiz Liard, 5.ª ed., cap. 71, pp. 827–832; Moore et al., 8.ª ed., cap. 4, pp. 382–388]</p>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">El ángulo esternal (de Louis): referencia clínica fundamental</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>El <strong>ángulo esternal</strong> es la prominencia palpable formada por la unión del manubrio con el cuerpo del esternón. Es una de las referencias anatómicas más importantes del tórax:</p>
+<div class="tw"><table class="dt"><tr><th>Estructura a nivel del ángulo</th><th>Significado clínico</th></tr><tr><td>2.º cartílago costal</td><td>Punto de inicio para contar costillas y espacios intercostales (EIC)</td></tr><tr><td>Disco intervertebral T4–T5</td><td>Límite entre mediastinos superior e inferior</td></tr><tr><td>Inicio y final del arco aórtico</td><td>Arco aórtico: de T4 a T4 (convexidad superior)</td></tr><tr><td>Bifurcación traqueal (carina)</td><td>La tráquea se divide en bronquios principales D e I</td></tr><tr><td>Vena cava superior</td><td>Entra en la aurícula derecha a nivel del 3.er cartílago costal</td></tr><tr><td>Ligamento arterioso</td><td>Vestigio del conducto arterioso fetal, a la izquierda del arco</td></tr></table></div>
+<div class="cbox opt"><div class="cbox-t">👁️ Relevancia optométrica</div><p>El ángulo de Louis permite localizar el 2.º EIC, referencia para los focos de auscultación aórtico (2.º EIC derecho) y pulmonar (2.º EIC izquierdo). Reconocer anomalías de los ruidos cardíacos en estos focos puede orientar la sospecha de patología valvular con potencial embólico hacia la retina.</p></div>
+<p class="ref">[Ref: Moore et al., 8.ª ed., cap. 4, pp. 386–388, fig. 4-5]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s1">Diafragma: hiatos y estructuras</h2>
+
+<p>El <strong>diafragma</strong> es un músculo plano, ancho y delgado que forma el tabique entre tórax y abdomen. Tiene forma de cúpula con convexidad superior (la cúpula derecha es más alta por el hígado subyacente). Su contracción durante la inspiración aumenta el diámetro vertical de la cavidad torácica. Presenta un <strong>centro tendinoso</strong> fusionado con el pericardio fibroso, lo que ancla el corazón al diafragma.</p>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Los tres hiatos del diafragma</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="tw"><table class="dt"><tr><th>Hiato</th><th>Nivel vertebral</th><th>Estructuras que lo atraviesan</th><th>Mnemotecnia</th></tr><tr><td><strong>Hiato aórtico</strong></td><td>T12</td><td>Aorta descendente, conducto torácico, vena ácigos</td><td>T12: 12 letras en 'aortic hiatus'</td></tr><tr><td><strong>Hiato esofágico</strong></td><td>T10</td><td>Esófago, nervios vagos (anterior y posterior)</td><td>T10: 10 letras en 'oesophagus'</td></tr><tr><td><strong>Foramen de la VCI</strong></td><td>T8</td><td>Vena cava inferior (y ramas del nervio frénico derecho)</td><td>T8: 8 letras en 'vena cava'</td></tr></table></div>
+<p>El hiato aórtico es <strong>posterior al diafragma</strong> (oseofibroso, entre los pilares), por lo que la aorta no se comprime durante la contracción diafragmática. El foramen de la VCI está en el <strong>centro tendinoso</strong>, y la contracción del diafragma lo abre, facilitando el retorno venoso durante la inspiración — un mecanismo de «bomba respiratoria» que contribuye al retorno venoso al corazón.</p>
+<p class="ref">[Ref: Latarjet & Ruiz Liard, 5.ª ed., cap. 75, pp. 845–852; Moore et al., 8.ª ed., cap. 4, p. 391]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s2">Mediastino: divisiones y contenido</h2>
+
+<p>El <strong>mediastino</strong> es la región central del tórax, entre las cavidades pleurales, delimitado por el esternón (anterior), la columna vertebral (posterior), el diafragma (inferior) y la apertura torácica superior (superior). Un plano transverso que pasa por el ángulo esternal y el disco T4–T5 lo divide en <strong>mediastino superior</strong> e <strong>inferior</strong>; este último se subdivide en anterior, medio y posterior.</p>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Contenido de cada división del mediastino</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="tw"><table class="dt"><tr><th>División</th><th>Límites</th><th>Contenido principal</th></tr><tr><td><strong>Superior</strong></td><td>Apertura torácica superior → plano T4–T5</td><td>Arco aórtico y 3 ramas (tr. braquiocefálico, carótida común I, subclavia I), VCS, venas braquiocefálicas, tráquea, esófago, nervios vagos, nervio frénico, nervio laríngeo recurrente I, conducto torácico, timo</td></tr><tr><td><strong>Anterior</strong></td><td>Esternón → pericardio</td><td>Grasa, tejido conectivo, ligamentos esternopericárdicos, restos del timo, vasos linfáticos</td></tr><tr><td><strong>Medio</strong></td><td>Contiene el pericardio</td><td>Pericardio, corazón, aorta ascendente, tronco pulmonar, VCS, arco de la vena ácigos, bronquios principales, nervios frénicos</td></tr><tr><td><strong>Posterior</strong></td><td>Pericardio → columna vertebral</td><td>Aorta torácica (descendente), esófago, conducto torácico, venas ácigos y hemiácigos, troncos simpáticos torácicos, nervios esplácnicos</td></tr></table></div>
+<div class="cbox tip"><div class="cbox-t">📌 Dato clave para el examen</div><p>El corazón se localiza en el mediastino MEDIO. El esófago pasa por el mediastino superior Y el posterior. La tráquea se bifurca en el mediastino superior (a nivel de T4–T5, ángulo esternal). El conducto torácico está en el mediastino posterior.</p></div>
+<p class="ref">[Ref: Moore et al., 8.ª ed., cap. 4, pp. 441–443, fig. 4-23; Latarjet & Ruiz Liard, 5.ª ed., cap. 76, pp. 862–864]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s3">Pleuras, pulmones y proyección pulmonar</h2>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Pleuras y recesos pleurales</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>Cada pulmón está envuelto por un saco pleural de doble capa:</p>
+<div class="kp"><div class="kp-i">P</div><span class="kp-t"><strong>Pleura parietal:</strong> reviste la pared torácica (costal), el mediastino (mediastínica), el diafragma (diafragmática) y la cúpula pleural (cervical). Inervada por nervios intercostales y frénico — el dolor pleural se refiere al hombro (frénico, C3–C5).</span></div>
+<div class="kp"><div class="kp-i">V</div><span class="kp-t"><strong>Pleura visceral:</strong> se adhiere a la superficie pulmonar, penetra en las cisuras. No tiene inervación sensitiva dolorosa.</span></div>
+<p>La <strong>cavidad pleural</strong> es un espacio virtual con líquido seroso que reduce la fricción y mantiene el pulmón adherido por tensión superficial. Los <strong>recesos costodiafragmáticos</strong> son espacios de reserva donde la pleura parietal se repliega sin que el pulmón los ocupe en espiración — clínicamente, son los sitios donde se acumula primero el derrame pleural.</p>
+<p>La pleura parietal se extiende ~2 costillas por debajo del borde pulmonar inferior (línea medioclavicular: pulmón → 6.ª costilla, pleura → 8.ª; línea axilar media: pulmón → 8.ª, pleura → 10.ª; línea escapular: pulmón → 10.ª, pleura → 12.ª).</p>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Lóbulos, cisuras e hilio pulmonar</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="tw"><table class="dt"><tr><th>Pulmón</th><th>Lóbulos</th><th>Cisuras</th><th>Hilio</th></tr><tr><td><strong>Derecho</strong></td><td>3 (superior, medio, inferior)</td><td>Oblicua + horizontal</td><td>Bronquio principal D (epiarterial), arteria pulmonar D, 2 venas pulmonares D, vasos bronquiales, linfáticos</td></tr><tr><td><strong>Izquierdo</strong></td><td>2 (superior + língula, inferior)</td><td>Solo oblicua</td><td>Bronquio principal I (hipoarterial), arteria pulmonar I, 2 venas pulmonares I, vasos bronquiales, linfáticos</td></tr></table></div>
+<p>El pulmón derecho es más ancho y corto (por el hígado); el izquierdo tiene la <strong>incisura cardíaca</strong> con la língula. El bronquio principal derecho es más corto, más ancho y más vertical → los cuerpos extraños aspirados se alojan preferentemente en el bronquio derecho.</p>
+<p class="ref">[Ref: Moore et al., 8.ª ed., cap. 4, pp. 420–423]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s4">Posición, orientación y proyección superficial del corazón</h2>
+
+<p>El corazón se localiza en el <strong>mediastino medio</strong>, entre ambos pulmones, apoyado sobre el centro tendinoso del diafragma. Dos tercios de su masa se sitúan a la izquierda de la línea media. Tiene forma de cono invertido, con un tamaño aproximado al de un puño cerrado (~12 × 9 × 6 cm, 250–300 g).</p>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Eje cardíaco y proyección en la pared torácica</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>El <strong>eje cardíaco</strong> se orienta hacia abajo, hacia la izquierda y hacia adelante. Esto determina que:</p>
+<div class="kp"><div class="kp-i">V</div><span class="kp-t"><strong>Vértice (ápex):</strong> formado por el ventrículo izquierdo, se proyecta en el 5.º EIC izquierdo, sobre la línea medioclavicular. Es el <strong>punto de máximo impulso</strong> (PMI o choque de la punta), palpable en individuos delgados.</span></div>
+<div class="kp"><div class="kp-i">B</div><span class="kp-t"><strong>Base:</strong> posterosuperior, formada por las aurículas (principalmente la izquierda) y los grandes vasos. Mira hacia arriba y a la derecha.</span></div>
+<p>La proyección del corazón define 4 bordes sobre la pared anterior:</p>
+<div class="tw"><table class="dt"><tr><th>Borde</th><th>Estructura que lo forma</th><th>Proyección</th></tr><tr><td><strong>Derecho</strong></td><td>Aurícula derecha</td><td>3.er al 6.º cartílago costal derecho, ~1 cm lateral al borde esternal</td></tr><tr><td><strong>Izquierdo</strong></td><td>Ventrículo izquierdo (+ orejuela izquierda)</td><td>2.º EIC izquierdo hasta el PMI (5.º EIC)</td></tr><tr><td><strong>Superior</strong></td><td>Aurículas + grandes vasos</td><td>Borde inferior del 2.º cartílago costal</td></tr><tr><td><strong>Inferior</strong></td><td>Ventrículo derecho + ápex del VI</td><td>Del 6.º cartílago costal D al PMI, sobre el diafragma</td></tr></table></div>
+<p class="ref">[Ref: Tortora & Derrickson, 15.ª ed., cap. 20, p. 759, fig. 20.1; Latarjet & Ruiz Liard, 5.ª ed., cap. 76, pp. 862–865; Moore et al., 8.ª ed., cap. 4, pp. 446–449]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s5">Configuración externa del corazón</h2>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Caras, bordes y surcos cardíacos</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>El corazón presenta 4 caras, 4 bordes y varios surcos externos:</p>
+<div class="tw"><table class="dt"><tr><th>Cara</th><th>Sinónimo</th><th>Estructuras principales</th></tr><tr><td><strong>Esternocostal</strong></td><td>Anterior</td><td>Formada principalmente por el VD; también la orejuela derecha y parte del VI</td></tr><tr><td><strong>Diafragmática</strong></td><td>Inferior</td><td>Ambos ventrículos apoyados sobre el centro tendinoso del diafragma</td></tr><tr><td><strong>Pulmonar izquierda</strong></td><td>Lateral izq.</td><td>VI (produce la incisura cardíaca en el pulmón izquierdo)</td></tr><tr><td><strong>Pulmonar derecha</strong></td><td>Lateral der.</td><td>AD</td></tr></table></div>
+<p><strong>Surcos externos:</strong></p>
+<div class="kp"><div class="kp-i">S</div><span class="kp-t"><strong>Surco coronario (auriculoventricular):</strong> rodea el corazón separando aurículas de ventrículos. Contiene la arteria coronaria derecha, la circunfleja y el seno coronario.</span></div>
+<div class="kp"><div class="kp-i">A</div><span class="kp-t"><strong>Surco interventricular anterior:</strong> en la cara esternocostal, marca el límite entre VD y VI. Contiene la DAI y la vena cardíaca magna.</span></div>
+<div class="kp"><div class="kp-i">P</div><span class="kp-t"><strong>Surco interventricular posterior:</strong> en la cara diafragmática. Contiene la arteria interventricular posterior y la vena cardíaca media.</span></div>
+<p class="ref">[Ref: Tortora & Derrickson, 15.ª ed., cap. 20, fig. 20.3, pp. 761–762; Latarjet & Ruiz Liard, 5.ª ed., cap. 76, fig. 76-5]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s6">Pericardio: estructura, senos y correlato clínico</h2>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Pericardio fibroso y seroso</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="kp"><div class="kp-i">F</div><span class="kp-t"><strong>Pericardio fibroso:</strong> saco de tejido conectivo denso, inextensible. Anclado al diafragma (centro tendinoso), al esternón (ligamentos esternopericárdicos) y a la adventicia de los grandes vasos. Protege contra sobredistensión súbita.</span></div>
+<div class="kp"><div class="kp-i">S</div><span class="kp-t"><strong>Pericardio seroso:</strong> membrana de dos hojas. La <strong>hoja parietal</strong> tapiza el interior del pericardio fibroso. La <strong>hoja visceral (epicardio)</strong> se adhiere a la superficie del corazón y contiene los vasos coronarios superficiales.</span></div>
+<div class="kp"><div class="kp-i">C</div><span class="kp-t"><strong>Cavidad pericárdica:</strong> espacio virtual entre ambas hojas con 15–50 mL de líquido pericárdico seroso que reduce la fricción.</span></div>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Senos pericárdicos: relevancia quirúrgica</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="tw"><table class="dt"><tr><th>Seno</th><th>Localización</th><th>Relevancia clínica</th></tr><tr><td><strong>Transverso</strong></td><td>Posterior a aorta ascendente y tronco pulmonar; anterior a VCS</td><td>El cirujano puede introducir un dedo o pinza para clampar la aorta/tronco pulmonar durante cirugía con bypass cardiopulmonar</td></tr><tr><td><strong>Oblicuo</strong></td><td>Fondo de saco posterior, entre las 4 venas pulmonares y la VCI</td><td>Accesible inferiormente; admite dedos pero no rodea vasos (es un fondo de saco ciego)</td></tr></table></div>
+<p>Los senos se forman durante el desarrollo embrionario por el plegamiento del tubo cardíaco primitivo. El seno transverso queda entre los polos arterial (aorta/tronco pulmonar) y venoso (VCS/venas pulmonares).</p>
+<p class="ref">[Ref: Moore et al., 8.ª ed., cap. 4, pp. 443–446, figs. 4-24 y 4-25; Latarjet & Ruiz Liard, 5.ª ed., cap. 77, pp. 887–890]</p>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Correlato clínico: taponamiento cardíaco y síndrome de Horner</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="cbox warn"><div class="cbox-t">🚨 Taponamiento cardíaco</div><p>Acumulación de líquido en la cavidad pericárdica que comprime el corazón e impide el llenado diastólico. La <strong>tríada de Beck</strong>: (1) hipotensión arterial, (2) ingurgitación yugular, (3) ruidos cardíacos apagados. Tratamiento urgente: pericardiocentesis.</p></div>
+<div class="cbox opt"><div class="cbox-t">👁️ Conexión optométrica — Horner + tórax</div><p>El síndrome de Horner (miosis + ptosis parcial + anhidrosis) puede originarse en el tórax: tumores de Pancoast (ápex pulmonar) comprimen el ganglio estrellado (2.º orden simpático), y la disección carotídea causa Horner de 3.er orden con dolor. Un Horner nuevo + dolor en hombro/cuello en un fumador debe hacer sospechar malignidad torácica. El optometrista que detecta anisocoria con ptosis leve debe investigar esta posibilidad — la confirmación farmacológica se realiza con apraclonidina 0.5%: la pupila afectada se dilata por supersensibilidad por denervación.</p></div>
+<div class="cbox opt"><div class="cbox-t">👁️ Congestión venosa y ojo</div><p>El aumento de presión venosa central (tamponamiento, síndrome de VCS) se transmite al seno cavernoso produciendo quemosis conjuntival bilateral, venas episclerales dilatadas y elevación de la PIO. La pérdida de la pulsación venosa espontánea en el disco óptico puede indicar hipertensión intracraneal secundaria.</p></div>
+<p class="ref">[Ref: StatPearls: Horner Syndrome, 2025; Moore et al., 8.ª ed., cap. 4]</p>
+</div></div></div>
+
+
+<div class="quiz-sec" id="quiz">
+  <h2>📝 Quiz — Evaluación del Grupo 1</h2>
+  <p>Responde las siguientes preguntas para evaluar tu comprensión del tema. Al finalizar, obtendrás tu puntuación.</p>
+  <div class="score-bar" id="scoreBar" style="display:none">
+    <div class="sc-num" id="scoreNum">0/0</div>
+    <div class="sc-lab">Respuestas correctas</div>
+  </div>
+
+  <div class="qi" id="q0">
+    <div class="qi-n">Pregunta 1 </div>
+    <div class="qi-q">El ángulo esternal (de Louis) se localiza a nivel de:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(0,0,this)"><span class="qi-l">A)</span><span>1.er cartílago costal y disco T2–T3</span></div>
+      <div class="qi-o" onclick="sel(0,1,this)"><span class="qi-l">B)</span><span>2.º cartílago costal y disco T4–T5</span></div>
+      <div class="qi-o" onclick="sel(0,2,this)"><span class="qi-l">C)</span><span>4.º cartílago costal y disco T6–T7</span></div>
+      <div class="qi-o" onclick="sel(0,3,this)"><span class="qi-l">D)</span><span>6.º cartílago costal y disco T8–T9</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(0)">Verificar</button>
+    <div class="qi-fb" id="fb0"></div>
+  </div>
+
+  <div class="qi" id="q1">
+    <div class="qi-n">Pregunta 2 </div>
+    <div class="qi-q">La vena cava inferior atraviesa el diafragma a nivel de:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(1,0,this)"><span class="qi-l">A)</span><span>T12 (hiato aórtico)</span></div>
+      <div class="qi-o" onclick="sel(1,1,this)"><span class="qi-l">B)</span><span>T10 (hiato esofágico)</span></div>
+      <div class="qi-o" onclick="sel(1,2,this)"><span class="qi-l">C)</span><span>T8 (foramen de la VCI)</span></div>
+      <div class="qi-o" onclick="sel(1,3,this)"><span class="qi-l">D)</span><span>T6 (centro tendinoso superior)</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(1)">Verificar</button>
+    <div class="qi-fb" id="fb1"></div>
+  </div>
+
+  <div class="qi" id="q2">
+    <div class="qi-n">Pregunta 3 </div>
+    <div class="qi-q">El corazón se localiza en el:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(2,0,this)"><span class="qi-l">A)</span><span>Mediastino superior</span></div>
+      <div class="qi-o" onclick="sel(2,1,this)"><span class="qi-l">B)</span><span>Mediastino anterior</span></div>
+      <div class="qi-o" onclick="sel(2,2,this)"><span class="qi-l">C)</span><span>Mediastino medio</span></div>
+      <div class="qi-o" onclick="sel(2,3,this)"><span class="qi-l">D)</span><span>Mediastino posterior</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(2)">Verificar</button>
+    <div class="qi-fb" id="fb2"></div>
+  </div>
+
+  <div class="qi" id="q3">
+    <div class="qi-n">Pregunta 4 </div>
+    <div class="qi-q">El punto de máximo impulso (PMI) se palpa en:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(3,0,this)"><span class="qi-l">A)</span><span>2.º EIC derecho, borde esternal</span></div>
+      <div class="qi-o" onclick="sel(3,1,this)"><span class="qi-l">B)</span><span>3.er EIC izquierdo, línea paraesternal</span></div>
+      <div class="qi-o" onclick="sel(3,2,this)"><span class="qi-l">C)</span><span>5.º EIC izquierdo, línea medioclavicular</span></div>
+      <div class="qi-o" onclick="sel(3,3,this)"><span class="qi-l">D)</span><span>4.º EIC derecho, línea axilar anterior</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(3)">Verificar</button>
+    <div class="qi-fb" id="fb3"></div>
+  </div>
+
+  <div class="qi" id="q4">
+    <div class="qi-n">Pregunta 5 </div>
+    <div class="qi-q">El seno transverso del pericardio se localiza:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(4,0,this)"><span class="qi-l">A)</span><span>Entre las 4 venas pulmonares y la VCI</span></div>
+      <div class="qi-o" onclick="sel(4,1,this)"><span class="qi-l">B)</span><span>Posterior a la aorta y tronco pulmonar, anterior a la VCS</span></div>
+      <div class="qi-o" onclick="sel(4,2,this)"><span class="qi-l">C)</span><span>Entre el esternón y el pericardio fibroso</span></div>
+      <div class="qi-o" onclick="sel(4,3,this)"><span class="qi-l">D)</span><span>En la cara diafragmática del corazón</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(4)">Verificar</button>
+    <div class="qi-fb" id="fb4"></div>
+  </div>
+
+  <div class="qi" id="q5">
+    <div class="qi-n">Pregunta 6 </div>
+    <div class="qi-q">Las costillas flotantes son:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(5,0,this)"><span class="qi-l">A)</span><span>1.ª a 7.ª</span></div>
+      <div class="qi-o" onclick="sel(5,1,this)"><span class="qi-l">B)</span><span>8.ª a 10.ª</span></div>
+      <div class="qi-o" onclick="sel(5,2,this)"><span class="qi-l">C)</span><span>11.ª y 12.ª</span></div>
+      <div class="qi-o" onclick="sel(5,3,this)"><span class="qi-l">D)</span><span>Solo la 12.ª</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(5)">Verificar</button>
+    <div class="qi-fb" id="fb5"></div>
+  </div>
+
+  <div class="qi" id="q6">
+    <div class="qi-n">Pregunta 7 </div>
+    <div class="qi-q">El surco coronario (auriculoventricular) separa:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(6,0,this)"><span class="qi-l">A)</span><span>Los dos ventrículos entre sí</span></div>
+      <div class="qi-o" onclick="sel(6,1,this)"><span class="qi-l">B)</span><span>Las aurículas de los ventrículos</span></div>
+      <div class="qi-o" onclick="sel(6,2,this)"><span class="qi-l">C)</span><span>La aorta del tronco pulmonar</span></div>
+      <div class="qi-o" onclick="sel(6,3,this)"><span class="qi-l">D)</span><span>El pericardio fibroso del seroso</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(6)">Verificar</button>
+    <div class="qi-fb" id="fb6"></div>
+  </div>
+
+  <div class="qi" id="q7">
+    <div class="qi-n">Pregunta 8 </div>
+    <div class="qi-q">Un paciente con miosis + ptosis parcial + anhidrosis ipsilateral presenta:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(7,0,this)"><span class="qi-l">A)</span><span>Parálisis del NC III</span></div>
+      <div class="qi-o" onclick="sel(7,1,this)"><span class="qi-l">B)</span><span>Síndrome de Horner</span></div>
+      <div class="qi-o" onclick="sel(7,2,this)"><span class="qi-l">C)</span><span>Parálisis del NC VII</span></div>
+      <div class="qi-o" onclick="sel(7,3,this)"><span class="qi-l">D)</span><span>Lesión del nodo ciliar</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(7)">Verificar</button>
+    <div class="qi-fb" id="fb7"></div>
+  </div>
+
+  <div class="qi" id="q8">
+    <div class="qi-n">Pregunta 9 </div>
+    <div class="qi-q">La tríada de Beck (taponamiento cardíaco) incluye:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(8,0,this)"><span class="qi-l">A)</span><span>Fiebre + soplo + petequias</span></div>
+      <div class="qi-o" onclick="sel(8,1,this)"><span class="qi-l">B)</span><span>Hipotensión + ingurgitación yugular + ruidos apagados</span></div>
+      <div class="qi-o" onclick="sel(8,2,this)"><span class="qi-l">C)</span><span>Disnea + cianosis + hepatomegalia</span></div>
+      <div class="qi-o" onclick="sel(8,3,this)"><span class="qi-l">D)</span><span>Dolor torácico + irradiación al brazo + diaforesis</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(8)">Verificar</button>
+    <div class="qi-fb" id="fb8"></div>
+  </div>
+
+  <div class="qi" id="q9">
+    <div class="qi-n">Pregunta 10 </div>
+    <div class="qi-q">La bifurcación traqueal (carina) se localiza a nivel de:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(9,0,this)"><span class="qi-l">A)</span><span>T1–T2</span></div>
+      <div class="qi-o" onclick="sel(9,1,this)"><span class="qi-l">B)</span><span>T4–T5 (ángulo esternal)</span></div>
+      <div class="qi-o" onclick="sel(9,2,this)"><span class="qi-l">C)</span><span>T8</span></div>
+      <div class="qi-o" onclick="sel(9,3,this)"><span class="qi-l">D)</span><span>T12</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(9)">Verificar</button>
+    <div class="qi-fb" id="fb9"></div>
+  </div>
+  <div style="text-align:center;margin-top:1.5rem">
+    <button class="qi-btn" onclick="showScore()" style="font-size:.75rem;padding:.6rem 2rem">📊 Ver puntuación</button>
+  </div>
+</div>
+</main>
+
+<footer>
+  <p>Del Corazón a la Retina · Morfología General 2026-I · Dr. Jorge Bogoya</p>
+  <p style="margin-top:.2rem">Universidad de La Salle · Bogotá</p>
+</footer>
+
+<script>
+function tc(h){h.closest('.card').classList.toggle('open')}
+const S={},A=[1,2,2,2,1,2,1,1,1,1];
+function sel(i,j,el){const p=document.getElementById('q'+i);p.querySelectorAll('.qi-o').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S[i]=j}
+function chk(i){if(S[i]===undefined)return;const p=document.getElementById('q'+i),os=p.querySelectorAll('.qi-o');os.forEach((o,j)=>{o.classList.remove('sel');if(j===A[i])o.classList.add('ok');else if(j===S[i]&&S[i]!==A[i])o.classList.add('no')});const fb=document.getElementById('fb'+i);fb.textContent=(S[i]===A[i]?'✓ Correcto. ':'✗ Incorrecto. ')+["El ángulo esternal marca el 2.º cartílago costal y el disco T4–T5, límite entre mediastinos superior e inferior.","La VCI pasa por el foramen en el centro tendinoso a nivel de T8. Mnemotecnia: T8 = 8 letras en 'vena cava'.","El corazón y el pericardio se localizan en el mediastino medio (inferior).","El PMI corresponde al vértice del VI y se palpa en el 5.º EIC izquierdo sobre la línea medioclavicular.","El seno transverso está posterior a la aorta/tronco pulmonar y anterior a la VCS — permite el clampeo aórtico quirúrgico.","Las costillas 11.ª y 12.ª son flotantes: no tienen articulación anterior con el esternón.","El surco coronario rodea el corazón separando aurículas de ventrículos, y contiene los vasos coronarios principales.","La tríada miosis + ptosis parcial + anhidrosis define el síndrome de Horner por interrupción de la vía simpática.","Tríada de Beck: hipotensión + ingurgitación yugular + ruidos cardíacos apagados = taponamiento cardíaco.","La carina se encuentra a nivel de T4–T5, el mismo nivel del ángulo esternal."][i];fb.className='qi-fb show '+(S[i]===A[i]?'ok':'no')}
+function showScore(){let c=0,t=10;for(let i=0;i<t;i++){if(S[i]===A[i])c++;if(S[i]===undefined){const p=document.getElementById('q'+i);p.style.border='2px solid #FF6B6B';setTimeout(()=>p.style.border='',2000)}}document.getElementById('scoreBar').style.display='block';document.getElementById('scoreNum').textContent=c+'/'+t;document.getElementById('scoreBar').scrollIntoView({behavior:'smooth'})}
+document.querySelectorAll('.card').forEach(c=>{c.querySelector('.card-head')?.addEventListener('click',function(){tc(this)})});
+</script>
+</body>
+</html>

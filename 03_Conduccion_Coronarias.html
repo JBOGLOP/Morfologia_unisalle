@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conducción, Coronarias e Inervación — Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--c:#F39C12;--cd:#D68910;--cbg:#FEF9E7;--cg:rgba(243,156,18,.08);
+--dark:#1A1A2E;--text:#2D3436;--text2:#636E72;--bg:#FAFAFA;--card:#FFF;
+--red:#FF6B6B;--blue:#0984E3;--teal:#00B894;
+--radius:16px;--radius-sm:10px;--shadow:0 4px 24px rgba(0,0,0,.06);--tr:all .3s cubic-bezier(.4,0,.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;max-width:100vw}
+.hero{position:relative;padding:3rem 1.5rem;background:var(--dark);text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(243,156,18,.08),transparent 65%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:750px;margin:0 auto}
+.hero-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#F39C12;border:1px solid #F39C1244;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;background:#F39C120A}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:.5rem;text-shadow:0 2px 30px #F39C1233}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:.3rem}
+.hero-meta{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.3)}
+.back-btn{position:fixed;top:1rem;left:1rem;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.4rem .8rem;border-radius:20px;border:1px solid #F39C1255;background:#D68910EE;color:#fff;cursor:pointer;backdrop-filter:blur(8px);text-decoration:none;transition:var(--tr)}
+.back-btn:hover{background:#F39C12;transform:scale(1.05)}
+nav.toc{max-width:800px;margin:0 auto;padding:1rem 1.5rem;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+nav.toc a{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.3rem .7rem;border-radius:16px;background:#F39C1212;color:#D68910;text-decoration:none;transition:var(--tr);border:1px solid #F39C1222;white-space:nowrap}
+nav.toc a:hover{background:#F39C12;color:#fff}
+.main{max-width:800px;margin:0 auto;padding:1.5rem 1.2rem 3rem}
+h2.section-title{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:#D68910;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid #F39C12;scroll-margin-top:1rem}
+h3.sub{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text);margin:1.5rem 0 .6rem;padding-left:.8rem;border-left:3px solid #F39C12}
+p{margin-bottom:.7rem;font-size:.9rem;text-align:justify}
+p strong{color:#D68910}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.2rem;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:var(--tr)}
+.card:hover{box-shadow:0 6px 30px rgba(0,0,0,.09);transform:translateY(-1px)}
+.card-head{padding:1rem 1.2rem;cursor:pointer;display:flex;align-items:center;gap:.7rem;transition:var(--tr)}
+.card-head:hover{background:#FEF9E7}
+.card-dot{width:10px;height:10px;border-radius:50%;background:#F39C12;flex-shrink:0}
+.card-t{font-weight:600;font-size:.92rem;flex:1}
+.card-arr{transition:var(--tr);color:var(--text2);font-size:.7rem;flex-shrink:0}
+.card.open .card-arr{transform:rotate(180deg);color:#F39C12}
+.card-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.card.open .card-body{max-height:8000px}
+.card-in{padding:0 1.2rem 1.2rem;font-size:.88rem;line-height:1.8}
+.card-in p{margin-bottom:.6rem}
+.kp{display:flex;gap:.5rem;align-items:flex-start;padding:.4rem 0}
+.kp-i{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;color:#fff;background:#F39C12;margin-top:2px;font-weight:700}
+.kp-t{font-size:.85rem}
+.cbox{border-radius:var(--radius-sm);padding:.9rem 1.1rem;margin:.8rem 0;border-left:3px solid}
+.cbox.opt{background:#EBF5FB;border-color:#2980B9}
+.cbox.warn{background:#FFF5F5;border-color:#E74C3C}
+.cbox.tip{background:#FEF9E7;border-color:#F39C12}
+.cbox-t{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:.25rem}
+.cbox.opt .cbox-t{color:#2980B9}.cbox.warn .cbox-t{color:#E74C3C}.cbox.tip .cbox-t{color:#D68910}
+.cbox p{font-size:.82rem;font-style:italic;line-height:1.6;margin-bottom:0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:.7rem 0;max-width:100%}
+table.dt{width:100%;border-collapse:collapse;font-size:.8rem;min-width:320px}
+table.dt th{padding:.5rem .6rem;text-align:left;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.5px;text-transform:uppercase;color:#fff;background:#D68910;white-space:nowrap}
+table.dt td{padding:.45rem .6rem;border-bottom:1px solid rgba(0,0,0,.04);word-break:break-word}
+table.dt tr:nth-child(even){background:#FEF9E7}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.8rem 0}
+.comp-card{background:var(--card);border-radius:var(--radius-sm);padding:1rem;border-top:3px solid}
+.comp-card h4{font-family:'Fraunces',serif;font-size:.92rem;margin-bottom:.4rem}
+.comp-card ul{list-style:none;font-size:.82rem;line-height:1.8}
+.comp-card ul li{padding-left:1rem;position:relative}
+.comp-card ul li::before{content:'→';position:absolute;left:0}
+.fig-ref{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text2);margin:.3rem 0;font-style:italic}
+.ref{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#AAA;font-style:italic;margin:.3rem 0}
+.ecg-svg{width:100%;height:50px;margin:.5rem 0}
+.quiz-sec{margin-top:3rem;padding-top:2rem;border-top:2px solid #F39C12}
+.quiz-sec h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:#D68910;margin-bottom:1rem}
+.qi{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin-bottom:1.2rem;border:1px solid rgba(0,0,0,.04)}
+.qi-n{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#F39C12;letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;font-weight:600}
+.qi-q{font-size:.9rem;margin-bottom:.8rem;line-height:1.7}
+.qi-opts{display:flex;flex-direction:column;gap:.4rem}
+.qi-o{display:flex;align-items:flex-start;gap:.6rem;padding:.65rem .9rem;border-radius:var(--radius-sm);border:1.5px solid #F39C1233;cursor:pointer;transition:var(--tr);font-size:.85rem}
+.qi-o:hover{border-color:#F39C12;background:#FEF9E7}
+.qi-o.sel{border-color:#F39C12;background:#F39C120F}
+.qi-o.ok{border-color:#27AE60;background:#27AE600D}
+.qi-o.no{border-color:#E74C3C;background:#E74C3C08}
+.qi-l{font-family:'JetBrains Mono',monospace;font-weight:600;color:#F39C12;min-width:18px;font-size:.8rem}
+.qi-btn{margin-top:.8rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.5rem 1.2rem;border-radius:20px;border:none;background:#F39C12;color:#fff;cursor:pointer;transition:var(--tr)}
+.qi-btn:hover{background:#D68910;box-shadow:0 4px 15px #F39C1233}
+.qi-fb{margin-top:.7rem;padding:.8rem;border-radius:var(--radius-sm);font-size:.8rem;font-style:italic;display:none;line-height:1.6}
+.qi-fb.show{display:block}.qi-fb.ok{background:#27AE600D;border-left:3px solid #27AE60}.qi-fb.no{background:#E74C3C08;border-left:3px solid #E74C3C}
+.score-bar{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin:1.5rem 0;text-align:center;border:2px solid #F39C1233}
+.score-bar .sc-num{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:900;color:#F39C12}
+.score-bar .sc-lab{font-size:.8rem;color:var(--text2)}
+footer{text-align:center;padding:2rem 1rem;background:var(--dark);color:rgba(255,255,255,.25);font-size:.65rem;font-family:'JetBrains Mono',monospace}
+@media(max-width:768px){
+  .hero h1{font-size:1.6rem}.main{padding:1rem .8rem 2.5rem}
+  h2.section-title{font-size:1.25rem}h3.sub{font-size:.95rem}
+  .card-head{padding:.8rem .9rem}.card-in{padding:0 .9rem .9rem}
+  .comp{grid-template-columns:1fr}
+  table.dt{font-size:.72rem}table.dt th{font-size:.55rem;padding:.35rem .4rem}table.dt td{padding:.35rem .4rem}
+  .qi{padding:1rem}.qi-o{padding:.55rem .7rem;font-size:.8rem}
+  nav.toc{padding:.8rem}nav.toc a{font-size:.55rem;padding:.25rem .5rem}
+}
+@media(max-width:480px){
+  .hero{padding:2rem 1rem}.hero h1{font-size:1.4rem}
+  p{font-size:.84rem}.card-in{font-size:.84rem}
+  .kp-t{font-size:.82rem}.cbox p{font-size:.78rem}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:1.5rem 2rem}
+}
+html,body{max-width:100vw;overflow-x:hidden}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Grupo 3 — Actividad Colaborativa</div>
+    <h1>Conducción, Coronarias e Inervación</h1>
+    <p class="hero-sub">Módulos 1.7 + 1.8 + 1.9 + 1.10 — Nodos SA y AV, haz de His, Purkinje, ECG, arterias coronarias, dominancia, drenaje venoso, inervación, dolor referido, síncope vasovagal</p>
+    <p class="hero-meta">Dr. Jorge Bogoya · Universidad de La Salle · 22–23 abril 2026</p>
+  </div>
+</section>
+
+<nav class="toc">
+    <a href="#s0">Conducción</a>
+    <a href="#s1">Coronarias</a>
+    <a href="#s2">Drenaje/Inervación</a>
+    <a href="#quiz">📝 Quiz</a>
+</nav>
+
+<main class="main">
+<h2 class="section-title" id="s0">Sistema de conducción cardíaca</h2>
+
+<p>El corazón posee una actividad eléctrica intrínseca y rítmica gracias a las <strong>fibras automáticas</strong> — células miocárdicas especializadas (solo el 1% del total) que se despolarizan espontáneamente y forman el sistema de conducción.</p>
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Componentes del sistema de conducción</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="kp"><div class="kp-i">1</div><span class="kp-t"><strong>Nodo sinoauricular (SA) — Keith y Flack:</strong> Marcapasos natural. Localización: pared del AD, anterolateralmente, en la unión VCS–AD, cerca del extremo superior del surco terminal, subepicárdico. Frecuencia intrínseca: ~100 potenciales/min (modulada por el vago a ~75/min en reposo). Genera el potencial marcapasos (corriente If o 'funny current') — despolarización espontánea que alcanza el umbral cíclicamente.</span></div>
+<div class="kp"><div class="kp-i">2</div><span class="kp-t"><strong>Nodo auriculoventricular (AV) — Aschoff-Tawara:</strong> Localización: triángulo de Koch (delimitado por seno coronario + valva septal tricúspide + tendón de Todaro). Introduce un retraso fisiológico de ~0,1 s que permite el vaciamiento auricular completo antes de la sístole ventricular. Marcapasos de escape: 40–60 lpm si falla el nodo SA.</span></div>
+<div class="kp"><div class="kp-i">3</div><span class="kp-t"><strong>Fascículo AV (Haz de His):</strong> Única conexión eléctrica entre aurículas y ventrículos (atraviesa el esqueleto fibroso). Tronco: ~10–12 mm de largo, 3 mm de ancho. Se divide en ramas derecha (por la trabécula septomarginal) e izquierda (se subdivide en fascículo anterior y posterior).</span></div>
+<div class="kp"><div class="kp-i">4</div><span class="kp-t"><strong>Fibras de Purkinje (ramos subendocárdicos):</strong> Red terminal que se distribuye subendocárdicamente por las paredes ventriculares. Velocidad de conducción muy alta. Activan el miocardio desde el vértice hacia la base y desde el endocardio hacia el epicardio — esto produce la contracción 'de exprimir' que eyecta la sangre hacia las válvulas semilunares.</span></div>
+<p class="ref">[Ref: Tortora, 15.ª ed., cap. 20, pp. 772–777, fig. 20.10; Latarjet, 5.ª ed., cap. 76, pp. 878–880]</p>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Electrocardiograma (ECG) básico</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<svg class="ecg-svg" viewBox="0 0 600 50"><path d="M0 30 L60 30 L70 26 L80 18 L90 30 L120 30 L125 26 L130 4 L135 48 L140 30 L175 30 L190 24 L205 30 L270 30 L280 26 L290 18 L300 30 L330 30 L335 26 L340 4 L345 48 L350 30 L385 30 L400 24 L415 30 L480 30 L490 26 L500 18 L510 30 L540 30 L545 26 L550 4 L555 48 L560 30 L595 30" fill="none" stroke="var(--c)" stroke-width="1.8" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="1200" to="0" dur="4s" repeatCount="indefinite"/><animate attributeName="stroke-dasharray" values="0 1200;1200 0" dur="4s" repeatCount="indefinite"/></path></svg>
+<div class="tw"><table class="dt"><tr><th>Componente ECG</th><th>Representa</th><th>Duración normal</th><th>Correlación anatómica</th></tr><tr><td><strong>Onda P</strong></td><td>Despolarización auricular</td><td>0,08–0,10 s</td><td>Potencial de acción del nodo SA propagándose por ambas aurículas</td></tr><tr><td><strong>Intervalo P-Q</strong></td><td>Tiempo de conducción AV</td><td>0,12–0,20 s</td><td>Paso del impulso por aurículas + nodo AV + haz de His hasta inicio de despolarización ventricular</td></tr><tr><td><strong>Complejo QRS</strong></td><td>Despolarización ventricular</td><td>0,06–0,10 s</td><td>Impulso a través de ramas del haz, Purkinje y miocardio ventricular</td></tr><tr><td><strong>Segmento S-T</strong></td><td>Meseta del potencial de acción ventricular</td><td>Variable</td><td>Ventrículos completamente despolarizados (fase plateau). Elevación = isquemia aguda (IAM)</td></tr><tr><td><strong>Onda T</strong></td><td>Repolarización ventricular</td><td>Variable</td><td>Recuperación del potencial de membrana de reposo en ventrículos</td></tr><tr><td><strong>Intervalo Q-T</strong></td><td>Duración total de actividad ventricular</td><td>0,36–0,44 s</td><td>Desde inicio de despolarización hasta final de repolarización ventricular</td></tr></table></div>
+<p><strong>Anomalías clave:</strong> Onda P grande = hipertrofia auricular. Onda Q patológica = necrosis miocárdica (IAM). Ondas R altas = hipertrofia ventricular. Onda T aplanada/invertida = isquemia miocárdica. Segmento S-T elevado = IAM agudo transmural.</p>
+<p class="ref">[Ref: Tortora, 15.ª ed., cap. 20, pp. 776–777, fig. 20.12; Latarjet, 5.ª ed., cap. 76]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s1">Arterias coronarias y dominancia</h2>
+
+<p>Las arterias coronarias constituyen la circulación propia del corazón. Nacen de los <strong>senos aórticos (de Valsalva)</strong> en la raíz de la aorta ascendente, inmediatamente superior a la válvula aórtica. El flujo coronario ocurre predominantemente durante la <strong>diástole</strong>, cuando el miocardio relajado no comprime los vasos.</p>
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Arteria coronaria derecha (ACD) vs. izquierda (ACI)</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="comp">
+  <div class="comp-card" style="border-top-color:var(--red)"><h4 style="color:#C0392B">Coronaria Derecha (ACD)</h4><ul style="color:var(--red)">
+    <li>Origen: seno aórtico derecho</li>
+    <li>Rama del nodo SA (en 60% de la población)</li>
+    <li>Rama marginal derecha (borde derecho del corazón)</li>
+    <li>Rama del nodo AV (en 80% de la población)</li>
+    <li>Rama interventricular posterior (descendente posterior) — define la dominancia derecha</li>
+    <li><strong>Irriga:</strong> AD, mayor parte del VD, cara diafragmática del VI, 1/3 posterior del tabique IV, nodos SA y AV</li>
+  </ul></div>
+  <div class="comp-card" style="border-top-color:var(--blue)"><h4 style="color:#1A5276">Coronaria Izquierda (ACI)</h4><ul style="color:var(--blue)">
+    <li>Origen: seno aórtico izquierdo</li>
+    <li>Tronco principal (left main): 1–2 cm de longitud</li>
+    <li>DAI/LAD: surco IV anterior → ramas septales + diagonales</li>
+    <li>Circunfleja (CX): surco coronario → marginal obtusa</li>
+    <li>Nodo SA (en 40% de la población)</li>
+    <li><strong>Irriga:</strong> AI, mayor parte del VI, parte del VD, 2/3 anteriores del tabique IV</li>
+  </ul></div>
+</div>
+<p><strong>Dominancia coronaria:</strong> Se define por la arteria que emite la rama interventricular posterior: dominancia derecha (~70%, la ACD emite la descendente posterior), izquierda (~15%, la CX la emite), o codominancia (~15%).</p>
+<div class="cbox opt"><div class="cbox-t">👁️ IAM y manifestaciones retinianas</div><p>Pacientes post-IAM presentan con frecuencia aterosclerosis sistémica. El optometrista debe buscar: estrechamiento arteriolar retiniano (signo de enfermedad de pequeños vasos), placas de Hollenhorst (émbolos de colesterol de placas aórticas o carotídeas), y reducción de la densidad vascular macular en OCT-A. Un estudio ARIC demostró que las mujeres con arteriolas retinianas en el cuartil más estrecho tienen el doble de riesgo cardiovascular a 10 años.</p></div>
+<p class="ref">[Ref: Moore et al., 8.ª ed., cap. 4, pp. 467–471, tabla 4-4; Tortora, 15.ª ed., cap. 20, pp. 768–770]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s2">Drenaje venoso e inervación cardíaca</h2>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Drenaje venoso del corazón</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="kp"><div class="kp-i">S</div><span class="kp-t"><strong>Seno coronario:</strong> Colector principal (~60% del drenaje). Discurre por el surco coronario posterior, desemboca en la AD. Recibe: vena cardíaca magna (surco IV anterior), vena cardíaca media (surco IV posterior), vena cardíaca menor (surco coronario derecho), vena posterior del VI.</span></div>
+<div class="kp"><div class="kp-i">A</div><span class="kp-t"><strong>Venas cardíacas anteriores:</strong> Drenan la pared anterior del VD directamente a la AD, sin pasar por el seno coronario.</span></div>
+<div class="kp"><div class="kp-i">T</div><span class="kp-t"><strong>Venas cardíacas mínimas (de Tebesio):</strong> Pequeños vasos que conectan lechos capilares miocárdicos directamente con las cámaras cardíacas. Representan un shunt fisiológico pequeño.</span></div>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Inervación cardíaca y dolor referido</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>El corazón está inervado por el <strong>plexo cardíaco</strong> (superficial y profundo), formado por fibras simpáticas y parasimpáticas.</p>
+<div class="tw"><table class="dt"><tr><th>Sistema</th><th>Origen</th><th>Efecto</th><th>Neurotransmisor</th></tr><tr><td><strong>Simpático</strong></td><td>T1–T4 (médula espinal) → ganglios cervicales y torácicos superiores</td><td>↑FC (cronotropismo+), ↑fuerza (inotropismo+), ↑velocidad conducción (dromotropismo+), ↑velocidad relajación (lusitropismo+), vasodilatación coronaria</td><td>Noradrenalina → receptores β1</td></tr><tr><td><strong>Parasimpático</strong></td><td>Nervio vago (NC X) → ganglios intrínsecos cerca de nodos SA/AV</td><td>↓FC (cronotropismo−), ↓velocidad conducción (dromotropismo−), constricción coronaria leve</td><td>Acetilcolina → receptores M2</td></tr></table></div>
+<p><strong>Dolor referido cardíaco:</strong> Las aferentes viscerales cardíacas viajan con los nervios simpáticos y convergen con aferentes somáticas de los segmentos C8–T4 en las mismas neuronas del asta dorsal → dolor percibido en hombro izquierdo, borde cubital del brazo izquierdo, mandíbula, epigastrio. El <strong>signo de Levine</strong> es el puño cerrado sobre el esternón, gesto característico del dolor anginoso.</p>
+<div class="cbox opt"><div class="cbox-t">👁️ Síncope vasovagal en consulta optométrica</div><p>El reflejo de Bezold-Jarisch (vagal cardíaco) produce bradicardia + vasodilatación + apnea, causando síncope. Triggers en consulta optométrica: tonometría de aplanación, instilación de midriáticos (tropicamida, fenilefrina), gonioscopia, retirada de cuerpos extraños, incluso el test de Schirmer. Incidencia del reflejo oculocardíaco: 14–90% en procedimientos oftálmicos. Protocolo: detener procedimiento → reclinar paciente → elevar piernas → monitorizar → si no recupera en 1–2 min, llamar emergencias.</p></div>
+<p class="ref">[Ref: Moore et al., 8.ª ed., cap. 4, pp. 473–474; Tortora, 15.ª ed., cap. 20, pp. 790–791; StatPearls: Oculocardiac Reflex]</p>
+</div></div></div>
+
+
+<div class="quiz-sec" id="quiz">
+  <h2>📝 Quiz — Evaluación del Grupo 3</h2>
+  <p>Responde las siguientes preguntas para evaluar tu comprensión del tema. Al finalizar, obtendrás tu puntuación.</p>
+  <div class="score-bar" id="scoreBar" style="display:none">
+    <div class="sc-num" id="scoreNum">0/0</div>
+    <div class="sc-lab">Respuestas correctas</div>
+  </div>
+
+  <div class="qi" id="q0">
+    <div class="qi-n">Pregunta 1 </div>
+    <div class="qi-q">El marcapasos natural del corazón es:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(0,0,this)"><span class="qi-l">A)</span><span>El nodo AV</span></div>
+      <div class="qi-o" onclick="sel(0,1,this)"><span class="qi-l">B)</span><span>El nodo SA</span></div>
+      <div class="qi-o" onclick="sel(0,2,this)"><span class="qi-l">C)</span><span>El haz de His</span></div>
+      <div class="qi-o" onclick="sel(0,3,this)"><span class="qi-l">D)</span><span>Las fibras de Purkinje</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(0)">Verificar</button>
+    <div class="qi-fb" id="fb0"></div>
+  </div>
+
+  <div class="qi" id="q1">
+    <div class="qi-n">Pregunta 2 </div>
+    <div class="qi-q">El retraso fisiológico de ~0,1 s en el nodo AV permite:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(1,0,this)"><span class="qi-l">A)</span><span>La repolarización de las fibras de Purkinje</span></div>
+      <div class="qi-o" onclick="sel(1,1,this)"><span class="qi-l">B)</span><span>El vaciamiento auricular antes de la sístole ventricular</span></div>
+      <div class="qi-o" onclick="sel(1,2,this)"><span class="qi-l">C)</span><span>La relajación del diafragma</span></div>
+      <div class="qi-o" onclick="sel(1,3,this)"><span class="qi-l">D)</span><span>La contracción de los músculos papilares</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(1)">Verificar</button>
+    <div class="qi-fb" id="fb1"></div>
+  </div>
+
+  <div class="qi" id="q2">
+    <div class="qi-n">Pregunta 3 </div>
+    <div class="qi-q">La única conexión eléctrica entre aurículas y ventrículos es:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(2,0,this)"><span class="qi-l">A)</span><span>El nodo SA</span></div>
+      <div class="qi-o" onclick="sel(2,1,this)"><span class="qi-l">B)</span><span>El esqueleto fibroso</span></div>
+      <div class="qi-o" onclick="sel(2,2,this)"><span class="qi-l">C)</span><span>El fascículo AV (haz de His)</span></div>
+      <div class="qi-o" onclick="sel(2,3,this)"><span class="qi-l">D)</span><span>Las fibras de Purkinje</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(2)">Verificar</button>
+    <div class="qi-fb" id="fb2"></div>
+  </div>
+
+  <div class="qi" id="q3">
+    <div class="qi-n">Pregunta 4 </div>
+    <div class="qi-q">El complejo QRS en el ECG representa:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(3,0,this)"><span class="qi-l">A)</span><span>Despolarización auricular</span></div>
+      <div class="qi-o" onclick="sel(3,1,this)"><span class="qi-l">B)</span><span>Repolarización auricular</span></div>
+      <div class="qi-o" onclick="sel(3,2,this)"><span class="qi-l">C)</span><span>Despolarización ventricular</span></div>
+      <div class="qi-o" onclick="sel(3,3,this)"><span class="qi-l">D)</span><span>Repolarización ventricular</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(3)">Verificar</button>
+    <div class="qi-fb" id="fb3"></div>
+  </div>
+
+  <div class="qi" id="q4">
+    <div class="qi-n">Pregunta 5 </div>
+    <div class="qi-q">La dominancia coronaria derecha (70% de la población) se define porque:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(4,0,this)"><span class="qi-l">A)</span><span>La ACD irriga el nodo SA</span></div>
+      <div class="qi-o" onclick="sel(4,1,this)"><span class="qi-l">B)</span><span>La ACD emite la rama interventricular posterior (descendente posterior)</span></div>
+      <div class="qi-o" onclick="sel(4,2,this)"><span class="qi-l">C)</span><span>La ACI tiene un tronco más largo</span></div>
+      <div class="qi-o" onclick="sel(4,3,this)"><span class="qi-l">D)</span><span>La ACD es más gruesa que la ACI</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(4)">Verificar</button>
+    <div class="qi-fb" id="fb4"></div>
+  </div>
+
+  <div class="qi" id="q5">
+    <div class="qi-n">Pregunta 6 </div>
+    <div class="qi-q">Si se ocluye la DAI (LAD), el territorio infartado es:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(5,0,this)"><span class="qi-l">A)</span><span>Pared inferior y nodo AV</span></div>
+      <div class="qi-o" onclick="sel(5,1,this)"><span class="qi-l">B)</span><span>Pared anterior del VI y 2/3 anteriores del tabique IV</span></div>
+      <div class="qi-o" onclick="sel(5,2,this)"><span class="qi-l">C)</span><span>Aurícula derecha y VD</span></div>
+      <div class="qi-o" onclick="sel(5,3,this)"><span class="qi-l">D)</span><span>Únicamente la aurícula izquierda</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(5)">Verificar</button>
+    <div class="qi-fb" id="fb5"></div>
+  </div>
+
+  <div class="qi" id="q6">
+    <div class="qi-n">Pregunta 7 </div>
+    <div class="qi-q">El dolor referido del infarto se percibe en hombro izquierdo y brazo porque:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(6,0,this)"><span class="qi-l">A)</span><span>El nervio frénico inerva ambas estructuras</span></div>
+      <div class="qi-o" onclick="sel(6,1,this)"><span class="qi-l">B)</span><span>Las aferentes viscerales cardíacas (C8–T4) convergen con somáticas del hombro/brazo en el asta dorsal</span></div>
+      <div class="qi-o" onclick="sel(6,2,this)"><span class="qi-l">C)</span><span>El plexo braquial se origina en T1–T4</span></div>
+      <div class="qi-o" onclick="sel(6,3,this)"><span class="qi-l">D)</span><span>La arteria subclavia izquierda comparte raíz con la coronaria</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(6)">Verificar</button>
+    <div class="qi-fb" id="fb6"></div>
+  </div>
+
+  <div class="qi" id="q7">
+    <div class="qi-n">Pregunta 8 </div>
+    <div class="qi-q">El síncope vasovagal durante la tonometría se produce por:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(7,0,this)"><span class="qi-l">A)</span><span>Efecto tóxico del anestésico tópico</span></div>
+      <div class="qi-o" onclick="sel(7,1,this)"><span class="qi-l">B)</span><span>Reflejo oculocardíaco (trigémino-vagal): estímulo del globo → bradicardia</span></div>
+      <div class="qi-o" onclick="sel(7,2,this)"><span class="qi-l">C)</span><span>Hipoglucemia durante el ayuno previo</span></div>
+      <div class="qi-o" onclick="sel(7,3,this)"><span class="qi-l">D)</span><span>Alergia a la fluoresceína</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(7)">Verificar</button>
+    <div class="qi-fb" id="fb7"></div>
+  </div>
+
+  <div class="qi" id="q8">
+    <div class="qi-n">Pregunta 9 </div>
+    <div class="qi-q">La noradrenalina liberada por nervios simpáticos cardíacos se une a receptores:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(8,0,this)"><span class="qi-l">A)</span><span>Alfa-1 en los nodos SA y AV</span></div>
+      <div class="qi-o" onclick="sel(8,1,this)"><span class="qi-l">B)</span><span>Beta-1 en fibras miocárdicas y nodos</span></div>
+      <div class="qi-o" onclick="sel(8,2,this)"><span class="qi-l">C)</span><span>Beta-2 en el músculo liso bronquial</span></div>
+      <div class="qi-o" onclick="sel(8,3,this)"><span class="qi-l">D)</span><span>Muscarínicos M2 en el nodo SA</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(8)">Verificar</button>
+    <div class="qi-fb" id="fb8"></div>
+  </div>
+
+  <div class="qi" id="q9">
+    <div class="qi-n">Pregunta 10 </div>
+    <div class="qi-q">La elevación del segmento S-T en el ECG sugiere:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(9,0,this)"><span class="qi-l">A)</span><span>Hipertrofia ventricular derecha</span></div>
+      <div class="qi-o" onclick="sel(9,1,this)"><span class="qi-l">B)</span><span>Bloqueo AV de primer grado</span></div>
+      <div class="qi-o" onclick="sel(9,2,this)"><span class="qi-l">C)</span><span>Isquemia transmural aguda (IAM)</span></div>
+      <div class="qi-o" onclick="sel(9,3,this)"><span class="qi-l">D)</span><span>Fibrilación auricular</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(9)">Verificar</button>
+    <div class="qi-fb" id="fb9"></div>
+  </div>
+  <div style="text-align:center;margin-top:1.5rem">
+    <button class="qi-btn" onclick="showScore()" style="font-size:.75rem;padding:.6rem 2rem">📊 Ver puntuación</button>
+  </div>
+</div>
+</main>
+
+<footer>
+  <p>Del Corazón a la Retina · Morfología General 2026-I · Dr. Jorge Bogoya</p>
+  <p style="margin-top:.2rem">Universidad de La Salle · Bogotá</p>
+</footer>
+
+<script>
+function tc(h){h.closest('.card').classList.toggle('open')}
+const S={},A=[1,1,2,2,1,1,1,1,1,2];
+function sel(i,j,el){const p=document.getElementById('q'+i);p.querySelectorAll('.qi-o').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S[i]=j}
+function chk(i){if(S[i]===undefined)return;const p=document.getElementById('q'+i),os=p.querySelectorAll('.qi-o');os.forEach((o,j)=>{o.classList.remove('sel');if(j===A[i])o.classList.add('ok');else if(j===S[i]&&S[i]!==A[i])o.classList.add('no')});const fb=document.getElementById('fb'+i);fb.textContent=(S[i]===A[i]?'✓ Correcto. ':'✗ Incorrecto. ')+["El nodo SA genera impulsos a ~100/min (modulados a ~75 por el vago) y establece el ritmo cardíaco.","El retraso permite que las aurículas completen su vaciamiento antes de que los ventrículos se contraigan.","El haz de His es la única vía eléctrica que atraviesa el esqueleto fibroso, aislante entre A y V.","El QRS representa la despolarización ventricular rápida a través de las ramas del haz y las fibras de Purkinje.","La dominancia se define por la arteria que emite la interventricular posterior — en el 70% es la ACD.","La DAI irriga la pared anterior del VI, los 2/3 anteriores del tabique IV y parte de la cara anterior del VD.","La convergencia de aferentes viscerales y somáticas en C8–T4 explica el dolor referido cardíaco.","El reflejo oculocardíaco es una vía trigémino-vagal: estímulo del globo → bradicardia → vasodilatación → síncope.","La noradrenalina actúa sobre receptores β1, aumentando frecuencia cardíaca y contractilidad.","La elevación del S-T indica lesión miocárdica transmural aguda — hallazgo de IAM con elevación del ST (STEMI)."][i];fb.className='qi-fb show '+(S[i]===A[i]?'ok':'no')}
+function showScore(){let c=0,t=10;for(let i=0;i<t;i++){if(S[i]===A[i])c++;if(S[i]===undefined){const p=document.getElementById('q'+i);p.style.border='2px solid #F39C12';setTimeout(()=>p.style.border='',2000)}}document.getElementById('scoreBar').style.display='block';document.getElementById('scoreNum').textContent=c+'/'+t;document.getElementById('scoreBar').scrollIntoView({behavior:'smooth'})}
+document.querySelectorAll('.card').forEach(c=>{c.querySelector('.card-head')?.addEventListener('click',function(){tc(this)})});
+</script>
+</body>
+</html>

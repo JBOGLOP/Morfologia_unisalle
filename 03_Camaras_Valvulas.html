@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pared Cardíaca, Cámaras y Válvulas — Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--c:#E84393;--cd:#A71D5D;--cbg:#FDF2F8;--cg:rgba(232,67,147,.08);
+--dark:#1A1A2E;--text:#2D3436;--text2:#636E72;--bg:#FAFAFA;--card:#FFF;
+--red:#FF6B6B;--blue:#0984E3;--teal:#00B894;
+--radius:16px;--radius-sm:10px;--shadow:0 4px 24px rgba(0,0,0,.06);--tr:all .3s cubic-bezier(.4,0,.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;max-width:100vw}
+.hero{position:relative;padding:3rem 1.5rem;background:var(--dark);text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(232,67,147,.08),transparent 65%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:750px;margin:0 auto}
+.hero-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#E84393;border:1px solid #E8439344;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;background:#E843930A}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:.5rem;text-shadow:0 2px 30px #E8439333}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:.3rem}
+.hero-meta{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.3)}
+.back-btn{position:fixed;top:1rem;left:1rem;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.4rem .8rem;border-radius:20px;border:1px solid #E8439355;background:#A71D5DEE;color:#fff;cursor:pointer;backdrop-filter:blur(8px);text-decoration:none;transition:var(--tr)}
+.back-btn:hover{background:#E84393;transform:scale(1.05)}
+nav.toc{max-width:800px;margin:0 auto;padding:1rem 1.5rem;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+nav.toc a{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.3rem .7rem;border-radius:16px;background:#E8439312;color:#A71D5D;text-decoration:none;transition:var(--tr);border:1px solid #E8439322;white-space:nowrap}
+nav.toc a:hover{background:#E84393;color:#fff}
+.main{max-width:800px;margin:0 auto;padding:1.5rem 1.2rem 3rem}
+h2.section-title{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:#A71D5D;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid #E84393;scroll-margin-top:1rem}
+h3.sub{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text);margin:1.5rem 0 .6rem;padding-left:.8rem;border-left:3px solid #E84393}
+p{margin-bottom:.7rem;font-size:.9rem;text-align:justify}
+p strong{color:#A71D5D}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.2rem;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:var(--tr)}
+.card:hover{box-shadow:0 6px 30px rgba(0,0,0,.09);transform:translateY(-1px)}
+.card-head{padding:1rem 1.2rem;cursor:pointer;display:flex;align-items:center;gap:.7rem;transition:var(--tr)}
+.card-head:hover{background:#FDF2F8}
+.card-dot{width:10px;height:10px;border-radius:50%;background:#E84393;flex-shrink:0}
+.card-t{font-weight:600;font-size:.92rem;flex:1}
+.card-arr{transition:var(--tr);color:var(--text2);font-size:.7rem;flex-shrink:0}
+.card.open .card-arr{transform:rotate(180deg);color:#E84393}
+.card-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.card.open .card-body{max-height:8000px}
+.card-in{padding:0 1.2rem 1.2rem;font-size:.88rem;line-height:1.8}
+.card-in p{margin-bottom:.6rem}
+.kp{display:flex;gap:.5rem;align-items:flex-start;padding:.4rem 0}
+.kp-i{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;color:#fff;background:#E84393;margin-top:2px;font-weight:700}
+.kp-t{font-size:.85rem}
+.cbox{border-radius:var(--radius-sm);padding:.9rem 1.1rem;margin:.8rem 0;border-left:3px solid}
+.cbox.opt{background:#EBF5FB;border-color:#2980B9}
+.cbox.warn{background:#FFF5F5;border-color:#E74C3C}
+.cbox.tip{background:#FDF2F8;border-color:#E84393}
+.cbox-t{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:.25rem}
+.cbox.opt .cbox-t{color:#2980B9}.cbox.warn .cbox-t{color:#E74C3C}.cbox.tip .cbox-t{color:#A71D5D}
+.cbox p{font-size:.82rem;font-style:italic;line-height:1.6;margin-bottom:0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:.7rem 0;max-width:100%}
+table.dt{width:100%;border-collapse:collapse;font-size:.8rem;min-width:320px}
+table.dt th{padding:.5rem .6rem;text-align:left;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.5px;text-transform:uppercase;color:#fff;background:#A71D5D;white-space:nowrap}
+table.dt td{padding:.45rem .6rem;border-bottom:1px solid rgba(0,0,0,.04);word-break:break-word}
+table.dt tr:nth-child(even){background:#FDF2F8}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.8rem 0}
+.comp-card{background:var(--card);border-radius:var(--radius-sm);padding:1rem;border-top:3px solid}
+.comp-card h4{font-family:'Fraunces',serif;font-size:.92rem;margin-bottom:.4rem}
+.comp-card ul{list-style:none;font-size:.82rem;line-height:1.8}
+.comp-card ul li{padding-left:1rem;position:relative}
+.comp-card ul li::before{content:'→';position:absolute;left:0}
+.fig-ref{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text2);margin:.3rem 0;font-style:italic}
+.ref{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#AAA;font-style:italic;margin:.3rem 0}
+.ecg-svg{width:100%;height:50px;margin:.5rem 0}
+.quiz-sec{margin-top:3rem;padding-top:2rem;border-top:2px solid #E84393}
+.quiz-sec h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:#A71D5D;margin-bottom:1rem}
+.qi{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin-bottom:1.2rem;border:1px solid rgba(0,0,0,.04)}
+.qi-n{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#E84393;letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;font-weight:600}
+.qi-q{font-size:.9rem;margin-bottom:.8rem;line-height:1.7}
+.qi-opts{display:flex;flex-direction:column;gap:.4rem}
+.qi-o{display:flex;align-items:flex-start;gap:.6rem;padding:.65rem .9rem;border-radius:var(--radius-sm);border:1.5px solid #E8439333;cursor:pointer;transition:var(--tr);font-size:.85rem}
+.qi-o:hover{border-color:#E84393;background:#FDF2F8}
+.qi-o.sel{border-color:#E84393;background:#E843930F}
+.qi-o.ok{border-color:#27AE60;background:#27AE600D}
+.qi-o.no{border-color:#E74C3C;background:#E74C3C08}
+.qi-l{font-family:'JetBrains Mono',monospace;font-weight:600;color:#E84393;min-width:18px;font-size:.8rem}
+.qi-btn{margin-top:.8rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.5rem 1.2rem;border-radius:20px;border:none;background:#E84393;color:#fff;cursor:pointer;transition:var(--tr)}
+.qi-btn:hover{background:#A71D5D;box-shadow:0 4px 15px #E8439333}
+.qi-fb{margin-top:.7rem;padding:.8rem;border-radius:var(--radius-sm);font-size:.8rem;font-style:italic;display:none;line-height:1.6}
+.qi-fb.show{display:block}.qi-fb.ok{background:#27AE600D;border-left:3px solid #27AE60}.qi-fb.no{background:#E74C3C08;border-left:3px solid #E74C3C}
+.score-bar{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin:1.5rem 0;text-align:center;border:2px solid #E8439333}
+.score-bar .sc-num{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:900;color:#E84393}
+.score-bar .sc-lab{font-size:.8rem;color:var(--text2)}
+footer{text-align:center;padding:2rem 1rem;background:var(--dark);color:rgba(255,255,255,.25);font-size:.65rem;font-family:'JetBrains Mono',monospace}
+@media(max-width:768px){
+  .hero h1{font-size:1.6rem}.main{padding:1rem .8rem 2.5rem}
+  h2.section-title{font-size:1.25rem}h3.sub{font-size:.95rem}
+  .card-head{padding:.8rem .9rem}.card-in{padding:0 .9rem .9rem}
+  .comp{grid-template-columns:1fr}
+  table.dt{font-size:.72rem}table.dt th{font-size:.55rem;padding:.35rem .4rem}table.dt td{padding:.35rem .4rem}
+  .qi{padding:1rem}.qi-o{padding:.55rem .7rem;font-size:.8rem}
+  nav.toc{padding:.8rem}nav.toc a{font-size:.55rem;padding:.25rem .5rem}
+}
+@media(max-width:480px){
+  .hero{padding:2rem 1rem}.hero h1{font-size:1.4rem}
+  p{font-size:.84rem}.card-in{font-size:.84rem}
+  .kp-t{font-size:.82rem}.cbox p{font-size:.78rem}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:1.5rem 2rem}
+}
+html,body{max-width:100vw;overflow-x:hidden}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Grupo 2 — Actividad Colaborativa</div>
+    <h1>Pared Cardíaca, Cámaras y Válvulas</h1>
+    <p class="hero-sub">Módulos 1.4 + 1.5 + 1.6 — Epicardio, miocardio, endocardio, esqueleto fibroso, aurículas, ventrículos, válvulas AV y semilunares, focos de auscultación</p>
+    <p class="hero-meta">Dr. Jorge Bogoya · Universidad de La Salle · 22–23 abril 2026</p>
+  </div>
+</section>
+
+<nav class="toc">
+    <a href="#s0">Pared cardíaca</a>
+    <a href="#s1">Aurículas</a>
+    <a href="#s2">Ventrículos</a>
+    <a href="#s3">Válvulas</a>
+    <a href="#quiz">📝 Quiz</a>
+</nav>
+
+<main class="main">
+<h2 class="section-title" id="s0">Capas de la pared cardíaca</h2>
+
+<p>La pared del corazón se compone de tres capas concéntricas, cada una con una función específica. Su conocimiento es esencial para comprender la fisiopatología del infarto de miocardio y las alteraciones de conducción.</p>
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Epicardio, miocardio y endocardio</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="kp"><div class="kp-i">E</div><span class="kp-t"><strong>Epicardio</strong> (capa visceral del pericardio seroso): mesotelio + tejido conectivo subepicárdico con grasa, vasos coronarios superficiales, vasos linfáticos y nervios. La grasa epicárdica aumenta con la edad y rodea los surcos coronarios.</span></div>
+<div class="kp"><div class="kp-i">M</div><span class="kp-t"><strong>Miocardio:</strong> constituye el 95% del espesor de la pared. Músculo cardíaco estriado involuntario. Las fibras se organizan en haces diagonales que generan la acción de torsión durante la sístole (wringing motion). Características histológicas únicas: <strong>discos intercalados</strong> con desmosomas (unión mecánica) y <strong>uniones en hendidura</strong> (gap junctions — permiten propagación rápida del impulso eléctrico como sincitio funcional). Las mitocondrias ocupan ~25% del volumen celular (vs. 2% en músculo esquelético), reflejando la dependencia casi exclusiva de la respiración aeróbica.</span></div>
+<div class="kp"><div class="kp-i">N</div><span class="kp-t"><strong>Endocardio:</strong> endotelio + tejido conectivo delgado. Reviste todas las cámaras y se continúa con el endotelio de los grandes vasos. Recubre las válvulas cardíacas. El endocardio recibe O₂ directamente de la sangre intracavitaria.</span></div>
+<div class="cbox tip"><div class="cbox-t">📌 Esqueleto fibroso</div><p>Cuatro anillos de tejido conectivo denso rodeando los orificios valvulares + dos trígonos fibrosos (D e I) + porción membranosa de los tabiques. Triple función: (1) soporte estructural de válvulas, (2) punto de inserción para el miocardio, (3) aislante eléctrico entre aurículas y ventrículos — la única conexión eléctrica A↔V es el haz de His.</p></div>
+<p class="ref">[Ref: Tortora & Derrickson, 15.ª ed., cap. 20, pp. 760–765, figs. 20.2 y 20.5; Moore et al., 8.ª ed., cap. 4, pp. 452–455]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s1">Aurícula derecha e izquierda</h2>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Aurícula derecha (AD)</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>Recibe la sangre venosa sistémica a través de tres orificios:</p>
+<div class="kp"><div class="kp-i">1</div><span class="kp-t"><strong>VCS</strong> (vena cava superior): desemboca en la parte superior, sin válvula.</span></div>
+<div class="kp"><div class="kp-i">2</div><span class="kp-t"><strong>VCI</strong> (vena cava inferior): desemboca en la parte inferior, con la <strong>válvula de Eustaquio</strong> (rudimentaria en el adulto; en el feto dirigía la sangre oxigenada hacia el foramen oval).</span></div>
+<div class="kp"><div class="kp-i">3</div><span class="kp-t"><strong>Seno coronario:</strong> desemboca medialmente, protegido por la <strong>válvula de Tebesio</strong>.</span></div>
+<p><strong>Anatomía interna:</strong> Pared posterior lisa (seno de las venas cavas) separada de la pared anterior trabeculada por la <strong>cresta terminal</strong>. Los <strong>músculos pectíneos</strong> se extienden por la pared anterior y la orejuela derecha. El <strong>tabique interauricular</strong> presenta la <strong>fosa oval</strong> — depresión oval que es el remanente del foramen oval fetal.</p>
+<p>El <strong>triángulo de Koch</strong> (delimitado por el orificio del seno coronario, la inserción de la valva septal de la tricúspide y el tendón de Todaro) contiene el nodo AV — referencia quirúrgica crítica.</p>
+<p class="ref">[Ref: Latarjet & Ruiz Liard, 5.ª ed., cap. 76, pp. 868–871; Tortora, 15.ª ed., cap. 20, pp. 763–764]</p>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Aurícula izquierda (AI)</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>Recibe sangre oxigenada de los pulmones a través de <strong>4 venas pulmonares</strong> (2 derechas + 2 izquierdas). Su pared es predominantemente lisa; los músculos pectíneos se limitan a la <strong>orejuela izquierda</strong>.</p>
+<div class="cbox warn"><div class="cbox-t">🚨 Orejuela izquierda y trombosis</div><p>La orejuela izquierda tiene una anatomía trabecular compleja con baja velocidad de flujo. En pacientes con <strong>fibrilación auricular (FA)</strong>, el 90% de los trombos se forman en la orejuela izquierda. Estos trombos pueden embolizar a través de la carótida interna → arteria oftálmica → arteria central de la retina, causando OACR; o al cerebro, causando ACV con hemianopsia homónima.</p></div>
+<div class="cbox opt"><div class="cbox-t">👁️ Actualización 2024: CHA₂DS₂-VA score</div><p>Las guías ESC 2024 reemplazaron el CHA₂DS₂-VASc por el CHA₂DS₂-VA, eliminando el sexo femenino como modificador de riesgo. Anticoagulación recomendada para score ≥2 (Clase I). Hasta el 50% de pacientes con OACR tienen FA detectada en monitoreo cardíaco extendido — el optometrista que detecta una OACR debe solicitar evaluación cardiológica urgente.</p></div>
+<p class="ref">[Ref: Latarjet, 5.ª ed., cap. 76, pp. 872–873; ESC/EACTS AF Guidelines 2024]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s2">Ventrículos derecho e izquierdo</h2>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Ventrículo derecho (VD)</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>Forma la mayor parte de la cara anterior (esternocostal). Espesor de pared: <strong>4–5 mm</strong>. Presión sistólica: ~25 mmHg.</p>
+<p><strong>Anatomía interna:</strong> Trabéculas carnosas prominentes. La <strong>trabécula septomarginal</strong> (banda moderadora) conduce la rama derecha del haz de His al músculo papilar anterior — asegura la contracción coordinada. Posee una <strong>cámara de entrada</strong> (debajo de la válvula tricúspide, rugosa) y una <strong>cámara de salida</strong> (infundíbulo/cono arterioso, lisa) separadas por la cresta supraventricular.</p>
+<p>La sangre sale a través de la <strong>válvula pulmonar</strong> → tronco pulmonar → circulación pulmonar (baja presión).</p>
+<p class="ref">[Ref: Latarjet, 5.ª ed., cap. 76, pp. 869–872; Tortora, 15.ª ed., cap. 20, pp. 763]</p>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Ventrículo izquierdo (VI)</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>Forma el vértice (ápex) y la mayor parte de la cara diafragmática e izquierda. Espesor de pared: <strong>10–15 mm (~3× el VD)</strong>. Presión sistólica: ~120 mmHg. La luz es circular (vs. semilunar en el VD).</p>
+<p><strong>Anatomía interna:</strong> Trabéculas carnosas finas. Dos <strong>músculos papilares</strong> (anterior y posterior), cada uno envía cuerdas tendinosas a AMBAS valvas de la válvula mitral — si un papilar se rompe (infarto), se produce insuficiencia mitral aguda. El tracto de salida del VI conduce a la <strong>válvula aórtica</strong> → aorta ascendente.</p>
+<div class="cbox tip"><div class="cbox-t">📌 ¿Por qué el VI es 3× más grueso?</div><p>El VI genera la presión sistémica (120/80 mmHg) para perfundir todo el cuerpo. El VD solo necesita ~25/5 mmHg para perfundir los pulmones (circuito de baja resistencia). La relación espesor/función es directa: mayor poscarga → mayor masa muscular.</p></div>
+<p class="ref">[Ref: Tortora, 15.ª ed., cap. 20, pp. 764–765, fig. 20.4c; Moore, 8.ª ed., cap. 4, pp. 458–462]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s3">Válvulas cardíacas y focos de auscultación</h2>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Válvulas auriculoventriculares (AV)</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>Las válvulas AV impiden el reflujo de sangre de los ventrículos a las aurículas durante la sístole ventricular.</p>
+<div class="tw"><table class="dt"><tr><th>Válvula</th><th>Valvas</th><th>Ubicación</th><th>Componentes del aparato</th></tr><tr><td><strong>Tricúspide</strong> (AV derecha)</td><td>3 (anterior, posterior, septal)</td><td>Orificio AV derecho</td><td>Anillo fibroso + 3 valvas + cuerdas tendinosas + 3 músculos papilares (anterior, posterior, septal)</td></tr><tr><td><strong>Mitral</strong> (AV izquierda, bicúspide)</td><td>2 (anterior/aórtica, posterior/mural)</td><td>Orificio AV izquierdo</td><td>Anillo fibroso + 2 valvas + cuerdas tendinosas + 2 músculos papilares (anterior, posterior)</td></tr></table></div>
+<p><strong>Mecanismo:</strong> Durante la diástole, la presión auricular > ventricular → válvulas abiertas → llenado. Durante la sístole, la presión intraventricular aumenta → las valvas se cierran por presión → los músculos papilares se contraen tensando las cuerdas tendinosas para prevenir la eversión (prolapso) hacia la aurícula.</p>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Válvulas semilunares</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>Impiden el reflujo de sangre desde las arterias hacia los ventrículos durante la diástole.</p>
+<div class="tw"><table class="dt"><tr><th>Válvula</th><th>Valvas (3 cada una)</th><th>Senos</th><th>Dato clave</th></tr><tr><td><strong>Aórtica</strong></td><td>Derecha, izquierda, posterior (no coronaria)</td><td>Senos de Valsalva</td><td>Las coronarias nacen de los senos derecho e izquierdo; el seno posterior NO emite arteria</td></tr><tr><td><strong>Pulmonar</strong></td><td>Anterior, derecha, izquierda</td><td>Senos pulmonares</td><td>Se localiza anterior y superior a la aórtica; conecta con el tronco pulmonar</td></tr></table></div>
+<div class="cbox opt"><div class="cbox-t">👁️ Endocarditis y manchas de Roth</div><p>La endocarditis infecciosa produce vegetaciones en las válvulas (especialmente mitral y aórtica) que pueden embolizar a la retina. Las manchas de Roth (hemorragias retinianas con centro blanco) se encuentran en ~2–5% de los casos de endocarditis. El optometrista que observe múltiples manchas de Roth en un paciente febril con soplo cardíaco debe sospechar endocarditis y remitir urgentemente.</p></div>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Focos de auscultación</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="tw"><table class="dt"><tr><th>Foco</th><th>Localización</th><th>Válvula evaluada</th><th>Ruido normal</th></tr><tr><td><strong>Aórtico (A)</strong></td><td>2.º EIC derecho, borde esternal</td><td>Aórtica</td><td>S2 mejor escuchado aquí</td></tr><tr><td><strong>Pulmonar (P)</strong></td><td>2.º EIC izquierdo, borde esternal</td><td>Pulmonar</td><td>Desdoblamiento fisiológico de S2</td></tr><tr><td><strong>Tricuspídeo (T)</strong></td><td>Borde esternal izq., 4.º–5.º EIC</td><td>Tricúspide</td><td>S1 componente tricuspídeo</td></tr><tr><td><strong>Mitral/Apical (M)</strong></td><td>5.º EIC izq., línea medioclavicular (PMI)</td><td>Mitral</td><td>S1 mejor escuchado aquí</td></tr></table></div>
+<p><strong>Soplos:</strong> Un soplo sistólico (entre S1 y S2) puede indicar estenosis aórtica/pulmonar o insuficiencia mitral/tricuspídea. Un soplo diastólico (entre S2 y S1) sugiere estenosis mitral/tricuspídea o insuficiencia aórtica/pulmonar.</p>
+<p class="ref">[Ref: Moore et al., 8.ª ed., cap. 4, pp. 464–466, fig. A4-7; Tortora, 15.ª ed., cap. 20, pp. 766–768]</p>
+</div></div></div>
+
+
+<div class="quiz-sec" id="quiz">
+  <h2>📝 Quiz — Evaluación del Grupo 2</h2>
+  <p>Responde las siguientes preguntas para evaluar tu comprensión del tema. Al finalizar, obtendrás tu puntuación.</p>
+  <div class="score-bar" id="scoreBar" style="display:none">
+    <div class="sc-num" id="scoreNum">0/0</div>
+    <div class="sc-lab">Respuestas correctas</div>
+  </div>
+
+  <div class="qi" id="q0">
+    <div class="qi-n">Pregunta 1 </div>
+    <div class="qi-q">El miocardio representa qué porcentaje del espesor de la pared cardíaca:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(0,0,this)"><span class="qi-l">A)</span><span>50%</span></div>
+      <div class="qi-o" onclick="sel(0,1,this)"><span class="qi-l">B)</span><span>75%</span></div>
+      <div class="qi-o" onclick="sel(0,2,this)"><span class="qi-l">C)</span><span>95%</span></div>
+      <div class="qi-o" onclick="sel(0,3,this)"><span class="qi-l">D)</span><span>100%</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(0)">Verificar</button>
+    <div class="qi-fb" id="fb0"></div>
+  </div>
+
+  <div class="qi" id="q1">
+    <div class="qi-n">Pregunta 2 </div>
+    <div class="qi-q">Las uniones en hendidura (gap junctions) de los discos intercalados permiten:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(1,0,this)"><span class="qi-l">A)</span><span>La contracción voluntaria del corazón</span></div>
+      <div class="qi-o" onclick="sel(1,1,this)"><span class="qi-l">B)</span><span>La propagación rápida del impulso eléctrico como sincitio funcional</span></div>
+      <div class="qi-o" onclick="sel(1,2,this)"><span class="qi-l">C)</span><span>El aislamiento eléctrico entre aurículas y ventrículos</span></div>
+      <div class="qi-o" onclick="sel(1,3,this)"><span class="qi-l">D)</span><span>La nutrición del miocardio desde la cavidad</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(1)">Verificar</button>
+    <div class="qi-fb" id="fb1"></div>
+  </div>
+
+  <div class="qi" id="q2">
+    <div class="qi-n">Pregunta 3 </div>
+    <div class="qi-q">La fosa oval en el tabique interauricular es el remanente del:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(2,0,this)"><span class="qi-l">A)</span><span>Conducto arterioso</span></div>
+      <div class="qi-o" onclick="sel(2,1,this)"><span class="qi-l">B)</span><span>Foramen oval fetal</span></div>
+      <div class="qi-o" onclick="sel(2,2,this)"><span class="qi-l">C)</span><span>Conducto venoso</span></div>
+      <div class="qi-o" onclick="sel(2,3,this)"><span class="qi-l">D)</span><span>Seno coronario embrionario</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(2)">Verificar</button>
+    <div class="qi-fb" id="fb2"></div>
+  </div>
+
+  <div class="qi" id="q3">
+    <div class="qi-n">Pregunta 4 </div>
+    <div class="qi-q">El 90% de los trombos en fibrilación auricular se forman en:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(3,0,this)"><span class="qi-l">A)</span><span>El ventrículo izquierdo</span></div>
+      <div class="qi-o" onclick="sel(3,1,this)"><span class="qi-l">B)</span><span>La orejuela izquierda</span></div>
+      <div class="qi-o" onclick="sel(3,2,this)"><span class="qi-l">C)</span><span>La aurícula derecha</span></div>
+      <div class="qi-o" onclick="sel(3,3,this)"><span class="qi-l">D)</span><span>El seno coronario</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(3)">Verificar</button>
+    <div class="qi-fb" id="fb3"></div>
+  </div>
+
+  <div class="qi" id="q4">
+    <div class="qi-n">Pregunta 5 </div>
+    <div class="qi-q">El espesor aproximado del ventrículo izquierdo es:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(4,0,this)"><span class="qi-l">A)</span><span>2–3 mm</span></div>
+      <div class="qi-o" onclick="sel(4,1,this)"><span class="qi-l">B)</span><span>4–5 mm</span></div>
+      <div class="qi-o" onclick="sel(4,2,this)"><span class="qi-l">C)</span><span>10–15 mm</span></div>
+      <div class="qi-o" onclick="sel(4,3,this)"><span class="qi-l">D)</span><span>20–25 mm</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(4)">Verificar</button>
+    <div class="qi-fb" id="fb4"></div>
+  </div>
+
+  <div class="qi" id="q5">
+    <div class="qi-n">Pregunta 6 </div>
+    <div class="qi-q">Las arterias coronarias nacen de:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(5,0,this)"><span class="qi-l">A)</span><span>La aorta descendente</span></div>
+      <div class="qi-o" onclick="sel(5,1,this)"><span class="qi-l">B)</span><span>El tronco pulmonar</span></div>
+      <div class="qi-o" onclick="sel(5,2,this)"><span class="qi-l">C)</span><span>Los senos aórticos (de Valsalva) en la aorta ascendente</span></div>
+      <div class="qi-o" onclick="sel(5,3,this)"><span class="qi-l">D)</span><span>Las arterias bronquiales</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(5)">Verificar</button>
+    <div class="qi-fb" id="fb5"></div>
+  </div>
+
+  <div class="qi" id="q6">
+    <div class="qi-n">Pregunta 7 </div>
+    <div class="qi-q">Las manchas de Roth (hemorragia retiniana con centro blanco) se asocian más frecuentemente a:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(6,0,this)"><span class="qi-l">A)</span><span>Glaucoma</span></div>
+      <div class="qi-o" onclick="sel(6,1,this)"><span class="qi-l">B)</span><span>Endocarditis infecciosa</span></div>
+      <div class="qi-o" onclick="sel(6,2,this)"><span class="qi-l">C)</span><span>Miopía alta</span></div>
+      <div class="qi-o" onclick="sel(6,3,this)"><span class="qi-l">D)</span><span>Degeneración macular</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(6)">Verificar</button>
+    <div class="qi-fb" id="fb6"></div>
+  </div>
+
+  <div class="qi" id="q7">
+    <div class="qi-n">Pregunta 8 </div>
+    <div class="qi-q">El foco de auscultación mitral se localiza en:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(7,0,this)"><span class="qi-l">A)</span><span>2.º EIC derecho</span></div>
+      <div class="qi-o" onclick="sel(7,1,this)"><span class="qi-l">B)</span><span>2.º EIC izquierdo</span></div>
+      <div class="qi-o" onclick="sel(7,2,this)"><span class="qi-l">C)</span><span>5.º EIC izquierdo, línea medioclavicular</span></div>
+      <div class="qi-o" onclick="sel(7,3,this)"><span class="qi-l">D)</span><span>Borde esternal izquierdo, 4.º EIC</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(7)">Verificar</button>
+    <div class="qi-fb" id="fb7"></div>
+  </div>
+
+  <div class="qi" id="q8">
+    <div class="qi-n">Pregunta 9 </div>
+    <div class="qi-q">El esqueleto fibroso del corazón cumple la función de:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(8,0,this)"><span class="qi-l">A)</span><span>Generar el impulso eléctrico cardíaco</span></div>
+      <div class="qi-o" onclick="sel(8,1,this)"><span class="qi-l">B)</span><span>Aislar eléctricamente aurículas de ventrículos y dar soporte a las válvulas</span></div>
+      <div class="qi-o" onclick="sel(8,2,this)"><span class="qi-l">C)</span><span>Producir el líquido pericárdico</span></div>
+      <div class="qi-o" onclick="sel(8,3,this)"><span class="qi-l">D)</span><span>Conectar las arterias coronarias con los senos aórticos</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(8)">Verificar</button>
+    <div class="qi-fb" id="fb8"></div>
+  </div>
+
+  <div class="qi" id="q9">
+    <div class="qi-n">Pregunta 10 </div>
+    <div class="qi-q">La trabécula septomarginal (banda moderadora) del VD conduce:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(9,0,this)"><span class="qi-l">A)</span><span>La arteria coronaria derecha</span></div>
+      <div class="qi-o" onclick="sel(9,1,this)"><span class="qi-l">B)</span><span>La rama derecha del haz de His</span></div>
+      <div class="qi-o" onclick="sel(9,2,this)"><span class="qi-l">C)</span><span>El nervio frénico</span></div>
+      <div class="qi-o" onclick="sel(9,3,this)"><span class="qi-l">D)</span><span>La vena cardíaca magna</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(9)">Verificar</button>
+    <div class="qi-fb" id="fb9"></div>
+  </div>
+  <div style="text-align:center;margin-top:1.5rem">
+    <button class="qi-btn" onclick="showScore()" style="font-size:.75rem;padding:.6rem 2rem">📊 Ver puntuación</button>
+  </div>
+</div>
+</main>
+
+<footer>
+  <p>Del Corazón a la Retina · Morfología General 2026-I · Dr. Jorge Bogoya</p>
+  <p style="margin-top:.2rem">Universidad de La Salle · Bogotá</p>
+</footer>
+
+<script>
+function tc(h){h.closest('.card').classList.toggle('open')}
+const S={},A=[2,1,1,1,2,2,1,2,1,1];
+function sel(i,j,el){const p=document.getElementById('q'+i);p.querySelectorAll('.qi-o').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S[i]=j}
+function chk(i){if(S[i]===undefined)return;const p=document.getElementById('q'+i),os=p.querySelectorAll('.qi-o');os.forEach((o,j)=>{o.classList.remove('sel');if(j===A[i])o.classList.add('ok');else if(j===S[i]&&S[i]!==A[i])o.classList.add('no')});const fb=document.getElementById('fb'+i);fb.textContent=(S[i]===A[i]?'✓ Correcto. ':'✗ Incorrecto. ')+["El miocardio constituye el 95% del espesor de la pared cardíaca.","Las gap junctions permiten la propagación del potencial de acción de una fibra a sus vecinas, haciendo que el miocardio funcione como un sincitio.","La fosa oval es el remanente del foramen oval, comunicación interauricular fetal que permite el paso de sangre de AD a AI.","La orejuela izquierda, con su anatomía trabecular y bajo flujo, es el sitio principal de formación de trombos en FA.","El VI mide 10–15 mm de espesor, ~3 veces más que el VD (4–5 mm), debido a la alta presión sistémica que debe generar.","Las coronarias nacen de los senos de Valsalva: la derecha del seno derecho, la izquierda del seno izquierdo. El seno posterior no emite arteria.","Las manchas de Roth son hemorragias retinianas con centro blanco fibrinoplaquetario, presentes en ~2–5% de endocarditis.","El foco mitral/apical coincide con el PMI: 5.º EIC izquierdo, línea medioclavicular.","El esqueleto fibroso tiene triple función: soporte valvular, inserción muscular y aislamiento eléctrico A↔V.","La trabécula septomarginal lleva la rama derecha del haz de His al músculo papilar anterior del VD."][i];fb.className='qi-fb show '+(S[i]===A[i]?'ok':'no')}
+function showScore(){let c=0,t=10;for(let i=0;i<t;i++){if(S[i]===A[i])c++;if(S[i]===undefined){const p=document.getElementById('q'+i);p.style.border='2px solid #E84393';setTimeout(()=>p.style.border='',2000)}}document.getElementById('scoreBar').style.display='block';document.getElementById('scoreNum').textContent=c+'/'+t;document.getElementById('scoreBar').scrollIntoView({behavior:'smooth'})}
+document.querySelectorAll('.card').forEach(c=>{c.querySelector('.card-head')?.addEventListener('click',function(){tc(this)})});
+</script>
+</body>
+</html>

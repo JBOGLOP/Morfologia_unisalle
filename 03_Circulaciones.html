@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circulaciones Pulmonar y Sistémica — Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--c:#00B894;--cd:#0E6655;--cbg:#E8F8F5;--cg:rgba(0,184,148,.08);
+--dark:#1A1A2E;--text:#2D3436;--text2:#636E72;--bg:#FAFAFA;--card:#FFF;
+--red:#FF6B6B;--blue:#0984E3;--teal:#00B894;
+--radius:16px;--radius-sm:10px;--shadow:0 4px 24px rgba(0,0,0,.06);--tr:all .3s cubic-bezier(.4,0,.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;max-width:100vw}
+.hero{position:relative;padding:3rem 1.5rem;background:var(--dark);text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,184,148,.08),transparent 65%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:750px;margin:0 auto}
+.hero-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#00B894;border:1px solid #00B89444;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;background:#00B8940A}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:.5rem;text-shadow:0 2px 30px #00B89433}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:.3rem}
+.hero-meta{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.3)}
+.back-btn{position:fixed;top:1rem;left:1rem;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.4rem .8rem;border-radius:20px;border:1px solid #00B89455;background:#0E6655EE;color:#fff;cursor:pointer;backdrop-filter:blur(8px);text-decoration:none;transition:var(--tr)}
+.back-btn:hover{background:#00B894;transform:scale(1.05)}
+nav.toc{max-width:800px;margin:0 auto;padding:1rem 1.5rem;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+nav.toc a{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.3rem .7rem;border-radius:16px;background:#00B89412;color:#0E6655;text-decoration:none;transition:var(--tr);border:1px solid #00B89422;white-space:nowrap}
+nav.toc a:hover{background:#00B894;color:#fff}
+.main{max-width:800px;margin:0 auto;padding:1.5rem 1.2rem 3rem}
+h2.section-title{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:#0E6655;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid #00B894;scroll-margin-top:1rem}
+h3.sub{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text);margin:1.5rem 0 .6rem;padding-left:.8rem;border-left:3px solid #00B894}
+p{margin-bottom:.7rem;font-size:.9rem;text-align:justify}
+p strong{color:#0E6655}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.2rem;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:var(--tr)}
+.card:hover{box-shadow:0 6px 30px rgba(0,0,0,.09);transform:translateY(-1px)}
+.card-head{padding:1rem 1.2rem;cursor:pointer;display:flex;align-items:center;gap:.7rem;transition:var(--tr)}
+.card-head:hover{background:#E8F8F5}
+.card-dot{width:10px;height:10px;border-radius:50%;background:#00B894;flex-shrink:0}
+.card-t{font-weight:600;font-size:.92rem;flex:1}
+.card-arr{transition:var(--tr);color:var(--text2);font-size:.7rem;flex-shrink:0}
+.card.open .card-arr{transform:rotate(180deg);color:#00B894}
+.card-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.card.open .card-body{max-height:8000px}
+.card-in{padding:0 1.2rem 1.2rem;font-size:.88rem;line-height:1.8}
+.card-in p{margin-bottom:.6rem}
+.kp{display:flex;gap:.5rem;align-items:flex-start;padding:.4rem 0}
+.kp-i{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;color:#fff;background:#00B894;margin-top:2px;font-weight:700}
+.kp-t{font-size:.85rem}
+.cbox{border-radius:var(--radius-sm);padding:.9rem 1.1rem;margin:.8rem 0;border-left:3px solid}
+.cbox.opt{background:#EBF5FB;border-color:#2980B9}
+.cbox.warn{background:#FFF5F5;border-color:#E74C3C}
+.cbox.tip{background:#E8F8F5;border-color:#00B894}
+.cbox-t{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:.25rem}
+.cbox.opt .cbox-t{color:#2980B9}.cbox.warn .cbox-t{color:#E74C3C}.cbox.tip .cbox-t{color:#0E6655}
+.cbox p{font-size:.82rem;font-style:italic;line-height:1.6;margin-bottom:0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:.7rem 0;max-width:100%}
+table.dt{width:100%;border-collapse:collapse;font-size:.8rem;min-width:320px}
+table.dt th{padding:.5rem .6rem;text-align:left;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.5px;text-transform:uppercase;color:#fff;background:#0E6655;white-space:nowrap}
+table.dt td{padding:.45rem .6rem;border-bottom:1px solid rgba(0,0,0,.04);word-break:break-word}
+table.dt tr:nth-child(even){background:#E8F8F5}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.8rem 0}
+.comp-card{background:var(--card);border-radius:var(--radius-sm);padding:1rem;border-top:3px solid}
+.comp-card h4{font-family:'Fraunces',serif;font-size:.92rem;margin-bottom:.4rem}
+.comp-card ul{list-style:none;font-size:.82rem;line-height:1.8}
+.comp-card ul li{padding-left:1rem;position:relative}
+.comp-card ul li::before{content:'→';position:absolute;left:0}
+.fig-ref{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text2);margin:.3rem 0;font-style:italic}
+.ref{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#AAA;font-style:italic;margin:.3rem 0}
+.ecg-svg{width:100%;height:50px;margin:.5rem 0}
+.quiz-sec{margin-top:3rem;padding-top:2rem;border-top:2px solid #00B894}
+.quiz-sec h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:#0E6655;margin-bottom:1rem}
+.qi{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin-bottom:1.2rem;border:1px solid rgba(0,0,0,.04)}
+.qi-n{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#00B894;letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;font-weight:600}
+.qi-q{font-size:.9rem;margin-bottom:.8rem;line-height:1.7}
+.qi-opts{display:flex;flex-direction:column;gap:.4rem}
+.qi-o{display:flex;align-items:flex-start;gap:.6rem;padding:.65rem .9rem;border-radius:var(--radius-sm);border:1.5px solid #00B89433;cursor:pointer;transition:var(--tr);font-size:.85rem}
+.qi-o:hover{border-color:#00B894;background:#E8F8F5}
+.qi-o.sel{border-color:#00B894;background:#00B8940F}
+.qi-o.ok{border-color:#27AE60;background:#27AE600D}
+.qi-o.no{border-color:#E74C3C;background:#E74C3C08}
+.qi-l{font-family:'JetBrains Mono',monospace;font-weight:600;color:#00B894;min-width:18px;font-size:.8rem}
+.qi-btn{margin-top:.8rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.5rem 1.2rem;border-radius:20px;border:none;background:#00B894;color:#fff;cursor:pointer;transition:var(--tr)}
+.qi-btn:hover{background:#0E6655;box-shadow:0 4px 15px #00B89433}
+.qi-fb{margin-top:.7rem;padding:.8rem;border-radius:var(--radius-sm);font-size:.8rem;font-style:italic;display:none;line-height:1.6}
+.qi-fb.show{display:block}.qi-fb.ok{background:#27AE600D;border-left:3px solid #27AE60}.qi-fb.no{background:#E74C3C08;border-left:3px solid #E74C3C}
+.score-bar{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin:1.5rem 0;text-align:center;border:2px solid #00B89433}
+.score-bar .sc-num{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:900;color:#00B894}
+.score-bar .sc-lab{font-size:.8rem;color:var(--text2)}
+footer{text-align:center;padding:2rem 1rem;background:var(--dark);color:rgba(255,255,255,.25);font-size:.65rem;font-family:'JetBrains Mono',monospace}
+@media(max-width:768px){
+  .hero h1{font-size:1.6rem}.main{padding:1rem .8rem 2.5rem}
+  h2.section-title{font-size:1.25rem}h3.sub{font-size:.95rem}
+  .card-head{padding:.8rem .9rem}.card-in{padding:0 .9rem .9rem}
+  .comp{grid-template-columns:1fr}
+  table.dt{font-size:.72rem}table.dt th{font-size:.55rem;padding:.35rem .4rem}table.dt td{padding:.35rem .4rem}
+  .qi{padding:1rem}.qi-o{padding:.55rem .7rem;font-size:.8rem}
+  nav.toc{padding:.8rem}nav.toc a{font-size:.55rem;padding:.25rem .5rem}
+}
+@media(max-width:480px){
+  .hero{padding:2rem 1rem}.hero h1{font-size:1.4rem}
+  p{font-size:.84rem}.card-in{font-size:.84rem}
+  .kp-t{font-size:.82rem}.cbox p{font-size:.78rem}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:1.5rem 2rem}
+}
+html,body{max-width:100vw;overflow-x:hidden}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Grupo 5 — Actividad Colaborativa</div>
+    <h1>Circulaciones Pulmonar y Sistémica</h1>
+    <p class="hero-sub">Módulos 4 + 5 — Hematosis, vasoconstricción hipóxica, circulación fetal, PFO, PDA, arteria oftálmica, ACR, ciliares, polígono de Willis, microcirculación, humor acuoso, OACR como stroke</p>
+    <p class="hero-meta">Dr. Jorge Bogoya · Universidad de La Salle · 22–23 abril 2026</p>
+  </div>
+</section>
+
+<nav class="toc">
+    <a href="#s0">Circ. pulmonar</a>
+    <a href="#s1">Circ. fetal</a>
+    <a href="#s2">A. OFTÁLMICA ⭐</a>
+    <a href="#s3">Microcirculación</a>
+    <a href="#quiz">📝 Quiz</a>
+</nav>
+
+<main class="main">
+<h2 class="section-title" id="s0">Circulación pulmonar (menor)</h2>
+
+<p>La circulación pulmonar es un circuito de <strong>baja presión</strong> (~25/10 mmHg) y <strong>alta distensibilidad</strong> cuya función exclusiva es la <strong>hematosis</strong>: intercambio de O₂ y CO₂ a nivel de la membrana alveolocapilar.</p>
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Recorrido y hematosis</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p><strong>Recorrido completo:</strong> VD → válvula pulmonar → tronco pulmonar → AA. pulmonares D e I → arterias lobares → segmentarias → arteriolas → <strong>capilares alveolares</strong> (membrana alveolocapilar ~0,5 µm de espesor, área total ~70 m²) → vénulas → venas pulmonares (4) → AI.</p>
+<p>La membrana alveolocapilar está compuesta por: neumocito tipo I (epitelio alveolar) + láminas basales fusionadas + endotelio capilar. El CO₂ difunde ~20 veces más rápido que el O₂ debido a su mayor solubilidad.</p>
+<div class="cbox tip"><div class="cbox-t">📌 Vasoconstricción hipóxica pulmonar</div><p>El reflejo de Euler-Liljestrand es EXCLUSIVO de la circulación pulmonar: ante hipoxia alveolar local, las arteriolas pulmonares se CONTRAEN (a diferencia de la circulación sistémica, donde la hipoxia causa vasodilatación). Esto desvía el flujo hacia áreas mejor ventiladas, optimizando la relación ventilación/perfusión (V/Q). En la circulación sistémica, la hipoxia local produce vasodilatación para aumentar el aporte de O₂ al tejido isquémico.</p></div>
+<p class="ref">[Ref: Tortora, 15.ª ed., cap. 21; Moore, 8.ª ed., cap. 4]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s1">Circulación fetal y cambios al nacer</h2>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Shunts fetales y adaptación postnatal</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>En la vida fetal, los pulmones no funcionan → tres derivaciones (shunts) desvían la sangre del circuito pulmonar:</p>
+<div class="tw"><table class="dt"><tr><th>Shunt fetal</th><th>Función</th><th>Vestigio en adulto</th></tr><tr><td><strong>Foramen oval</strong></td><td>AD → AI (bypasea pulmones; la sangre oxigenada de la VCI se desvía al lado izquierdo)</td><td>Fosa oval</td></tr><tr><td><strong>Conducto arterioso</strong></td><td>Tronco pulmonar → aorta (desvía el flujo pulmonar al sistémico)</td><td>Ligamento arterioso</td></tr><tr><td><strong>Conducto venoso</strong></td><td>Vena umbilical → VCI (bypasea el hígado fetal)</td><td>Ligamento venoso</td></tr></table></div>
+<p><strong>Cambios al nacer:</strong> El primer llanto expande los pulmones → caída dramática de la resistencia vascular pulmonar → aumento del retorno a la AI → aumento de presión en AI (supera la presión en AD) → cierre funcional del foramen oval. El aumento de la pO₂ arterial → constricción y cierre del conducto arterioso (mediado por prostaglandinas → cierre funcional en 24–48 h, cierre anatómico en 2–3 semanas).</p>
+<div class="cbox warn"><div class="cbox-t">🚨 PFO y embolia paradójica ocular</div><p>El foramen oval permeable (PFO) persiste en el 25–30% de adultos. Permite el paso de trombos venosos (p. ej., TVP) a la circulación arterial sin pasar por los pulmones → embolia paradójica. En pacientes jóvenes (<50 años) con OACR sin factores de riesgo tradicionales, el 78% tienen PFO. La detección requiere ecocardiografía transesofágica (TEE) — la TTE sola es insuficiente en el 71% de casos.</p></div>
+<div class="cbox opt"><div class="cbox-t">👁️ PDA y retinopatía del prematuro (ROP)</div><p>El ductus arterioso persistente (PDA) causa fluctuaciones de O₂ en la retina del prematuro: la oscilación hiperoxia-hipoxia impulsa la doble fase de la ROP (vaso-obliteración → vasoproliferación por VEGF). Un estudio JAAPOS 2024 demostró que 7 días de shunt PDA hemodinámicamente significativo predice ROP moderada-severa con sensibilidad del 80%. Screening: todos los prematuros ≤1500 g o ≤30 semanas (AAP/AAO/AAPOS 2018).</p></div>
+<p class="ref">[Ref: Tortora, 15.ª ed., cap. 21, fig. 21.30; Moore, 8.ª ed., cap. 4]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s2">Arteria oftálmica y circulación ocular ⭐</h2>
+
+<p>La <strong>arteria oftálmica</strong> es la <strong>primera rama intracraneal</strong> de la arteria carótida interna (segmento C6/oftálmico), haciendo de la retina el primer territorio vascular encontrado por émbolos de la carótida — el 71% de pacientes con OACR tienen placa carotídea ipsilateral.</p>
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Anatomía y ramas de la arteria oftálmica</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>Entra en la órbita por el <strong>canal óptico</strong> junto con el nervio óptico, inferoexterna a él. Cruza por encima del nervio óptico dentro de la órbita.</p>
+<div class="tw"><table class="dt"><tr><th>Rama</th><th>Territorio</th><th>Tipo de capilar</th><th>Relevancia clínica</th></tr><tr><td><strong>A. central de la retina (ACR)</strong></td><td>Capas internas de la retina (capa de fibras nerviosas → nuclear interna)</td><td>Continuos (barrera hematorretiniana interna)</td><td>ARTERIA TERMINAL sin anastomosis → oclusión = ceguera irreversible. Penetra al nervio óptico ~1 cm posterior al globo.</td></tr><tr><td><strong>AA. ciliares posteriores cortas</strong></td><td>Coriocapilar (perfunde EPR y fotorreceptores), cabeza del nervio óptico</td><td>Fenestrados (coriocapilar)</td><td>Compromiso → DMAE (degeneración macular), NOIA (neuropatía óptica isquémica anterior)</td></tr><tr><td><strong>AA. ciliares posteriores largas (2)</strong></td><td>Cuerpo ciliar, iris (círculo arterial mayor)</td><td>Fenestrados (procesos ciliares)</td><td>Base de la producción de humor acuoso</td></tr><tr><td><strong>AA. ciliares anteriores</strong></td><td>Parte anterior del globo, conjuntiva, iris (círculo arterial menor)</td><td>Continuos y fenestrados</td><td>Derivadas de AA. musculares de los rectos (2 por recto, excepto recto lateral: 1). Relevante en cirugía de estrabismo.</td></tr><tr><td><strong>A. lagrimal</strong></td><td>Glándula lagrimal, conjuntiva</td><td>Fenestrados</td><td>Síndrome de ojo seco vascular</td></tr><tr><td><strong>AA. etmoidales ant. y post.</strong></td><td>Senos etmoidales, mucosa nasal, duramadre de fosa anterior</td><td>Continuos</td><td>Fuente de epistaxis. La etmoidal anterior puede ser ligada para epistaxis refractaria.</td></tr></table></div>
+<div class="cbox warn"><div class="cbox-t">🚨 OACR = STROKE RETINIANO</div><p>La AHA/ASA 2021 reclasificó la OACR como <strong>infarto del SNC</strong> — la OACR es un stroke de la retina. El 27–76% de pacientes con OACR tienen infartos cerebrales silentes en la RMN-DWI, y el 34–65% de los ACV post-OACR ocurren en las primeras 4 semanas. Hallazgo clásico: palidez retiniana difusa + mancha rojo cereza en fóvea. VENTANA TERAPÉUTICA: tPA IV ≤4,5 horas. Oxígeno hiperbárico: 70% de mejoría visual si se inicia <9 horas (Mayo Clinic, 2025). REMISIÓN INMEDIATA a centro de ictus.</p></div>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Polígono de Willis y drenaje venoso</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p><strong>Polígono de Willis</strong> (círculo arterial del cerebro): anastomosis en la base del cerebro formada por:</p>
+<div class="kp"><div class="kp-i">C</div><span class="kp-t">2 ACI + 2 ACA (unidas por comunicante anterior) + 2 ACM + 2 ACP (ramas de la basilar) + 2 comunicantes posteriores (unen ACI con ACP)</span></div>
+<p>Proporciona vías alternativas de flujo en caso de estenosis u oclusión de un vaso. Sin embargo, el polígono es anatómicamente completo solo en ~42% de la población.</p>
+<p><strong>Drenaje venoso orbitario:</strong> Vena oftálmica superior → seno cavernoso → senos petrosos superior e inferior → vena yugular interna. El seno cavernoso rodea la silla turca y contiene: ACI (porción cavernosa/sifón), NC III, IV, V1, V2 y VI — fístula carótido-cavernosa o trombosis del seno cavernoso producen proptosis, quemosis, oftalmoplejía y congestión venosa retiniana.</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s3">Microcirculación, Starling y humor acuoso</h2>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Tipos de capilares y fuerzas de Starling</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="tw"><table class="dt"><tr><th>Tipo</th><th>Estructura</th><th>Localización</th><th>Permeabilidad</th></tr><tr><td><strong>Continuos</strong></td><td>Endotelio sin poros, uniones estrechas</td><td>Músculo, cerebro (BHE), retina (BHR interna)</td><td>Baja — difusión selectiva</td></tr><tr><td><strong>Fenestrados</strong></td><td>Poros (60–80 nm) con diafragma</td><td>Riñón, intestino, glándulas endocrinas, <strong>procesos ciliares</strong>, coriocapilar</td><td>Alta — permite ultrafiltración</td></tr><tr><td><strong>Sinusoides (discontinuos)</strong></td><td>Grandes hendiduras intercelulares</td><td>Hígado, bazo, médula ósea</td><td>Muy alta — pasan proteínas y células</td></tr></table></div>
+<p><strong>Fuerzas de Starling:</strong> gobiernan el intercambio capilar.</p>
+<p>PNF = (P<sub>c</sub> + π<sub>i</sub>) − (P<sub>i</sub> + π<sub>c</sub>)</p>
+<p>Donde P<sub>c</sub> = presión hidrostática capilar (favorece filtración), π<sub>c</sub> = presión oncótica plasmática (favorece reabsorción), P<sub>i</sub> = presión hidrostática intersticial, π<sub>i</sub> = presión oncótica intersticial.</p>
+<div class="cbox opt"><div class="cbox-t">👁️ Capilares fenestrados ciliares → humor acuoso → PIO</div><p>Los capilares fenestrados de los procesos ciliares son la base anatómica de la producción de humor acuoso. La ultrafiltración plasmática atraviesa las fenestraciones hacia el estroma ciliar; luego el epitelio ciliar bilaminar (pigmentado + no pigmentado) secreta activamente el humor acuoso hacia la cámara posterior mediante Na⁺/K⁺-ATPasa y anhidrasa carbónica. La secreción activa aporta el 70–80% de la producción. Alteraciones en la dinámica de Starling (p. ej., HAS sistémica) pueden modificar la tasa de producción y la PIO. En el síndrome de ojo isquémico (estenosis carotídea ≥90%), la hipoperfusión ciliar REDUCE la producción de humor acuoso → PIO baja (hallazgo diagnóstico clave para diferenciarlo de OVCR).</p></div>
+<p class="ref">[Ref: Tortora, 15.ª ed., cap. 21; StatPearls: Aqueous Humor, 2025]</p>
+</div></div></div>
+
+
+<div class="quiz-sec" id="quiz">
+  <h2>📝 Quiz — Evaluación del Grupo 5</h2>
+  <p>Responde las siguientes preguntas para evaluar tu comprensión del tema. Al finalizar, obtendrás tu puntuación.</p>
+  <div class="score-bar" id="scoreBar" style="display:none">
+    <div class="sc-num" id="scoreNum">0/0</div>
+    <div class="sc-lab">Respuestas correctas</div>
+  </div>
+
+  <div class="qi" id="q0">
+    <div class="qi-n">Pregunta 1 </div>
+    <div class="qi-q">La arteria central de la retina es una arteria terminal porque:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(0,0,this)"><span class="qi-l">A)</span><span>Es la más grande de la órbita</span></div>
+      <div class="qi-o" onclick="sel(0,1,this)"><span class="qi-l">B)</span><span>No tiene anastomosis efectivas para irrigar las capas internas retinianas</span></div>
+      <div class="qi-o" onclick="sel(0,2,this)"><span class="qi-l">C)</span><span>Se origina directamente de la carótida externa</span></div>
+      <div class="qi-o" onclick="sel(0,3,this)"><span class="qi-l">D)</span><span>Tiene paredes más gruesas que otras arteriolas</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(0)">Verificar</button>
+    <div class="qi-fb" id="fb0"></div>
+  </div>
+
+  <div class="qi" id="q1">
+    <div class="qi-n">Pregunta 2 </div>
+    <div class="qi-q">Según la AHA/ASA 2021, la OACR se clasifica como:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(1,0,this)"><span class="qi-l">A)</span><span>Una urgencia oftalmológica menor</span></div>
+      <div class="qi-o" onclick="sel(1,1,this)"><span class="qi-l">B)</span><span>Un infarto del SNC (stroke retiniano)</span></div>
+      <div class="qi-o" onclick="sel(1,2,this)"><span class="qi-l">C)</span><span>Una neuropatía óptica</span></div>
+      <div class="qi-o" onclick="sel(1,3,this)"><span class="qi-l">D)</span><span>Una enfermedad retiniana degenerativa</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(1)">Verificar</button>
+    <div class="qi-fb" id="fb1"></div>
+  </div>
+
+  <div class="qi" id="q2">
+    <div class="qi-n">Pregunta 3 </div>
+    <div class="qi-q">El foramen oval permeable (PFO) permite:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(2,0,this)"><span class="qi-l">A)</span><span>El flujo de sangre de AI a AD</span></div>
+      <div class="qi-o" onclick="sel(2,1,this)"><span class="qi-l">B)</span><span>El paso de émbolos venosos a la circulación arterial (embolia paradójica)</span></div>
+      <div class="qi-o" onclick="sel(2,2,this)"><span class="qi-l">C)</span><span>La comunicación entre VD y VI</span></div>
+      <div class="qi-o" onclick="sel(2,3,this)"><span class="qi-l">D)</span><span>El flujo de LCR al sistema venoso</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(2)">Verificar</button>
+    <div class="qi-fb" id="fb2"></div>
+  </div>
+
+  <div class="qi" id="q3">
+    <div class="qi-n">Pregunta 4 </div>
+    <div class="qi-q">La vasoconstricción hipóxica pulmonar (Euler-Liljestrand) tiene como función:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(3,0,this)"><span class="qi-l">A)</span><span>Aumentar la resistencia vascular sistémica</span></div>
+      <div class="qi-o" onclick="sel(3,1,this)"><span class="qi-l">B)</span><span>Desviar flujo pulmonar a áreas mejor ventiladas (optimizar V/Q)</span></div>
+      <div class="qi-o" onclick="sel(3,2,this)"><span class="qi-l">C)</span><span>Reducir la FC</span></div>
+      <div class="qi-o" onclick="sel(3,3,this)"><span class="qi-l">D)</span><span>Aumentar la producción de surfactante</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(3)">Verificar</button>
+    <div class="qi-fb" id="fb3"></div>
+  </div>
+
+  <div class="qi" id="q4">
+    <div class="qi-n">Pregunta 5 </div>
+    <div class="qi-q">Los capilares fenestrados de los procesos ciliares son la base de:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(4,0,this)"><span class="qi-l">A)</span><span>La barrera hematoencefálica</span></div>
+      <div class="qi-o" onclick="sel(4,1,this)"><span class="qi-l">B)</span><span>La producción de humor acuoso</span></div>
+      <div class="qi-o" onclick="sel(4,2,this)"><span class="qi-l">C)</span><span>La formación de lágrimas</span></div>
+      <div class="qi-o" onclick="sel(4,3,this)"><span class="qi-l">D)</span><span>La nutrición del cristalino vía difusión</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(4)">Verificar</button>
+    <div class="qi-fb" id="fb4"></div>
+  </div>
+
+  <div class="qi" id="q5">
+    <div class="qi-n">Pregunta 6 </div>
+    <div class="qi-q">En el síndrome de ojo isquémico (estenosis carotídea ≥90%), la PIO está:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(5,0,this)"><span class="qi-l">A)</span><span>Elevada (>21 mmHg)</span></div>
+      <div class="qi-o" onclick="sel(5,1,this)"><span class="qi-l">B)</span><span>Normal</span></div>
+      <div class="qi-o" onclick="sel(5,2,this)"><span class="qi-l">C)</span><span>Baja (por hipoperfusión ciliar que reduce producción de humor acuoso)</span></div>
+      <div class="qi-o" onclick="sel(5,3,this)"><span class="qi-l">D)</span><span>Variable según el hora del día</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(5)">Verificar</button>
+    <div class="qi-fb" id="fb5"></div>
+  </div>
+
+  <div class="qi" id="q6">
+    <div class="qi-n">Pregunta 7 </div>
+    <div class="qi-q">El hallazgo fundoscópico clásico de la OACR es:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(6,0,this)"><span class="qi-l">A)</span><span>Hemorragias en los 4 cuadrantes</span></div>
+      <div class="qi-o" onclick="sel(6,1,this)"><span class="qi-l">B)</span><span>Neovascularización del disco óptico</span></div>
+      <div class="qi-o" onclick="sel(6,2,this)"><span class="qi-l">C)</span><span>Palidez retiniana difusa + mancha rojo cereza en fóvea</span></div>
+      <div class="qi-o" onclick="sel(6,3,this)"><span class="qi-l">D)</span><span>Edema macular cistoideo</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(6)">Verificar</button>
+    <div class="qi-fb" id="fb6"></div>
+  </div>
+
+  <div class="qi" id="q7">
+    <div class="qi-n">Pregunta 8 </div>
+    <div class="qi-q">Las arterias ciliares posteriores cortas irrigan:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(7,0,this)"><span class="qi-l">A)</span><span>Las capas internas de la retina</span></div>
+      <div class="qi-o" onclick="sel(7,1,this)"><span class="qi-l">B)</span><span>La coriocapilar y la cabeza del nervio óptico</span></div>
+      <div class="qi-o" onclick="sel(7,2,this)"><span class="qi-l">C)</span><span>El iris y el cuerpo ciliar</span></div>
+      <div class="qi-o" onclick="sel(7,3,this)"><span class="qi-l">D)</span><span>Los músculos extraoculares</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(7)">Verificar</button>
+    <div class="qi-fb" id="fb7"></div>
+  </div>
+
+  <div class="qi" id="q8">
+    <div class="qi-n">Pregunta 9 </div>
+    <div class="qi-q">El polígono de Willis es anatómicamente completo en:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(8,0,this)"><span class="qi-l">A)</span><span>~100% de la población</span></div>
+      <div class="qi-o" onclick="sel(8,1,this)"><span class="qi-l">B)</span><span>~80% de la población</span></div>
+      <div class="qi-o" onclick="sel(8,2,this)"><span class="qi-l">C)</span><span>~42% de la población</span></div>
+      <div class="qi-o" onclick="sel(8,3,this)"><span class="qi-l">D)</span><span>~15% de la población</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(8)">Verificar</button>
+    <div class="qi-fb" id="fb8"></div>
+  </div>
+
+  <div class="qi" id="q9">
+    <div class="qi-n">Pregunta 10 </div>
+    <div class="qi-q">La ventana terapéutica para trombolisis IV (tPA) en OACR es:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(9,0,this)"><span class="qi-l">A)</span><span>≤90 minutos</span></div>
+      <div class="qi-o" onclick="sel(9,1,this)"><span class="qi-l">B)</span><span>≤4,5 horas</span></div>
+      <div class="qi-o" onclick="sel(9,2,this)"><span class="qi-l">C)</span><span>≤12 horas</span></div>
+      <div class="qi-o" onclick="sel(9,3,this)"><span class="qi-l">D)</span><span>≤24 horas</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(9)">Verificar</button>
+    <div class="qi-fb" id="fb9"></div>
+  </div>
+  <div style="text-align:center;margin-top:1.5rem">
+    <button class="qi-btn" onclick="showScore()" style="font-size:.75rem;padding:.6rem 2rem">📊 Ver puntuación</button>
+  </div>
+</div>
+</main>
+
+<footer>
+  <p>Del Corazón a la Retina · Morfología General 2026-I · Dr. Jorge Bogoya</p>
+  <p style="margin-top:.2rem">Universidad de La Salle · Bogotá</p>
+</footer>
+
+<script>
+function tc(h){h.closest('.card').classList.toggle('open')}
+const S={},A=[1,1,1,1,1,2,2,1,2,1];
+function sel(i,j,el){const p=document.getElementById('q'+i);p.querySelectorAll('.qi-o').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S[i]=j}
+function chk(i){if(S[i]===undefined)return;const p=document.getElementById('q'+i),os=p.querySelectorAll('.qi-o');os.forEach((o,j)=>{o.classList.remove('sel');if(j===A[i])o.classList.add('ok');else if(j===S[i]&&S[i]!==A[i])o.classList.add('no')});const fb=document.getElementById('fb'+i);fb.textContent=(S[i]===A[i]?'✓ Correcto. ':'✗ Incorrecto. ')+["La ACR es terminal: sin anastomosis funcionales, su oclusión produce ceguera irreversible.","La OACR fue reclasificada como stroke/infarto del SNC. El 27–76% tienen infartos cerebrales silentes en RMN.","El PFO permite embolia paradójica: trombos venosos cruzan a la circulación arterial causando OACR o ACV.","La vasoconstricción hipóxica desvía flujo de zonas hipóxicas a zonas ventiladas, optimizando V/Q.","Las fenestraciones permiten la ultrafiltración; el epitelio ciliar secreta activamente el humor acuoso.","La hipoperfusión ciliar reduce la producción de humor acuoso → PIO baja. Diferencia clave vs. OVCR (PIO normal/alta).","Palidez retiniana (isquemia de capas internas) + rojo cereza en fóvea (se transparenta la perfusión coroidea por ausencia de capa de fibras nerviosas).","Las ciliares posteriores cortas irrigan la coriocapilar (que nutre los fotorreceptores y el EPR) y la cabeza del nervio óptico.","El polígono de Willis es completo solo en ~42% de personas, limitando la redundancia de flujo cerebral.","tPA IV puede administrarse dentro de ≤4,5 horas del inicio de síntomas, igual que en ACV cerebral."][i];fb.className='qi-fb show '+(S[i]===A[i]?'ok':'no')}
+function showScore(){let c=0,t=10;for(let i=0;i<t;i++){if(S[i]===A[i])c++;if(S[i]===undefined){const p=document.getElementById('q'+i);p.style.border='2px solid #00B894';setTimeout(()=>p.style.border='',2000)}}document.getElementById('scoreBar').style.display='block';document.getElementById('scoreNum').textContent=c+'/'+t;document.getElementById('scoreBar').scrollIntoView({behavior:'smooth'})}
+document.querySelectorAll('.card').forEach(c=>{c.querySelector('.card-head')?.addEventListener('click',function(){tc(this)})});
+</script>
+</body>
+</html>

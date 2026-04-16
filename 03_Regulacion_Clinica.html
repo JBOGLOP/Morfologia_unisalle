@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulación CV + Clínica Ocular + Embriología — Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--c:#6C5CE7;--cd:#4A3F8A;--cbg:#F0EDFC;--cg:rgba(108,92,231,.08);
+--dark:#1A1A2E;--text:#2D3436;--text2:#636E72;--bg:#FAFAFA;--card:#FFF;
+--red:#FF6B6B;--blue:#0984E3;--teal:#00B894;
+--radius:16px;--radius-sm:10px;--shadow:0 4px 24px rgba(0,0,0,.06);--tr:all .3s cubic-bezier(.4,0,.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;max-width:100vw}
+.hero{position:relative;padding:3rem 1.5rem;background:var(--dark);text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(108,92,231,.08),transparent 65%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:750px;margin:0 auto}
+.hero-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#6C5CE7;border:1px solid #6C5CE744;padding:.3rem 1rem;border-radius:20px;margin-bottom:1rem;background:#6C5CE70A}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:.5rem;text-shadow:0 2px 30px #6C5CE733}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:.3rem}
+.hero-meta{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.3)}
+.back-btn{position:fixed;top:1rem;left:1rem;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.4rem .8rem;border-radius:20px;border:1px solid #6C5CE755;background:#4A3F8AEE;color:#fff;cursor:pointer;backdrop-filter:blur(8px);text-decoration:none;transition:var(--tr)}
+.back-btn:hover{background:#6C5CE7;transform:scale(1.05)}
+nav.toc{max-width:800px;margin:0 auto;padding:1rem 1.5rem;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+nav.toc a{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.3rem .7rem;border-radius:16px;background:#6C5CE712;color:#4A3F8A;text-decoration:none;transition:var(--tr);border:1px solid #6C5CE722;white-space:nowrap}
+nav.toc a:hover{background:#6C5CE7;color:#fff}
+.main{max-width:800px;margin:0 auto;padding:1.5rem 1.2rem 3rem}
+h2.section-title{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:#4A3F8A;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid #6C5CE7;scroll-margin-top:1rem}
+h3.sub{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text);margin:1.5rem 0 .6rem;padding-left:.8rem;border-left:3px solid #6C5CE7}
+p{margin-bottom:.7rem;font-size:.9rem;text-align:justify}
+p strong{color:#4A3F8A}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.2rem;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:var(--tr)}
+.card:hover{box-shadow:0 6px 30px rgba(0,0,0,.09);transform:translateY(-1px)}
+.card-head{padding:1rem 1.2rem;cursor:pointer;display:flex;align-items:center;gap:.7rem;transition:var(--tr)}
+.card-head:hover{background:#F0EDFC}
+.card-dot{width:10px;height:10px;border-radius:50%;background:#6C5CE7;flex-shrink:0}
+.card-t{font-weight:600;font-size:.92rem;flex:1}
+.card-arr{transition:var(--tr);color:var(--text2);font-size:.7rem;flex-shrink:0}
+.card.open .card-arr{transform:rotate(180deg);color:#6C5CE7}
+.card-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.card.open .card-body{max-height:8000px}
+.card-in{padding:0 1.2rem 1.2rem;font-size:.88rem;line-height:1.8}
+.card-in p{margin-bottom:.6rem}
+.kp{display:flex;gap:.5rem;align-items:flex-start;padding:.4rem 0}
+.kp-i{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;color:#fff;background:#6C5CE7;margin-top:2px;font-weight:700}
+.kp-t{font-size:.85rem}
+.cbox{border-radius:var(--radius-sm);padding:.9rem 1.1rem;margin:.8rem 0;border-left:3px solid}
+.cbox.opt{background:#EBF5FB;border-color:#2980B9}
+.cbox.warn{background:#FFF5F5;border-color:#E74C3C}
+.cbox.tip{background:#F0EDFC;border-color:#6C5CE7}
+.cbox-t{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:.25rem}
+.cbox.opt .cbox-t{color:#2980B9}.cbox.warn .cbox-t{color:#E74C3C}.cbox.tip .cbox-t{color:#4A3F8A}
+.cbox p{font-size:.82rem;font-style:italic;line-height:1.6;margin-bottom:0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:.7rem 0;max-width:100%}
+table.dt{width:100%;border-collapse:collapse;font-size:.8rem;min-width:320px}
+table.dt th{padding:.5rem .6rem;text-align:left;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.5px;text-transform:uppercase;color:#fff;background:#4A3F8A;white-space:nowrap}
+table.dt td{padding:.45rem .6rem;border-bottom:1px solid rgba(0,0,0,.04);word-break:break-word}
+table.dt tr:nth-child(even){background:#F0EDFC}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.8rem 0}
+.comp-card{background:var(--card);border-radius:var(--radius-sm);padding:1rem;border-top:3px solid}
+.comp-card h4{font-family:'Fraunces',serif;font-size:.92rem;margin-bottom:.4rem}
+.comp-card ul{list-style:none;font-size:.82rem;line-height:1.8}
+.comp-card ul li{padding-left:1rem;position:relative}
+.comp-card ul li::before{content:'→';position:absolute;left:0}
+.fig-ref{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text2);margin:.3rem 0;font-style:italic}
+.ref{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#AAA;font-style:italic;margin:.3rem 0}
+.ecg-svg{width:100%;height:50px;margin:.5rem 0}
+.quiz-sec{margin-top:3rem;padding-top:2rem;border-top:2px solid #6C5CE7}
+.quiz-sec h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:#4A3F8A;margin-bottom:1rem}
+.qi{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin-bottom:1.2rem;border:1px solid rgba(0,0,0,.04)}
+.qi-n{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#6C5CE7;letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;font-weight:600}
+.qi-q{font-size:.9rem;margin-bottom:.8rem;line-height:1.7}
+.qi-opts{display:flex;flex-direction:column;gap:.4rem}
+.qi-o{display:flex;align-items:flex-start;gap:.6rem;padding:.65rem .9rem;border-radius:var(--radius-sm);border:1.5px solid #6C5CE733;cursor:pointer;transition:var(--tr);font-size:.85rem}
+.qi-o:hover{border-color:#6C5CE7;background:#F0EDFC}
+.qi-o.sel{border-color:#6C5CE7;background:#6C5CE70F}
+.qi-o.ok{border-color:#27AE60;background:#27AE600D}
+.qi-o.no{border-color:#E74C3C;background:#E74C3C08}
+.qi-l{font-family:'JetBrains Mono',monospace;font-weight:600;color:#6C5CE7;min-width:18px;font-size:.8rem}
+.qi-btn{margin-top:.8rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.5rem 1.2rem;border-radius:20px;border:none;background:#6C5CE7;color:#fff;cursor:pointer;transition:var(--tr)}
+.qi-btn:hover{background:#4A3F8A;box-shadow:0 4px 15px #6C5CE733}
+.qi-fb{margin-top:.7rem;padding:.8rem;border-radius:var(--radius-sm);font-size:.8rem;font-style:italic;display:none;line-height:1.6}
+.qi-fb.show{display:block}.qi-fb.ok{background:#27AE600D;border-left:3px solid #27AE60}.qi-fb.no{background:#E74C3C08;border-left:3px solid #E74C3C}
+.score-bar{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;margin:1.5rem 0;text-align:center;border:2px solid #6C5CE733}
+.score-bar .sc-num{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:900;color:#6C5CE7}
+.score-bar .sc-lab{font-size:.8rem;color:var(--text2)}
+footer{text-align:center;padding:2rem 1rem;background:var(--dark);color:rgba(255,255,255,.25);font-size:.65rem;font-family:'JetBrains Mono',monospace}
+@media(max-width:768px){
+  .hero h1{font-size:1.6rem}.main{padding:1rem .8rem 2.5rem}
+  h2.section-title{font-size:1.25rem}h3.sub{font-size:.95rem}
+  .card-head{padding:.8rem .9rem}.card-in{padding:0 .9rem .9rem}
+  .comp{grid-template-columns:1fr}
+  table.dt{font-size:.72rem}table.dt th{font-size:.55rem;padding:.35rem .4rem}table.dt td{padding:.35rem .4rem}
+  .qi{padding:1rem}.qi-o{padding:.55rem .7rem;font-size:.8rem}
+  nav.toc{padding:.8rem}nav.toc a{font-size:.55rem;padding:.25rem .5rem}
+}
+@media(max-width:480px){
+  .hero{padding:2rem 1rem}.hero h1{font-size:1.4rem}
+  p{font-size:.84rem}.card-in{font-size:.84rem}
+  .kp-t{font-size:.82rem}.cbox p{font-size:.78rem}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .hero{padding:1.5rem 2rem}
+}
+html,body{max-width:100vw;overflow-x:hidden}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Grupo 6 — Actividad Colaborativa</div>
+    <h1>Regulación CV + Clínica Ocular + Embriología</h1>
+    <p class="hero-sub">Módulos 6 + 7 + 8 — Barorreceptores, SRAA, NO, autorregulación retiniana, retinopatía hipertensiva/diabética, OACR, OVCR, NOIA, amaurosis fugaz, NC III, embriología, cardiopatías congénitas, variaciones coronarias</p>
+    <p class="hero-meta">Dr. Jorge Bogoya · Universidad de La Salle · 22–23 abril 2026</p>
+  </div>
+</section>
+
+<nav class="toc">
+    <a href="#s0">Regulación CV</a>
+    <a href="#s1">Retinop. HTA</a>
+    <a href="#s2">Isquemia ocular</a>
+    <a href="#s3">Retinop. diabética</a>
+    <a href="#s4">Embriología</a>
+    <a href="#quiz">📝 Quiz</a>
+</nav>
+
+<main class="main">
+<h2 class="section-title" id="s0">Regulación cardiovascular</h2>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Control nervioso: centro cardiovascular y reflejos</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>El <strong>centro cardiovascular</strong> se localiza en la médula oblongada (bulbo raquídeo). Integra aferencias de barorreceptores, quimiorreceptores, proprioceptores y centros superiores (corteza, sistema límbico, hipotálamo) para modular la actividad cardíaca y el tono vascular.</p>
+<div class="tw"><table class="dt"><tr><th>Receptor</th><th>Localización</th><th>Inervación</th><th>Estímulo</th><th>Respuesta</th></tr><tr><td><strong>Barorreceptores</strong></td><td>Seno carotídeo + arco aórtico</td><td>NC IX (glosofar.) + NC X (vago)</td><td>↑PA → ↑estiramiento</td><td>↑Tono vagal (bradicardia) + ↓simpático (vasodilatación)</td></tr><tr><td><strong>Quimiorreceptores periféricos</strong></td><td>Corpúsculos carotídeos y aórticos</td><td>NC IX + NC X</td><td>↓pO₂, ↑pCO₂, ↓pH</td><td>↑Ventilación + ↑simpático (taquicardia, vasoconstricción)</td></tr><tr><td><strong>Quimiorreceptores centrales</strong></td><td>Superficie ventral de la médula</td><td>Neuronas locales</td><td>↑CO₂/↓pH en LCR</td><td>↑Ventilación</td></tr></table></div>
+<p><strong>Reflejo de Bezold-Jarisch:</strong> Respuesta vagal cardíaca (bradicardia + vasodilatación + apnea) desencadenada por mecanorreceptores ventriculares → síncope vasovagal.</p>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Control humoral y autorregulación</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="tw"><table class="dt"><tr><th>Mediador</th><th>Origen</th><th>Efecto cardiovascular</th></tr><tr><td><strong>SRAA</strong> (Ang II)</td><td>Renina (riñón) → Ang I → ECA → Ang II</td><td>Vasoconstricción potente + aldosterona (retención Na⁺/H₂O) → ↑PA</td></tr><tr><td><strong>ADH (vasopresina)</strong></td><td>Hipotálamo/neurohipófisis</td><td>Retención hídrica renal + vasoconstricción → ↑PA</td></tr><tr><td><strong>ANP</strong></td><td>Aurículas (ante distensión)</td><td>Natriuresis + vasodilatación → ↓PA, ↓volemia</td></tr><tr><td><strong>Adrenalina/Noradrenalina</strong></td><td>Médula suprarrenal</td><td>↑FC, ↑contractilidad, vasoconstricción periférica</td></tr><tr><td><strong>Óxido nítrico (NO)</strong></td><td>Endotelio vascular</td><td>Vasodilatación endotelial (relaja músculo liso)</td></tr><tr><td><strong>Endotelina</strong></td><td>Endotelio vascular</td><td>Vasoconstrictor más potente conocido</td></tr></table></div>
+<div class="cbox opt"><div class="cbox-t">👁️ Autorregulación retiniana vs. coroidea</div><p>Los vasos retinianos poseen <strong>autorregulación miogénica y metabólica</strong>: mantienen flujo constante ante variaciones de la presión de perfusión (PAM 70–130 mmHg). La circulación coroidea tiene <strong>poca autorregulación</strong> y depende más de la regulación simpática. Implicación clínica: la retina tolera mejor las fluctuaciones de PA que la coroides. En hipotensión nocturna severa (overdipping >20%), la autorregulación retiniana puede fallar, causando isquemia del nervio óptico → progresión del glaucoma de tensión normal.</p></div>
+<p class="ref">[Ref: Tortora, 15.ª ed., cap. 21, pp. 811–822]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s1">Retinopatía hipertensiva</h2>
+
+<p>La hipertensión arterial sistémica produce cambios progresivos en la microvasculatura retiniana, detectables en el <strong>examen de fondo de ojo</strong>, que es la única exploración no invasiva que permite observar arteriolas y vénulas directamente in vivo.</p>
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Clasificación de Keith-Wagener-Barker y Mitchell-Wong</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="tw"><table class="dt"><tr><th>Grado KWB</th><th>Hallazgos retinianos</th><th>Clasificación Mitchell-Wong 2004</th><th>Riesgo sistémico</th></tr><tr><td><strong>I</strong></td><td>Estrechamiento arteriolar leve, aumento del reflejo arteriolar (hilo de cobre)</td><td><strong>Leve</strong></td><td>Modesta asociación cardiovascular</td></tr><tr><td><strong>II</strong></td><td>Estrechamiento marcado, signo de Gunn (nicking AV = compresión venosa en cruces AV), hilo de plata</td><td><strong>Leve</strong></td><td>Asociación con riesgo CV moderado</td></tr><tr><td><strong>III</strong></td><td>Hemorragias en llama, exudados duros (depósitos lipídicos), manchas algodonosas (microinfartos de capa de fibras nerviosas)</td><td><strong>Moderada</strong></td><td>Fuerte asociación con ACV, deterioro cognitivo, mortalidad CV, disfunción renal</td></tr><tr><td><strong>IV</strong></td><td>Todo lo anterior + edema de papila</td><td><strong>Severa/Maligna</strong></td><td>Emergencia hipertensiva (PA típicamente >180/120). Remisión inmediata a urgencias</td></tr></table></div>
+<p>La clasificación Mitchell-Wong (2004) simplifica en 3 categorías con mejor correlación clínica y menor variabilidad interobservador (la KWB tiene 20–40% de variabilidad entre grados I–II). En la práctica, lo más importante es distinguir la <strong>retinopatía moderada</strong> (hemorragias + exudados = riesgo sistémico significativo) de la <strong>severa</strong> (papiledema = emergencia).</p>
+<div class="cbox opt"><div class="cbox-t">👁️ El fondo de ojo como 'ventana' vascular</div><p>El optometrista es frecuentemente el primer profesional en detectar daño microvascular sistémico. Un fondo de ojo con hemorragias en llama y manchas algodonosas en un paciente sin diagnóstico previo de HAS debe motivar remisión urgente al médico para confirmación diagnóstica e inicio de tratamiento. Los cambios retinianos predicen eventos cardiovasculares independientemente de los factores de riesgo tradicionales.</p></div>
+<p class="ref">[Ref: StatPearls: Hypertensive Retinopathy, 2025; Mitchell-Wong Classification, JAMA 2004]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s2">OACR, OVCR, NOIA y amaurosis fugaz</h2>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Emergencias vasculares retinianas</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<div class="tw"><table class="dt"><tr><th>Condición</th><th>Hallazgo fundoscópico</th><th>Mecanismo</th><th>Urgencia</th><th>Acción del optometrista</th></tr><tr><td><strong>OACR</strong></td><td>Palidez retiniana + mancha rojo cereza</td><td>Trombosis, émbolo carotídeo/cardíaco</td><td>EMERGENCIA (<4,5 h para tPA)</td><td>Remisión INMEDIATA a centro de ictus. Descartar ACG en >50 años (VSG, PCR)</td></tr><tr><td><strong>OVCR</strong></td><td>Hemorragias en llama 4 cuadrantes, edema disco, dilatación venosa ('fondo en ketchup')</td><td>Compresión venosa en lámina cribosa</td><td>URGENTE (24–48 h)</td><td>Evaluación de PA, glicemia, perfil lipídico, hemograma. Referir a retinología</td></tr><tr><td><strong>NOIA arterítica (ACG)</strong></td><td>Edema papilar pálido ('chalky white'), severa pérdida visual</td><td>Oclusión de ciliares posteriores por vasculitis de células gigantes</td><td>EMERGENCIA MÁXIMA</td><td>Corticoides IV inmediatos (antes de biopsia). VSG + PCR stat. Dolor temporal + claudicación mandibular</td></tr><tr><td><strong>NOIA no arterítica</strong></td><td>Edema papilar sectorial, defecto altitudinal</td><td>Disco de riesgo ('small cup'), HAS, DM, hipotensión nocturna</td><td>Urgente (días)</td><td>Control de PA nocturna. Sin tratamiento comprobado</td></tr><tr><td><strong>Amaurosis fugaz</strong></td><td>Examen normal (episodio ya resolvió)</td><td>Microémbolo transitorio de carótida</td><td>URGENCIA NEUROLÓGICA</td><td>Remisión a urgencias en <24 h. ABCD² score. RMN cerebral + duplex carotídeo + ECG</td></tr></table></div>
+</div></div></div>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">La 'regla de la pupila': NC III y aneurisma</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>Las fibras parasimpáticas pupilomotoras viajan <strong>superficialmente</strong> en el NC III, irrigadas por vasos piales. Las fibras motoras somáticas viajan <strong>centralmente</strong>, irrigadas por vasa vasorum.</p>
+<p><strong>Compresión (aneurisma de comunicante posterior):</strong> daña primero las fibras superficiales → <strong>pupila dilatada y fija</strong> + oftalmoplejía. Un aneurisma roto de PComm causa hemorragia subaracnoidea con 50% de mortalidad.</p>
+<p><strong>Isquemia microvascular (DM, HAS):</strong> daña los vasa vasorum centrales → afecta fibras motoras <strong>respetando la pupila</strong>. Mejora en 1 mes, resolución en 3 meses.</p>
+<div class="cbox warn"><div class="cbox-t">🚨 Regla clínica</div><p>Parálisis de NC III con PUPILA AFECTADA (midriasis) = aneurisma hasta demostrar lo contrario → CTA urgente del polígono de Willis (sensibilidad >95% para aneurismas >3 mm). Si hay regeneración aberrante (retracción palpebral con aducción) = compresión, NUNCA isquemia → imagen obligatoria. Si no hay mejoría a las 6–12 semanas de una parálisis 'presuntamente microvascular' → RMN con contraste obligatoria.</p></div>
+<p class="ref">[Ref: StatPearls: CN III Palsy, 2025; Moore et al., 8.ª ed., cap. 7]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s3">Retinopatía diabética y anti-VEGF</h2>
+
+<div class="card open"><div class="card-head"><div class="card-dot"></div><span class="card-t">Fisiopatología y clasificación</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>La diabetes mellitus produce <strong>microangiopatía</strong> retiniana progresiva por hiperglicemia crónica → daño pericítico → pérdida de autorregulación → isquemia → VEGF.</p>
+<div class="tw"><table class="dt"><tr><th>Estadio</th><th>Hallazgos</th><th>Riesgo de progresión</th></tr><tr><td><strong>RDNP leve</strong></td><td>Microaneurismas (primer signo)</td><td>5% progresa a PDR en 1 año</td></tr><tr><td><strong>RDNP moderada</strong></td><td>Microaneurismas + hemorragias dot-blot + exudados duros + manchas algodonosas</td><td>15% progresa</td></tr><tr><td><strong>RDNP severa (regla 4-2-1)</strong></td><td>Hemorragias severas en 4 cuadrantes, O arrosariamiento venoso en 2, O IRMA en 1</td><td>50% progresa a PDR en 1 año</td></tr><tr><td><strong>RDP (proliferativa)</strong></td><td>Neovascularización del disco (NVD) o elsewhere (NVE). Riesgo: hemorragia vítrea, DR traccional</td><td>Alto riesgo de ceguera sin tratamiento</td></tr></table></div>
+<div class="cbox tip"><div class="cbox-t">📌 Anti-VEGF: panorama 2025</div><p>Faricimab (Vabysmo, 2022): primer bispecífico anti-VEGF-A + anti-Ang2, intervalos hasta 16 semanas. Aflibercept 8 mg (Eylea HD): dosis más alta, intervalos extendidos. 5 biosimilares de aflibercept aprobados por FDA (Enzeevu es intercambiable). Port Delivery System (Susvimo): reservorio implantable de ranibizumab, aprobado para DME (feb 2025) y DR (mayo 2025).</p></div>
+<div class="cbox warn"><div class="cbox-t">🚨 Alerta ADA 2026</div><p>Los agonistas GLP-1 (semaglutide, liraglutide) pueden ACELERAR la retinopatía diabética cuando producen mejoría glucémica rápida. Las guías ADA 2026 recomiendan evaluar el estado de la retina ANTES de intensificar la terapia hipoglucemiante.</p></div>
+<p class="ref">[Ref: ADA Standards of Care 2026; StatPearls: Diabetic Retinopathy, 2025]</p>
+</div></div></div>
+
+
+<h2 class="section-title" id="s4">Desarrollo embrionario y variaciones</h2>
+
+<div class="card"><div class="card-head"><div class="card-dot"></div><span class="card-t">Embriología cardíaca y cardiopatías congénitas</span><span class="card-arr">▼</span></div><div class="card-body"><div class="card-in">
+<p>El corazón es el <strong>primer órgano funcional</strong> del embrión. Día 22: tubo cardíaco primitivo comienza a latir. Asa cardíaca (looping dextro) posiciona las futuras cámaras. Tabicamiento (septum primum/secundum → foramen oval; tabique IV; espiral aortopulmonar) completa la septación hacia la semana 8.</p>
+<div class="tw"><table class="dt"><tr><th>Estructura embrionaria</th><th>Derivado adulto</th></tr><tr><td>Seno venoso</td><td>Parte de AD, seno coronario, nodo SA</td></tr><tr><td>Aurícula primitiva</td><td>Aurículas D e I</td></tr><tr><td>Ventrículo primitivo</td><td>Ventrículo izquierdo</td></tr><tr><td>Bulbo cardíaco</td><td>Ventrículo derecho</td></tr><tr><td>Tronco arterioso</td><td>Aorta ascendente + tronco pulmonar</td></tr></table></div>
+<div class="tw"><table class="dt"><tr><th>Cardiopatía congénita</th><th>Frecuencia</th><th>Descripción</th></tr><tr><td><strong>CIV</strong></td><td>~25% de CC</td><td>Defecto en tabique interventricular (más frecuente)</td></tr><tr><td><strong>CIA</strong></td><td>Frecuente</td><td>Falta de cierre del foramen oval</td></tr><tr><td><strong>Tetralogía de Fallot</strong></td><td>~10%</td><td>Estenosis pulmonar + CIV + cabalgamiento aórtico + hipertrofia VD</td></tr><tr><td><strong>TGV</strong></td><td>~5%</td><td>Aorta sale del VD, tronco pulmonar del VI</td></tr></table></div>
+<p><strong>Variación coronaria peligrosa:</strong> ACI originando del seno aórtico derecho con recorrido interarterial (entre aorta y tronco pulmonar). Durante el ejercicio intenso, la aorta y el tronco pulmonar se dilatan y comprimen la ACI → isquemia ventricular → <strong>muerte súbita en atletas jóvenes</strong>.</p>
+<p class="ref">[Ref: Tortora, 15.ª ed., cap. 20, pp. 786–790; Moore, 8.ª ed., cap. 4]</p>
+</div></div></div>
+
+
+<div class="quiz-sec" id="quiz">
+  <h2>📝 Quiz — Evaluación del Grupo 6</h2>
+  <p>Responde las siguientes preguntas para evaluar tu comprensión del tema. Al finalizar, obtendrás tu puntuación.</p>
+  <div class="score-bar" id="scoreBar" style="display:none">
+    <div class="sc-num" id="scoreNum">0/0</div>
+    <div class="sc-lab">Respuestas correctas</div>
+  </div>
+
+  <div class="qi" id="q0">
+    <div class="qi-n">Pregunta 1 </div>
+    <div class="qi-q">Los barorreceptores del seno carotídeo están inervados por:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(0,0,this)"><span class="qi-l">A)</span><span>NC VII (facial)</span></div>
+      <div class="qi-o" onclick="sel(0,1,this)"><span class="qi-l">B)</span><span>NC IX (glosofaríngeo)</span></div>
+      <div class="qi-o" onclick="sel(0,2,this)"><span class="qi-l">C)</span><span>NC XI (accesorio)</span></div>
+      <div class="qi-o" onclick="sel(0,3,this)"><span class="qi-l">D)</span><span>NC XII (hipogloso)</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(0)">Verificar</button>
+    <div class="qi-fb" id="fb0"></div>
+  </div>
+
+  <div class="qi" id="q1">
+    <div class="qi-n">Pregunta 2 </div>
+    <div class="qi-q">En la clasificación de Keith-Wagener-Barker, la retinopatía grado IV incluye:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(1,0,this)"><span class="qi-l">A)</span><span>Solo estrechamiento arteriolar</span></div>
+      <div class="qi-o" onclick="sel(1,1,this)"><span class="qi-l">B)</span><span>Hemorragias + exudados + edema de papila</span></div>
+      <div class="qi-o" onclick="sel(1,2,this)"><span class="qi-l">C)</span><span>Neovascularización del disco</span></div>
+      <div class="qi-o" onclick="sel(1,3,this)"><span class="qi-l">D)</span><span>Microaneurismas aislados</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(1)">Verificar</button>
+    <div class="qi-fb" id="fb1"></div>
+  </div>
+
+  <div class="qi" id="q2">
+    <div class="qi-n">Pregunta 3 </div>
+    <div class="qi-q">La amaurosis fugaz es clasificada por AHA/ASA como:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(2,0,this)"><span class="qi-l">A)</span><span>Un cuadro benigno que no requiere seguimiento</span></div>
+      <div class="qi-o" onclick="sel(2,1,this)"><span class="qi-l">B)</span><span>Un equivalente de TIA (accidente isquémico transitorio)</span></div>
+      <div class="qi-o" onclick="sel(2,2,this)"><span class="qi-l">C)</span><span>Un síntoma de migraña ocular</span></div>
+      <div class="qi-o" onclick="sel(2,3,this)"><span class="qi-l">D)</span><span>Una manifestación de glaucoma agudo</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(2)">Verificar</button>
+    <div class="qi-fb" id="fb2"></div>
+  </div>
+
+  <div class="qi" id="q3">
+    <div class="qi-n">Pregunta 4 </div>
+    <div class="qi-q">Una parálisis del NC III con pupila dilatada (midriasis) sugiere:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(3,0,this)"><span class="qi-l">A)</span><span>Isquemia microvascular (DM/HAS)</span></div>
+      <div class="qi-o" onclick="sel(3,1,this)"><span class="qi-l">B)</span><span>Aneurisma de la arteria comunicante posterior</span></div>
+      <div class="qi-o" onclick="sel(3,2,this)"><span class="qi-l">C)</span><span>Miastenia gravis</span></div>
+      <div class="qi-o" onclick="sel(3,3,this)"><span class="qi-l">D)</span><span>Parálisis de Bell</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(3)">Verificar</button>
+    <div class="qi-fb" id="fb3"></div>
+  </div>
+
+  <div class="qi" id="q4">
+    <div class="qi-n">Pregunta 5 </div>
+    <div class="qi-q">La 'regla 4-2-1' para retinopatía diabética no proliferativa severa requiere:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(4,0,this)"><span class="qi-l">A)</span><span>4 cuadrantes con neovascularización</span></div>
+      <div class="qi-o" onclick="sel(4,1,this)"><span class="qi-l">B)</span><span>Hemorragias severas en 4 cuadrantes, O beading venoso en 2, O IRMA en 1</span></div>
+      <div class="qi-o" onclick="sel(4,2,this)"><span class="qi-l">C)</span><span>4 microaneurismas por cuadrante</span></div>
+      <div class="qi-o" onclick="sel(4,3,this)"><span class="qi-l">D)</span><span>PIO >21 en 4 visitas</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(4)">Verificar</button>
+    <div class="qi-fb" id="fb4"></div>
+  </div>
+
+  <div class="qi" id="q5">
+    <div class="qi-n">Pregunta 6 </div>
+    <div class="qi-q">El faricimab (Vabysmo) es innovador porque:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(5,0,this)"><span class="qi-l">A)</span><span>Es el primer anti-VEGF inyectable</span></div>
+      <div class="qi-o" onclick="sel(5,1,this)"><span class="qi-l">B)</span><span>Es el primer anticuerpo bispecífico (anti-VEGF-A + anti-Ang2)</span></div>
+      <div class="qi-o" onclick="sel(5,2,this)"><span class="qi-l">C)</span><span>Es el primer tratamiento oral para DME</span></div>
+      <div class="qi-o" onclick="sel(5,3,this)"><span class="qi-l">D)</span><span>Es un implante de liberación sostenida</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(5)">Verificar</button>
+    <div class="qi-fb" id="fb5"></div>
+  </div>
+
+  <div class="qi" id="q6">
+    <div class="qi-n">Pregunta 7 </div>
+    <div class="qi-q">La autorregulación retiniana mantiene flujo constante cuando la PAM está entre:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(6,0,this)"><span class="qi-l">A)</span><span>40–60 mmHg</span></div>
+      <div class="qi-o" onclick="sel(6,1,this)"><span class="qi-l">B)</span><span>70–130 mmHg</span></div>
+      <div class="qi-o" onclick="sel(6,2,this)"><span class="qi-l">C)</span><span>130–200 mmHg</span></div>
+      <div class="qi-o" onclick="sel(6,3,this)"><span class="qi-l">D)</span><span>No existe autorregulación retiniana</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(6)">Verificar</button>
+    <div class="qi-fb" id="fb6"></div>
+  </div>
+
+  <div class="qi" id="q7">
+    <div class="qi-n">Pregunta 8 </div>
+    <div class="qi-q">El óxido nítrico (NO) produce:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(7,0,this)"><span class="qi-l">A)</span><span>Vasoconstricción y retención de Na⁺</span></div>
+      <div class="qi-o" onclick="sel(7,1,this)"><span class="qi-l">B)</span><span>Vasodilatación endotelial</span></div>
+      <div class="qi-o" onclick="sel(7,2,this)"><span class="qi-l">C)</span><span>Bradicardia sinusal</span></div>
+      <div class="qi-o" onclick="sel(7,3,this)"><span class="qi-l">D)</span><span>Broncoconstricción</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(7)">Verificar</button>
+    <div class="qi-fb" id="fb7"></div>
+  </div>
+
+  <div class="qi" id="q8">
+    <div class="qi-n">Pregunta 9 </div>
+    <div class="qi-q">La cardiopatía congénita más frecuente es:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(8,0,this)"><span class="qi-l">A)</span><span>Tetralogía de Fallot</span></div>
+      <div class="qi-o" onclick="sel(8,1,this)"><span class="qi-l">B)</span><span>Transposición de grandes vasos</span></div>
+      <div class="qi-o" onclick="sel(8,2,this)"><span class="qi-l">C)</span><span>Comunicación interventricular (CIV)</span></div>
+      <div class="qi-o" onclick="sel(8,3,this)"><span class="qi-l">D)</span><span>Coartación de aorta</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(8)">Verificar</button>
+    <div class="qi-fb" id="fb8"></div>
+  </div>
+
+  <div class="qi" id="q9">
+    <div class="qi-n">Pregunta 10 </div>
+    <div class="qi-q">Las guías ADA 2026 advierten que los agonistas GLP-1 pueden:</div>
+    <div class="qi-opts">
+      <div class="qi-o" onclick="sel(9,0,this)"><span class="qi-l">A)</span><span>Causar glaucoma agudo</span></div>
+      <div class="qi-o" onclick="sel(9,1,this)"><span class="qi-l">B)</span><span>Acelerar la retinopatía diabética con mejoría glucémica rápida</span></div>
+      <div class="qi-o" onclick="sel(9,2,this)"><span class="qi-l">C)</span><span>Producir desprendimiento de retina</span></div>
+      <div class="qi-o" onclick="sel(9,3,this)"><span class="qi-l">D)</span><span>Reducir la PIO significativamente</span></div>
+    </div>
+    <button class="qi-btn" onclick="chk(9)">Verificar</button>
+    <div class="qi-fb" id="fb9"></div>
+  </div>
+  <div style="text-align:center;margin-top:1.5rem">
+    <button class="qi-btn" onclick="showScore()" style="font-size:.75rem;padding:.6rem 2rem">📊 Ver puntuación</button>
+  </div>
+</div>
+</main>
+
+<footer>
+  <p>Del Corazón a la Retina · Morfología General 2026-I · Dr. Jorge Bogoya</p>
+  <p style="margin-top:.2rem">Universidad de La Salle · Bogotá</p>
+</footer>
+
+<script>
+function tc(h){h.closest('.card').classList.toggle('open')}
+const S={},A=[1,1,1,1,1,1,1,1,2,1];
+function sel(i,j,el){const p=document.getElementById('q'+i);p.querySelectorAll('.qi-o').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S[i]=j}
+function chk(i){if(S[i]===undefined)return;const p=document.getElementById('q'+i),os=p.querySelectorAll('.qi-o');os.forEach((o,j)=>{o.classList.remove('sel');if(j===A[i])o.classList.add('ok');else if(j===S[i]&&S[i]!==A[i])o.classList.add('no')});const fb=document.getElementById('fb'+i);fb.textContent=(S[i]===A[i]?'✓ Correcto. ':'✗ Incorrecto. ')+["El seno carotídeo está inervado por el NC IX (glosofaríngeo); el arco aórtico por el NC X (vago).","Grado IV = todos los hallazgos de grado III + edema de papila → indica HAS maligna/emergencia.","La amaurosis fugaz es un TIA ocular. Riesgo de ACV 10–15% a 3 meses. Requiere evaluación urgente en <24 h.","Pupila afectada (midriasis) en parálisis NC III = compresión, generalmente por aneurisma de PComm → CTA urgente.","Regla 4-2-1: hemorragias en 4 cuadrantes, O beading en 2, O IRMA en 1. Cualquier criterio = RDNP severa (50% progresa a PDR en 1 año).","Faricimab es el primer bispecífico que bloquea VEGF-A y Angiopoietina-2, permitiendo intervalos hasta 16 semanas.","Los vasos retinianos autorregulan en el rango PAM 70–130 mmHg. Fuera de ese rango, la autorregulación falla.","El NO es el principal vasodilatador endotelial — relaja el músculo liso vascular.","La CIV representa ~25% de todas las cardiopatías congénitas, siendo la más frecuente.","Los GLP-1RA (semaglutide, etc.) pueden acelerar DR cuando producen mejoría glucémica rápida. Evaluar retina ANTES de intensificar tratamiento."][i];fb.className='qi-fb show '+(S[i]===A[i]?'ok':'no')}
+function showScore(){let c=0,t=10;for(let i=0;i<t;i++){if(S[i]===A[i])c++;if(S[i]===undefined){const p=document.getElementById('q'+i);p.style.border='2px solid #6C5CE7';setTimeout(()=>p.style.border='',2000)}}document.getElementById('scoreBar').style.display='block';document.getElementById('scoreNum').textContent=c+'/'+t;document.getElementById('scoreBar').scrollIntoView({behavior:'smooth'})}
+document.querySelectorAll('.card').forEach(c=>{c.querySelector('.card-head')?.addEventListener('click',function(){tc(this)})});
+</script>
+</body>
+</html>
