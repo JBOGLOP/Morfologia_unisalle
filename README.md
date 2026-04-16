@@ -34,7 +34,7 @@
 | 🛡️ Meninges y LCE | G4 | [2_grupo4_meninges_lce_2.html](https://jboglop.github.io/Morfologia_unisalle/2_grupo4_meninges_lce_2.html) |
 | 👁️ NC II, III, IV | G5 | [2_grupo5_NC_II_III_IV.html](https://jboglop.github.io/Morfologia_unisalle/2_grupo5_NC_II_III_IV.html) |
 | ⚡ NC V₁, VI, VII | G6 | [2_grupo6_NC_V1_VI_VII.html](https://jboglop.github.io/Morfologia_unisalle/2_grupo6_NC_V1_VI_VII.html) |
-| 📝 **Quiz Final — SNC** | Todos | [**2_quiz_final.html**](https://jboglop.github.io/Morfologia_unisalle/2_quiz_final.html) |
+| 📝 **Quiz Final — SNC** | Todos | [**02_quiz_final.html**](https://jboglop.github.io/Morfologia_unisalle/02_quiz_final.html) |
 
 ---
 
