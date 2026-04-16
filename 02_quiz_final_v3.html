@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Final — SNC · Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1714;--parchment:#f5f0e8;--cream:#faf7f2;
+  --amber:#c8a45c;--amber-light:#e8d5a0;--amber-dark:#8b6914;
+  --teal:#2a7a6e;--red-clinical:#b5413b;--blue-nerve:#3a5a8c;
+  --green-muscle:#4a7a4e;--shadow:rgba(26,23,20,0.12);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+  --g1:#2a7a6e;--g1-bg:#eaf6f4;--g2:#3a5a8c;--g2-bg:#eaf0f8;
+  --ver-a:#2a7a6e;--ver-b:#7a3a8c;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--ink);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--teal));z-index:1001;transition:width 0.1s;width:0}
+
+/* HERO */
+.hero{min-height:42vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(170deg,var(--ink) 0%,#2a2520 40%,#3a3028 100%);color:var(--parchment);padding:2rem;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(200,164,92,0.15) 0%,transparent 60%),radial-gradient(ellipse at 70% 60%,rgba(42,122,110,0.1) 0%,transparent 50%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:750px}
+.hero h1{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.6rem);font-weight:900;line-height:1.1;margin-bottom:0.4rem}
+.hero h1 .accent{color:var(--amber)}
+.hero .subtitle{font-family:var(--font-display);font-style:italic;font-size:clamp(0.95rem,2.2vw,1.4rem);color:var(--amber-light);margin-bottom:1rem;opacity:0.9}
+.hero .meta{font-family:var(--font-mono);font-size:0.76rem;color:rgba(245,240,232,0.5);letter-spacing:0.05em;margin-bottom:0.3rem}
+.hero .meta span{color:var(--amber)}
+.hero .dyn-badge{display:inline-block;background:var(--teal);color:white;font-family:var(--font-mono);font-size:0.8rem;padding:0.38rem 1.1rem;border-radius:30px;margin-top:0.7rem;letter-spacing:0.06em;text-transform:uppercase}
+.quiz-badge-row{display:flex;gap:0.6rem;justify-content:center;margin-top:0.8rem;flex-wrap:wrap}
+.qbadge{display:inline-flex;align-items:center;gap:0.3rem;background:rgba(200,164,92,0.15);border:1px solid rgba(200,164,92,0.3);color:var(--amber-light);font-family:var(--font-mono);font-size:0.72rem;padding:0.25rem 0.75rem;border-radius:20px;letter-spacing:0.04em}
+
+/* REGISTRO */
+.reg-wrap{max-width:680px;margin:0 auto;padding:2.5rem 1.5rem}
+.reg-card{background:var(--cream);border-radius:16px;box-shadow:0 6px 32px var(--shadow);overflow:hidden}
+.reg-header{background:var(--ink);color:var(--parchment);padding:1.5rem 2rem}
+.reg-header h2{font-family:var(--font-display);font-size:1.5rem;margin-bottom:0.2rem}
+.reg-header p{font-family:var(--font-mono);font-size:0.72rem;color:rgba(245,240,232,0.45);letter-spacing:0.04em}
+.reg-body{padding:1.8rem 2rem}
+.group-selector{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.4rem;margin-bottom:1.6rem}
+.group-opt{border:2px solid rgba(200,164,92,0.3);border-radius:12px;padding:1rem;text-align:center;cursor:pointer;transition:all 0.25s;background:var(--parchment);user-select:none}
+.group-opt:hover{border-color:var(--amber);background:var(--amber-light)}
+.group-opt.selected.g1{border-color:var(--g1);background:var(--g1-bg);box-shadow:0 0 0 3px rgba(42,122,110,0.15)}
+.group-opt.selected.g2{border-color:var(--g2);background:var(--g2-bg);box-shadow:0 0 0 3px rgba(58,90,140,0.15)}
+.group-opt .g-code{font-family:var(--font-display);font-size:2rem;font-weight:900;line-height:1}
+.group-opt .g-day{font-family:var(--font-mono);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.07em;margin-top:0.15rem;opacity:0.55}
+.group-opt .g-hour{font-family:var(--font-mono);font-size:0.63rem;opacity:0.45;margin-top:0.05rem}
+.group-opt.g1 .g-code{color:var(--g1)}
+.group-opt.g2 .g-code{color:var(--g2)}
+.field-group{margin-bottom:1.3rem}
+.field-group label{display:block;font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber-dark);margin-bottom:0.38rem}
+.field-group select,.field-group input{width:100%;padding:0.7rem 1rem;border:1.5px solid rgba(200,164,92,0.3);border-radius:8px;background:var(--parchment);font-family:var(--font-body);font-size:0.95rem;color:var(--ink);outline:none;transition:border-color 0.2s,box-shadow 0.2s;appearance:none;-webkit-appearance:none}
+.field-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%238b6914' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
+.field-group select:focus,.field-group input:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(200,164,92,0.12)}
+.field-group select:disabled{opacity:0.4;cursor:not-allowed}
+.field-hint{font-family:var(--font-mono);font-size:0.67rem;color:rgba(26,23,20,0.38);margin-top:0.25rem}
+.email-note{display:flex;align-items:center;gap:0.5rem;background:rgba(200,164,92,0.08);border:1px solid rgba(200,164,92,0.25);border-radius:6px;padding:0.5rem 0.8rem;margin-top:0.35rem;font-family:var(--font-mono);font-size:0.68rem;color:var(--amber-dark)}
+.notice-box{background:#fff8e1;border:1.5px solid var(--amber);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1.4rem;display:flex;gap:0.7rem;align-items:flex-start}
+.notice-box .nb-icon{font-size:1.2rem;margin-top:0.05rem;flex-shrink:0}
+.notice-box p{font-family:var(--font-mono);font-size:0.76rem;color:var(--amber-dark);line-height:1.6}
+.notice-box strong{color:var(--ink)}
+.btn-start{width:100%;padding:1rem;background:var(--amber);color:var(--ink);font-family:var(--font-mono);font-size:0.92rem;font-weight:500;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.07em;text-transform:uppercase;transition:all 0.3s;margin-top:0.3rem}
+.btn-start:hover{background:var(--amber-dark);color:white;transform:translateY(-1px);box-shadow:0 4px 16px rgba(139,105,20,0.25)}
+.btn-start:disabled{opacity:0.35;cursor:not-allowed;transform:none;box-shadow:none}
+.reg-error{background:#f8d7da;color:#721c24;font-family:var(--font-mono);font-size:0.76rem;padding:0.7rem 1rem;border-radius:6px;margin-bottom:1rem;display:none}
+
+/* QUIZ */
+.quiz-wrap{max-width:880px;margin:0 auto;padding:2rem 1.5rem 4rem;display:none}
+
+/* STICKY HEADER */
+.sticky-header{position:sticky;top:0;z-index:200;margin-bottom:1.6rem}
+.quiz-header-bar{background:var(--ink);color:var(--parchment);border-radius:12px;padding:1.1rem 1.8rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;box-shadow:0 4px 20px rgba(26,23,20,0.28);transition:border-radius 0.2s}
+.sticky-header.scrolled .quiz-header-bar{border-radius:0 0 12px 12px}
+.student-info .s-name{font-family:var(--font-display);font-size:1.02rem;color:var(--amber);font-weight:700}
+.student-info .s-detail{font-family:var(--font-mono);font-size:0.67rem;color:rgba(245,240,232,0.45);letter-spacing:0.04em;margin-top:0.1rem}
+.ver-badge{display:inline-block;font-family:var(--font-mono);font-size:0.65rem;font-weight:500;padding:0.15rem 0.55rem;border-radius:4px;letter-spacing:0.07em;text-transform:uppercase;margin-left:0.6rem;vertical-align:middle}
+.ver-badge.va{background:rgba(42,122,110,0.3);color:#a0e0d0;border:1px solid rgba(42,122,110,0.4)}
+.ver-badge.vb{background:rgba(122,58,140,0.3);color:#d8b0f0;border:1px solid rgba(122,58,140,0.4)}
+.timer-box{text-align:right}
+.timer-display{font-family:var(--font-mono);font-size:2.4rem;font-weight:500;color:var(--amber);letter-spacing:0.05em;line-height:1}
+.timer-label{font-family:var(--font-mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;opacity:0.4;margin-top:0.1rem}
+.timer-display.urgent{color:#ff6b6b;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.55}}
+
+/* BANNER TIEMPO AGOTADO */
+.timeout-banner{display:none;position:fixed;top:0;left:0;right:0;z-index:500;background:linear-gradient(90deg,#b5413b,#8a2f2b);color:white;text-align:center;padding:0.85rem 1.5rem;font-family:var(--font-mono);font-size:0.9rem;font-weight:500;letter-spacing:0.04em;box-shadow:0 3px 16px rgba(181,65,59,0.5)}
+.timeout-banner.show{display:block;animation:slideDown 0.4s ease-out}
+@keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* PROGRESO */
+.progress-quiz{height:5px;background:rgba(200,164,92,0.15);border-radius:3px;margin-bottom:0.6rem;overflow:hidden}
+.progress-quiz-fill{height:100%;background:linear-gradient(90deg,var(--amber),var(--teal));border-radius:3px;transition:width 0.4s;width:0}
+.q-counter{font-family:var(--font-mono);font-size:0.7rem;color:var(--amber-dark);text-align:right;margin-bottom:1.2rem;letter-spacing:0.05em}
+.no-fb-strip{background:rgba(58,90,140,0.08);border:1.5px solid rgba(58,90,140,0.2);border-radius:8px;padding:0.7rem 1rem;margin-bottom:1.4rem;display:flex;align-items:center;gap:0.6rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--blue-nerve)}
+
+/* PREGUNTAS */
+.quiz-q{background:var(--cream);border:1px solid rgba(200,164,92,0.2);border-radius:12px;padding:1.5rem;margin-bottom:1rem;animation:fadeIn 0.4s ease-out}
+.quiz-q.answered{border-color:rgba(42,122,110,0.35);background:#f5faf9}
+.quiz-q.unanswered-alert{border-color:rgba(181,65,59,0.55)!important;background:#fff8f7!important;animation:shakeAlert 0.4s ease-out}
+@keyframes shakeAlert{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}60%{transform:translateX(4px)}}
+.quiz-q h4{font-family:var(--font-display);font-size:1rem;margin-bottom:0.9rem;line-height:1.55}
+.q-label{font-family:var(--font-mono);font-size:0.67rem;color:var(--amber-dark);display:block;margin-bottom:0.3rem;letter-spacing:0.05em}
+.q-group-tag{display:inline-block;font-family:var(--font-mono);font-size:0.6rem;background:rgba(200,164,92,0.12);border:1px solid rgba(200,164,92,0.3);color:var(--amber-dark);padding:0.1rem 0.5rem;border-radius:4px;margin-left:0.5rem;letter-spacing:0.04em;vertical-align:middle}
+.quiz-options{list-style:none;padding:0}
+.quiz-options li{padding:0.6rem 1rem;margin:0.32rem 0;border:1.5px solid rgba(200,164,92,0.3);border-radius:8px;cursor:pointer;transition:all 0.22s;font-size:0.92rem;display:flex;align-items:center;gap:0.6rem}
+.quiz-options li:hover{background:var(--amber-light);border-color:var(--amber)}
+.quiz-options li.selected{background:rgba(42,122,110,0.1);border-color:var(--teal);color:var(--ink)}
+.quiz-options li.opt-locked{pointer-events:none;opacity:0.6;cursor:not-allowed}
+.opt-letter{font-family:var(--font-mono);font-size:0.72rem;font-weight:500;color:var(--amber-dark);min-width:1.2rem;flex-shrink:0}
+
+/* SUBMIT */
+.btn-submit{display:block;margin:2rem auto 0;padding:1rem 3rem;background:var(--teal);color:white;font-family:var(--font-mono);font-size:0.95rem;font-weight:500;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.07em;text-transform:uppercase;transition:all 0.3s;box-shadow:0 4px 16px rgba(42,122,110,0.25)}
+.btn-submit:hover{background:#1d5c52;transform:translateY(-1px);box-shadow:0 6px 20px rgba(42,122,110,0.35)}
+.btn-submit:disabled{opacity:0.35;cursor:not-allowed;transform:none;box-shadow:none}
+.submit-warn{text-align:center;font-family:var(--font-mono);font-size:0.73rem;color:var(--amber-dark);margin-top:0.5rem}
+
+/* SCORE */
+.score-panel{display:none;text-align:center;padding:2.5rem;background:var(--cream);border-radius:16px;border:2px solid var(--amber);margin-top:2rem;animation:fadeIn 0.5s ease-out}
+.score-big{font-family:var(--font-display);font-size:4.5rem;font-weight:900;color:var(--amber-dark);line-height:1;margin-bottom:0.2rem}
+.score-fraction{font-family:var(--font-mono);font-size:0.9rem;color:rgba(26,23,20,0.45);margin-bottom:1.2rem}
+.score-msg{font-family:var(--font-display);font-size:1.25rem;font-style:italic;margin-bottom:0.3rem}
+.detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin:1.5rem 0}
+.detail-item{background:var(--parchment);border-radius:8px;padding:0.7rem 0.4rem}
+.detail-item .di-val{font-family:var(--font-display);font-size:1.4rem;font-weight:700}
+.detail-item .di-val.c{color:var(--green-muscle)}
+.detail-item .di-val.i{color:var(--red-clinical)}
+.detail-item .di-label{font-family:var(--font-mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.48;margin-top:0.1rem}
+.fb-note{margin-top:1.5rem;background:rgba(58,90,140,0.08);border:1px solid rgba(58,90,140,0.2);border-radius:10px;padding:1rem 1.2rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--blue-nerve);line-height:1.7;text-align:left}
+.fb-note strong{color:var(--ink)}
+.send-status{font-family:var(--font-mono);font-size:0.76rem;margin-top:1rem;padding:0.55rem 1.1rem;border-radius:6px;display:inline-block}
+.send-status.sending{background:#fff8e1;color:#856404}
+.send-status.ok{background:#d4edda;color:#155724}
+.send-status.fail{background:#f8d7da;color:#721c24}
+.btn-retry{font-family:var(--font-mono);font-size:0.78rem;padding:0.55rem 1.4rem;border:1.5px solid var(--amber-dark);background:transparent;color:var(--amber-dark);border-radius:8px;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.3s;margin-top:0.8rem;display:block;margin-left:auto;margin-right:auto}
+.btn-retry:hover{background:var(--amber-dark);color:white}
+.footer{background:var(--ink);color:rgba(245,240,232,0.4);text-align:center;padding:2rem;font-family:var(--font-mono);font-size:0.72rem}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){
+  .reg-body{padding:1.4rem 1.2rem}
+  .detail-grid{grid-template-columns:repeat(2,1fr)}
+  .quiz-header-bar{flex-direction:column;text-align:center}
+  .timer-box{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="hero">
+  <div class="hero-content">
+    <div class="meta">UNIVERSIDAD DE LA SALLE · OPTOMETRÍA · <span>MORFOLOGÍA GENERAL 2026-I</span></div>
+    <h1>Quiz <span class="accent">Final</span></h1>
+    <p class="subtitle">Clase Puente — Sistema Nervioso Central y Pares Craneales</p>
+    <div class="meta">Dr. Jorge Bogoya</div>
+    <div class="quiz-badge-row">
+      <span class="qbadge">📝 15 preguntas</span>
+      <span class="qbadge">⏱ 15 minutos</span>
+      <span class="qbadge">🔒 Sin retroalimentación inmediata</span>
+    </div>
+    <div class="dyn-badge" id="heroBadge">⏳ Identifícate para comenzar</div>
+  </div>
+</header>
+
+<!-- REGISTRO -->
+<div class="reg-wrap" id="regSection">
+  <div class="reg-card">
+    <div class="reg-header">
+      <h2>Identificación del estudiante</h2>
+      <p>MORFOLOGÍA GENERAL · PERIODO 2026-I · OPTOMETRÍA</p>
+    </div>
+    <div class="reg-body">
+      <div class="reg-error" id="regError">Por favor completa todos los campos.</div>
+      <div class="notice-box">
+        <span class="nb-icon">ℹ️</span>
+        <p><strong>Modo evaluativo:</strong> Las respuestas correctas <strong>no se revelan</strong> durante el quiz. La retroalimentación completa se realizará en grupo al finalizar, con la versión del docente.</p>
+      </div>
+      <div class="field-group">
+        <label>1 — Selecciona tu grupo</label>
+        <div class="group-selector">
+          <div class="group-opt g1" id="optG1" onclick="selectGroup('G1')">
+            <div class="g-code">G1</div><div class="g-day">Jueves</div><div class="g-hour">07:00 – 08:59</div>
+          </div>
+          <div class="group-opt g2" id="optG2" onclick="selectGroup('G2')">
+            <div class="g-code">G2</div><div class="g-day">Miércoles</div><div class="g-hour">09:00 – 10:59</div>
+          </div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>2 — Selecciona tu nombre</label>
+        <select id="selectNombre" onchange="onStudentSelect()" disabled>
+          <option value="">— Primero elige tu grupo —</option>
+        </select>
+        <div class="field-hint" id="hintNombre">Selecciona el grupo para ver la lista.</div>
+      </div>
+      <div class="field-group">
+        <label>3 — Confirma o corrige tu correo</label>
+        <input type="email" id="correo" placeholder="usuario@unisalle.edu.co" autocomplete="email" disabled>
+        <div class="email-note" id="emailNote" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Corrige si tu correo institucional es diferente al registrado.
+        </div>
+      </div>
+      <button class="btn-start" id="btnStart" onclick="startQuiz()" disabled>▶ Comenzar quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- BANNER TIEMPO AGOTADO -->
+<div class="timeout-banner" id="timeoutBanner">
+  ⏱ &nbsp;Tiempo agotado — tus respuestas han sido enviadas automáticamente.
+</div>
+
+<!-- QUIZ -->
+<div class="quiz-wrap" id="quizSection">
+  <div class="sticky-header" id="stickyHeader">
+    <div class="quiz-header-bar">
+      <div class="student-info">
+        <div class="s-name" id="sName">—</div>
+        <div class="s-detail" id="sDetail">—</div>
+      </div>
+      <div class="timer-box">
+        <div class="timer-display" id="timerDisplay">15:00</div>
+        <div class="timer-label">tiempo restante</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-quiz"><div class="progress-quiz-fill" id="quizProgress"></div></div>
+  <div class="q-counter" id="qCounter">0 / 15 respondidas</div>
+
+  <div class="no-fb-strip">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    Modo evaluativo — las respuestas correctas se revelan en la sesión de retroalimentación grupal.
+  </div>
+
+  <!-- Contenedor dinámico de preguntas -->
+  <div id="questionsContainer"></div>
+
+  <button class="btn-submit" id="btnSubmit" onclick="submitQuiz()" disabled>Enviar respuestas →</button>
+  <p class="submit-warn" id="submitWarn">Responde todas las preguntas para habilitar el envío.</p>
+
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scorePct">—</div>
+    <div class="score-fraction" id="scoreFrac">—</div>
+    <div class="score-msg" id="scoreMsg">—</div>
+    <div class="detail-grid">
+      <div class="detail-item"><div class="di-val c" id="dCorrect">—</div><div class="di-label">Correctas</div></div>
+      <div class="detail-item"><div class="di-val i" id="dIncorrect">—</div><div class="di-label">Incorrectas</div></div>
+      <div class="detail-item"><div class="di-val" id="dTotal">15</div><div class="di-label">Total</div></div>
+      <div class="detail-item"><div class="di-val" id="dTime">—</div><div class="di-label">Tiempo</div></div>
+    </div>
+    <div class="fb-note">
+      📋 <strong>Retroalimentación:</strong> El docente revisará cada pregunta con la clave de respuestas al finalizar.<br>
+      Las explicaciones clínicas serán proyectadas para discusión grupal.
+    </div>
+    <div class="send-status" id="sendStatus" style="display:none"></div>
+    <button class="btn-retry" onclick="location.reload()">↺ Volver al inicio</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Universidad de La Salle · Optometría · Morfología General 2026-I</p>
+  <p style="margin-top:0.3rem">Dr. Jorge Bogoya · Clase Puente — Sistema Nervioso Central</p>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+//  CONFIGURACIÓN
+// ══════════════════════════════════════════════════════════════════
+const SHEETS_URL   = "https://script.google.com/macros/s/AKfycbxijUrh5HhZa30qwrDeBeoFDWaCNsUami16c0Tb96Ke8RqteD3aMePby-EooyRnbEAqIQ/exec";
+const EXAM_MINUTES = 15;
+const TOTAL_QS     = 15;
+
+// ══════════════════════════════════════════════════════════════════
+//  BANCO DE PREGUNTAS — orden canónico (Versión A)
+//  correct: índice (0-3) de la opción correcta en options[]
+// ══════════════════════════════════════════════════════════════════
+const QUESTIONS = [
+  {
+    label: "G1 · Unidad Motora",
+    stem:  "Los músculos extraoculares tienen unidades motoras de 5–10 fibras musculares. Esto les permite:",
+    options: [
+      "Control motor extremadamente fino para movimientos oculares precisos",
+      "Generar la máxima fuerza posible",
+      "Resistencia a la fatiga durante largos periodos",
+      "Contracción isométrica sostenida"
+    ],
+    correct: 0
+  },
+  {
+    label: "G1 · Unión Neuromuscular",
+    stem:  "La miastenia gravis ocular y la toxina botulínica comparten un mecanismo final similar respecto a la unión neuromuscular. ¿Cuál es?",
+    options: [
+      "Ambas destruyen el axón motor de forma permanente",
+      "Ambas reducen la disponibilidad efectiva de acetilcolina en la hendidura sináptica",
+      "Ambas afectan exclusivamente al músculo liso ocular",
+      "Ambas producen hiperactividad muscular por despolarización sostenida"
+    ],
+    correct: 1
+  },
+  {
+    label: "G2 · SNC vs SNP",
+    stem:  "¿Cuál de las siguientes estructuras pertenece EXCLUSIVAMENTE al Sistema Nervioso Central y no al Sistema Nervioso Periférico?",
+    options: [
+      "Ganglio ciliar",
+      "Nervio óptico (NC II)",
+      "Nervio facial (NC VII)",
+      "Ganglio trigéminal de Gasser"
+    ],
+    correct: 1
+  },
+  {
+    label: "G2 · SNC vs SNP",
+    stem:  "¿Cuál de las siguientes afirmaciones describe CORRECTAMENTE una diferencia estructural entre el SNC y el SNP?",
+    options: [
+      "El SNP está protegido por meninges y cráneo; el SNC no tiene protección ósea",
+      "Los axones del SNC se regeneran gracias a las células de Schwann; los del SNP no",
+      "El SNC incluye encéfalo y médula espinal; el SNP incluye nervios craneales, espinales, ganglios y plexos",
+      "El SNP es el centro integrador; el SNC comunica el SNP con los órganos periféricos"
+    ],
+    correct: 2
+  },
+  {
+    label: "G2 · SNC vs SNP",
+    stem:  "¿Cuál de las siguientes afirmaciones sobre el control autonómico de la pupila es CORRECTA?",
+    options: [
+      "El simpático produce miosis a través del músculo esfínter pupilar",
+      "El parasimpático produce midriasis a través del NC III",
+      "Ambos sistemas actúan sobre el mismo músculo pupilar con efectos opuestos",
+      "El simpático dilata la pupila (músculo dilatador) y el parasimpático la contrae (músculo esfínter vía NC III)"
+    ],
+    correct: 3
+  },
+  {
+    label: "G3 · Partes del Encéfalo",
+    stem:  "¿En qué región del tronco encefálico se originan los núcleos de los nervios craneales III (oculomotor) y IV (troclear)?",
+    options: [
+      "Diencéfalo (tálamo)",
+      "Mesencéfalo",
+      "Puente (protuberancia)",
+      "Bulbo raquídeo"
+    ],
+    correct: 1
+  },
+  {
+    label: "G3 · Partes del Encéfalo",
+    stem:  "Un paciente de 65 años sufre un ACV que afecta el lóbulo occipital izquierdo. ¿Qué alteración del campo visual es más probable?",
+    options: [
+      "Ceguera total del ojo izquierdo",
+      "Hemianopsia homónima derecha",
+      "Ptosis palpebral bilateral",
+      "Midriasis izquierda aislada"
+    ],
+    correct: 1
+  },
+  {
+    label: "G3 · Partes del Encéfalo",
+    stem:  "¿Cuál de las siguientes estructuras NO forma parte del tronco encefálico?",
+    options: [
+      "Mesencéfalo",
+      "Puente (protuberancia)",
+      "Bulbo raquídeo",
+      "Tálamo"
+    ],
+    correct: 3
+  },
+  {
+    label: "G4 · Meninges y LCE",
+    stem:  "¿En cuál de los siguientes espacios meníngeos circula el líquido cefalorraquídeo (LCE)?",
+    options: [
+      "Espacio epidural (extradural)",
+      "Espacio subdural",
+      "Espacio subaracnoideo",
+      "Espacio intraventricular exclusivamente (no circula en meninges)"
+    ],
+    correct: 2
+  },
+  {
+    label: "G4 · Meninges y LCE",
+    stem:  "¿Dónde se reabsorbe el líquido cefalorraquídeo (LCE) hacia la circulación venosa?",
+    options: [
+      "Plexos coroideos de los ventrículos",
+      "Acueducto cerebral (de Silvio)",
+      "Forámenes de Luschka y Magendie",
+      "Granulaciones (vellosidades) aracnoideas en los senos venosos durales"
+    ],
+    correct: 3
+  },
+  {
+    label: "G5 · NC II, III, IV",
+    stem:  "¿Por qué el nervio óptico (NC II) NO es técnicamente un nervio periférico, sino un tracto del SNC?",
+    options: [
+      "Porque sus axones son amielínicos y no tienen nodos de Ranvier",
+      "Porque está recubierto por meninges y sus axones están mielinizados por oligodendrocitos, no por células de Schwann",
+      "Porque surge directamente de la retina sin pasar por el quiasma óptico",
+      "Porque no posee vaina de mielina en ningún segmento de su trayecto"
+    ],
+    correct: 1
+  },
+  {
+    label: "G5 · NC II, III, IV",
+    stem:  "Una paciente de 58 años presenta ptosis derecha severa, midriasis derecha y globo ocular desviado «abajo y afuera». ¿Qué par craneal está comprometido y cuál es la causa más urgente a descartar?",
+    options: [
+      "NC IV — fractura de piso de órbita",
+      "NC VI — hipertensión intracraneal crónica",
+      "NC III — aneurisma de la arteria comunicante posterior",
+      "NC II — neuritis óptica desmielinizante"
+    ],
+    correct: 2
+  },
+  {
+    label: "G5 · NC II, III, IV",
+    stem:  "¿Cuál es la acción muscular propia del NC IV (troclear) y cuál sería la manifestación clínica típica si este nervio se lesiona?",
+    options: [
+      "Abduce el ojo; su parálisis produce esotropía",
+      "Deprime e intorsiona el ojo (músculo oblicuo superior); su parálisis produce hipertropía con diplopía vertical",
+      "Eleva el párpado superior; su parálisis produce lagoftalmos",
+      "Constriñe la pupila; su parálisis produce midriasis fija"
+    ],
+    correct: 1
+  },
+  {
+    label: "G6 · NC V₁, VI, VII",
+    stem:  "Un niño de 8 años presenta esotropía izquierda de inicio agudo acompañada de cefalea matutina y vómitos. La parálisis del NC VI en este contexto sugiere principalmente:",
+    options: [
+      "Miastenia gravis congénita",
+      "Hipertensión intracraneal por tumor de fosa posterior (signo de falsa localización)",
+      "Parálisis microvascular por diabetes juvenil",
+      "Fractura de la base del cráneo en el canal del peñasco"
+    ],
+    correct: 1
+  },
+  {
+    label: "G6 · NC V₁, VI, VII",
+    stem:  "Al tocar la córnea derecha, ambos ojos parpadean normalmente. Al tocar la córnea izquierda, NO hay parpadeo en ningún ojo. ¿Dónde está la lesión?",
+    options: [
+      "NC VII derecho",
+      "NC VII izquierdo",
+      "NC V₁ izquierdo (brazo aferente del reflejo corneal)",
+      "Lesión bilateral del puente"
+    ],
+    correct: 2
+  }
+];
+
+// ══════════════════════════════════════════════════════════════════
+//  VERSIÓN B — mapa de permutación de opciones por pregunta
+//  SHUFFLE_B[qi][j] = índice original que va a la posición j mostrada
+//  Versión A usa identidad [0,1,2,3] para todas las preguntas
+// ══════════════════════════════════════════════════════════════════
+const SHUFFLE_B = [
+  [2,0,3,1],  // P1:  correctB = indexOf(0) = 1  → B
+  [0,2,3,1],  // P2:  correctB = indexOf(1) = 3  → D
+  [1,0,3,2],  // P3:  correctB = indexOf(1) = 0  → A
+  [0,3,2,1],  // P4:  correctB = indexOf(2) = 2  → C
+  [3,0,2,1],  // P5:  correctB = indexOf(3) = 0  → A
+  [2,3,0,1],  // P6:  correctB = indexOf(1) = 3  → D
+  [0,3,1,2],  // P7:  correctB = indexOf(1) = 2  → C
+  [2,3,0,1],  // P8:  correctB = indexOf(3) = 1  → B
+  [0,3,1,2],  // P9:  correctB = indexOf(2) = 3  → D
+  [1,3,2,0],  // P10: correctB = indexOf(3) = 1  → B
+  [3,0,1,2],  // P11: correctB = indexOf(1) = 2  → C
+  [2,1,3,0],  // P12: correctB = indexOf(2) = 0  → A
+  [2,0,3,1],  // P13: correctB = indexOf(1) = 3  → D
+  [3,2,1,0],  // P14: correctB = indexOf(1) = 2  → C
+  [0,2,3,1]   // P15: correctB = indexOf(2) = 1  → B
+];
+
+// ══════════════════════════════════════════════════════════════════
+//  CLAVES (para verificación en el cliente — el script también las tiene)
+//  Versión A: [0,1,1,2,3,1,1,3,2,3,1,2,1,1,2]
+//  Versión B: [1,3,0,2,0,3,2,1,3,1,2,0,3,2,1]
+// ══════════════════════════════════════════════════════════════════
+
+// ══════════════════════════════════════════════════════════════════
+//  ASIGNACIÓN DE VERSIÓN (hash determinista del nombre)
+//  Mismo estudiante → siempre misma versión
+// ══════════════════════════════════════════════════════════════════
+function asignarVersion(apellidos, nombres) {
+  const str = (apellidos + nombres).toUpperCase().replace(/\s/g, "");
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) & 0xFFFFFF;
+  return h % 2 === 0 ? "A" : "B";
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  ESTUDIANTES
+// ══════════════════════════════════════════════════════════════════
+const STUDENTS = {
+  G1: [
+    { apellidos:"ACOSTA ALARCON",          nombres:"JUAN ANDRES",          codigo:"001014670982", correo:"jacosta82@unisalle.edu.co" },
+    { apellidos:"ALVAREZ FUENTES",         nombres:"DANIEL SANTIAGO",       codigo:"001028489073", correo:"dalvarez73@unisalle.edu.co" },
+    { apellidos:"ARANDIA CAÑON",           nombres:"MARIA JOSE",            codigo:"001019606740", correo:"marandia40@unisalle.edu.co" },
+    { apellidos:"BALLEN GARZON",           nombres:"ZAMY GABRIELA",         codigo:"001033721333", correo:"zballen33@unisalle.edu.co" },
+    { apellidos:"BARRETO CONTRERAS",       nombres:"CARLOS ANDRES",         codigo:"001043141206", correo:"cbarreto06@unisalle.edu.co" },
+    { apellidos:"FONSECA MONTAÑO",         nombres:"DANIEL",                codigo:"001028900106", correo:"dfonseca06@unisalle.edu.co" },
+    { apellidos:"GARCIA RAMIREZ",          nombres:"JOHAN STIVEN",          codigo:"001025654399", correo:"jgarcia99@unisalle.edu.co" },
+    { apellidos:"GUTIERREZ MORENO",        nombres:"ANDREA SOFIA",          codigo:"001078827075", correo:"angutierrez75@unisalle.edu.co" },
+    { apellidos:"LANCHEROS CULMA",         nombres:"LUZ ADRIANA",           codigo:"001021514109", correo:"llancheros09@unisalle.edu.co" },
+    { apellidos:"LOPEZ PLAZAS",            nombres:"DARWIN SAMIR",          codigo:"001012919861", correo:"dalopez61@unisalle.edu.co" },
+    { apellidos:"MURILLO SAAVEDRA",        nombres:"SARA SOFIA",            codigo:"001029648425", correo:"smurillo25@unisalle.edu.co" },
+    { apellidos:"NIETO GARCIA",            nombres:"MARIA JULIANA",         codigo:"001141517739", correo:"mnieto39@unisalle.edu.co" },
+    { apellidos:"REYES MONTAÑO",           nombres:"JUAN SEBASTIAN",        codigo:"001019992850", correo:"jureyes50@unisalle.edu.co" },
+    { apellidos:"RODRIGUEZ CASTELLANOS",   nombres:"SEBASTIAN FELIPE",      codigo:"001021674349", correo:"srodrigues49@unisalle.edu.co" },
+    { apellidos:"RODRIGUEZ VALENCIA",      nombres:"MARIA JULIANA",         codigo:"001022365908", correo:"marrodriguez08@unisalle.edu.co" },
+    { apellidos:"SALAMANCA BERNAL",        nombres:"SARA SOFIA",            codigo:"001029650678", correo:"ssalamanca78@unisalle.edu.co" },
+    { apellidos:"SALAZAR SANCHEZ",         nombres:"THALIANA",              codigo:"001091664180", correo:"tsalazar80@unisalle.edu.co" },
+    { apellidos:"SANCHEZ GOMEZ",           nombres:"GABRIELA",              codigo:"001013123462", correo:"gsanchez62@unisalle.edu.co" },
+    { apellidos:"SANCHEZ MALDONADO",       nombres:"LUISA ALEJANDRA",       codigo:"001001217921", correo:"lusanchez21@unisalle.edu.co" },
+    { apellidos:"SATOBA GARZON",           nombres:"YEIMY ALEJANDRA",       codigo:"001031165346", correo:"ysatoba46@unisalle.edu.co" },
+    { apellidos:"SIERRA SANCHEZ",          nombres:"ISABELA",               codigo:"001029147034", correo:"isierra34@unisalle.edu.co" },
+    { apellidos:"TOVAR VARGAS",            nombres:"SANTIAGO",              codigo:"001014991611", correo:"stovar11@unisalle.edu.co" },
+    { apellidos:"VARON CARDENAS",          nombres:"SARA JULIANA",          codigo:"001021314605", correo:"svaron05@unisalle.edu.co" },
+    { apellidos:"VELANDIA VELANDIA",       nombres:"ANGEL RICARDO",         codigo:"001023383631", correo:"avelandia31@unisalle.edu.co" },
+    { apellidos:"VILLANUEVA AMORTEGUI",    nombres:"DEREK ALEJANDRO",       codigo:"001027527173", correo:"dvillanueva73@unisalle.edu.co" }
+  ],
+  G2: [
+    { apellidos:"AULESTIA CELY",           nombres:"ALEJANDRO",             codigo:"001052840351", correo:"aaulestia51@unisalle.edu.co" },
+    { apellidos:"BAUTISTA CORTES",         nombres:"LUISA FERNANDA",        codigo:"001014977061", correo:"lbautista61@unisalle.edu.co" },
+    { apellidos:"CANTOR ROJAS",            nombres:"ANGIE DANIELA",         codigo:"001024495530", correo:"acantor30@unisalle.edu.co" },
+    { apellidos:"CARDENAS ARENAS",         nombres:"JUAN SEBASTIAN",        codigo:"001011101155", correo:"jcardenas55@unisalle.edu.co" },
+    { apellidos:"CASAS RINCON",            nombres:"SAMUEL NICOLAS",        codigo:"001014480977", correo:"scasas77@unisalle.edu.co" },
+    { apellidos:"CASTAÑEDA CARDENAS",      nombres:"NELSON ANDREY",         codigo:"001121916455", correo:"ncastaneda55@unisalle.edu.co" },
+    { apellidos:"CHICUASUQUE ABRIL",       nombres:"LUIS MIGUEL",           codigo:"001000225309", correo:"lchicuasuque09@unisalle.edu.co" },
+    { apellidos:"DIAZ DAZA",               nombres:"THOMAS",                codigo:"001077725429", correo:"tdiaz29@unisalle.edu.co" },
+    { apellidos:"FLOREZ MORENO",           nombres:"ISABELLA",              codigo:"001076506069", correo:"iflorez69@unisalle.edu.co" },
+    { apellidos:"GARCES GOMEZ",            nombres:"DANNA GABRIELA",        codigo:"001019765056", correo:"dgarces568@unisalle.edu.co" },
+    { apellidos:"GARCIA ROMERO",           nombres:"EVELIN SALOME",         codigo:"001027526555", correo:"evgarcia55@unisalle.edu.co" },
+    { apellidos:"GONZALEZ DIAZ",           nombres:"LAURA SOFIA",           codigo:"001077231172", correo:"lagonzalez72@unisalle.edu.co" },
+    { apellidos:"HERNANDEZ NEIRA",         nombres:"MARIA ALEJANDRA",       codigo:"001033103275", correo:"mhernandez75@unisalle.edu.co" },
+    { apellidos:"JIMENEZ CASTILLO",        nombres:"BIBIAN ALEJANDRA",      codigo:"001014219693", correo:"bjimenez93@unisalle.edu.co" },
+    { apellidos:"LADINO AROILA",           nombres:"MICHELL TALIANA",       codigo:"001029990679", correo:"mladino79@unisalle.edu.co" },
+    { apellidos:"LADINO GARCIA",           nombres:"TANIA VALENTINA",       codigo:"001023380574", correo:"tladino74@unisalle.edu.co" },
+    { apellidos:"LEON MARCIALES",          nombres:"JUAN SEBASTIAN",        codigo:"001014658705", correo:"juleon05@unisalle.edu.co" },
+    { apellidos:"MELGAREJO GONZALEZ",      nombres:"LAURA SOFIA",           codigo:"001121712496", correo:"lmelgarejo96@unisalle.edu.co" },
+    { apellidos:"MONTENEGRO GONZALEZ",     nombres:"SARA SOFIA",            codigo:"001021675001", correo:"smontenegro01@unisalle.edu.co" },
+    { apellidos:"MORANTES FERNANDEZ",      nombres:"SARA SOFIA",            codigo:"001022369062", correo:"smorantes62@unisalle.edu.co" },
+    { apellidos:"OLIVARES POVEDA",         nombres:"JUAN SEBASTIAN",        codigo:"001013124290", correo:"jolivares90@unisalle.edu.co" },
+    { apellidos:"PARRA MORENO",            nombres:"MARLY ROCIO",           codigo:"001110563297", correo:"mparra97@unisalle.edu.co" },
+    { apellidos:"PASTRAN VAQUIRO",         nombres:"LAURA SOFIA",           codigo:"001031423529", correo:"lpastran29@unisalle.edu.co" },
+    { apellidos:"PEDRAZA RICO",            nombres:"CARLA MARIANA",         codigo:"001032878177", correo:"cpedraza77@unisalle.edu.co" },
+    { apellidos:"PULIDO MARTINEZ",         nombres:"CARLOS ANDRES",         codigo:"001031814534", correo:"cpulido34@unisalle.edu.co" },
+    { apellidos:"RODRIGUEZ PACHON",        nombres:"ANDREY FELIPE",         codigo:"001028881898", correo:"arodriguez98@unisalle.edu.co" },
+    { apellidos:"SALINAS SIERRA",          nombres:"CAMILA",                codigo:"001034577981", correo:"csalinas81@unisalle.edu.co" },
+    { apellidos:"SANABRIA TORRES",         nombres:"VALERIE SHARITH",       codigo:"001140915367", correo:"vsanabria67@unisalle.edu.co" }
+  ]
+};
+
+
+// ══════════════════════════════════════════════════════════════════
+//  ESTADO GLOBAL
+// ══════════════════════════════════════════════════════════════════
+const state = {
+  grupo:"", nombres:"", apellidos:"", codigo:"", correo:"",
+  version: "",          // "A" o "B"
+  shuffle: [],          // permutación activa por pregunta
+  correctIdxShuffled: [],// índice correcto en la versión activa
+  answered: 0,
+  correct:  0,
+  responses: new Array(TOTAL_QS).fill(null), // índice seleccionado (en su versión)
+  timerInterval: null,
+  elapsedSec: 0,
+  submitted: false
+};
+
+// ══════════════════════════════════════════════════════════════════
+//  SELECCIÓN DE GRUPO
+// ══════════════════════════════════════════════════════════════════
+function selectGroup(g) {
+  state.grupo = g;
+  document.getElementById("optG1").classList.toggle("selected", g === "G1");
+  document.getElementById("optG2").classList.toggle("selected", g === "G2");
+  const sel = document.getElementById("selectNombre");
+  sel.disabled = false;
+  sel.innerHTML = '<option value="">— Selecciona tu nombre —</option>';
+  STUDENTS[g].forEach((s, i) => {
+    const o = document.createElement("option");
+    o.value = i;
+    o.textContent = s.apellidos + ", " + s.nombres;
+    sel.appendChild(o);
+  });
+  document.getElementById("correo").disabled = true;
+  document.getElementById("correo").value = "";
+  document.getElementById("btnStart").disabled = true;
+  document.getElementById("heroBadge").textContent = "Grupo " + g + " seleccionado";
+}
+
+function onStudentSelect() {
+  const sel = document.getElementById("selectNombre");
+  const inp = document.getElementById("correo");
+  if (sel.value === "") { inp.disabled = true; inp.value = ""; return; }
+  const s = STUDENTS[state.grupo][parseInt(sel.value)];
+  inp.disabled = false;
+  inp.value = s.correo;
+  document.getElementById("emailNote").style.display = "flex";
+  document.getElementById("btnStart").disabled = false;
+  document.getElementById("heroBadge").textContent = s.nombres + " " + s.apellidos;
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  RENDERIZADO DE PREGUNTAS (dinámico por versión)
+// ══════════════════════════════════════════════════════════════════
+function renderQuestions(version) {
+  const LETTERS = ["A", "B", "C", "D"];
+  const perm    = version === "B" ? SHUFFLE_B : QUESTIONS.map(() => [0,1,2,3]);
+  const container = document.getElementById("questionsContainer");
+  container.innerHTML = "";
+
+  QUESTIONS.forEach((q, qi) => {
+    const shuffle    = perm[qi];
+    const correctPos = shuffle.indexOf(q.correct); // posición de la opción correcta en esta versión
+
+    // Guardar en state
+    state.shuffle[qi]           = shuffle;
+    state.correctIdxShuffled[qi] = correctPos;
+
+    const div = document.createElement("div");
+    div.className = "quiz-q";
+    div.id        = "q" + (qi + 1);
+
+    let optsHTML = "";
+    shuffle.forEach((origIdx, pos) => {
+      optsHTML += `<li data-idx="${pos}"><span class="opt-letter">${LETTERS[pos]})</span> ${q.options[origIdx]}</li>`;
+    });
+
+    div.innerHTML = `
+      <span class="q-label">Pregunta ${qi + 1} <span class="q-group-tag">${q.label}</span></span>
+      <h4>${q.stem}</h4>
+      <ul class="quiz-options">${optsHTML}</ul>`;
+
+    container.appendChild(div);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  INICIAR QUIZ
+// ══════════════════════════════════════════════════════════════════
+function startQuiz() {
+  const sel    = document.getElementById("selectNombre");
+  const correo = document.getElementById("correo").value.trim();
+  const errs   = [];
+  if (!state.grupo)           errs.push("Selecciona tu grupo.");
+  if (sel.value === "")       errs.push("Selecciona tu nombre.");
+  if (!correo || !correo.includes("@")) errs.push("Ingresa un correo válido.");
+  const errEl = document.getElementById("regError");
+  if (errs.length) { errEl.textContent = errs.join(" "); errEl.style.display = "block"; return; }
+  errEl.style.display = "none";
+
+  const s = STUDENTS[state.grupo][parseInt(sel.value)];
+  state.nombres   = s.nombres;
+  state.apellidos = s.apellidos;
+  state.codigo    = s.codigo;
+  state.correo    = correo;
+  state.version   = asignarVersion(s.apellidos, s.nombres);
+
+  // Renderizar preguntas según versión
+  renderQuestions(state.version);
+
+  // Ocultar registro, mostrar quiz
+  document.getElementById("regSection").style.display = "none";
+  document.getElementById("quizSection").style.display = "block";
+
+  // Mostrar nombre + versión en header
+  const badge = `<span class="ver-badge v${state.version.toLowerCase()}">Ver. ${state.version}</span>`;
+  document.getElementById("sName").innerHTML = s.nombres + " " + s.apellidos + badge;
+  document.getElementById("sDetail").textContent = "Código: " + s.codigo + " · Grupo: " + state.grupo;
+
+  attachQuestionHandlers();
+  startTimer();
+  updateScrollProgress();
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  MANEJADORES DE OPCIONES
+// ══════════════════════════════════════════════════════════════════
+function attachQuestionHandlers() {
+  document.querySelectorAll(".quiz-q").forEach((q, qi) => {
+    q.querySelectorAll(".quiz-options li").forEach(opt => {
+      opt.addEventListener("click", () => {
+        if (state.submitted) return;
+        const wasAnswered = state.responses[qi] !== null;
+        if (wasAnswered) {
+          const prev = q.querySelector(`.quiz-options li[data-idx="${state.responses[qi]}"]`);
+          if (prev) prev.classList.remove("selected");
+        }
+        const idx = parseInt(opt.dataset.idx);
+        state.responses[qi] = idx;
+        opt.classList.add("selected");
+        if (!wasAnswered) {
+          state.answered++;
+          q.classList.add("answered");
+        }
+        updateProgress();
+      });
+    });
+  });
+}
+
+function updateProgress() {
+  const pct = (state.answered / TOTAL_QS) * 100;
+  document.getElementById("quizProgress").style.width = pct + "%";
+  document.getElementById("qCounter").textContent = state.answered + " / " + TOTAL_QS + " respondidas";
+  const canSubmit = state.answered === TOTAL_QS;
+  document.getElementById("btnSubmit").disabled = !canSubmit;
+  if (canSubmit) {
+    document.getElementById("submitWarn").textContent = "✓ Todas respondidas — puedes enviar.";
+    document.getElementById("submitWarn").style.color = "var(--green-muscle)";
+  }
+  updateScrollProgress();
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  CRONÓMETRO
+// ══════════════════════════════════════════════════════════════════
+function startTimer() {
+  const totalSec = EXAM_MINUTES * 60;
+  let remaining  = totalSec;
+  const disp = document.getElementById("timerDisplay");
+  const fmt  = n => String(n).padStart(2, "0");
+  state.timerInterval = setInterval(() => {
+    remaining--;
+    state.elapsedSec++;
+    disp.textContent = fmt(Math.floor(remaining / 60)) + ":" + fmt(remaining % 60);
+    if (remaining <= 120) disp.classList.add("urgent");
+    if (remaining <= 0) { clearInterval(state.timerInterval); submitQuiz(true); }
+  }, 1000);
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  ENVÍO Y PUNTUACIÓN
+// ══════════════════════════════════════════════════════════════════
+function submitQuiz(timeUp = false) {
+  if (state.submitted) return;
+  state.submitted = true;
+  clearInterval(state.timerInterval);
+  document.getElementById("timerDisplay").textContent = "00:00";
+
+  // Bloquear todas las opciones visualmente
+  document.querySelectorAll(".quiz-options li").forEach(li => li.classList.add("opt-locked"));
+
+  // Calcular puntaje usando claves de la versión activa
+  state.correct = 0;
+  document.querySelectorAll(".quiz-q").forEach((q, qi) => {
+    const sel = state.responses[qi];
+    if (sel !== null && sel === state.correctIdxShuffled[qi]) state.correct++;
+  });
+
+  showScore(timeUp);
+  sendResults();
+}
+
+function showScore(timeUp) {
+  const pct = Math.round((state.correct / TOTAL_QS) * 100);
+  const inc = TOTAL_QS - state.correct;
+  const em  = Math.floor(state.elapsedSec / 60);
+  const es  = state.elapsedSec % 60;
+  const fmt = n => String(n).padStart(2, "0");
+  const msgs = [
+    [90, "¡Excelente dominio de los contenidos!"],
+    [75, "Muy buen resultado. Sigue así."],
+    [60, "Desempeño satisfactorio. Refuerza los puntos débiles."],
+    [0,  "Oportunidad de mejora. La retroalimentación te ayudará."]
+  ];
+  const msg = msgs.find(([t]) => pct >= t)[1];
+
+  if (timeUp) {
+    // Banner de tiempo agotado
+    document.getElementById("timeoutBanner").classList.add("show");
+    // Marcar preguntas sin responder
+    document.querySelectorAll(".quiz-q").forEach((q, qi) => {
+      if (state.responses[qi] === null) {
+        q.classList.add("unanswered-alert");
+        const tag = document.createElement("div");
+        tag.style.cssText = "font-family:var(--font-mono);font-size:0.68rem;color:#b5413b;margin-top:0.5rem;font-weight:500";
+        tag.textContent = "— Sin responder";
+        q.appendChild(tag);
+      }
+    });
+  }
+
+  document.getElementById("scorePct").textContent   = pct + "%";
+  document.getElementById("scoreFrac").textContent  = state.correct + " correctas de " + TOTAL_QS;
+  document.getElementById("scoreMsg").textContent   = (timeUp ? "Tiempo agotado — " : "") + msg;
+  document.getElementById("dCorrect").textContent   = state.correct;
+  document.getElementById("dIncorrect").textContent = inc;
+  document.getElementById("dTotal").textContent     = TOTAL_QS;
+  document.getElementById("dTime").textContent      = fmt(em) + ":" + fmt(es);
+  document.getElementById("scorePanel").style.display = "block";
+  document.getElementById("btnSubmit").style.display  = "none";
+  document.getElementById("submitWarn").style.display = "none";
+  document.getElementById("scorePanel").scrollIntoView({ behavior:"smooth", block:"start" });
+}
+
+async function sendResults() {
+  const el = document.getElementById("sendStatus");
+  el.style.display = "inline-block";
+  el.className = "send-status sending";
+  el.textContent = "⏳ Enviando resultados…";
+  try {
+    // Construir string de respuestas originales (para compatibilidad con el Sheet)
+    // Guardamos también las respuestas en índice original para el docente
+    const respOriginal = state.responses.map((r, qi) =>
+      r !== null ? state.shuffle[qi][r] : -1
+    ).join(",");
+
+    const payload = {
+      timestamp:  new Date().toISOString(),
+      grupo:      state.grupo,
+      version:    state.version,
+      apellidos:  state.apellidos,
+      nombres:    state.nombres,
+      codigo:     state.codigo,
+      correo:     state.correo,
+      correctas:  state.correct,
+      total:      TOTAL_QS,
+      pct:        Math.round((state.correct / TOTAL_QS) * 100),
+      tiempo_seg: state.elapsedSec,
+      respuestas: state.responses.map(r => r !== null ? r : -1).join(","),
+      resp_orig:  respOriginal,
+      quiz:       "Quiz_Final_SNC_15Q_v2"
+    };
+    await fetch(SHEETS_URL, { method:"POST", mode:"no-cors", body: JSON.stringify(payload) });
+    el.className = "send-status ok";
+    el.textContent = "✓ Resultado registrado correctamente.";
+  } catch(e) {
+    el.className = "send-status fail";
+    el.textContent = "✗ No se pudo enviar. Anota tu puntaje manualmente.";
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  SCROLL PROGRESS + STICKY HEADER
+// ══════════════════════════════════════════════════════════════════
+function updateScrollProgress() {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById("progressBar").style.width = pct + "%";
+  const sh = document.getElementById("stickyHeader");
+  if (sh) sh.classList.toggle("scrolled", window.scrollY > 10);
+}
+window.addEventListener("scroll", updateScrollProgress);
+</script>
+</body>
+</html>
