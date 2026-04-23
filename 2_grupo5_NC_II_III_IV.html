@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupo 5 — NC II, III, IV · Clase Puente · Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1714;--parchment:#f5f0e8;--cream:#faf7f2;--amber:#c8a45c;--amber-light:#e8d5a0;--amber-dark:#8b6914;--teal:#2a7a6e;--red-clinical:#b5413b;--blue-nerve:#3a5a8c;--green-muscle:#4a7a4e;--purple-brain:#6b4a8a;--shadow:rgba(26,23,20,0.12);--font-display:'Playfair Display',Georgia,serif;--font-body:'Source Serif 4',Georgia,serif;--font-mono:'DM Mono','Courier New',monospace;
+--ncii:#3a80b0;--nciii:#8a4a6a;--nciv:#4a8a5a;--g5:#b5413b;--g5-bg:#f8eaea}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--ink);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--ncii),var(--nciii),var(--nciv));z-index:1001;transition:width 0.1s;width:0}
+.hero{min-height:45vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(170deg,#1a1018 0%,#2a1820 40%,#3a2028 100%);color:var(--parchment);padding:2rem;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(58,128,176,0.15) 0%,transparent 50%),radial-gradient(ellipse at 50% 55%,rgba(138,74,106,0.12) 0%,transparent 45%),radial-gradient(ellipse at 70% 50%,rgba(74,138,90,0.1) 0%,transparent 45%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:820px}
+.hero h1{font-family:var(--font-display);font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;line-height:1.15;margin-bottom:0.5rem}
+.hero .subtitle{font-family:var(--font-display);font-style:italic;font-size:clamp(0.95rem,2.3vw,1.35rem);color:var(--amber-light);margin-bottom:0.8rem;opacity:0.9}
+.hero .meta{font-family:var(--font-mono);font-size:0.78rem;color:rgba(245,240,232,0.5);letter-spacing:0.05em}
+.hero .meta span{color:var(--amber)}
+.hero .nc-trio{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem}
+.hero .nc-chip{padding:0.5rem 1.2rem;border-radius:10px;font-family:var(--font-mono);font-size:0.82rem;font-weight:500}
+.hero .group-badge{display:inline-block;background:var(--g5);color:white;font-family:var(--font-mono);font-size:0.85rem;padding:0.45rem 1.4rem;border-radius:30px;margin-top:1rem;letter-spacing:0.06em;text-transform:uppercase}
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(26,16,24,0.95);backdrop-filter:blur(12px);padding:0.5rem 1rem;display:flex;gap:0.4rem;justify-content:center;flex-wrap:wrap;border-bottom:1px solid rgba(181,65,59,0.3)}
+.nav-pill{font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--parchment);background:transparent;border:1px solid rgba(181,65,59,0.4);padding:0.28rem 0.65rem;border-radius:20px;cursor:pointer;transition:all 0.3s;text-decoration:none}
+.nav-pill:hover,.nav-pill.active{background:var(--g5);color:white;border-color:var(--g5)}
+.section{max-width:1140px;margin:0 auto;padding:3.5rem 1.5rem}
+.section-header{margin-bottom:2rem;padding-bottom:0.8rem;border-bottom:2px solid var(--amber-light)}
+.section-tag{font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--g5);margin-bottom:0.4rem;display:block}
+.section h2{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;line-height:1.2}
+.section-intro{font-size:1rem;line-height:1.8;color:rgba(26,23,20,0.75);max-width:800px;margin-bottom:2rem}
+/* NC CARDS */
+.nc-card{border-radius:14px;overflow:hidden;box-shadow:0 4px 20px var(--shadow);margin:1.8rem 0;background:var(--cream)}
+.nc-header{padding:1.2rem 1.5rem;color:white;display:flex;align-items:center;gap:1rem}
+.nc-num{font-family:var(--font-mono);font-size:2.2rem;font-weight:700;opacity:0.5;line-height:1}
+.nc-title-block h3{font-family:var(--font-display);font-size:1.2rem;font-weight:700}
+.nc-title-block .nc-type{font-family:var(--font-mono);font-size:0.7rem;opacity:0.7;text-transform:uppercase;letter-spacing:0.06em;margin-top:0.1rem}
+.nc-body{padding:1.3rem 1.5rem}
+.nc-body p{font-size:0.9rem;margin-bottom:0.5rem;line-height:1.65}
+.nc-body ul{list-style:none;padding:0}
+.nc-body li{position:relative;padding-left:1.2rem;font-size:0.88rem;margin-bottom:0.35rem;line-height:1.6}
+.nc-body li::before{content:'▸';position:absolute;left:0;font-weight:700}
+.nc-sub{font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;margin:0.7rem 0 0.3rem;display:block}
+.nc-clinical{border-left:3px solid var(--red-clinical);padding:0.6rem 1rem;border-radius:0 8px 8px 0;margin-top:0.6rem;font-size:0.86rem;background:rgba(181,65,59,0.04)}
+.nc-clinical strong{color:var(--red-clinical)}
+.nc-optometry{border-left:3px solid var(--teal);padding:0.6rem 1rem;border-radius:0 8px 8px 0;margin-top:0.5rem;font-size:0.86rem;background:rgba(42,122,110,0.04)}
+.nc-optometry strong{color:var(--teal)}
+.nc-rule{background:linear-gradient(135deg,var(--ink),#2a1820);color:var(--parchment);border-radius:10px;padding:1rem 1.3rem;margin:1rem 0;text-align:center}
+.nc-rule .rule-text{font-family:var(--font-display);font-size:1.1rem;color:var(--amber);font-weight:700}
+.nc-rule .rule-detail{font-family:var(--font-mono);font-size:0.78rem;color:rgba(245,240,232,0.5);margin-top:0.3rem}
+/* EYE SIM */
+.eye-sim{display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap;margin:1.5rem 0;padding:1rem;background:var(--cream);border-radius:12px;border:1px solid rgba(200,164,92,0.15)}
+.eye-box{text-align:center}
+.eye-lbl{font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber-dark);margin-bottom:0.5rem}
+.eye-cv{border-radius:50%;border:2px solid rgba(200,164,92,0.3);background:#f8f8f0}
+/* REFLEX ARC */
+.reflex-wrap{background:linear-gradient(135deg,#1a1018,#2a1820);border-radius:14px;padding:1.5rem;margin:2rem 0}
+/* PARKS TEST */
+.parks-card{background:var(--cream);border:1px solid rgba(200,164,92,0.2);border-radius:12px;padding:1.3rem;margin:1rem 0}
+.parks-step{display:flex;align-items:flex-start;gap:0.8rem;margin:0.6rem 0;padding:0.6rem;border-radius:8px;background:rgba(74,138,90,0.04);border-left:3px solid var(--nciv)}
+.parks-step .step-num{font-family:var(--font-display);font-size:1.4rem;font-weight:900;color:var(--nciv);line-height:1;min-width:28px}
+.parks-step .step-text{font-size:0.88rem;line-height:1.6}
+/* GUIA */
+.guia-card{background:linear-gradient(135deg,var(--ink),#2a1820);color:var(--parchment);border-radius:14px;padding:1.8rem 2rem;margin:2rem 0;position:relative;overflow:hidden}
+.guia-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--ncii),var(--nciii),var(--nciv))}
+.guia-card h3{font-family:var(--font-display);color:var(--amber);font-size:1.25rem;margin-bottom:1rem}
+.guia-item{margin:0.6rem 0}
+.guia-btn{display:block;width:100%;text-align:left;background:rgba(200,164,92,0.08);border:1px solid rgba(200,164,92,0.2);border-radius:8px;padding:0.8rem 1.2rem;color:var(--parchment);font-family:var(--font-body);font-size:0.9rem;cursor:pointer;transition:all 0.3s;line-height:1.6}
+.guia-btn:hover{background:rgba(200,164,92,0.15);border-color:var(--amber)}
+.guia-btn .q-icon{font-family:var(--font-mono);font-size:0.7rem;color:var(--amber);margin-right:0.5rem}
+.guia-answer{max-height:0;overflow:hidden;transition:max-height 0.5s ease}
+.guia-answer.open{max-height:1500px}
+.guia-answer-inner{padding:0.8rem 1.2rem;background:rgba(42,122,110,0.08);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;margin-top:0.3rem;font-size:0.88rem;line-height:1.7}
+.guia-answer-inner strong{color:var(--teal)}
+.guia-answer-inner .ref{font-family:var(--font-mono);font-size:0.7rem;color:rgba(245,240,232,0.4);margin-top:0.4rem;display:block}
+/* QUIZ */
+.quiz-q{background:var(--cream);border:1px solid rgba(200,164,92,0.2);border-radius:12px;padding:1.3rem;margin-bottom:1rem}
+.quiz-q .q-num{font-family:var(--font-mono);font-size:0.68rem;color:var(--g5);display:block;margin-bottom:0.3rem}
+.quiz-q h4{font-family:var(--font-display);font-size:0.98rem;margin-bottom:0.7rem;line-height:1.5}
+.quiz-options{list-style:none;padding:0}
+.quiz-options li{padding:0.5rem 0.85rem;margin:0.3rem 0;border:1.5px solid rgba(200,164,92,0.3);border-radius:8px;cursor:pointer;transition:all 0.22s;font-size:0.88rem}
+.quiz-options li:hover{background:var(--amber-light);border-color:var(--amber)}
+.quiz-options li.correct{background:#d4edda;border-color:var(--green-muscle);color:#155724;font-weight:600}
+.quiz-options li.incorrect{background:#f8d7da;border-color:var(--red-clinical);color:#721c24}
+.quiz-options li.disabled{pointer-events:none;opacity:0.6}
+.quiz-feedback{margin-top:0.6rem;padding:0.6rem 0.9rem;border-radius:8px;font-size:0.84rem;display:none;line-height:1.6}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct-fb{background:#d4edda;color:#155724}
+.quiz-feedback.incorrect-fb{background:#f8d7da;color:#721c24}
+.score-display{text-align:center;font-family:var(--font-display);font-size:1.2rem;color:var(--g5);margin:1.5rem 0;padding:1rem;background:var(--cream);border-radius:10px;border:2px solid var(--g5);display:none}
+.footer{background:#1a1018;color:rgba(245,240,232,0.35);text-align:center;padding:2rem 1.5rem;font-family:var(--font-mono);font-size:0.72rem}
+/* Muscle table */
+.muscle-table{width:100%;border-collapse:collapse;font-size:0.85rem;margin:1rem 0}
+.muscle-table th{background:var(--ink);color:var(--parchment);font-family:var(--font-mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;padding:0.6rem 0.5rem;text-align:left}
+.muscle-table td{padding:0.5rem;border-bottom:1px solid rgba(200,164,92,0.15);vertical-align:top}
+.muscle-table tr:nth-child(even){background:rgba(200,164,92,0.04)}
+@media(max-width:768px){.section{padding:2.5rem 1rem}.eye-sim{flex-direction:column;align-items:center}}
+@media(max-width:480px){.nav-bar{gap:0.2rem;padding:0.4rem}.nav-pill{font-size:0.6rem;padding:0.2rem 0.4rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="hero">
+  <div class="hero-content">
+    <div class="meta">UNIVERSIDAD DE LA SALLE · OPTOMETRÍA · <span>MORFOLOGÍA GENERAL 2026-I</span></div>
+    <h1>NC <span style="color:var(--ncii)">II</span> · <span style="color:var(--nciii)">III</span> · <span style="color:var(--nciv)">IV</span></h1>
+    <p class="subtitle">Vía visual · Motilidad ocular · Pupila · Acomodación</p>
+    <div class="meta">Clase Puente: Del Músculo al Nervio · <span>Dr. Jorge Bogoya</span></div>
+    <div class="nc-trio">
+      <div class="nc-chip" style="background:rgba(58,128,176,0.25);border:1px solid var(--ncii);color:var(--ncii)">II Óptico</div>
+      <div class="nc-chip" style="background:rgba(138,74,106,0.25);border:1px solid var(--nciii);color:var(--nciii)">III Oculomotor</div>
+      <div class="nc-chip" style="background:rgba(74,138,90,0.25);border:1px solid var(--nciv);color:var(--nciv)">IV Troclear</div>
+    </div>
+    <div class="group-badge">Grupo 05</div>
+  </div>
+</header>
+
+<nav class="nav-bar">
+  <a href="#ncii" class="nav-pill">NC II</a>
+  <a href="#reflejo" class="nav-pill">Reflejo Fotomotor</a>
+  <a href="#nciii" class="nav-pill">NC III</a>
+  <a href="#nciv" class="nav-pill">NC IV</a>
+  <a href="#preguntas" class="nav-pill">Preguntas Guía</a>
+  <a href="#quiz" class="nav-pill">Quiz</a>
+</nav>
+
+<!-- ═══ NC II ═══ -->
+<section class="section" id="ncii">
+  <div class="section-header"><span class="section-tag">Grupo 05 · Vía visual aferente</span><h2>NC II — Nervio Óptico</h2></div>
+
+  <div class="nc-card"><div class="nc-header" style="background:var(--ncii)"><span class="nc-num">II</span><div class="nc-title-block"><h3>Nervio Óptico</h3><div class="nc-type">Sensitivo especial (aferente visual) · NO es un nervio periférico</div></div></div>
+  <div class="nc-body">
+    <div class="nc-rule"><div class="rule-text">⚡ Concepto clave: El NC II es un TRACTO DEL SNC</div><div class="rule-detail">Origen embriológico: diencéfalo · Mielinización: oligodendrocitos · Envolturas: duramadre + aracnoides + piamadre + LCE</div></div>
+
+    <span class="nc-sub" style="color:var(--ncii)">Trayectoria completa (~50 mm)</span>
+    <ul><li style="color:var(--ncii)"><strong>Retina:</strong> ~1.2 millones de axones de células ganglionares → disco óptico (papila)</li>
+    <li style="color:var(--ncii)"><strong>Nervio óptico:</strong> 4 segmentos — intraocular (1 mm) → intraorbitario (25 mm, en S) → intracanalicular (9 mm) → intracraneal (10-16 mm)</li>
+    <li style="color:var(--ncii)"><strong>Quiasma óptico:</strong> decusación parcial — fibras nasales (~53%) cruzan, temporales (~47%) no cruzan</li>
+    <li style="color:var(--ncii)"><strong>Tracto óptico</strong> → <strong>CGL del tálamo</strong> (6 capas) → <strong>radiaciones ópticas</strong> → <strong>corteza V1</strong> (cisura calcarina, lóbulo occipital)</li></ul>
+
+    <span class="nc-sub" style="color:var(--ncii)">Consecuencias de ser un tracto del SNC</span>
+    <ul><li style="color:var(--ncii)"><strong>NO regenera</strong> — daño = pérdida visual irreversible</li>
+    <li style="color:var(--ncii)"><strong>Susceptible a esclerosis múltiple</strong> → neuritis óptica (desmielinización de oligodendrocitos)</li>
+    <li style="color:var(--ncii)"><strong>Papiledema posible</strong> → el LCE perineural transmite la HIC al disco óptico</li></ul>
+
+    <div class="nc-optometry"><strong>Evaluación optométrica del NC II:</strong>
+    <br>• Agudeza visual (Snellen / LogMAR)
+    <br>• Campimetría (confrontación + Humphrey): detecta hemianopsias y escotomas
+    <br>• Reflejo pupilar fotomotor: NC II = <strong>brazo aferente</strong>
+    <br>• DPAR (Marcus Gunn) con swinging flashlight test
+    <br>• Oftalmoscopia directa: evaluar disco óptico (excavación, bordes, color, papiledema)</div>
+  </div></div>
+</section>
+
+<!-- ═══ REFLEJO FOTOMOTOR ═══ -->
+<section class="section" id="reflejo">
+  <div class="section-header"><span class="section-tag">Arco reflejo que integra NC II y NC III</span><h2>El Reflejo Pupilar Fotomotor</h2></div>
+  <p class="section-intro">Este reflejo conecta los dos pares craneales principales del Grupo 5. <strong>NC II = aferente</strong> (detecta la luz). <strong>NC III = eferente</strong> (contrae la pupila). Su evaluación es una de las competencias más importantes del optómetra.</p>
+
+  <div class="reflex-wrap">
+    <svg viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto;max-width:100%">
+      <defs><filter id="gl"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10Z" fill="rgba(245,240,232,0.4)"/></marker></defs>
+
+      <g><circle cx="60" cy="110" r="28" fill="rgba(58,128,176,0.2)" stroke="var(--ncii)" stroke-width="2"/>
+      <text x="60" y="108" fill="white" font-size="18" text-anchor="middle">💡</text>
+      <text x="60" y="125" fill="var(--ncii)" font-size="7" text-anchor="middle" font-family="DM Mono">RETINA</text>
+      <text x="60" y="155" fill="rgba(245,240,232,0.4)" font-size="7" text-anchor="middle" font-family="DM Mono">1. Luz</text></g>
+
+      <line x1="92" y1="110" x2="155" y2="110" stroke="var(--ncii)" stroke-width="2" marker-end="url(#aw)"/>
+      <text x="125" y="100" fill="var(--ncii)" font-size="9" text-anchor="middle" font-family="Playfair Display" font-weight="700">NC II</text>
+      <text x="125" y="128" fill="rgba(245,240,232,0.3)" font-size="6" text-anchor="middle" font-family="DM Mono">aferente</text>
+
+      <g><rect x="160" y="85" width="100" height="50" rx="8" fill="rgba(58,128,176,0.12)" stroke="var(--ncii)" stroke-width="1.5"/>
+      <text x="210" y="107" fill="white" font-size="8" text-anchor="middle" font-family="DM Mono">Tracto óptico</text>
+      <text x="210" y="120" fill="rgba(245,240,232,0.4)" font-size="6.5" text-anchor="middle" font-family="DM Mono">(antes del CGL)</text>
+      <text x="210" y="155" fill="rgba(245,240,232,0.4)" font-size="7" text-anchor="middle" font-family="DM Mono">2. Aferencia</text></g>
+
+      <line x1="265" y1="110" x2="320" y2="110" stroke="rgba(245,240,232,0.3)" stroke-width="2" marker-end="url(#aw)"/>
+
+      <g><rect x="325" y="78" width="120" height="65" rx="10" fill="rgba(106,138,90,0.15)" stroke="#6a8a5a" stroke-width="2"/>
+      <text x="385" y="100" fill="white" font-size="9" text-anchor="middle" font-family="Playfair Display" font-weight="700">MESENCÉFALO</text>
+      <text x="385" y="115" fill="rgba(245,240,232,0.5)" font-size="7" text-anchor="middle" font-family="DM Mono">Núcleo pretectal</text>
+      <text x="385" y="128" fill="rgba(245,240,232,0.5)" font-size="7" text-anchor="middle" font-family="DM Mono">→ Edinger-Westphal</text>
+      <text x="385" y="138" fill="rgba(245,240,232,0.35)" font-size="6" text-anchor="middle" font-family="DM Mono">(BILATERAL)</text>
+      <text x="385" y="162" fill="rgba(245,240,232,0.4)" font-size="7" text-anchor="middle" font-family="DM Mono">3. Centro integrador</text></g>
+
+      <line x1="450" y1="110" x2="510" y2="110" stroke="var(--nciii)" stroke-width="2" marker-end="url(#aw)"/>
+      <text x="480" y="100" fill="var(--nciii)" font-size="9" text-anchor="middle" font-family="Playfair Display" font-weight="700">NC III</text>
+      <text x="480" y="128" fill="rgba(245,240,232,0.3)" font-size="6" text-anchor="middle" font-family="DM Mono">eferente (parasim.)</text>
+
+      <g><rect x="515" y="85" width="100" height="50" rx="8" fill="rgba(138,74,106,0.15)" stroke="var(--nciii)" stroke-width="1.5"/>
+      <text x="565" y="107" fill="white" font-size="8" text-anchor="middle" font-family="DM Mono">Ganglio ciliar</text>
+      <text x="565" y="120" fill="rgba(245,240,232,0.4)" font-size="6.5" text-anchor="middle" font-family="DM Mono">→ nn. ciliares cortos</text>
+      <text x="565" y="155" fill="rgba(245,240,232,0.4)" font-size="7" text-anchor="middle" font-family="DM Mono">4. Eferencia</text></g>
+
+      <line x1="620" y1="110" x2="680" y2="110" stroke="var(--nciii)" stroke-width="2" marker-end="url(#aw)"/>
+
+      <g><circle cx="720" cy="110" r="28" fill="rgba(138,74,106,0.2)" stroke="var(--nciii)" stroke-width="2"/>
+      <text x="720" y="108" fill="white" font-size="14" text-anchor="middle">⬤</text>
+      <text x="720" y="125" fill="var(--nciii)" font-size="7" text-anchor="middle" font-family="DM Mono">MIOSIS</text>
+      <text x="720" y="155" fill="rgba(245,240,232,0.4)" font-size="7" text-anchor="middle" font-family="DM Mono">5. Esfínter pupilar</text></g>
+
+      <!-- Animated signal -->
+      <circle r="5" fill="#ffd700" filter="url(#gl)"><animateMotion dur="3s" repeatCount="indefinite" path="M60,110 L210,110 L385,110 L565,110 L720,110"/></circle>
+
+      <text x="400" y="195" fill="rgba(245,240,232,0.35)" font-size="8" text-anchor="middle" font-family="DM Mono">Respuesta DIRECTA (ojo estimulado) + CONSENSUAL (ojo contralateral)</text>
+      <text x="400" y="210" fill="rgba(245,240,232,0.25)" font-size="7" text-anchor="middle" font-family="DM Mono">Bilateral porque el pretectal proyecta a AMBOS núcleos de Edinger-Westphal</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ NC III ═══ -->
+<section class="section" id="nciii">
+  <div class="section-header"><span class="section-tag">El nervio motor ocular principal</span><h2>NC III — Nervio Oculomotor</h2></div>
+
+  <div class="nc-card"><div class="nc-header" style="background:var(--nciii)"><span class="nc-num">III</span><div class="nc-title-block"><h3>Nervio Oculomotor</h3><div class="nc-type">Motor somático + Parasimpático · Mesencéfalo</div></div></div>
+  <div class="nc-body">
+    <div class="nc-rule"><div class="rule-text">🎯 Regla del NC III: «Todo excepto el OS y el RL»</div><div class="rule-detail">Oblicuo superior = NC IV · Recto lateral = NC VI · Los demás (RS, RI, RM, OI, elevador, esfínter, ciliar) = NC III</div></div>
+
+    <span class="nc-sub" style="color:var(--nciii)">Músculos inervados (5 + 2 lisos)</span>
+    <table class="muscle-table">
+      <thead><tr><th>Músculo</th><th>Acción principal</th><th>Componente</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Recto superior</strong></td><td>Elevación (máx. en abducción)</td><td rowspan="5" style="vertical-align:middle">Motor somático<br>(ramo sup. e inf.)</td></tr>
+        <tr><td><strong>Recto inferior</strong></td><td>Depresión (máx. en abducción)</td></tr>
+        <tr><td><strong>Recto medial</strong></td><td>Aducción</td></tr>
+        <tr><td><strong>Oblicuo inferior</strong></td><td>Extorsión + elevación en aducción</td></tr>
+        <tr><td><strong>Elevador del párpado sup.</strong></td><td>Apertura palpebral</td></tr>
+        <tr><td><strong>Esfínter pupilar</strong></td><td>Miosis (constricción pupilar)</td><td rowspan="2">Parasimpático<br>(Edinger-Westphal<br>→ ganglio ciliar)</td></tr>
+        <tr><td><strong>Músculo ciliar</strong></td><td>Acomodación (enfoque cercano)</td></tr>
+      </tbody>
+    </table>
+
+    <span class="nc-sub" style="color:var(--nciii)">Trayecto</span>
+    <ul><li style="color:var(--nciii)">Núcleos en el <strong>mesencéfalo</strong> (colículos superiores) + núcleo de Edinger-Westphal (parasimpático)</li>
+    <li style="color:var(--nciii)">Emerge por la <strong>fosa interpeduncular</strong> → pasa entre la arteria cerebral posterior y la cerebelosa superior</li>
+    <li style="color:var(--nciii)">Atraviesa la <strong>pared lateral del seno cavernoso</strong> → fisura orbitaria superior</li>
+    <li style="color:var(--nciii)"><strong>Ramo superior:</strong> recto superior + elevador del párpado</li>
+    <li style="color:var(--nciii)"><strong>Ramo inferior:</strong> recto inferior + recto medial + oblicuo inferior + raíz parasimpática → ganglio ciliar</li></ul>
+
+    <div class="nc-clinical"><strong>Parálisis completa del NC III:</strong>
+    <br>• <strong>Ptosis severa</strong> — elevador del párpado paralizado
+    <br>• <strong>Midriasis</strong> — esfínter pupilar paralizado (parasimpático)
+    <br>• <strong>Ojo «abajo y afuera»</strong> — acción no contrarrestada del recto lateral (NC VI) + oblicuo superior (NC IV)
+    <br>• <strong>Pérdida de acomodación</strong> — músculo ciliar paralizado
+    <br><br><strong>Regla de la pupila:</strong>
+    <br>• <strong>Midriasis</strong> = compresión extrínseca (aneurisma ACoP, herniación uncal) → fibras parasimpáticas superficiales afectadas primero → <strong>EMERGENCIA</strong>
+    <br>• <strong>Pupila respetada</strong> = probable isquemia microvascular (DM, HTA) → fibras centrales del nervio afectadas → NO emergencia quirúrgica</div>
+
+    <p style="margin-top:1rem;font-weight:600">Simulador: Parálisis completa del NC III derecho</p>
+    <div class="eye-sim">
+      <div class="eye-box"><div class="eye-lbl">OI (normal)</div><canvas class="eye-cv" id="eyeL3" width="120" height="120"></canvas></div>
+      <div class="eye-box"><div class="eye-lbl">OD (afectado — «abajo y afuera» + midriasis)</div><canvas class="eye-cv" id="eyeR3" width="120" height="120"></canvas></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ═══ NC IV ═══ -->
+<section class="section" id="nciv">
+  <div class="section-header"><span class="section-tag">El más pequeño y peculiar</span><h2>NC IV — Nervio Troclear</h2></div>
+
+  <div class="nc-card"><div class="nc-header" style="background:var(--nciv)"><span class="nc-num">IV</span><div class="nc-title-block"><h3>Nervio Troclear</h3><div class="nc-type">Motor somático puro · Mesencéfalo (cara posterior)</div></div></div>
+  <div class="nc-body">
+    <p>Inerva <strong>exclusivamente el oblicuo superior</strong> (intorsión + depresión en aducción + abducción débil).</p>
+
+    <div class="nc-rule"><div class="rule-text">🔑 3 récords del NC IV</div><div class="rule-detail">Más DELGADO de todos los NC · ÚNICO que emerge de la cara POSTERIOR del tronco · ÚNICO que se DECUSA completamente (inerva el oblicuo superior contralateral)</div></div>
+
+    <span class="nc-sub" style="color:var(--nciv)">Trayecto</span>
+    <ul><li style="color:var(--nciv)">Núcleo troclear en el mesencéfalo (colículos <strong>inferiores</strong>)</li>
+    <li style="color:var(--nciv)">Emerge de la <strong>cara posterior</strong> del mesencéfalo → cruza la línea media (decusación completa)</li>
+    <li style="color:var(--nciv)">Rodea el tronco → pared lateral del seno cavernoso → fisura orbitaria superior</li>
+    <li style="color:var(--nciv)">Inerva el oblicuo superior <strong>contralateral</strong></li></ul>
+
+    <div class="nc-clinical"><strong>Parálisis del NC IV:</strong>
+    <br>• <strong>Diplopía vertical</strong> — empeora al bajar la mirada (ej: bajar escaleras, leer)
+    <br>• <strong>Tortícolis compensatorio</strong> — el paciente inclina la cabeza hacia el lado sano para compensar la falta de intorsión
+    <br>• <strong>Causa más frecuente:</strong> traumatismo craneoencefálico (incluso leve) — el nervio es largo y delgado
+    <br>• En parálisis congénitas: tortícolis crónico desde la infancia, puede pasar desapercibido años</div>
+
+    <span class="nc-sub" style="color:var(--nciv)">Test de Parks (3 pasos) — diagnóstico de parálisis del NC IV</span>
+    <div class="parks-card">
+      <div class="parks-step"><div class="step-num">1</div><div class="step-text"><strong>¿Qué ojo tiene hipertropía?</strong><br>El ojo afectado está más alto (el oblicuo superior deprime el ojo → si falla, el ojo sube).</div></div>
+      <div class="parks-step"><div class="step-num">2</div><div class="step-text"><strong>¿Empeora en la mirada contralateral?</strong><br>La depresión del oblicuo superior es máxima en aducción → la hipertropía empeora al mirar hacia el lado opuesto al ojo afectado.</div></div>
+      <div class="parks-step"><div class="step-num">3</div><div class="step-text"><strong>¿Empeora con la inclinación ipsilateral de la cabeza?</strong> (Test de Bielschowsky)<br>Al inclinar la cabeza hacia el lado afectado, los intorsores se activan reflejo → el oblicuo superior paralizado no responde → el ojo sube más (hipertropía aumenta).</div></div>
+      <p style="margin-top:0.8rem;font-size:0.88rem;color:var(--nciv);font-weight:600">Si las 3 respuestas son SÍ → parálisis del oblicuo superior contralateral al lado de la mirada que empeora.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- ═══ PREGUNTAS GUÍA ═══ -->
+<section class="section" id="preguntas">
+  <div class="section-header"><span class="section-tag">Para la exposición del grupo</span><h2>Preguntas Guía con Respuestas</h2></div>
+
+  <div class="guia-card">
+    <h3>📋 Preparen estas respuestas para su exposición de 7 minutos</h3>
+
+    <div class="guia-item">
+      <button class="guia-btn" onclick="toggleG(this)"><span class="q-icon">P1 ▸</span> ¿Qué músculos inerva el NC III y qué ocurre clínicamente cuando se paraliza por completo?</button>
+      <div class="guia-answer"><div class="guia-answer-inner">
+        El NC III inerva <strong>5 músculos estriados</strong>: recto superior, recto inferior, recto medial, oblicuo inferior y elevador del párpado superior. Además lleva fibras <strong>parasimpáticas</strong> (Edinger-Westphal → ganglio ciliar → nervios ciliares cortos) al esfínter pupilar y al músculo ciliar.
+        <br><br><strong>Parálisis completa:</strong> ptosis severa (elevador del párpado) + midriasis (esfínter pupilar) + ojo desviado «abajo y afuera» (por acción sin oposición del recto lateral [NC VI] y oblicuo superior [NC IV]) + pérdida de acomodación (músculo ciliar).
+        <br><br><strong>Regla mnemotécnica:</strong> «NC III = TODO excepto el OS (NC IV) y el RL (NC VI)».
+        <span class="ref">Moore, Cap. 10, pp. 1200-1208; Fang et al., JAMA Ophthalmol 2017</span>
+      </div></div>
+    </div>
+
+    <div class="guia-item">
+      <button class="guia-btn" onclick="toggleG(this)"><span class="q-icon">P2 ▸</span> ¿Por qué el ojo queda «abajo y afuera» en la parálisis del NC III? ¿Qué nervios/músculos quedan activos?</button>
+      <div class="guia-answer"><div class="guia-answer-inner">
+        De los 6 músculos extraoculares, el NC III inerva 4 (RS, RI, RM, OI). Cuando se paraliza, solo quedan activos los <strong>2 músculos no inervados por el NC III</strong>:
+        <br><br>• <strong>Recto lateral</strong> (NC VI) → abduce el ojo → desviación LATERAL ("afuera")
+        <br>• <strong>Oblicuo superior</strong> (NC IV) → deprime el ojo (en aducción) e intorsiona → desviación INFERIOR ("abajo")
+        <br><br>La combinación de abducción (RL) + depresión/intorsión (OS) produce la posición clásica <strong>«abajo y afuera»</strong> (down and out).
+        <span class="ref">Moore, Cap. 8, Fig. C8-11; Cap. 10</span>
+      </div></div>
+    </div>
+
+    <div class="guia-item">
+      <button class="guia-btn" onclick="toggleG(this)"><span class="q-icon">P3 ▸</span> Expliquen cómo funciona el reflejo fotomotor y cuál es el papel del NC II y del NC III en este arco reflejo.</button>
+      <div class="guia-answer"><div class="guia-answer-inner">
+        <strong>Arco reflejo pupilar fotomotor:</strong>
+        <br><br>1. <strong>Estímulo:</strong> luz incide en la retina
+        <br>2. <strong>Aferencia (NC II):</strong> señal viaja por el nervio óptico → quiasma → tracto óptico → se desvía al <strong>núcleo pretectal olivar</strong> (mesencéfalo) ANTES de llegar al CGL
+        <br>3. <strong>Centro integrador:</strong> el pretectal proyecta <strong>bilateralmente</strong> a ambos núcleos de <strong>Edinger-Westphal</strong>
+        <br>4. <strong>Eferencia (NC III parasimpático):</strong> Edinger-Westphal → ganglio ciliar → nervios ciliares cortos → <strong>esfínter pupilar</strong> → MIOSIS
+        <br>5. <strong>Respuestas:</strong> directa (ojo estimulado) + consensual (ojo contralateral) — iguales porque el pretectal proyecta bilateralmente
+        <br><br><strong>DPAR (Marcus Gunn):</strong> si el NC II de un ojo está dañado, al iluminar ese ojo la señal aferente es más débil → menor activación bilateral de Edinger-Westphal → la pupila del ojo afectado se dilata paradójicamente (swinging flashlight test).
+        <span class="ref">Moore, Cap. 10; StatPearls, Pupillary Light Reflex</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUIZ ═══ -->
+<section class="section" id="quiz">
+  <div class="section-header"><span class="section-tag">Repaso de conceptos</span><h2>Quiz: NC II, III, IV</h2></div>
+
+  <div id="quizBox">
+    <div class="quiz-q" data-correct="2">
+      <span class="q-num">Pregunta 1 · NC II</span>
+      <h4>¿Por qué la neuritis óptica afecta al NC II pero NO a nervios periféricos como el facial?</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Porque el NC II es más grueso</li>
+        <li data-idx="1">B) Porque el NC II transmite señales sensoriales</li>
+        <li data-idx="2">C) Porque el NC II está mielinizado por oligodendrocitos (SNC) y la esclerosis múltiple ataca la mielina del SNC</li>
+        <li data-idx="3">D) Porque el NC II pasa por el conducto óptico</li>
+      </ul>
+      <div class="quiz-feedback">La <strong>esclerosis múltiple</strong> es una enfermedad desmielinizante del <strong>SNC</strong>. El NC II está mielinizado por <strong>oligodendrocitos</strong> (SNC), mientras que los nervios periféricos usan células de Schwann (SNP). Por eso la neuritis óptica es manifestación de EM pero no la neuritis facial. <em>Moore, Cap. 8; StatPearls, NC II</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="0">
+      <span class="q-num">Pregunta 2 · NC III</span>
+      <h4>Una paciente de 58 años presenta ptosis derecha + midriasis derecha + ojo «abajo y afuera». La midriasis indica que la causa más urgente a descartar es:</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Aneurisma de la arteria comunicante posterior (compresión extrínseca)</li>
+        <li data-idx="1">B) Isquemia microvascular por diabetes mellitus</li>
+        <li data-idx="2">C) Miastenia gravis ocular</li>
+        <li data-idx="3">D) Tumor orbitario</li>
+      </ul>
+      <div class="quiz-feedback">Las fibras <strong>parasimpáticas</strong> viajan <strong>superficialmente</strong> en el NC III → la compresión extrínseca (aneurisma ACoP, herniación uncal) las afecta <strong>primero</strong> → midriasis. La isquemia microvascular (DM) afecta el centro del nervio → respeta la pupila. <strong>Midriasis en parálisis del NC III = emergencia neuroquirúrgica.</strong> <em>Fang et al., JAMA Ophthalmol 2017</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="3">
+      <span class="q-num">Pregunta 3 · NC IV</span>
+      <h4>¿Cuál de estas características es ÚNICA del nervio troclear (NC IV)?</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Es el nervio craneal más grueso</li>
+        <li data-idx="1">B) Inerva dos músculos extraoculares</li>
+        <li data-idx="2">C) Emerge del puente</li>
+        <li data-idx="3">D) Es el ÚNICO NC que emerge de la cara posterior del tronco y se decusa completamente</li>
+      </ul>
+      <div class="quiz-feedback">El NC IV tiene <strong>3 récords</strong>: es el más <strong>delgado</strong>, el único que emerge de la cara <strong>posterior</strong> del tronco (mesencéfalo, colículos inferiores) y el único que se <strong>decusa completamente</strong> (inerva el oblicuo superior contralateral). <em>Moore, Cap. 10</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="1">
+      <span class="q-num">Pregunta 4 · Reflejo fotomotor</span>
+      <h4>¿Por qué la respuesta pupilar consensual es igual a la directa?</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Porque ambos ojos comparten el mismo nervio óptico</li>
+        <li data-idx="1">B) Porque el núcleo pretectal proyecta bilateralmente a AMBOS núcleos de Edinger-Westphal</li>
+        <li data-idx="2">C) Porque todas las fibras cruzan en el quiasma óptico</li>
+        <li data-idx="3">D) Porque el NC III inerva ambos esfínteres pupilares</li>
+      </ul>
+      <div class="quiz-feedback">El núcleo pretectal olivar (mesencéfalo) recibe la señal aferente y proyecta <strong>bilateralmente</strong> a ambos núcleos de Edinger-Westphal → ambos NC III se activan → ambos esfínteres se contraen por igual. Cada NC III inerva solo su esfínter ipsilateral. <em>StatPearls, Pupillary Light Reflex</em></div>
+    </div>
+
+    <div class="quiz-q" data-correct="2">
+      <span class="q-num">Pregunta 5 · Test de Parks</span>
+      <h4>Un paciente inclina la cabeza hacia la derecha y la hipertropía del OD empeora (test de Bielschowsky positivo). ¿Qué músculo está paralizado?</h4>
+      <ul class="quiz-options">
+        <li data-idx="0">A) Oblicuo inferior derecho</li>
+        <li data-idx="1">B) Recto superior derecho</li>
+        <li data-idx="2">C) Oblicuo superior derecho (NC IV derecho)</li>
+        <li data-idx="3">D) Recto inferior izquierdo</li>
+      </ul>
+      <div class="quiz-feedback">Test de Bielschowsky: al inclinar la cabeza hacia el lado afectado, los <strong>intorsores</strong> se activan reflexivamente. El oblicuo superior es el principal intorsor → si está paralizado, no compensa → el ojo <strong>sube más</strong> (hipertropía aumenta). Inclinación derecha + hipertropía OD empeora = <strong>OS derecho paralizado</strong>. <em>Moore, Cap. 10; Helveston, Survey Ophthalmol 2010</em></div>
+    </div>
+  </div>
+  <div class="score-display" id="scoreDisp"></div>
+</section>
+
+<footer class="footer">
+  <p>Universidad de La Salle · Programa de Optometría · Morfología General 2026-I</p>
+  <p style="margin-top:0.3rem">Dr. Jorge Bogoya · Grupo 05: NC II, III, IV</p>
+  <p style="margin-top:0.3rem;opacity:0.4;font-size:0.65rem">Refs: Moore, Dalley & Agur 8ª ed., Cap. 8 y 10 · Tortora 15ª ed. · Fang et al., JAMA Ophthalmol 2017 · StatPearls, NC II, Pupillary Light Reflex</p>
+</footer>
+
+<script>
+function toggleG(b){const a=b.nextElementSibling;a.classList.toggle('open');const i=b.querySelector('.q-icon');i.textContent=a.classList.contains('open')?i.textContent.replace('▸','▾'):i.textContent.replace('▾','▸')}
+
+// ═══ EYE SIMULATOR (NC III palsy right) ═══
+function drawEye(id,dx,dy,ps,ir){const c=document.getElementById(id),x=c.getContext('2d'),cx=60,cy=60;x.clearRect(0,0,120,120);x.beginPath();x.ellipse(cx,cy,48,42,0,0,Math.PI*2);x.fillStyle='#f8f5f0';x.fill();x.strokeStyle='#bbb';x.lineWidth=1.5;x.stroke();x.beginPath();x.arc(cx+dx,cy+dy,18,0,Math.PI*2);x.fillStyle=ir||'#5a8a5e';x.fill();for(let i=0;i<10;i++){const a=(i/10)*Math.PI*2;x.beginPath();x.moveTo(cx+dx+Math.cos(a)*7,cy+dy+Math.sin(a)*7);x.lineTo(cx+dx+Math.cos(a)*17,cy+dy+Math.sin(a)*17);x.strokeStyle='rgba(0,0,0,0.1)';x.lineWidth=1;x.stroke()}x.beginPath();x.arc(cx+dx,cy+dy,ps,0,Math.PI*2);x.fillStyle='#111';x.fill();x.beginPath();x.arc(cx+dx-3,cy+dy-4,2.5,0,Math.PI*2);x.fillStyle='rgba(255,255,255,0.7)';x.fill()}
+drawEye('eyeL3',0,0,4.5,'#6a7a5e'); // Normal OI
+// OD affected: in examiner's view, OD is on right side of display. "Down and out" = temporal (right on canvas = positive dx) + down (positive dy) + mydriasis (large pupil)
+drawEye('eyeR3',10,5,9,'#6a7a5e'); // NC III palsy: abducted + depressed + mydriasis
+
+// ═══ QUIZ ═══
+let qA=0,qC=0,qT=5;
+document.querySelectorAll('.quiz-q').forEach(q=>{const ci=parseInt(q.dataset.correct),opts=q.querySelectorAll('.quiz-options li'),fb=q.querySelector('.quiz-feedback');opts.forEach(o=>{o.addEventListener('click',()=>{if(q.classList.contains('answered'))return;q.classList.add('answered');qA++;const idx=parseInt(o.dataset.idx);if(idx===ci){o.classList.add('correct');fb.classList.add('correct-fb');qC++}else{o.classList.add('incorrect');opts[ci].classList.add('correct');fb.classList.add('incorrect-fb')}opts.forEach(x=>x.classList.add('disabled'));fb.classList.add('show');if(qA===qT){const p=Math.round((qC/qT)*100);const s=document.getElementById('scoreDisp');s.style.display='block';s.textContent=`Resultado: ${qC}/${qT} (${p}%) — ${p>=80?'¡Excelente! 🎯':p>=60?'Buen trabajo 👍':'Repasa el contenido 📖'}`;s.scrollIntoView({behavior:'smooth',block:'center'})}})})});
+
+window.addEventListener('scroll',()=>{const ss=document.querySelectorAll('section[id]');let c='';ss.forEach(s=>{if(scrollY>=s.offsetTop-120)c=s.id});document.querySelectorAll('.nav-pill').forEach(p=>p.classList.toggle('active',p.getAttribute('href')==='#'+c));const h=document.documentElement;document.getElementById('progressBar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'});
+</script>
+</body>
+</html>

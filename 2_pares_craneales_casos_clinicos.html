@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pares Craneales & Casos Clínicos — Clase Puente · Morfología General 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1714;--parchment:#f5f0e8;--cream:#faf7f2;--amber:#c8a45c;--amber-light:#e8d5a0;--amber-dark:#8b6914;--teal:#2a7a6e;--teal-light:#3aa08e;--red-clinical:#b5413b;--blue-nerve:#3a5a8c;--green-muscle:#4a7a4e;--purple-brain:#6b4a8a;--shadow:rgba(26,23,20,0.12);--font-display:'Playfair Display',Georgia,serif;--font-body:'Source Serif 4',Georgia,serif;--font-mono:'DM Mono','Courier New',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--ink);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--teal));z-index:1001;transition:width 0.1s;width:0}
+.hero{min-height:50vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(170deg,var(--ink) 0%,#2a2520 40%,#3a3028 100%);color:var(--parchment);padding:2rem;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(200,164,92,0.15) 0%,transparent 60%),radial-gradient(ellipse at 70% 60%,rgba(58,90,140,0.12) 0%,transparent 50%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:820px}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5.5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:0.5rem;letter-spacing:-0.02em}
+.hero h1 .accent{color:var(--amber)}
+.hero .subtitle{font-family:var(--font-display);font-style:italic;font-size:clamp(1rem,2.8vw,1.6rem);color:var(--amber-light);margin-bottom:1rem;opacity:0.9}
+.hero .meta{font-family:var(--font-mono);font-size:0.8rem;color:rgba(245,240,232,0.55);letter-spacing:0.05em}
+.hero .meta span{color:var(--amber)}
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(26,23,20,0.95);backdrop-filter:blur(12px);padding:0.5rem 1rem;display:flex;gap:0.4rem;justify-content:center;flex-wrap:wrap;border-bottom:1px solid rgba(200,164,92,0.2)}
+.nav-pill{font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--parchment);background:transparent;border:1px solid rgba(200,164,92,0.3);padding:0.3rem 0.7rem;border-radius:20px;cursor:pointer;transition:all 0.3s;text-decoration:none}
+.nav-pill:hover,.nav-pill.active{background:var(--amber);color:var(--ink);border-color:var(--amber)}
+.section{max-width:1140px;margin:0 auto;padding:3.5rem 1.5rem}
+.section-header{margin-bottom:2rem;padding-bottom:0.8rem;border-bottom:2px solid var(--amber-light)}
+.section-tag{font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--amber-dark);margin-bottom:0.4rem;display:block}
+.section h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:700;line-height:1.2}
+.section-intro{font-size:1.05rem;line-height:1.8;color:rgba(26,23,20,0.8);max-width:800px;margin-bottom:2rem}
+.nc-table-wrap{overflow-x:auto;margin:1.5rem 0 2rem;border-radius:12px;box-shadow:0 4px 24px var(--shadow)}
+.nc-table{width:100%;border-collapse:collapse;min-width:700px;font-size:0.92rem}
+.nc-table thead th{background:var(--ink);color:var(--parchment);font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;padding:0.9rem 0.8rem;text-align:left}
+.nc-table tbody tr:not(.nc-detail){cursor:pointer;transition:all 0.3s;border-bottom:1px solid rgba(200,164,92,0.15)}
+.nc-table tbody tr:nth-child(4n+1){background:rgba(200,164,92,0.04)}
+.nc-table tbody tr:not(.nc-detail):hover{background:rgba(200,164,92,0.12)}
+.nc-table tbody tr.active-row{background:rgba(200,164,92,0.18)!important}
+.nc-table td{padding:0.75rem 0.8rem;vertical-align:top}
+.nc-badge{display:inline-block;color:white;font-family:var(--font-mono);font-size:0.72rem;padding:0.18rem 0.55rem;border-radius:4px;font-weight:500;min-width:38px;text-align:center}
+.nc-badge.sensory{background:var(--blue-nerve)}.nc-badge.motor{background:var(--green-muscle)}.nc-badge.mixed{background:var(--purple-brain)}
+.nc-type-tag{font-family:var(--font-mono);font-size:0.65rem;padding:0.12rem 0.4rem;border-radius:3px;display:inline-block}
+.tag-motor{background:rgba(74,122,78,0.15);color:var(--green-muscle)}.tag-sensory{background:rgba(58,90,140,0.15);color:var(--blue-nerve)}.tag-mixed{background:rgba(107,74,138,0.15);color:var(--purple-brain)}
+.nc-relevance{font-size:0.85rem;color:var(--red-clinical);font-weight:600}
+.expand-arrow{display:inline-block;transition:transform 0.3s;color:var(--amber-dark);font-size:0.8rem}
+.active-row .expand-arrow{transform:rotate(90deg)}
+.nc-detail{display:none}
+.nc-detail.open{display:table-row;animation:slideDown 0.4s ease}
+.nc-detail-cell{padding:0!important;background:var(--cream);border-bottom:2px solid var(--amber-light)}
+.nc-detail-inner{padding:1.5rem 1.8rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.detail-block h4{font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber-dark);margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:1px solid rgba(200,164,92,0.2)}
+.detail-block p{font-size:0.9rem;line-height:1.7;margin-bottom:0.4rem}
+.detail-clinical{background:rgba(181,65,59,0.06);border-left:3px solid var(--red-clinical);padding:0.8rem 1rem;border-radius:0 6px 6px 0;margin-top:0.5rem}
+.detail-clinical strong{color:var(--red-clinical)}
+.detail-exam{background:rgba(42,122,110,0.06);border-left:3px solid var(--teal);padding:0.8rem 1rem;border-radius:0 6px 6px 0;margin-top:0.5rem}
+.detail-exam strong{color:var(--teal)}
+.detail-ref{font-family:var(--font-mono);font-size:0.72rem;color:var(--amber-dark);margin-top:0.8rem;font-style:italic}
+.mnemonic-card{background:linear-gradient(135deg,var(--ink) 0%,#2a2520 100%);color:var(--parchment);border-radius:14px;padding:2rem 2.5rem;margin:2.5rem 0;position:relative;overflow:hidden;text-align:center}
+.mnemonic-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--amber),var(--teal),var(--purple-brain))}
+.mnemonic-card h3{font-family:var(--font-display);color:var(--amber);font-size:1.3rem;margin-bottom:1rem}
+.mnemonic-letters{display:flex;justify-content:center;flex-wrap:wrap;gap:0.4rem;margin:1rem 0}
+.mnemonic-item{display:flex;flex-direction:column;align-items:center;padding:0.6rem 0.8rem;border-radius:8px;background:rgba(200,164,92,0.1);border:1px solid rgba(200,164,92,0.2);min-width:70px;transition:all 0.3s;cursor:default}
+.mnemonic-item:hover{background:rgba(200,164,92,0.2);transform:translateY(-2px)}
+.mnemonic-item .letter{font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--amber);line-height:1}
+.mnemonic-item .word{font-family:var(--font-mono);font-size:0.62rem;color:rgba(245,240,232,0.6);margin-top:0.2rem;text-transform:uppercase;letter-spacing:0.05em}
+.mnemonic-item .nc{font-family:var(--font-mono);font-size:0.58rem;color:var(--teal-light);margin-top:0.1rem}
+.mnemonic-note{font-family:var(--font-mono);font-size:0.78rem;color:rgba(245,240,232,0.45);margin-top:1rem}
+.case-box{background:linear-gradient(135deg,#1a1714 0%,#2a2520 100%);color:var(--parchment);border-radius:14px;padding:2rem 2.2rem;margin:1.8rem 0;position:relative;overflow:hidden}
+.case-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--red-clinical),var(--amber),var(--teal))}
+.case-num{font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.3rem}
+.case-box h3{font-family:var(--font-display);color:var(--amber);font-size:1.35rem;margin-bottom:1rem;line-height:1.3}
+.patient-data{background:rgba(245,240,232,0.07);border-radius:8px;padding:1.2rem 1.4rem;margin:1rem 0;border-left:3px solid var(--amber);font-size:0.95rem;line-height:1.8}
+.patient-data strong{color:var(--amber-light)}
+.case-findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem;margin:1rem 0}
+.finding-chip{background:rgba(245,240,232,0.06);border:1px solid rgba(200,164,92,0.2);border-radius:8px;padding:0.7rem 1rem;font-size:0.88rem;text-align:center;transition:all 0.3s}
+.finding-chip:hover{background:rgba(200,164,92,0.12)}
+.finding-chip .emoji{font-size:1.5rem;display:block;margin-bottom:0.3rem}
+.finding-chip .label{font-family:var(--font-mono);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--amber-light)}
+.case-q-item{margin:0.5rem 0}
+.case-q-btn{display:block;width:100%;text-align:left;background:rgba(200,164,92,0.08);border:1px solid rgba(200,164,92,0.2);border-radius:8px;padding:0.8rem 1.2rem;color:var(--parchment);font-family:var(--font-body);font-size:0.92rem;cursor:pointer;transition:all 0.3s;line-height:1.6}
+.case-q-btn:hover{background:rgba(200,164,92,0.15);border-color:var(--amber)}
+.case-q-btn .q-icon{font-family:var(--font-mono);font-size:0.7rem;color:var(--amber);margin-right:0.5rem}
+.case-answer{max-height:0;overflow:hidden;transition:max-height 0.5s ease}
+.case-answer.open{max-height:800px}
+.case-answer-inner{padding:0.8rem 1.2rem;background:rgba(42,122,110,0.08);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;margin-top:0.3rem;font-size:0.9rem;line-height:1.7}
+.case-answer-inner strong{color:var(--teal-light)}
+.case-answer-inner .ref{font-family:var(--font-mono);font-size:0.7rem;color:rgba(245,240,232,0.4);margin-top:0.5rem;display:block}
+.eye-sim-wrap{display:flex;justify-content:center;align-items:center;gap:2rem;margin:1.5rem 0;flex-wrap:wrap}
+.eye-container{text-align:center}
+.eye-label{font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber-light);margin-bottom:0.5rem}
+.eye-canvas{border-radius:50%;border:2px solid rgba(200,164,92,0.3)}
+.footer{background:var(--ink);color:rgba(245,240,232,0.4);text-align:center;padding:2.5rem 1.5rem;font-family:var(--font-mono);font-size:0.75rem}
+@keyframes slideDown{from{opacity:0}to{opacity:1}}
+@media(max-width:768px){.section{padding:2.5rem 1rem}.nc-detail-inner{grid-template-columns:1fr}.case-box{padding:1.5rem 1.2rem}.mnemonic-card{padding:1.5rem 1rem}.mnemonic-item{min-width:55px}.mnemonic-item .letter{font-size:1.4rem}}
+@media(max-width:480px){.nav-bar{gap:0.2rem;padding:0.4rem}.nav-pill{font-size:0.62rem;padding:0.22rem 0.45rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<header class="hero">
+  <div class="hero-content">
+    <div class="meta">UNIVERSIDAD DE LA SALLE · OPTOMETRÍA · <span>MORFOLOGÍA GENERAL 2026-I</span></div>
+    <h1>Pares Craneales &<br><span class="accent">Casos Clínicos</span></h1>
+    <p class="subtitle">Clase Puente — Del Músculo al Nervio</p>
+    <div class="meta" style="margin-top:0.8rem">09 de abril de 2026 · <span>Dr. Jorge Bogoya</span></div>
+    <div class="meta" style="margin-top:0.3rem;font-size:0.72rem;opacity:0.4">Actividad posterior al trabajo por grupos · Previa al quiz de ingreso</div>
+  </div>
+</header>
+<nav class="nav-bar">
+  <a href="#tabla" class="nav-pill">Tabla Pares Craneales</a>
+  <a href="#mnemonic" class="nav-pill">Mnemotecnia</a>
+  <a href="#caso1" class="nav-pill">Caso 1 · NC III</a>
+  <a href="#caso2" class="nav-pill">Caso 2 · NC VI</a>
+  <a href="#caso3" class="nav-pill">Caso 3 · NC VII</a>
+</nav>
+<section class="section" id="tabla">
+  <div class="section-header"><span class="section-tag">Neuroanatomía Optométrica</span><h2>Pares Craneales de Relevancia Optométrica</h2></div>
+  <p class="section-intro">De los 12 pares craneales, <strong>6 tienen relevancia directa</strong> para la práctica optométrica. Haz clic en cada fila para expandir: origen, trayecto, función detallada, prueba clínica en consultorio y patología asociada.</p>
+  <div class="nc-table-wrap"><table class="nc-table"><thead><tr><th style="width:40px"></th><th style="width:60px">NC</th><th style="width:130px">Nombre</th><th>Tipo</th><th>Músculos / Estructuras</th><th>Relevancia Optométrica</th></tr></thead><tbody id="ncBody"></tbody></table></div>
+  <div class="mnemonic-card" id="mnemonic">
+    <h3>🧠 Mnemotecnia: Pares Craneales Oculares</h3>
+    <p style="font-size:0.92rem;opacity:0.7;margin-bottom:0.5rem">Para recordar los 6 pares de relevancia optométrica:</p>
+    <div class="mnemonic-letters">
+      <div class="mnemonic-item"><span class="letter">O</span><span class="word">Óptico</span><span class="nc">NC II · Ver</span></div>
+      <div class="mnemonic-item"><span class="letter">O</span><span class="word">Oculomotor</span><span class="nc">NC III · Mover(4)+↑párp</span></div>
+      <div class="mnemonic-item"><span class="letter">T</span><span class="word">Troclear</span><span class="nc">NC IV · Obl.Sup</span></div>
+      <div class="mnemonic-item"><span class="letter">O</span><span class="word">Oftálmico</span><span class="nc">NC V₁ · Sentir córnea</span></div>
+      <div class="mnemonic-item"><span class="letter">A</span><span class="word">Abducens</span><span class="nc">NC VI · Recto lat.</span></div>
+      <div class="mnemonic-item"><span class="letter">F</span><span class="word">Facial</span><span class="nc">NC VII · Cerrar ojo</span></div>
+    </div>
+    <p class="mnemonic-note">«<strong style="color:var(--amber)">O-O-T-O-A-F</strong>» → <em>"Oh, Ojalá Todo Optómetra Aprenda Fuerte"</em></p>
+    <p class="mnemonic-note" style="margin-top:0.4rem">Regla NC III: «<strong style="color:var(--amber)">Todo menos el OS y el RL</strong>» → oblicuo superior = IV, recto lateral = VI, el resto = III</p>
+  </div>
+</section>
+<section class="section" id="casos">
+  <div class="section-header"><span class="section-tag">Integración Músculo → Nervio → Clínica</span><h2>Casos Clínicos Integradores</h2></div>
+  <p class="section-intro">Cada caso conecta el sistema muscular con el sistema nervioso a través de un escenario clínico real. Analiza los hallazgos, formula tu hipótesis y luego revela la respuesta.</p>
+
+  <div class="case-box" id="caso1">
+    <div class="case-num">Caso Clínico 01</div><h3>Ptosis, Midriasis y «Hacia Abajo y Afuera»</h3>
+    <div class="patient-data">Paciente femenina de <strong>58 años</strong> consulta por caída del párpado superior derecho de 3 días de evolución. Antecedente: HTA, DM tipo 2.</div>
+    <div class="case-findings">
+      <div class="finding-chip"><span class="emoji">👁️‍🗨️</span><strong>Ptosis severa</strong> OD<div class="label">Párpado superior</div></div>
+      <div class="finding-chip"><span class="emoji">⬤</span><strong>Midriasis</strong> OD<div class="label">Pupila dilatada, arreactiva</div></div>
+      <div class="finding-chip"><span class="emoji">↘️</span><strong>«Abajo y afuera»</strong><div class="label">Estrabismo divergente</div></div>
+      <div class="finding-chip"><span class="emoji">🔄</span><strong>Diplopía</strong> binocular<div class="label">Visión doble</div></div>
+    </div>
+    <div class="case-questions">
+      <div class="case-q-item"><button class="case-q-btn" onclick="toggleA(this)"><span class="q-icon">P1 ▸</span> ¿Qué par craneal está lesionado? ¿Qué músculos están paralizados?</button><div class="case-answer"><div class="case-answer-inner"><strong>NC III (oculomotor).</strong> Músculos paralizados: <strong>recto superior, recto inferior, recto medial, oblicuo inferior, elevador del párpado superior</strong> y fibras parasimpáticas al <strong>esfínter pupilar</strong>. Es parálisis completa del NC III porque hay compromiso pupilar (midriasis).<span class="ref">Moore, Cap. 10; Tortora, Cap. 14</span></div></div></div>
+      <div class="case-q-item"><button class="case-q-btn" onclick="toggleA(this)"><span class="q-icon">P2 ▸</span> ¿Por qué el ojo queda «hacia abajo y afuera»?</button><div class="case-answer"><div class="case-answer-inner">Los <strong>dos únicos músculos intactos</strong> actúan sin oposición: el <strong>recto lateral</strong> (NC VI → abducción) y el <strong>oblicuo superior</strong> (NC IV → depresión e intorsión). La acción combinada desplaza el ojo inferolateralmente.<span class="ref">Moore, Cap. 8, Fig. C8-11</span></div></div></div>
+      <div class="case-q-item"><button class="case-q-btn" onclick="toggleA(this)"><span class="q-icon">P3 ▸</span> ¿Por qué la midriasis indica mayor urgencia?</button><div class="case-answer"><div class="case-answer-inner">Las fibras parasimpáticas viajan <strong>superficialmente</strong> en el NC III. La <strong>compresión extrínseca</strong> (aneurisma ACoP, herniación uncal) las afecta primero → midriasis. La isquemia microvascular (diabética) afecta el <strong>centro del nervio</strong> → respeta la pupila. <strong>Midriasis = urgencia neuroquirúrgica</strong> hasta demostrar lo contrario.<span class="ref">Fang et al., JAMA Ophthalmol 2017</span></div></div></div>
+    </div>
+    <div class="eye-sim-wrap" style="margin-top:1.5rem"><div class="eye-container"><div class="eye-label">Ojo Derecho (afectado)</div><canvas class="eye-canvas" id="eyeR1" width="140" height="140"></canvas></div><div class="eye-container"><div class="eye-label">Ojo Izquierdo (normal)</div><canvas class="eye-canvas" id="eyeL1" width="140" height="140"></canvas></div></div>
+  </div>
+
+  <div class="case-box" id="caso2">
+    <div class="case-num">Caso Clínico 02</div><h3>Esotropía y Cefalea en Paciente Pediátrico</h3>
+    <div class="patient-data">Niño de <strong>8 años</strong> llevado a consulta porque «el ojo izquierdo se le mete para adentro» desde hace 2 semanas. Refiere <strong>cefalea matutina</strong> progresiva y dos episodios de <strong>vómito</strong> matutino.</div>
+    <div class="case-findings">
+      <div class="finding-chip"><span class="emoji">👁️</span><strong>Esotropía</strong> OI<div class="label">Desviación medial</div></div>
+      <div class="finding-chip"><span class="emoji">🚫</span><strong>Limitación</strong> abducción OI<div class="label">No mira lateralmente</div></div>
+      <div class="finding-chip"><span class="emoji">🤕</span><strong>Cefalea</strong> matutina<div class="label">Progresiva × 2 semanas</div></div>
+      <div class="finding-chip"><span class="emoji">🏥</span><strong>Pupilas</strong> normales<div class="label">Reactivas, simétricas</div></div>
+    </div>
+    <div class="case-questions">
+      <div class="case-q-item"><button class="case-q-btn" onclick="toggleA(this)"><span class="q-icon">P1 ▸</span> ¿Qué par craneal está lesionado? ¿Qué músculo no funciona?</button><div class="case-answer"><div class="case-answer-inner"><strong>NC VI (abducens)</strong> izquierdo. El músculo <strong>recto lateral</strong> está paralizado, y el <strong>recto medial</strong> actúa sin oposición → esotropía.<span class="ref">Moore, Cap. 10, Fig. C10-3</span></div></div></div>
+      <div class="case-q-item"><button class="case-q-btn" onclick="toggleA(this)"><span class="q-icon">P2 ▸</span> ¿Por qué el NC VI es un «signo de falsa localización»?</button><div class="case-answer"><div class="case-answer-inner">El NC VI tiene el <strong>recorrido subaracnoideo más largo</strong> de todos los NC. Al elevarse la presión intracraneal, el encéfalo se desplaza caudalmente y el NC VI se <strong>estira contra el borde superior del peñasco temporal</strong>. Su parálisis no indica lesión en el puente, sino <strong>hipertensión intracraneal</strong> de cualquier causa.<span class="ref">Holmes et al., Am J Ophthalmol 1999</span></div></div></div>
+      <div class="case-q-item"><button class="case-q-btn" onclick="toggleA(this)"><span class="q-icon">P3 ▸</span> ¿Cuál es la conducta del optómetra?</button><div class="case-answer"><div class="case-answer-inner"><strong>Remisión urgente a neurología/neurocirugía.</strong> En niños, ~50% de las parálisis del NC VI son neoplásicas (tumores de fosa posterior). Cefalea matutina + vómito = <strong>hipertensión intracraneal</strong>. El optómetra NO debe asumir que es un estrabismo común.<span class="ref">JAAPOS Guidelines; Holmes et al., 1999</span></div></div></div>
+    </div>
+    <div class="eye-sim-wrap" style="margin-top:1.5rem"><div class="eye-container"><div class="eye-label">Ojo Derecho (normal)</div><canvas class="eye-canvas" id="eyeR2" width="140" height="140"></canvas></div><div class="eye-container"><div class="eye-label">Ojo Izquierdo (afectado)</div><canvas class="eye-canvas" id="eyeL2" width="140" height="140"></canvas></div></div>
+  </div>
+
+  <div class="case-box" id="caso3">
+    <div class="case-num">Caso Clínico 03</div><h3>Lagoftalmos y Queratitis por Exposición</h3>
+    <div class="patient-data">Mujer de <strong>35 años</strong> no puede cerrar el ojo izquierdo desde hace 48 h. Dolor retroauricular previo. No puede sonreír del lado izquierdo. Lagoftalmos de 5 mm con signo de Bell (+).</div>
+    <div class="case-findings">
+      <div class="finding-chip"><span class="emoji">😐</span><strong>Parálisis facial</strong> izq<div class="label">Hemicara completa</div></div>
+      <div class="finding-chip"><span class="emoji">👁️</span><strong>Lagoftalmos</strong> 5 mm<div class="label">No cierra el ojo</div></div>
+      <div class="finding-chip"><span class="emoji">🔴</span><strong>Queratitis</strong> punteada inf<div class="label">Fluoresceína (+)</div></div>
+      <div class="finding-chip"><span class="emoji">⬆️</span><strong>Signo de Bell</strong> (+)<div class="label">Ojo rota arriba al cerrar</div></div>
+    </div>
+    <div class="case-questions">
+      <div class="case-q-item"><button class="case-q-btn" onclick="toggleA(this)"><span class="q-icon">P1 ▸</span> ¿Qué par craneal? ¿Periférica o central?</button><div class="case-answer"><div class="case-answer-inner"><strong>NC VII (facial)</strong> — parálisis periférica (<strong>Bell's palsy</strong>). Periférica porque afecta <strong>toda la hemicara incluida la frente</strong>. En parálisis central (ACV) la frente se conserva (inervación bilateral cortical).<span class="ref">Moore, Cap. 10; de Almeida et al., CMAJ 2014</span></div></div></div>
+      <div class="case-q-item"><button class="case-q-btn" onclick="toggleA(this)"><span class="q-icon">P2 ▸</span> ¿Por qué lagoftalmos causa queratitis?</button><div class="case-answer"><div class="case-answer-inner">El <strong>orbicular del ojo</strong> (NC VII) permite el cierre palpebral. Sin él → lagoftalmos → córnea expuesta → <strong>queratitis por exposición</strong> (zona inferior). Además, el reflejo corneal (brazo eferente = NC VII) está abolido.<span class="ref">Tortora, Cap. 13; Moore, Cap. 8</span></div></div></div>
+      <div class="case-q-item"><button class="case-q-btn" onclick="toggleA(this)"><span class="q-icon">P3 ▸</span> ¿Manejo optométrico urgente?</button><div class="case-answer"><div class="case-answer-inner"><strong>Protección corneal:</strong> lágrimas artificiales sin conservantes c/1–2 h + ungüento lubricante nocturno + cámara húmeda. <strong>Remisión para corticoides orales</strong> (prednisona 50–60 mg/d × 5d, descenso) en <strong>primeras 72 h</strong>. Control semanal con fluoresceína.<span class="ref">de Almeida et al., CMAJ 2014; AAO PPP 2023</span></div></div></div>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <p>Universidad de La Salle · Programa de Optometría · Morfología General 2026-I</p>
+  <p style="margin-top:0.3rem">Dr. Jorge Bogoya</p>
+  <p style="margin-top:0.5rem;opacity:0.5">Clase Puente: Del Músculo al Nervio · 09 de abril de 2026</p>
+  <p style="margin-top:0.3rem;opacity:0.35;font-size:0.68rem">Refs: Moore, Dalley & Agur 8ª ed. · Tortora & Derrickson 15ª ed. · Latarjet & Ruiz Liard 5ª ed.</p>
+</footer>
+<script>
+const CN=[
+{nc:"II",name:"Óptico",tl:"Sensorial especial",tc:"sensory",m:"Retina → quiasma óptico → tracto óptico → corteza visual (lóbulo occipital)",r:"Agudeza visual, campimetría, reflejo fotomotor (brazo aferente)",d:{o:"No es un nervio periférico verdadero, sino una extensión del diencéfalo. Rodeado por meninges craneales y LCE.",p:"Retina → disco óptico → conducto óptico → quiasma óptico (decusación parcial) → tracto óptico → cuerpo geniculado lateral → radiaciones ópticas → corteza visual primaria (área 17, lóbulo occipital).",f:"Transmite toda la información visual. Fibras nasales cruzan en el quiasma, temporales no. Esto explica los patrones de hemianopsia según localización de la lesión.",e:"Agudeza visual (Snellen/LogMAR), campimetría por confrontación y computarizada, reflejo pupilar fotomotor directo y consensual, oftalmoscopia directa (disco óptico, excavación, relación copa/disco).",x:"Neuritis óptica (esclerosis múltiple), papiledema (HIC), glaucoma (daño progresivo del nervio óptico), hemianopsias según nivel de la lesión.",ref:"Moore, Cap. 8; Tortora, Cap. 14"}},
+{nc:"III",name:"Oculomotor",tl:"Motor + Parasimpático",tc:"mixed",m:"RS, RI, RM, OI, elevador párpado, esfínter pupilar, cuerpo ciliar",r:"Ptosis, estrabismo, midriasis. Reflejo fotomotor (brazo eferente)",d:{o:"Núcleos en el mesencéfalo (colículos superiores). Fibras parasimpáticas del núcleo de Edinger-Westphal.",p:"Fosa interpeduncular → entre art. cerebral posterior y cerebelosa superior → seno cavernoso → fisura orbitaria superior → ramo superior (RS + elevador párpado) + ramo inferior (RI + RM + OI + raíz parasimpática → ganglio ciliar).",f:"Motor: 4 de 6 músculos extraoculares + elevador del párpado. Parasimpático: esfínter pupilar (miosis) + músculo ciliar (acomodación). Regla: «Todo excepto el oblicuo superior y el recto lateral».",e:"Motilidad ocular (versiones y ducciones), evaluación pupilar (reflejos fotomotor directo/consensual, DPAR con swinging flashlight test), medición de hendidura palpebral.",x:"Parálisis completa: ptosis + midriasis + ojo «abajo y afuera». Compresión extrínseca (aneurisma ACoP) → midriasis primero. Isquemia microvascular (DM) → respeta pupila. Herniación uncal → emergencia.",ref:"Moore, Cap. 10; Fang et al., JAMA Ophthalmol 2017"}},
+{nc:"IV",name:"Troclear",tl:"Motor somático",tc:"motor",m:"Oblicuo superior (intorsión + depresión en aducción)",r:"Diplopía al bajar escaleras, inclinación compensatoria de cabeza",d:{o:"Núcleo troclear en mesencéfalo (colículos inferiores). ÚNICO NC que emerge de la cara posterior del tronco encefálico y se DECUSA completamente.",p:"Cara posterior del mesencéfalo → rodea el tronco encefálico → pared lateral del seno cavernoso → fisura orbitaria superior → oblicuo superior CONTRALATERAL.",f:"Oblicuo superior: intorsión, depresión (máxima en aducción) y abducción débil. Nervio craneal más pequeño y con mayor recorrido intracraneal relativo.",e:"Test de Parks (3 pasos): 1) ¿Qué ojo tiene hipertropía? 2) ¿Empeora en mirada contralateral? 3) ¿Empeora con inclinación ipsilateral? Las 3 sí → parálisis del OS contralateral. Tortícolis compensatorio.",x:"Causa más frecuente: traumatismo craneal (incluso leve). Diplopía vertical al bajar escaleras o leer. Tortícolis compensatorio crónico en parálisis congénitas.",ref:"Moore, Cap. 10; Helveston, Survey Ophthalmol 2010"}},
+{nc:"V₁",name:"Oftálmico (rama V)",tl:"Sensorial somático",tc:"sensory",m:"Córnea, conjuntiva, párpado superior, frente, dorso nasal",r:"Reflejo corneal (brazo aferente). Queratitis neurogénica",d:{o:"NC V emerge del puente. Ganglio del trigémino (semilunar, de Gasser). V₁ es la rama superior, puramente sensitiva.",p:"Ganglio del trigémino → pared lateral del seno cavernoso → fisura orbitaria superior → n. lagrimal + n. frontal + n. nasociliar (córnea vía nervios ciliares largos).",f:"Sensibilidad general de órbita, córnea, conjuntiva superior, frente, cuero cabelludo anterior. Los nervios ciliares largos proporcionan la inervación sensitiva corneal.",e:"Reflejo corneal: tocar la CÓRNEA (no esclera) con torunda de algodón. V₁ = aferente, VII = eferente. Estesiómetro de Cochet-Bonnet para sensibilidad corneal cuantitativa.",x:"Herpes zóster oftálmico (signo de Hutchinson: vesículas punta nasal → riesgo queratitis). Queratitis neurotrófica: úlceras indoloras. Post-LASIK: hipoestesia transitoria.",ref:"Moore, Cap. 8 y 10; Müller et al., Prog Retin Eye Res 2003"}},
+{nc:"VI",name:"Abducens",tl:"Motor somático",tc:"motor",m:"Recto lateral (abducción del ojo)",r:"Esotropía. Signo de falsa localización en HIC",d:{o:"Núcleo abducens en el puente, a nivel del colículo facial (suelo del 4.º ventrículo).",p:"Entre puente y médula oblongada → recorrido subaracnoideo MÁS LARGO → gira sobre borde superior del peñasco temporal → seno cavernoso (DENTRO del seno, junto a la carótida interna) → fisura orbitaria superior → recto lateral.",f:"Inerva únicamente el recto lateral (abducción). Antagonista directo del recto medial (NC III).",e:"Evaluar abducción (ducciones) y versiones laterales. En parálisis: ojo no abduce completamente → esotropía incomitante, mayor en mirada ipsilateral.",x:"NC más frecuentemente paralizado. Vulnerable por recorrido largo: HIC = «signo de falsa localización», traumatismo, isquemia (DM/HTA en adultos), neoplasia (~50% en niños). En niños + cefalea → neuroimagen URGENTE.",ref:"Moore, Cap. 10; Holmes et al., Am J Ophthalmol 1999"}},
+{nc:"VII",name:"Facial",tl:"Mixto (motor+parasim+sensorial)",tc:"mixed",m:"Músculos de expresión facial, incluido orbicular del ojo",r:"Bell's palsy → lagoftalmos → queratitis por exposición",d:{o:"Núcleo motor facial en el puente. Nervio intermedio acompaña al facial (fibras sensitivas y parasimpáticas).",p:"Unión pontobulbar → meato acústico interno → conducto facial (peñasco temporal) → foramen estilomastoideo → glándula parótida → ramos: temporal, cigomático, bucal, mandibular marginal, cervical.",f:"Motor: TODOS los músculos de expresión facial, incluido orbicular del ojo. Parasimpático: glándulas lagrimal y submandibular/sublingual. Sensorial: gusto 2/3 anteriores de la lengua.",e:"Simetría facial en reposo y movimiento: elevar cejas, cerrar ojos (lagoftalmos), sonreír, inflar mejillas. Reflejo corneal (brazo eferente). Si lagoftalmos → fluoresceína. Signo de Bell: rotación superior del globo al intentar cerrar.",x:"Bell's palsy: parálisis periférica (hemicara completa + frente). LAGOFTALMOS → queratitis por exposición → ulceración. Manejo: lubricación + corticoides <72 h. Parálisis CENTRAL (ACV): frente conservada.",ref:"Moore, Cap. 10; de Almeida et al., CMAJ 2014"}}
+];
+const tb=document.getElementById('ncBody');
+CN.forEach((c,i)=>{
+  const tr=document.createElement('tr');tr.id='r'+i;
+  tr.innerHTML=`<td><span class="expand-arrow">▸</span></td><td><span class="nc-badge ${c.tc}">${c.nc}</span></td><td><strong>${c.name}</strong></td><td><span class="nc-type-tag tag-${c.tc}">${c.tl}</span></td><td>${c.m}</td><td class="nc-relevance">${c.r}</td>`;
+  tr.addEventListener('click',()=>tog(i));tb.appendChild(tr);
+  const dr=document.createElement('tr');dr.className='nc-detail';dr.id='d'+i;
+  dr.innerHTML=`<td class="nc-detail-cell" colspan="6"><div class="nc-detail-inner"><div class="detail-block"><h4>📍 Origen y Trayecto</h4><p><strong>Origen:</strong> ${c.d.o}</p><p><strong>Trayecto:</strong> ${c.d.p}</p></div><div class="detail-block"><h4>⚙️ Función Detallada</h4><p>${c.d.f}</p></div><div class="detail-block"><div class="detail-exam"><h4 style="border:none;padding:0;margin-bottom:0.3rem">🔍 Evaluación en Consultorio</h4><p>${c.d.e}</p></div></div><div class="detail-block"><div class="detail-clinical"><h4 style="border:none;padding:0;margin-bottom:0.3rem">⚠️ Patología Clínica</h4><p>${c.d.x}</p></div><p class="detail-ref">Ref: ${c.d.ref}</p></div></div></td>`;
+  tb.appendChild(dr);
+});
+function tog(i){const r=document.getElementById('r'+i),d=document.getElementById('d'+i),o=r.classList.contains('active-row');document.querySelectorAll('.nc-detail').forEach(x=>x.classList.remove('open'));document.querySelectorAll('#ncBody tr:not(.nc-detail)').forEach(x=>x.classList.remove('active-row'));if(!o){r.classList.add('active-row');d.classList.add('open')}}
+function toggleA(b){const a=b.nextElementSibling;a.classList.toggle('open');const ic=b.querySelector('.q-icon');ic.textContent=a.classList.contains('open')?ic.textContent.replace('▸','▾'):ic.textContent.replace('▾','▸')}
+function drawEye(id,dx,dy,ps,ir){const c=document.getElementById(id),x=c.getContext('2d'),cx=70,cy=70;x.clearRect(0,0,140,140);x.beginPath();x.ellipse(cx,cy,55,50,0,0,Math.PI*2);x.fillStyle='#f8f5f0';x.fill();x.strokeStyle='#bbb';x.lineWidth=1.5;x.stroke();x.beginPath();x.arc(cx+dx,cy+dy,22,0,Math.PI*2);x.fillStyle=ir||'#5a8a5e';x.fill();for(let i=0;i<12;i++){const a=(i/12)*Math.PI*2;x.beginPath();x.moveTo(cx+dx+Math.cos(a)*8,cy+dy+Math.sin(a)*8);x.lineTo(cx+dx+Math.cos(a)*21,cy+dy+Math.sin(a)*21);x.strokeStyle='rgba(0,0,0,0.12)';x.lineWidth=1;x.stroke()}x.beginPath();x.arc(cx+dx,cy+dy,ps,0,Math.PI*2);x.fillStyle='#111';x.fill();x.beginPath();x.arc(cx+dx-4,cy+dy-5,3,0,Math.PI*2);x.fillStyle='rgba(255,255,255,0.7)';x.fill()}
+drawEye('eyeR1',-12,6,10,'#6a7a5e');drawEye('eyeL1',0,0,5,'#6a7a5e');
+drawEye('eyeR2',0,0,5,'#5a7a8e');drawEye('eyeL2',-10,0,5,'#5a7a8e');
+window.addEventListener('scroll',()=>{const ss=document.querySelectorAll('section[id],.case-box[id],.mnemonic-card[id]');let c='';ss.forEach(s=>{if(scrollY>=s.offsetTop-120)c=s.id});document.querySelectorAll('.nav-pill').forEach(p=>p.classList.toggle('active',p.getAttribute('href')==='#'+c));const h=document.documentElement;document.getElementById('progressBar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'});
+</script>
+</body>
+</html>
