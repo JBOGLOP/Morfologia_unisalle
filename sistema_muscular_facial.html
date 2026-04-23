@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Muscular — Fibras, Contracción y Músculos Faciales</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1410;
+  --parchment: #f5f0e8;
+  --cream: #faf7f2;
+  --amber: #c8954c;
+  --amber-light: #e8c88a;
+  --amber-dark: #a07030;
+  --rust: #8b4513;
+  --sage: #6b7c5e;
+  --sage-light: #8fa07a;
+  --blue-steel: #4a6178;
+  --red-clinical: #a03030;
+  --red-light: #d4655a;
+  --bone: #e8ddd0;
+  --shadow: rgba(26,20,16,0.08);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Serif 4', 'Georgia', serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+/* ── NAV ── */
+.nav-bar {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(26,20,16,0.95);
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 20px; height: 52px;
+  overflow-x: auto; white-space: nowrap;
+  scrollbar-width: none;
+}
+.nav-bar::-webkit-scrollbar { display:none; }
+.nav-btn {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.5px;
+  color: var(--amber-light); background: transparent;
+  border: 1px solid rgba(200,149,76,0.25);
+  padding: 6px 14px; border-radius: 20px;
+  cursor: pointer; transition: all 0.3s; flex-shrink:0;
+  text-transform: uppercase;
+}
+.nav-btn:hover, .nav-btn.active {
+  background: var(--amber);
+  color: var(--ink);
+  border-color: var(--amber);
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 80px 30px 60px;
+  background: linear-gradient(170deg, var(--ink) 0%, #2a2018 40%, #3a2a1a 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(200,149,76,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 30%, rgba(107,124,94,0.08) 0%, transparent 50%);
+}
+.hero-label {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 24px;
+  position: relative;
+  opacity:0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 900; color: var(--parchment);
+  line-height: 1.15; max-width: 800px;
+  position: relative;
+  opacity:0; animation: fadeUp 0.8s 0.4s forwards;
+}
+.hero h1 em { color: var(--amber); font-style: italic; }
+.hero-sub {
+  font-family: var(--font-body); font-size: 1.1rem;
+  color: rgba(245,240,232,0.6); max-width: 600px;
+  margin-top: 20px; position: relative;
+  opacity:0; animation: fadeUp 0.8s 0.6s forwards;
+}
+.hero-cta {
+  margin-top: 40px; position: relative;
+  opacity:0; animation: fadeUp 0.8s 0.8s forwards;
+}
+.hero-cta a {
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink); background: var(--amber);
+  padding: 14px 36px; border-radius: 30px;
+  text-decoration: none; transition: all 0.3s;
+}
+.hero-cta a:hover { background: var(--amber-light); transform: translateY(-2px); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 80px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-dark {
+  background: var(--ink);
+  color: var(--parchment);
+  max-width: 100%;
+  padding: 80px 24px;
+}
+.section-dark .inner { max-width: 1100px; margin: 0 auto; }
+.section-accent {
+  background: linear-gradient(135deg, #2a2018, #1a1410);
+  color: var(--parchment);
+  max-width: 100%; padding: 80px 24px;
+}
+.section-accent .inner { max-width: 1100px; margin: 0 auto; }
+
+.sec-label {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 10px;
+}
+.sec-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700; line-height: 1.2;
+  margin-bottom: 16px;
+}
+.sec-intro {
+  font-size: 1.05rem; color: rgba(26,20,16,0.65);
+  max-width: 700px; margin-bottom: 40px;
+}
+.section-dark .sec-intro { color: rgba(245,240,232,0.55); }
+
+/* ── CARDS / FIBER TYPES ── */
+.fiber-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; margin-top: 30px;
+}
+.fiber-card {
+  background: var(--cream);
+  border: 1px solid rgba(26,20,16,0.08);
+  border-radius: 16px;
+  padding: 30px;
+  cursor: pointer;
+  transition: all 0.35s;
+  position: relative; overflow: hidden;
+}
+.fiber-card::before {
+  content:''; position:absolute; top:0; left:0;
+  width: 4px; height: 100%;
+  transition: width 0.3s;
+}
+.fiber-card[data-type="I"]::before { background: var(--red-clinical); }
+.fiber-card[data-type="IIa"]::before { background: var(--amber); }
+.fiber-card[data-type="IIx"]::before { background: var(--blue-steel); }
+.fiber-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--shadow); }
+.fiber-card:hover::before { width: 6px; }
+.fiber-card.expanded { border-color: var(--amber); }
+.fiber-type-label {
+  font-family: var(--font-display); font-size: 1.6rem;
+  font-weight: 900;
+}
+.fiber-card[data-type="I"] .fiber-type-label { color: var(--red-clinical); }
+.fiber-card[data-type="IIa"] .fiber-type-label { color: var(--amber-dark); }
+.fiber-card[data-type="IIx"] .fiber-type-label { color: var(--blue-steel); }
+.fiber-subtitle {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: rgba(26,20,16,0.45); margin-top: 4px;
+}
+.fiber-bars { margin-top: 20px; }
+.fiber-bar-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px;
+}
+.fiber-bar-label {
+  font-family: var(--font-mono); font-size: 11px;
+  width: 100px; flex-shrink: 0;
+  color: rgba(26,20,16,0.5);
+}
+.fiber-bar-track {
+  flex:1; height: 8px; background: var(--bone);
+  border-radius: 4px; overflow: hidden;
+}
+.fiber-bar-fill {
+  height: 100%; border-radius: 4px;
+  transition: width 1s ease;
+  width: 0;
+}
+.fiber-card[data-type="I"] .fiber-bar-fill { background: var(--red-clinical); }
+.fiber-card[data-type="IIa"] .fiber-bar-fill { background: var(--amber); }
+.fiber-card[data-type="IIx"] .fiber-bar-fill { background: var(--blue-steel); }
+.fiber-detail {
+  margin-top: 16px; font-size: 0.92rem;
+  color: rgba(26,20,16,0.6);
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s;
+}
+.fiber-card.expanded .fiber-detail { max-height: 300px; }
+
+/* ── SARCOMERE CANVAS ── */
+.canvas-wrap {
+  background: var(--ink);
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 30px;
+  position: relative;
+}
+.canvas-wrap canvas {
+  width: 100%; height: auto;
+  border-radius: 12px;
+}
+.canvas-controls {
+  display: flex; gap: 12px; margin-top: 16px;
+  flex-wrap: wrap; align-items: center;
+}
+.canvas-controls label {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--amber-light); letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.canvas-controls input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  height: 6px; background: rgba(200,149,76,0.25);
+  border-radius: 3px; outline: none;
+  flex: 1; min-width: 120px;
+}
+.canvas-controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px;
+  background: var(--amber); border-radius: 50%;
+  cursor: pointer;
+}
+.sarco-legend {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  margin-top: 12px;
+}
+.sarco-legend-item {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 10px;
+  color: rgba(245,240,232,0.6); letter-spacing: 0.5px;
+}
+.sarco-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+
+/* ── CONTRACTION STEPS ── */
+.steps-container {
+  display: flex; flex-direction: column; gap: 0;
+  margin-top: 30px; position: relative;
+}
+.step-line {
+  position: absolute; left: 28px; top: 40px; bottom: 40px;
+  width: 2px; background: rgba(200,149,76,0.2);
+}
+.step-item {
+  display: flex; gap: 24px;
+  padding: 20px 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.step-number {
+  width: 56px; height: 56px; flex-shrink:0;
+  border-radius: 50%;
+  background: var(--bone);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 1.2rem; color: var(--ink);
+  transition: all 0.3s;
+  position: relative; z-index: 2;
+}
+.step-item.active .step-number {
+  background: var(--amber);
+  transform: scale(1.15);
+  box-shadow: 0 0 0 6px rgba(200,149,76,0.2);
+}
+.step-content { flex:1; }
+.step-title {
+  font-family: var(--font-display); font-size: 1.15rem;
+  font-weight: 700; margin-bottom: 6px;
+}
+.step-desc {
+  font-size: 0.93rem; color: rgba(245,240,232,0.55);
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s;
+}
+.step-item.active .step-desc { max-height: 250px; }
+.step-molecule {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 0.85rem;
+  background: rgba(200,149,76,0.15);
+  color: var(--amber-light);
+  padding: 2px 8px; border-radius: 4px;
+  margin: 2px;
+}
+
+/* ── FACE MAP ── */
+.face-map-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 30px;
+  align-items: start;
+}
+@media(max-width:768px) { .face-map-container { grid-template-columns: 1fr; } }
+.face-svg-wrap {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid var(--bone);
+  position: relative;
+}
+.face-svg-wrap svg { width: 100%; height: auto; }
+.face-info-panel {
+  background: var(--cream);
+  border: 1px solid var(--bone);
+  border-radius: 20px;
+  padding: 30px;
+  min-height: 300px;
+}
+.face-info-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--amber-dark);
+}
+.face-info-section {
+  margin-top: 16px;
+}
+.face-info-label {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--amber);
+}
+.face-info-text {
+  font-size: 0.95rem; margin-top: 4px;
+  color: rgba(26,20,16,0.7);
+}
+.muscle-btn-grid {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
+}
+.muscle-btn {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.5px;
+  padding: 6px 12px; border-radius: 16px;
+  border: 1px solid var(--bone);
+  background: white; color: var(--ink);
+  cursor: pointer; transition: all 0.2s;
+}
+.muscle-btn:hover, .muscle-btn.active {
+  background: var(--amber); color: white;
+  border-color: var(--amber);
+}
+
+/* ── EYE MODEL ── */
+.eye-container {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 30px; margin-top: 30px;
+  align-items: start;
+}
+@media(max-width:768px) { .eye-container { grid-template-columns: 1fr; } }
+.eye-canvas-wrap {
+  background: var(--ink);
+  border-radius: 20px;
+  padding: 24px;
+}
+.eye-canvas-wrap canvas {
+  width: 100%; border-radius: 12px;
+}
+.eye-info {
+  background: rgba(245,240,232,0.05);
+  border: 1px solid rgba(200,149,76,0.15);
+  border-radius: 20px; padding: 30px;
+}
+.eye-muscle-list { margin-top: 16px; }
+.eye-muscle-item {
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+.eye-muscle-item:hover { background: rgba(200,149,76,0.08); }
+.eye-muscle-item.active {
+  background: rgba(200,149,76,0.12);
+  border-color: var(--amber);
+}
+.eye-muscle-name {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1rem;
+}
+.eye-muscle-nerve {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--amber); letter-spacing: 1px;
+}
+.eye-muscle-action {
+  font-size: 0.85rem; color: rgba(245,240,232,0.5);
+  margin-top: 4px;
+}
+
+/* ── QUIZ ── */
+.quiz-card {
+  background: var(--cream);
+  border: 2px solid var(--bone);
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 24px;
+  max-width: 700px;
+}
+.quiz-q {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 20px;
+}
+.quiz-clinical-tag {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 1px; text-transform: uppercase;
+  background: rgba(160,48,48,0.1);
+  color: var(--red-clinical);
+  padding: 3px 10px; border-radius: 10px;
+  margin-bottom: 12px;
+}
+.quiz-opts { display: flex; flex-direction: column; gap: 10px; }
+.quiz-opt {
+  padding: 14px 20px;
+  border: 1px solid var(--bone);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+.quiz-opt:hover { border-color: var(--amber); background: rgba(200,149,76,0.05); }
+.quiz-opt.correct { border-color: var(--sage); background: rgba(107,124,94,0.12); }
+.quiz-opt.wrong { border-color: var(--red-clinical); background: rgba(160,48,48,0.08); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.6; }
+.quiz-explanation {
+  margin-top: 16px; padding: 16px;
+  background: rgba(107,124,94,0.08);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: rgba(26,20,16,0.7);
+  display: none;
+}
+.quiz-nav {
+  display: flex; gap: 12px; margin-top: 20px;
+  align-items: center;
+}
+.quiz-nav-btn {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 10px 24px; border-radius: 20px;
+  border: 1px solid var(--amber);
+  background: transparent; color: var(--amber);
+  cursor: pointer; transition: all 0.2s;
+}
+.quiz-nav-btn:hover { background: var(--amber); color: white; }
+.quiz-score {
+  font-family: var(--font-mono); font-size: 12px;
+  color: rgba(26,20,16,0.4);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink); color: rgba(245,240,232,0.35);
+  text-align: center; padding: 40px 24px;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 1px;
+}
+footer strong { color: var(--amber); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px) {
+  .section, .section-dark, .section-accent { padding: 50px 16px; }
+  .fiber-grid { grid-template-columns: 1fr; }
+  .face-map-container, .eye-container { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar" id="navBar">
+  <button class="nav-btn active" onclick="scrollTo_('#hero')">Inicio</button>
+  <button class="nav-btn" onclick="scrollTo_('#fibras')">Fibras</button>
+  <button class="nav-btn" onclick="scrollTo_('#sarcomero')">Sarcómero</button>
+  <button class="nav-btn" onclick="scrollTo_('#contraccion')">Contracción</button>
+  <button class="nav-btn" onclick="scrollTo_('#faciales')">M. Faciales</button>
+  <button class="nav-btn" onclick="scrollTo_('#masticacion')">Masticación</button>
+  <button class="nav-btn" onclick="scrollTo_('#extraoculares')">Extraoculares</button>
+  <button class="nav-btn" onclick="scrollTo_('#clinica')">Clínica</button>
+  <button class="nav-btn" onclick="scrollTo_('#quiz')">Quiz</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-label">Morfología General · 2026-I · Universidad de La Salle</div>
+  <h1>Sistema Muscular:<br><em>Fibras, Contracción</em><br>y Músculos Faciales</h1>
+  <p class="hero-sub">Guía interactiva con relevancia clínica para estudiantes de Optometría — desde la molécula del sarcómero hasta la motilidad ocular</p>
+  <div class="hero-cta"><a href="#fibras">Comenzar ↓</a></div>
+</section>
+
+<!-- ═══════════ 1. FIBRAS MUSCULARES ═══════════ -->
+<section class="section" id="fibras">
+  <div class="sec-label">Sección 01</div>
+  <h2 class="sec-title">Tipos de Fibras Musculares</h2>
+  <p class="sec-intro">El músculo esquelético contiene tres tipos principales de fibras, clasificadas por la isoforma de miosina (MHC). Haz clic en cada tarjeta para explorar sus características.</p>
+
+  <div class="fiber-grid" id="fiberGrid">
+    <!-- Cards generadas por JS -->
+  </div>
+</section>
+
+<!-- ═══════════ 2. SARCÓMERO ═══════════ -->
+<section class="section-dark" id="sarcomero">
+  <div class="inner">
+    <div class="sec-label">Sección 02</div>
+    <h2 class="sec-title">Arquitectura del Sarcómero</h2>
+    <p class="sec-intro">Unidad funcional contráctil (~2,0–2,5 µm). Arrastra el control para simular la contracción y observa cómo cambian las bandas.</p>
+
+    <div class="canvas-wrap">
+      <canvas id="sarcoCanvas" width="1000" height="400"></canvas>
+      <div class="canvas-controls">
+        <label>Contracción</label>
+        <input type="range" id="sarcoSlider" min="0" max="100" value="0">
+        <label id="sarcoLength">2.5 µm</label>
+      </div>
+      <div class="sarco-legend">
+        <div class="sarco-legend-item"><div class="sarco-dot" style="background:#e8c88a"></div>Línea Z (α-actinina)</div>
+        <div class="sarco-legend-item"><div class="sarco-dot" style="background:#d4655a"></div>Actina (fil. delgado)</div>
+        <div class="sarco-legend-item"><div class="sarco-dot" style="background:#4a6178"></div>Miosina (fil. grueso)</div>
+        <div class="sarco-legend-item"><div class="sarco-dot" style="background:#6b7c5e"></div>Titina</div>
+        <div class="sarco-legend-item"><div class="sarco-dot" style="background:#a07030"></div>Línea M</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 3. CONTRACCIÓN ═══════════ -->
+<section class="section-accent" id="contraccion">
+  <div class="inner">
+    <div class="sec-label">Sección 03</div>
+    <h2 class="sec-title">Mecanismo de Contracción</h2>
+    <p class="sec-intro">El ciclo de puentes cruzados: seis pasos que se repiten mientras haya Ca²⁺ y ATP. Haz clic en cada paso para explorar el detalle molecular.</p>
+
+    <div class="steps-container">
+      <div class="step-line"></div>
+      <!-- steps generated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 4. MÚSCULOS FACIALES ═══════════ -->
+<section class="section" id="faciales">
+  <div class="sec-label">Sección 04</div>
+  <h2 class="sec-title">Músculos de la Expresión Facial</h2>
+  <p class="sec-intro">Todos derivados del 2.° arco faríngeo, inervados por el nervio facial (VII par). Se insertan en la piel, no de hueso a hueso. Selecciona un músculo para ver su anatomía.</p>
+
+  <div class="muscle-btn-grid" id="muscleBtns"></div>
+
+  <div class="face-map-container">
+    <div class="face-svg-wrap">
+      <svg id="faceSvg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- Head outline -->
+        <ellipse cx="200" cy="220" rx="140" ry="180" fill="#f0e0cc" stroke="#c8954c" stroke-width="1.5"/>
+        <!-- Hair suggestion -->
+        <path d="M60,180 Q60,60 200,40 Q340,60 340,180" fill="none" stroke="#8b6940" stroke-width="2"/>
+
+        <!-- Muscle regions as interactive areas -->
+        <!-- Frontal -->
+        <path id="m-frontal" class="face-muscle" d="M120,80 Q200,60 280,80 L275,130 Q200,110 125,130 Z"
+              fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer"/>
+        <!-- Corrugador -->
+        <ellipse id="m-corrugador" class="face-muscle" cx="170" cy="140" rx="30" ry="10"
+                 fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer" transform="rotate(-8,170,140)"/>
+        <!-- Prócer -->
+        <rect id="m-procer" class="face-muscle" x="188" y="155" width="24" height="30" rx="8"
+              fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer"/>
+        <!-- Orbicular del ojo IZQ -->
+        <ellipse id="m-orbicular-ojo" class="face-muscle" cx="155" cy="180" rx="38" ry="26"
+                 fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer"/>
+        <!-- Orbicular del ojo DER -->
+        <ellipse class="face-muscle" data-link="m-orbicular-ojo" cx="245" cy="180" rx="38" ry="26"
+                 fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer"/>
+        <!-- Nasal -->
+        <path id="m-nasal" class="face-muscle" d="M190,200 Q200,195 210,200 L212,240 Q200,245 188,240 Z"
+              fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer"/>
+        <!-- Cigomático mayor -->
+        <path id="m-cigomatico-mayor" class="face-muscle" d="M100,190 L165,290"
+              fill="none" stroke="rgba(200,149,76,0.0)" stroke-width="14" stroke-linecap="round" style="cursor:pointer"/>
+        <!-- Elevador labio sup -->
+        <rect id="m-elevador-labio" class="face-muscle" x="170" y="240" width="20" height="35" rx="6"
+              fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer"/>
+        <!-- Buccinador -->
+        <ellipse id="m-buccinador" class="face-muscle" cx="120" cy="280" rx="28" ry="35"
+                 fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer"/>
+        <!-- Orbicular de la boca -->
+        <ellipse id="m-orbicular-boca" class="face-muscle" cx="200" cy="300" rx="40" ry="22"
+                 fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer"/>
+        <!-- Mentoniano -->
+        <ellipse id="m-mentoniano" class="face-muscle" cx="200" cy="345" rx="22" ry="16"
+                 fill="rgba(200,149,76,0.0)" stroke="none" style="cursor:pointer"/>
+        <!-- Risorio -->
+        <path id="m-risorio" class="face-muscle" d="M240,295 L310,280"
+              fill="none" stroke="rgba(200,149,76,0.0)" stroke-width="10" stroke-linecap="round" style="cursor:pointer"/>
+
+        <!-- Eyes (decoration) -->
+        <ellipse cx="155" cy="180" rx="22" ry="12" fill="white" stroke="#5a4a3a" stroke-width="1"/>
+        <circle cx="155" cy="180" r="7" fill="#5a4a3a"/>
+        <circle cx="153" cy="178" r="2" fill="white"/>
+        <ellipse cx="245" cy="180" rx="22" ry="12" fill="white" stroke="#5a4a3a" stroke-width="1"/>
+        <circle cx="245" cy="180" r="7" fill="#5a4a3a"/>
+        <circle cx="243" cy="178" r="2" fill="white"/>
+
+        <!-- Nose -->
+        <path d="M200,195 L192,248 Q200,254 208,248 Z" fill="none" stroke="#c8954c" stroke-width="1"/>
+        <!-- Mouth -->
+        <path d="M170,298 Q185,310 200,310 Q215,310 230,298" fill="none" stroke="#a07030" stroke-width="2"/>
+        <path d="M175,298 Q200,290 225,298" fill="none" stroke="#a07030" stroke-width="1.5"/>
+
+        <!-- Eyebrows -->
+        <path d="M125,155 Q155,140 185,148" fill="none" stroke="#8b6940" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M215,148 Q245,140 275,155" fill="none" stroke="#8b6940" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="face-info-panel" id="faceInfo">
+      <p style="color:rgba(26,20,16,0.4); font-style:italic;">← Selecciona un músculo del diagrama o de los botones superiores para ver su información detallada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 5. MASTICACIÓN ═══════════ -->
+<section class="section-dark" id="masticacion">
+  <div class="inner">
+    <div class="sec-label">Sección 05</div>
+    <h2 class="sec-title">Músculos de la Masticación</h2>
+    <p class="sec-intro">Derivados del 1.er arco faríngeo, inervados por V3 (nervio mandibular del trigémino). Haz clic en cada músculo.</p>
+
+    <div class="fiber-grid" id="masticGrid">
+      <!-- generated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 6. EXTRAOCULARES ═══════════ -->
+<section class="section-accent" id="extraoculares">
+  <div class="inner">
+    <div class="sec-label">Sección 06</div>
+    <h2 class="sec-title">Músculos Extraoculares</h2>
+    <p class="sec-intro">Seis músculos mueven el globo ocular. Regla: LR₆(SO₄)₃. Haz clic en cada músculo para ver su acción animada.</p>
+
+    <div class="eye-container">
+      <div class="eye-canvas-wrap">
+        <canvas id="eyeCanvas" width="600" height="500"></canvas>
+      </div>
+      <div class="eye-info">
+        <h3 style="font-family:var(--font-display);font-size:1.3rem;margin-bottom:4px;">Músculos y Nervios</h3>
+        <p style="font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1px;">SELECCIONA UN MÚSCULO</p>
+        <div class="eye-muscle-list" id="eyeMuscleList">
+          <!-- generated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 7. RELEVANCIA CLÍNICA ═══════════ -->
+<section class="section" id="clinica">
+  <div class="sec-label">Sección 07</div>
+  <h2 class="sec-title">Relevancia Clínica para Optometría</h2>
+  <p class="sec-intro">Los casos clínicos que todo optometrista debe reconocer. Haz clic para expandir cada condición.</p>
+
+  <div class="fiber-grid" id="clinicalGrid">
+    <!-- generated by JS -->
+  </div>
+</section>
+
+<!-- ═══════════ 8. QUIZ ═══════════ -->
+<section class="section-dark" id="quiz">
+  <div class="inner">
+    <div class="sec-label">Sección 08</div>
+    <h2 class="sec-title">Evalúa tu Comprensión</h2>
+    <p class="sec-intro">Preguntas tipo Saber Pro con enfoque clínico optométrico.</p>
+
+    <div class="quiz-card" id="quizCard">
+      <!-- generated by JS -->
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Morfología General · Optometría · <strong>Universidad de La Salle</strong> · Bogotá, 2026-I</p>
+  <p style="margin-top:8px;">Ref.: Latarjet & Ruiz Liard (5.ª ed.) · Tortora (Principios de Anatomía y Fisiología)</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════
+function scrollTo_(sel){
+  document.querySelector(sel)?.scrollIntoView({behavior:'smooth'});
+}
+const navBtns = document.querySelectorAll('.nav-btn');
+const sections = ['#hero','#fibras','#sarcomero','#contraccion','#faciales','#masticacion','#extraoculares','#clinica','#quiz'];
+window.addEventListener('scroll',()=>{
+  let cur = 0;
+  sections.forEach((s,i)=>{
+    const el = document.querySelector(s);
+    if(el && window.scrollY >= el.offsetTop - 200) cur = i;
+  });
+  navBtns.forEach((b,i)=>b.classList.toggle('active', i===cur));
+});
+
+// ═══════════════════════════════════════
+// 1. FIBER CARDS
+// ═══════════════════════════════════════
+const fiberData = [
+  { type:'I', name:'Oxidativas Lentas', color:'var(--red-clinical)',
+    bars: {Velocidad:25, Fuerza:30, Resistencia:95, Mitocondrias:90, Diámetro:30},
+    detail:'Ricas en mioglobina (aspecto rojo), metabolismo aerobio. Predominan en músculos posturales (sóleo, erectores). Se reclutan primero (principio de Henneman). Los músculos extraoculares contienen fibras lentas especializadas para el tono sostenido.' },
+  { type:'IIa', name:'Oxidativas-Glucolíticas Rápidas', color:'var(--amber)',
+    bars: {Velocidad:65, Fuerza:65, Resistencia:60, Mitocondrias:55, Diámetro:55},
+    detail:'Posición intermedia: capacidad aerobia Y anaerobia. Velocidad de contracción moderadamente alta. Entrenamiento aeróbico puede inducir transición IIx→IIa. Abundantes en músculos como el gastrocnemio.' },
+  { type:'IIx', name:'Glucolíticas Rápidas', color:'var(--blue-steel)',
+    bars: {Velocidad:95, Fuerza:95, Resistencia:15, Mitocondrias:15, Diámetro:90},
+    detail:'Máxima fuerza y velocidad, fatiga rápida. Glucólisis anaerobia. Solo se reclutan ante demandas de fuerza elevadas (último en orden de Henneman). Importante: los humanos NO tienen fibras IIb verdaderas; lo que se llamaba IIb es IIx (gen MYH1).' }
+];
+const fiberGrid = document.getElementById('fiberGrid');
+fiberData.forEach(f => {
+  const card = document.createElement('div');
+  card.className = 'fiber-card'; card.dataset.type = f.type;
+  let barsHTML = '';
+  Object.entries(f.bars).forEach(([k,v]) => {
+    barsHTML += `<div class="fiber-bar-row">
+      <span class="fiber-bar-label">${k}</span>
+      <div class="fiber-bar-track"><div class="fiber-bar-fill" data-w="${v}"></div></div>
+    </div>`;
+  });
+  card.innerHTML = `
+    <div class="fiber-type-label">Tipo ${f.type}</div>
+    <div class="fiber-subtitle">${f.name}</div>
+    <div class="fiber-bars">${barsHTML}</div>
+    <div class="fiber-detail">${f.detail}</div>
+  `;
+  card.addEventListener('click',()=>{
+    card.classList.toggle('expanded');
+  });
+  fiberGrid.appendChild(card);
+});
+// Animate bars on scroll
+const fiberObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.fiber-bar-fill').forEach(b=>{
+        b.style.width = b.dataset.w + '%';
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.fiber-card').forEach(c=>fiberObs.observe(c));
+
+// ═══════════════════════════════════════
+// 2. SARCOMERE CANVAS
+// ═══════════════════════════════════════
+const sarcoCanvas = document.getElementById('sarcoCanvas');
+const sCtx = sarcoCanvas.getContext('2d');
+const sarcoSlider = document.getElementById('sarcoSlider');
+const sarcoLabel = document.getElementById('sarcoLength');
+
+function drawSarcomere(contraction){
+  const W = sarcoCanvas.width, H = sarcoCanvas.height;
+  const dpr = window.devicePixelRatio || 1;
+  sarcoCanvas.width = W * dpr; sarcoCanvas.height = H * dpr;
+  sCtx.scale(dpr,dpr);
+  sarcoCanvas.style.width = '100%';
+  sarcoCanvas.style.height = (H) + 'px';
+  sCtx.clearRect(0,0,W,H);
+
+  // Background
+  sCtx.fillStyle = '#1a1410';
+  sCtx.fillRect(0,0,W,H);
+
+  const cx = W/2, cy = H/2;
+  const maxSlide = 120;
+  const slide = contraction/100 * maxSlide;
+  const sarcoW = 400 - slide*1.5;
+  const halfS = sarcoW/2;
+
+  // Z lines
+  sCtx.strokeStyle = '#e8c88a'; sCtx.lineWidth = 4;
+  sCtx.beginPath();
+  sCtx.moveTo(cx-halfS, cy-100); sCtx.lineTo(cx-halfS, cy+100);
+  sCtx.moveTo(cx+halfS, cy-100); sCtx.lineTo(cx+halfS, cy+100);
+  sCtx.stroke();
+
+  // Labels for Z
+  sCtx.fillStyle = '#e8c88a'; sCtx.font = '600 13px "DM Mono"';
+  sCtx.textAlign = 'center';
+  sCtx.fillText('Z', cx-halfS, cy-110);
+  sCtx.fillText('Z', cx+halfS, cy-110);
+
+  // M line
+  sCtx.strokeStyle = '#a07030'; sCtx.lineWidth = 2;
+  sCtx.setLineDash([4,4]);
+  sCtx.beginPath(); sCtx.moveTo(cx, cy-80); sCtx.lineTo(cx, cy+80); sCtx.stroke();
+  sCtx.setLineDash([]);
+  sCtx.fillStyle = '#a07030'; sCtx.fillText('M', cx, cy-88);
+
+  // Thick filaments (myosin) - fixed length, centered
+  const myosinHalf = 130;
+  const myosinY = [cy-50, cy-25, cy, cy+25, cy+50];
+  sCtx.strokeStyle = '#4a6178'; sCtx.lineWidth = 8; sCtx.lineCap = 'round';
+  myosinY.forEach(y => {
+    sCtx.beginPath(); sCtx.moveTo(cx-myosinHalf, y); sCtx.lineTo(cx+myosinHalf, y); sCtx.stroke();
+    // Heads
+    for(let x = cx-myosinHalf+15; x < cx-10; x+=20){
+      drawHead(x, y, -1);
+    }
+    for(let x = cx+myosinHalf-15; x > cx+10; x-=20){
+      drawHead(x, y, 1);
+    }
+  });
+
+  function drawHead(x,y,dir){
+    sCtx.strokeStyle = 'rgba(74,97,120,0.6)'; sCtx.lineWidth = 2;
+    sCtx.beginPath();
+    sCtx.moveTo(x, y);
+    sCtx.lineTo(x+dir*8, y-6);
+    sCtx.stroke();
+  }
+
+  // Thin filaments (actin) - slide inward with contraction
+  const actinLen = 140;
+  const actinY = [cy-37, cy-12, cy+13, cy+38];
+  sCtx.strokeStyle = '#d4655a'; sCtx.lineWidth = 4;
+  actinY.forEach(y => {
+    // Left actin (from left Z toward center)
+    const lStart = cx - halfS;
+    const lEnd = lStart + actinLen;
+    sCtx.beginPath(); sCtx.moveTo(lStart, y); sCtx.lineTo(lEnd, y); sCtx.stroke();
+    // Right actin
+    const rStart = cx + halfS;
+    const rEnd = rStart - actinLen;
+    sCtx.beginPath(); sCtx.moveTo(rStart, y); sCtx.lineTo(rEnd, y); sCtx.stroke();
+  });
+
+  // Titin springs
+  sCtx.strokeStyle = '#6b7c5e'; sCtx.lineWidth = 1.5;
+  [cy-50, cy+50].forEach(y => {
+    drawSpring(cx-halfS, cx-myosinHalf, y);
+    drawSpring(cx+halfS, cx+myosinHalf, y);
+  });
+
+  function drawSpring(x1,x2,y){
+    const segs = 12;
+    const dx = (x2-x1)/segs;
+    sCtx.beginPath(); sCtx.moveTo(x1,y);
+    for(let i=1;i<=segs;i++){
+      sCtx.lineTo(x1+dx*i, y + (i%2===0?0: (i%4===1?-6:6)));
+    }
+    sCtx.stroke();
+  }
+
+  // Band labels
+  sCtx.font = '500 11px "DM Mono"';
+  // I band (left)
+  const iLeft = cx - halfS;
+  const iRight = cx - halfS + (actinLen - myosinHalf - (halfS - myosinHalf));
+  // A band
+  sCtx.fillStyle = 'rgba(74,97,120,0.3)';
+  sCtx.fillRect(cx-myosinHalf, cy+70, myosinHalf*2, 16);
+  sCtx.fillStyle = '#8aa0b8'; sCtx.textAlign='center';
+  sCtx.fillText('Banda A (no cambia)', cx, cy+82);
+
+  // I band indication
+  if(halfS > myosinHalf + 5){
+    sCtx.fillStyle = 'rgba(212,101,90,0.2)';
+    sCtx.fillRect(cx-halfS, cy+90, halfS-myosinHalf, 14);
+    sCtx.fillStyle = '#d4655a'; sCtx.font='500 10px "DM Mono"';
+    sCtx.textAlign='center';
+    sCtx.fillText('I', cx-halfS+(halfS-myosinHalf)/2, cy+100);
+  }
+  // H zone
+  const hHalf = myosinHalf - actinLen + halfS;
+  if(hHalf > 5){
+    sCtx.fillStyle='rgba(160,112,48,0.15)';
+    sCtx.fillRect(cx-hHalf, cy-65, hHalf*2, 130);
+    sCtx.fillStyle='#c8954c'; sCtx.font='500 11px "DM Mono"';
+    sCtx.fillText('Zona H',cx,cy+66);
+  }
+
+  // Length label
+  const len = (2.5 - contraction/100*1.0).toFixed(2);
+  sarcoLabel.textContent = len + ' µm';
+}
+
+sarcoSlider.addEventListener('input', ()=> drawSarcomere(+sarcoSlider.value));
+drawSarcomere(0);
+// Redraw on resize
+window.addEventListener('resize', ()=> drawSarcomere(+sarcoSlider.value));
+
+// ═══════════════════════════════════════
+// 3. CONTRACTION STEPS
+// ═══════════════════════════════════════
+const stepsData = [
+  { n:1, title:'Miosina energizada ("amartillada")',
+    desc:'La cabeza de miosina se encuentra en posición de alta energía (~90°) con <span class="step-molecule">ADP</span> + <span class="step-molecule">Pi</span> unidos. No está unida a la actina. La tropomiosina bloquea los sitios activos.' },
+  { n:2, title:'Formación del puente cruzado',
+    desc:'El <span class="step-molecule">Ca²⁺</span> del retículo sarcoplásmico se une a <span class="step-molecule">TnC</span> → la tropomiosina se desplaza → quedan expuestos los sitios en la actina. La cabeza de miosina se une a la actina. Se libera el Pi.' },
+  { n:3, title:'Golpe de fuerza (power stroke)',
+    desc:'La cabeza pivota de ~90° a ~45°, <strong>tirando del filamento delgado hacia el centro del sarcómero</strong>. Este es el paso generador de fuerza. Se libera el <span class="step-molecule">ADP</span>.' },
+  { n:4, title:'Estado de rigor',
+    desc:'Sin nucleótido, la miosina permanece firmemente unida a la actina. Estado transitorio en contracción normal. Si no hay ATP (muerte celular) → <strong>rigor mortis</strong>.' },
+  { n:5, title:'Desprendimiento',
+    desc:'Una nueva molécula de <span class="step-molecule">ATP</span> se une a la miosina → cambio conformacional → disminuye la afinidad por actina → el puente cruzado se rompe.' },
+  { n:6, title:'Re-energización',
+    desc:'La ATPasa de la miosina hidroliza <span class="step-molecule">ATP</span> → <span class="step-molecule">ADP</span> + <span class="step-molecule">Pi</span>. La energía re-posiciona la cabeza a ~90°. El ciclo reinicia.' }
+];
+const stepsContainer = document.querySelector('.steps-container');
+stepsData.forEach((s,i) => {
+  const div = document.createElement('div');
+  div.className = 'step-item' + (i===0?' active':'');
+  div.innerHTML = `
+    <div class="step-number">${s.n}</div>
+    <div class="step-content">
+      <div class="step-title">${s.title}</div>
+      <div class="step-desc">${s.desc}</div>
+    </div>`;
+  div.addEventListener('click',()=>{
+    document.querySelectorAll('.step-item').forEach(el=>el.classList.remove('active'));
+    div.classList.add('active');
+  });
+  stepsContainer.appendChild(div);
+});
+
+// ═══════════════════════════════════════
+// 4. FACIAL MUSCLES
+// ═══════════════════════════════════════
+const muscleData = {
+  'frontal': {
+    name:'Frontal (Occipitofrontal)',
+    origin:'Aponeurosis epicraneal (galea aponeurótica)',
+    insertion:'Piel de la frente y cejas',
+    action:'Eleva las cejas, arruga la frente transversalmente (expresión de sorpresa)',
+    nerve:'Ramo temporal del VII par',
+    clinical:'Se activa compensatoriamente en la ptosis palpebral para elevar el párpado vía tracción de la ceja. En parálisis facial, su parálisis ipsilateral distingue la lesión periférica de la central.',
+    id:'m-frontal'
+  },
+  'corrugador': {
+    name:'Corrugador Superciliar',
+    origin:'Extremo medial del arco superciliar',
+    insertion:'Piel de la ceja (porción media)',
+    action:'Aproxima y desciende las cejas → líneas verticales glabelares ("del once")',
+    nerve:'Ramo temporal del VII par',
+    clinical:'Diana principal de la toxina botulínica cosmética. Su hiperactividad contribuye al blefaroespasmo.',
+    id:'m-corrugador'
+  },
+  'procer': {
+    name:'Prócer (Procerus)',
+    origin:'Fascia del hueso nasal y cartílago nasal lateral',
+    insertion:'Piel interciliar (entre las cejas)',
+    action:'Desciende la piel interciliar, produce arrugas transversales en el puente nasal',
+    nerve:'Ramo bucal del VII par',
+    clinical:'Se inyecta con toxina botulínica junto con el corrugador en el tratamiento del blefaroespasmo.',
+    id:'m-procer'
+  },
+  'orbicular-ojo': {
+    name:'Orbicular del Ojo',
+    origin:'Porción nasal del frontal, apófisis frontal del maxilar, ligamento palpebral medial',
+    insertion:'Rafe palpebral lateral (palpebral); elipse completa (orbitaria)',
+    action:'Porción orbitaria: cierre forzado. Palpebral: parpadeo. Lagrimal (Horner): bomba lagrimal.',
+    nerve:'Ramos temporal y cigomático del VII par',
+    clinical:'El MÚSCULO MÁS IMPORTANTE para optometría. Su parálisis (Bell) → lagoftalmos → queratopatía por exposición. Su hiperactividad → blefaroespasmo → ceguera funcional.',
+    id:'m-orbicular-ojo'
+  },
+  'nasal': {
+    name:'Nasal',
+    origin:'Maxilar (porciones transversa y alar)',
+    insertion:'Dorso nasal y piel del ala nasal',
+    action:'Porción transversa: comprime las narinas. Alar: dilata las narinas.',
+    nerve:'Ramos bucales del VII par',
+    clinical:'Su contracción visible ("aleteo nasal") indica esfuerzo respiratorio.',
+    id:'m-nasal'
+  },
+  'cigomatico-mayor': {
+    name:'Cigomático Mayor',
+    origin:'Cara lateral del hueso cigomático',
+    insertion:'Modiolo (comisura labial)',
+    action:'Eleva y lateraliza la comisura: MÚSCULO PRINCIPAL DE LA SONRISA',
+    nerve:'Ramos cigomático y bucal del VII par',
+    clinical:'Su parálisis aplana el surco nasogeniano (signo temprano de parálisis facial).',
+    id:'m-cigomatico-mayor'
+  },
+  'elevador-labio': {
+    name:'Elevador del Labio Superior',
+    origin:'Borde infraorbitario del maxilar',
+    insertion:'Piel del labio superior',
+    action:'Eleva y evierte el labio superior, expone los dientes maxilares',
+    nerve:'Ramos cigomático y bucal del VII par',
+    clinical:'Su parálisis dificulta mostrar los dientes superiores.',
+    id:'m-elevador-labio'
+  },
+  'buccinador': {
+    name:'Buccinador',
+    origin:'Procesos alveolares del maxilar y mandíbula; rafe pterigomandibular',
+    insertion:'Se fusiona con el orbicular de la boca',
+    action:'Comprime las mejillas contra los dientes; evita acumulación de alimentos en el vestíbulo',
+    nerve:'Ramos bucales del VII par (pero sensibilidad por V3)',
+    clinical:'Atravesado por el conducto parotídeo (Stenon). Su debilidad causa acumulación de comida en el vestíbulo.',
+    id:'m-buccinador'
+  },
+  'orbicular-boca': {
+    name:'Orbicular de la Boca',
+    origin:'Fibras propias + contribuciones del buccinador, cigomáticos y otros',
+    insertion:'Piel y mucosa de los labios',
+    action:'Cierra, frunce y protruye los labios; mantiene sello labial',
+    nerve:'Ramos bucales del VII par',
+    clinical:'El modiolo (punto de convergencia muscular en la comisura) es clave en cirugía reconstructiva facial.',
+    id:'m-orbicular-boca'
+  },
+  'risorio': {
+    name:'Risorio',
+    origin:'Fascia parotídea (músculo muy variable)',
+    insertion:'Modiolo (comisura labial)',
+    action:'Retrae la comisura lateralmente ("sonrisa sardónica")',
+    nerve:'Ramos bucales del VII par',
+    clinical:'Músculo inconstante (ausente en ~20% de la población).',
+    id:'m-risorio'
+  },
+  'mentoniano': {
+    name:'Mentoniano',
+    origin:'Fosa incisiva de la mandíbula',
+    insertion:'Piel del mentón',
+    action:'Eleva y protruye el labio inferior; arruga la barbilla (expresión de duda)',
+    nerve:'Ramo marginal mandibular del VII par',
+    clinical:'Su contracción visible ("piel de naranja" mentoniana) puede ser signo de compensación ante insuficiencia labial.',
+    id:'m-mentoniano'
+  }
+};
+
+// Create buttons
+const muscleBtns = document.getElementById('muscleBtns');
+Object.keys(muscleData).forEach(key => {
+  const btn = document.createElement('button');
+  btn.className = 'muscle-btn';
+  btn.textContent = muscleData[key].name.split('(')[0].trim();
+  btn.addEventListener('click', ()=> showMuscle(key));
+  muscleBtns.appendChild(btn);
+});
+
+function showMuscle(key){
+  const m = muscleData[key];
+  // Highlight SVG
+  document.querySelectorAll('.face-muscle').forEach(el => {
+    el.setAttribute('fill', 'rgba(200,149,76,0.0)');
+    el.setAttribute('stroke', 'none');
+  });
+  const svgEl = document.getElementById(m.id);
+  if(svgEl){
+    const tag = svgEl.tagName;
+    if(tag==='path' && !svgEl.getAttribute('d').includes('Z')){
+      svgEl.setAttribute('stroke', 'rgba(200,149,76,0.7)');
+    } else {
+      svgEl.setAttribute('fill', 'rgba(200,149,76,0.3)');
+      svgEl.setAttribute('stroke', '#c8954c');
+      svgEl.setAttribute('stroke-width','2');
+    }
+    // Also highlight linked
+    document.querySelectorAll(`[data-link="${m.id}"]`).forEach(el=>{
+      el.setAttribute('fill','rgba(200,149,76,0.3)');
+      el.setAttribute('stroke','#c8954c');
+      el.setAttribute('stroke-width','2');
+    });
+  }
+  // Highlight button
+  document.querySelectorAll('.muscle-btn').forEach((b,i)=>{
+    b.classList.toggle('active', Object.keys(muscleData)[i]===key);
+  });
+  // Info panel
+  document.getElementById('faceInfo').innerHTML = `
+    <div class="face-info-title">${m.name}</div>
+    <div class="face-info-section"><div class="face-info-label">Origen</div><div class="face-info-text">${m.origin}</div></div>
+    <div class="face-info-section"><div class="face-info-label">Inserción</div><div class="face-info-text">${m.insertion}</div></div>
+    <div class="face-info-section"><div class="face-info-label">Acción</div><div class="face-info-text">${m.action}</div></div>
+    <div class="face-info-section"><div class="face-info-label">Inervación</div><div class="face-info-text">${m.nerve}</div></div>
+    <div class="face-info-section"><div class="face-info-label">Relevancia Clínica</div><div class="face-info-text" style="color:var(--red-clinical);">${m.clinical}</div></div>
+  `;
+}
+
+// SVG click handlers
+document.querySelectorAll('.face-muscle').forEach(el => {
+  el.addEventListener('click', ()=>{
+    const id = el.id || el.dataset.link;
+    const key = Object.keys(muscleData).find(k=>muscleData[k].id===id);
+    if(key) showMuscle(key);
+  });
+});
+
+// ═══════════════════════════════════════
+// 5. MASTICACIÓN CARDS
+// ═══════════════════════════════════════
+const masticData = [
+  { name:'Masetero', color:'var(--amber)',
+    bars:{Fuerza:95, Tamaño:75},
+    detail:'<b>Origen:</b> Arco cigomático (superficial: 2/3 ant. borde inferior; profunda: superficie medial).<br><b>Inserción:</b> Rama y ángulo mandibular (lateral).<br><b>Acción:</b> Elevación mandibular (el más potente). Porción superficial: protrusión.<br><b>Inervación:</b> N. masetérico (V3).' },
+  { name:'Temporal', color:'var(--blue-steel)',
+    bars:{Fuerza:80, Tamaño:90},
+    detail:'<b>Origen:</b> Fosa temporal (frontal, parietal, temporal, esfenoides).<br><b>Inserción:</b> Apófisis coronoides (vértice, cara medial, borde anterior).<br><b>Acción:</b> Fibras anteriores: elevan. Fibras posteriores: retruyen (retractor primario).<br><b>Inervación:</b> NN. temporales profundos (V3).' },
+  { name:'Pterigoideo Medial', color:'var(--sage)',
+    bars:{Fuerza:60, Tamaño:55},
+    detail:'<b>Origen:</b> Cab. profunda: lámina lateral pterigoides (medial). Cab. superficial: tuberosidad maxilar.<br><b>Inserción:</b> Superficie medial del ángulo mandibular.<br><b>Acción:</b> Eleva mandíbula; unilateral: lateralidad contralateral (molienda).<br><b>Inervación:</b> N. pterigoideo medial (V3).' },
+  { name:'Pterigoideo Lateral', color:'var(--red-clinical)',
+    bars:{Fuerza:40, Tamaño:35},
+    detail:'<b>Origen:</b> Cab. sup: ala mayor esfenoides; cab. inf: lámina lateral pterigoides.<br><b>Inserción:</b> Fóvea pterigoidea del cóndilo + disco articular ATM.<br><b>Acción:</b> Bilateral: deprime (abre) y protruye. Unilateral: desviación contralateral.<br><b>Inervación:</b> N. pterigoideo lateral (V3). <span style="color:var(--amber);">Conexión optométrica: la DTM puede causar dolor periorbitario referido y ojo seco.</span>' }
+];
+const masticGrid = document.getElementById('masticGrid');
+masticData.forEach(m => {
+  const card = document.createElement('div');
+  card.className = 'fiber-card'; card.style.background='rgba(245,240,232,0.06)';
+  card.style.borderColor='rgba(200,149,76,0.15)';
+  card.style.setProperty('--card-color', m.color);
+  let barsHTML = '';
+  Object.entries(m.bars).forEach(([k,v])=>{
+    barsHTML += `<div class="fiber-bar-row"><span class="fiber-bar-label" style="color:rgba(245,240,232,0.4)">${k}</span>
+    <div class="fiber-bar-track" style="background:rgba(245,240,232,0.08)"><div class="fiber-bar-fill" data-w="${v}" style="background:${m.color}"></div></div></div>`;
+  });
+  card.innerHTML = `
+    <div class="fiber-type-label" style="color:${m.color}">${m.name}</div>
+    <div class="fiber-subtitle" style="color:rgba(245,240,232,0.35)">Inervación: V3 (mandibular)</div>
+    <div class="fiber-bars">${barsHTML}</div>
+    <div class="fiber-detail" style="color:rgba(245,240,232,0.55)">${m.detail}</div>
+  `;
+  card.querySelector('::before')?.remove();
+  card.addEventListener('click',()=>card.classList.toggle('expanded'));
+  masticGrid.appendChild(card);
+  fiberObs.observe(card);
+});
+
+// ═══════════════════════════════════════
+// 6. EXTRAOCULAR EYE CANVAS
+// ═══════════════════════════════════════
+const eyeCanvas = document.getElementById('eyeCanvas');
+const eCtx = eyeCanvas.getContext('2d');
+const eyeMuscles = [
+  { name:'Recto Medial', nerve:'III (div. inf.)', action:'Aducción', color:'#d4655a', angle: Math.PI, limbo:'5.5 mm', secondary:'Ninguna' },
+  { name:'Recto Lateral', nerve:'VI (Abducens)', action:'Abducción', color:'#4a8db8', angle: 0, limbo:'6.9 mm', secondary:'Ninguna' },
+  { name:'Recto Superior', nerve:'III (div. sup.)', action:'Elevación', color:'#6b7c5e', angle: -Math.PI/2, limbo:'7.7 mm', secondary:'Intorsión, aducción' },
+  { name:'Recto Inferior', nerve:'III (div. inf.)', action:'Depresión', color:'#c8954c', angle: Math.PI/2, limbo:'6.5 mm', secondary:'Extorsión, aducción' },
+  { name:'Oblicuo Superior', nerve:'IV (Troclear)', action:'Intorsión', color:'#8b6eaa', angle: -Math.PI*0.65, limbo:'Post. al ecuador', secondary:'Depresión, abducción' },
+  { name:'Oblicuo Inferior', nerve:'III (div. inf.)', action:'Extorsión', color:'#d49a6a', angle: Math.PI*0.65, limbo:'Post. al ecuador', secondary:'Elevación, abducción' },
+];
+
+let activeEyeMuscle = -1;
+const eyeList = document.getElementById('eyeMuscleList');
+eyeMuscles.forEach((m,i) => {
+  const div = document.createElement('div');
+  div.className = 'eye-muscle-item';
+  div.innerHTML = `
+    <div class="eye-muscle-name" style="color:${m.color}">${m.name}</div>
+    <div class="eye-muscle-nerve">${m.nerve}</div>
+    <div class="eye-muscle-action">${m.action} · Limbo: ${m.limbo}</div>
+  `;
+  div.addEventListener('click',()=>{
+    activeEyeMuscle = (activeEyeMuscle===i)?-1:i;
+    document.querySelectorAll('.eye-muscle-item').forEach((el,j)=>el.classList.toggle('active',j===activeEyeMuscle));
+    drawEye();
+  });
+  eyeList.appendChild(div);
+});
+
+let eyeAnim = 0;
+function drawEye(){
+  const W = 600, H = 500;
+  const dpr = window.devicePixelRatio||1;
+  eyeCanvas.width=W*dpr; eyeCanvas.height=H*dpr;
+  eCtx.scale(dpr,dpr);
+  eyeCanvas.style.width='100%';
+
+  eCtx.clearRect(0,0,W,H);
+  eCtx.fillStyle='#1a1410'; eCtx.fillRect(0,0,W,H);
+
+  const cx=W/2, cy=H/2-10;
+  const R=100; // globe radius
+
+  // Globe
+  eCtx.beginPath(); eCtx.arc(cx,cy,R,0,Math.PI*2);
+  eCtx.fillStyle='#f5f0e8'; eCtx.fill();
+  eCtx.strokeStyle='#c8954c'; eCtx.lineWidth=2; eCtx.stroke();
+
+  // Iris
+  eCtx.beginPath(); eCtx.arc(cx,cy,35,0,Math.PI*2);
+  eCtx.fillStyle='#6b8c5e'; eCtx.fill();
+  // Pupil
+  eCtx.beginPath(); eCtx.arc(cx,cy,14,0,Math.PI*2);
+  eCtx.fillStyle='#1a1410'; eCtx.fill();
+  // Highlight
+  eCtx.beginPath(); eCtx.arc(cx-8,cy-8,5,0,Math.PI*2);
+  eCtx.fillStyle='rgba(255,255,255,0.7)'; eCtx.fill();
+
+  // Optic nerve
+  eCtx.strokeStyle='#a07030'; eCtx.lineWidth=12; eCtx.lineCap='round';
+  eCtx.beginPath(); eCtx.moveTo(cx+R-5,cy); eCtx.lineTo(cx+R+60,cy); eCtx.stroke();
+  eCtx.fillStyle='#a07030'; eCtx.font='500 11px "DM Mono"';
+  eCtx.textAlign='center'; eCtx.fillText('N. Óptico',cx+R+30,cy+22);
+
+  // Annulus of Zinn
+  eCtx.beginPath(); eCtx.arc(cx+R+10,cy,22,0,Math.PI*2);
+  eCtx.strokeStyle='rgba(200,149,76,0.4)'; eCtx.lineWidth=2; eCtx.setLineDash([3,3]); eCtx.stroke();
+  eCtx.setLineDash([]);
+  eCtx.fillStyle='rgba(200,149,76,0.5)'; eCtx.font='500 9px "DM Mono"';
+  eCtx.fillText('Anillo de Zinn',cx+R+10,cy-28);
+
+  // Muscles
+  eyeMuscles.forEach((m,i) => {
+    const isActive = (activeEyeMuscle===i);
+    const alpha = isActive ? 1 : 0.4;
+    const lw = isActive ? 6 : 3;
+
+    eCtx.save();
+    eCtx.globalAlpha = alpha;
+    eCtx.strokeStyle = m.color;
+    eCtx.lineWidth = lw;
+    eCtx.lineCap = 'round';
+
+    const originX = cx + R + 10;
+    const originY = cy;
+    // Insertion point on globe
+    let insAngle = m.angle;
+    // For obliques, adjust path
+    if(i >= 4){
+      // Obliques have curved paths
+      const insX = cx + Math.cos(insAngle) * R * 0.85;
+      const insY = cy + Math.sin(insAngle) * R * 0.85;
+      const midX = cx + Math.cos(insAngle) * (R + 40) * (i===4?0.6:0.5);
+      const midY = cy + Math.sin(insAngle) * (R + 40);
+      eCtx.beginPath();
+      if(i===4){ // Superior oblique - goes through trochlea
+        const trochX = cx - R - 20;
+        const trochY = cy - R + 10;
+        eCtx.moveTo(originX, originY-10);
+        eCtx.lineTo(trochX+10, trochY+5);
+        // Trochlea
+        eCtx.stroke();
+        eCtx.beginPath();
+        eCtx.arc(trochX,trochY,8,0,Math.PI*2);
+        eCtx.strokeStyle=m.color; eCtx.lineWidth=2; eCtx.stroke();
+        if(isActive){
+          eCtx.fillStyle='rgba(139,110,170,0.15)'; eCtx.fill();
+          eCtx.fillStyle=m.color; eCtx.font='500 10px "DM Mono"';
+          eCtx.fillText('Tróclea',trochX,trochY-14);
+        }
+        eCtx.beginPath();
+        eCtx.strokeStyle=m.color; eCtx.lineWidth=lw;
+        eCtx.moveTo(trochX+5,trochY+5);
+        eCtx.quadraticCurveTo(cx-R*0.3, cy-R*0.6, insX, insY);
+      } else { // Inferior oblique
+        eCtx.moveTo(cx-R-10, cy+R-10); // Origin: floor of orbit
+        eCtx.quadraticCurveTo(cx, cy+R*0.8, insX, insY);
+        if(isActive){
+          eCtx.stroke();
+          eCtx.fillStyle=m.color; eCtx.font='500 10px "DM Mono"';
+          eCtx.textAlign='left';
+          eCtx.fillText('Origen: maxilar',cx-R-10, cy+R+8);
+          eCtx.beginPath();
+          eCtx.strokeStyle=m.color; eCtx.lineWidth=lw;
+        }
+      }
+    } else {
+      // Rect muscles - straight from Zinn to insertion
+      const insX = cx + Math.cos(insAngle) * R;
+      const insY = cy + Math.sin(insAngle) * R;
+      eCtx.beginPath();
+      eCtx.moveTo(originX + Math.cos(insAngle)*12, originY + Math.sin(insAngle)*12);
+      eCtx.lineTo(insX, insY);
+    }
+    eCtx.stroke();
+
+    // Label
+    if(isActive){
+      const labelR = R + 45;
+      let lx = cx + Math.cos(insAngle) * labelR;
+      let ly = cy + Math.sin(insAngle) * labelR;
+      eCtx.fillStyle = m.color;
+      eCtx.font = '700 12px "DM Mono"';
+      eCtx.textAlign = 'center';
+      eCtx.fillText(m.name, lx, ly);
+      eCtx.font = '400 10px "DM Mono"';
+      eCtx.fillText(m.action, lx, ly+14);
+      eCtx.fillStyle = 'rgba(245,240,232,0.5)';
+      eCtx.fillText(m.nerve, lx, ly+27);
+
+      // Arrow showing direction of movement
+      const arrowAngle = m.angle + Math.PI;
+      const arrowR = R * 0.5;
+      const ax = cx + Math.cos(arrowAngle)*arrowR;
+      const ay = cy + Math.sin(arrowAngle)*arrowR;
+      eCtx.strokeStyle = m.color; eCtx.lineWidth = 2;
+      eCtx.setLineDash([4,3]);
+      eCtx.beginPath();
+      eCtx.arc(cx,cy,arrowR, m.angle, m.angle - Math.PI*0.3, true);
+      eCtx.stroke();
+      eCtx.setLineDash([]);
+    }
+
+    eCtx.restore();
+  });
+
+  // Title
+  eCtx.fillStyle='rgba(245,240,232,0.3)';
+  eCtx.font='500 11px "DM Mono"';
+  eCtx.textAlign='left';
+  eCtx.fillText('OJO DERECHO — Vista anterior', 20, H-16);
+
+  // Nemotecnia
+  eCtx.textAlign='right';
+  eCtx.fillText('LR₆(SO₄)₃', W-20, H-16);
+}
+drawEye();
+
+// ═══════════════════════════════════════
+// 7. CLINICAL CARDS
+// ═══════════════════════════════════════
+const clinicalData = [
+  { name:'Parálisis de Bell', tag:'VII par', color:'var(--red-clinical)',
+    detail:'Parálisis facial periférica aguda unilateral idiopática. Toda la hemicara ipsilateral paralizada (incluyendo frente). <b>Consecuencia ocular:</b> lagoftalmos → queratopatía por exposición. El optometrista prescribe lubricación intensiva, cámaras de humedad y evalúa el fenómeno de Bell. <b>Regla BALD:</b> Bell pobre, Ausencia de sensibilidad corneal, Lagoftalmos, Dry eye → derivación urgente.' },
+  { name:'Ptosis Palpebral', tag:'III par / Simpático', color:'var(--amber)',
+    detail:'<b>Aponeurótica (~60%):</b> envejecimiento del tendón del elevador. <b>III par:</b> ptosis severa + ojo "abajo y afuera" + midriasis → descartar aneurisma comunicante posterior (urgencia). <b>Horner:</b> ptosis leve (1-2mm) + miosis + anhidrosis → descartar tumor pulmonar, disección carotídea. <b>Miastenia:</b> ptosis variable y fatigable.' },
+  { name:'Blefaroespasmo', tag:'Distonía focal', color:'var(--blue-steel)',
+    detail:'Espasmos involuntarios bilaterales del orbicular del ojo. Puede causar ceguera funcional. Se diferencia del espasmo hemifacial (unilateral, por compresión vascular del VII). <b>Tratamiento:</b> toxina botulínica A en orbicular, corrugador y prócer cada 3-4 meses. El optometrista prescribe lentes con filtro FL-41.' },
+  { name:'Parálisis del VI Par', tag:'La más frecuente', color:'var(--sage)',
+    detail:'Endotropía incomitante + diplopía horizontal (peor a distancia) + abducción limitada. <b>Causa más común en adultos:</b> microvascular (diabetes/HTA) → resolución espontánea en 3-6 meses. <b>SIEMPRE</b> hacer fondo de ojo: papiledema = neuroimagen urgente. Es "signo de falsa localización" de hipertensión intracraneal. <b>Manejo:</b> prismas de Fresnel, filtro de Bangerter.' },
+  { name:'Miastenia Gravis Ocular', tag:'Autoinmune / UNM', color:'var(--rust)',
+    detail:'Anticuerpos anti-receptor ACh. 75% debutan con síntomas oculares. Tríada: ptosis variable + diplopía que NO sigue patrón de un solo nervio + pupilas normales. <b>Tests en consultorio:</b> Signo de Cogan (sens. 75%, esp. 99%), test del hielo (sens. 80-94%), test de fatiga. 85% progresan a generalizada en 2 años → derivar a neurología.' }
+];
+const clinicalGrid = document.getElementById('clinicalGrid');
+clinicalData.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'fiber-card';
+  card.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:start;">
+      <div class="fiber-type-label" style="color:${c.color}">${c.name}</div>
+      <span class="quiz-clinical-tag">${c.tag}</span>
+    </div>
+    <div class="fiber-subtitle">Haz clic para expandir</div>
+    <div class="fiber-detail">${c.detail}</div>
+  `;
+  card.addEventListener('click',()=>card.classList.toggle('expanded'));
+  clinicalGrid.appendChild(card);
+});
+
+// ═══════════════════════════════════════
+// 8. QUIZ
+// ═══════════════════════════════════════
+const quizQuestions = [
+  { q:'Un paciente presenta parálisis facial unilateral que incluye la frente. ¿Dónde se localiza la lesión?',
+    opts:['Corteza motora contralateral (central)','Nervio facial periférico (neurona motora inferior)','Núcleo del trigémino','Ganglio ciliar'],
+    correct:1, exp:'La parálisis que incluye la frente es PERIFÉRICA (neurona motora inferior). En la central (ACV), la frente se preserva porque el subnúcleo dorsal del facial recibe inervación cortical bilateral.' },
+  { q:'¿Cuál es la regla nemotécnica para la inervación de los músculos extraoculares?',
+    opts:['RS₃(OI₄)₆','LR₆(SO₄)₃','RM₃(RL₆)₄','SO₆(LR₄)₃'],
+    correct:1, exp:'LR₆(SO₄)₃: Recto Lateral = VI par, Oblicuo Superior = IV par, todos los demás = III par.' },
+  { q:'En la miastenia gravis ocular, ¿qué hallazgo pupilar se espera?',
+    opts:['Midriasis fija bilateral','Miosis bilateral','Pupilas NORMALES','Anisocoria alternante'],
+    correct:2, exp:'Las pupilas siempre son normales en miastenia gravis. Esto la diferencia de la parálisis del III par (que sí produce midriasis cuando hay compromiso pupilar).' },
+  { q:'¿Qué proteína del sarcómero actúa como "sensor" de calcio que desencadena la contracción?',
+    opts:['Tropomiosina','Troponina I (TnI)','Troponina C (TnC)','Titina'],
+    correct:2, exp:'TnC es la subunidad que une Ca²⁺ en sus sitios reguladores, desencadenando el cambio conformacional que desplaza la tropomiosina y expone los sitios de unión actina-miosina.' },
+  { q:'Un paciente con ptosis y midriasis tiene probable parálisis del III par. ¿Qué etiología debe descartarse urgentemente?',
+    opts:['Miastenia gravis','Aneurisma de la arteria comunicante posterior','Diabetes mellitus','Tumor de ápex pulmonar'],
+    correct:1, exp:'La presencia de midriasis (compromiso pupilar) indica compresión de las fibras parasimpáticas periféricas del III par. La causa más peligrosa es un aneurisma de la comunicante posterior — urgencia neuroquirúrgica. La diabetes causa parálisis isquémica que respeta la pupila.' },
+  { q:'¿Qué músculo ejecuta la bomba lagrimal durante el parpadeo?',
+    opts:['Frontal','Porción orbitaria del orbicular','Porción lagrimal del orbicular (músculo de Horner)','Elevador del párpado superior'],
+    correct:2, exp:'La porción lagrimal (músculo de Horner) se origina en la cresta lagrimal posterior y comprime los canalículos durante el parpadeo, forzando las lágrimas hacia el saco lagrimal.' },
+  { q:'¿Cuál banda del sarcómero NO cambia de longitud durante la contracción?',
+    opts:['Banda I','Zona H','Banda A','Línea Z'],
+    correct:2, exp:'La Banda A (anisotrópica) abarca toda la longitud de los filamentos gruesos y no cambia — dato clave de la teoría del deslizamiento. La Banda I y la Zona H sí se acortan.' },
+  { q:'Un paciente con parálisis del VI par. ¿Qué examen es OBLIGATORIO?',
+    opts:['Resonancia magnética inmediata','Fondo de ojo con dilatación buscando papiledema','Test de hielo en el párpado','Electromiografía del recto lateral'],
+    correct:1, exp:'El VI par es "signo de falsa localización": puede reflejar hipertensión intracraneal de cualquier origen. El fondo de ojo buscando papiledema es obligatorio. Si hay papiledema → neuroimagen urgente.' }
+];
+
+let quizIdx = 0, quizScore = 0;
+function renderQuiz(){
+  const q = quizQuestions[quizIdx];
+  const card = document.getElementById('quizCard');
+  let optsHTML = '';
+  q.opts.forEach((o,i) => {
+    optsHTML += `<div class="quiz-opt" data-i="${i}" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}) ${o}</div>`;
+  });
+  card.innerHTML = `
+    <div class="quiz-clinical-tag">Pregunta ${quizIdx+1} de ${quizQuestions.length}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div class="quiz-opts">${optsHTML}</div>
+    <div class="quiz-explanation" id="quizExp">${q.exp}</div>
+    <div class="quiz-nav">
+      <button class="quiz-nav-btn" onclick="nextQuiz()" id="nextBtn" style="display:none">Siguiente →</button>
+      <span class="quiz-score" style="color:rgba(245,240,232,0.4)">Puntaje: ${quizScore}/${quizQuestions.length}</span>
+    </div>
+  `;
+}
+window.answerQuiz = function(i){
+  const q = quizQuestions[quizIdx];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach(o => o.classList.add('disabled'));
+  opts[i].classList.add(i===q.correct ? 'correct':'wrong');
+  if(i!==q.correct) opts[q.correct].classList.add('correct');
+  if(i===q.correct) quizScore++;
+  document.getElementById('quizExp').style.display='block';
+  document.getElementById('nextBtn').style.display='inline-block';
+  document.querySelector('.quiz-score').textContent = `Puntaje: ${quizScore}/${quizQuestions.length}`;
+};
+window.nextQuiz = function(){
+  quizIdx++;
+  if(quizIdx >= quizQuestions.length){
+    const card = document.getElementById('quizCard');
+    const pct = Math.round(quizScore/quizQuestions.length*100);
+    card.innerHTML = `
+      <div class="quiz-q" style="text-align:center;">¡Quiz completado!</div>
+      <div style="text-align:center;font-size:3rem;font-family:var(--font-display);font-weight:900;color:${pct>=70?'var(--sage)':'var(--amber)'};">${quizScore}/${quizQuestions.length}</div>
+      <p style="text-align:center;color:rgba(26,20,16,0.5);margin-top:12px;">${pct>=70?'Excelente comprensión de la anatomía muscular.':'Revisa las secciones anteriores y vuelve a intentar.'}</p>
+      <div class="quiz-nav" style="justify-content:center;"><button class="quiz-nav-btn" onclick="quizIdx=0;quizScore=0;renderQuiz();">Reiniciar Quiz</button></div>
+    `;
+    return;
+  }
+  renderQuiz();
+};
+renderQuiz();
+
+</script>
+</body>
+</html>
