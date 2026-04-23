@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía del Estudiante · Sistema Linfático · Morfología General · 2026-I</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --parchment:#f4ecd8;
+  --parchment-dark:#e8dcc0;
+  --parchment-light:#faf5e6;
+  --ink:#2b2416;
+  --ink-soft:#4a3f2a;
+  --ink-light:#6b5d45;
+  --amber:#b8860b;
+  --amber-dark:#8b6914;
+  --lymph:#2d6a4f;
+  --lymph-dark:#1b4332;
+  --lymph-light:#74c69d;
+  --lymph-pale:#d8f3dc;
+  --clinical:#b5413b;
+  --shadow:rgba(43,36,22,0.12);
+  --shadow-strong:rgba(43,36,22,0.25);
+  /* Colores por grupo */
+  --g1:#2d6a4f;      /* verde linfático */
+  --g1-pale:#d8f3dc;
+  --g2:#6b4a8a;      /* púrpura ganglio */
+  --g2-pale:#e8dff2;
+  --g3:#b8860b;      /* ámbar drenaje */
+  --g3-pale:#f8edd1;
+  --g4:#a0522d;      /* rust órganos */
+  --g4-pale:#f0dfd0;
+  --g5:#1976a1;      /* azul mucosa */
+  --g5-pale:#d4e8f0;
+  --g6:#b5413b;      /* rojo privilegio */
+  --g6-pale:#f4d9d7;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Source Serif 4',Georgia,serif;
+  background:var(--parchment);
+  color:var(--ink);line-height:1.65;font-size:16px;
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(45,106,79,0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(139,105,20,0.035) 0%, transparent 40%);
+}
+/* ── HERO ─────────────────────────── */
+.hero{
+  background:linear-gradient(120deg, var(--lymph-dark) 0%, var(--lymph) 45%, #40916c 100%);
+  color:var(--parchment-light);
+  padding:2.8rem 2rem 2.5rem;
+  position:relative;overflow:hidden;
+  border-bottom:3px double var(--amber);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(135deg, transparent, transparent 25px, rgba(250,245,230,0.025) 25px, rgba(250,245,230,0.025) 26px);
+  pointer-events:none;
+}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.hero-badge{
+  display:inline-block;
+  background:var(--amber);color:var(--ink);
+  font-family:'DM Mono',monospace;font-size:0.7rem;
+  font-weight:500;letter-spacing:0.18em;text-transform:uppercase;
+  padding:0.35rem 0.9rem;border-radius:2px;margin-bottom:1rem;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:clamp(1.7rem,3.8vw,2.8rem);
+  line-height:1.1;margin-bottom:0.5rem;letter-spacing:-0.015em;
+}
+.hero h1 em{font-style:italic;color:var(--lymph-light);font-weight:400}
+.hero-sub{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(1rem,1.5vw,1.2rem);
+  color:rgba(250,245,230,0.88);
+  margin-bottom:1.3rem;max-width:820px;
+}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:1rem;margin-top:1.2rem;
+  padding-top:1.1rem;
+  border-top:1px solid rgba(250,245,230,0.2);
+}
+.stat{font-family:'DM Mono',monospace;font-size:0.78rem}
+.stat-label{
+  color:var(--lymph-light);letter-spacing:0.12em;
+  text-transform:uppercase;font-size:0.66rem;display:block;margin-bottom:0.2rem;
+}
+.stat-val{color:var(--parchment-light);font-weight:500}
+/* ── NAV ──────────────────────────── */
+nav.sticky{
+  position:sticky;top:0;z-index:100;
+  background:var(--parchment);
+  border-bottom:1px solid var(--parchment-dark);
+  box-shadow:0 2px 8px var(--shadow);
+  padding:0.6rem 0;
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 2rem;
+  display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:center;
+}
+nav.sticky a{
+  font-family:'DM Mono',monospace;font-size:0.72rem;
+  color:var(--ink-soft);text-decoration:none;
+  padding:0.4rem 0.7rem;border-radius:2px;
+  text-transform:uppercase;letter-spacing:0.08em;
+  transition:all 0.2s;border:1px solid transparent;
+}
+nav.sticky a:hover{background:var(--lymph-pale);color:var(--lymph-dark);border-color:var(--lymph-light)}
+nav.sticky a.g1:hover{background:var(--g1-pale);color:var(--g1);border-color:var(--g1)}
+nav.sticky a.g2:hover{background:var(--g2-pale);color:var(--g2);border-color:var(--g2)}
+nav.sticky a.g3:hover{background:var(--g3-pale);color:var(--g3);border-color:var(--g3)}
+nav.sticky a.g4:hover{background:var(--g4-pale);color:var(--g4);border-color:var(--g4)}
+nav.sticky a.g5:hover{background:var(--g5-pale);color:var(--g5);border-color:var(--g5)}
+nav.sticky a.g6:hover{background:var(--g6-pale);color:var(--g6);border-color:var(--g6)}
+/* ── MAIN ─────────────────────────── */
+main{max-width:1200px;margin:0 auto;padding:2.5rem 2rem 3rem}
+section{margin-bottom:3rem;scroll-margin-top:70px}
+.sec-head{
+  display:flex;align-items:baseline;gap:1rem;
+  margin-bottom:1.3rem;padding-bottom:0.7rem;
+  border-bottom:2px solid var(--amber);
+  position:relative;
+}
+.sec-head::after{
+  content:'';position:absolute;left:0;bottom:-5px;
+  width:70px;height:2px;background:var(--lymph);
+}
+.sec-num{
+  font-family:'DM Mono',monospace;font-size:0.82rem;
+  color:var(--amber-dark);font-weight:500;letter-spacing:0.1em;
+}
+.sec-head h2{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(1.4rem,2.4vw,1.9rem);
+  color:var(--ink);letter-spacing:-0.01em;
+}
+.sec-head h2 em{font-style:italic;color:var(--lymph-dark);font-weight:600}
+
+/* ── WELCOME ──────────────────────── */
+.welcome{
+  background:linear-gradient(135deg, var(--parchment-light) 0%, var(--parchment) 100%);
+  padding:1.8rem 2rem;border-radius:4px;
+  border-left:4px solid var(--lymph);
+  box-shadow:0 3px 10px var(--shadow);
+  margin-bottom:2rem;position:relative;
+}
+.welcome::before{
+  content:'◈';font-family:'Playfair Display',serif;
+  font-size:3.5rem;color:var(--lymph-light);opacity:0.5;
+  position:absolute;top:5px;left:15px;line-height:1;
+}
+.welcome-inner{padding-left:3rem}
+.welcome p{font-size:1.05rem;color:var(--ink-soft);margin-bottom:0.8rem}
+.welcome strong{color:var(--lymph-dark);font-weight:600}
+.welcome .deadline{
+  display:inline-block;margin-top:0.8rem;
+  font-family:'DM Mono',monospace;font-size:0.8rem;
+  background:var(--amber);color:var(--ink);
+  padding:0.4rem 0.8rem;border-radius:2px;
+  letter-spacing:0.08em;
+}
+/* ── INSTRUCTIONS ─────────────────── */
+.instructions{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1rem;
+}
+.instr-card{
+  background:var(--parchment-light);padding:1.2rem 1.3rem;
+  border-radius:3px;border-top:3px solid var(--amber);
+  box-shadow:0 2px 6px var(--shadow);
+  position:relative;
+}
+.instr-num{
+  position:absolute;top:-12px;right:15px;
+  background:var(--amber);color:var(--ink);
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:1.1rem;
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 4px var(--shadow);
+}
+.instr-card h4{
+  font-family:'Playfair Display',serif;font-size:1.05rem;
+  color:var(--ink);margin-bottom:0.5rem;
+}
+.instr-card p{font-size:0.9rem;color:var(--ink-soft)}
+
+/* ── GROUPS MAIN CARDS ────────────── */
+.group-section{
+  background:var(--parchment-light);
+  border-radius:6px;padding:2rem;
+  box-shadow:0 4px 15px var(--shadow);
+  position:relative;overflow:hidden;
+  border-top:6px solid var(--g1);
+  margin-bottom:2rem;
+}
+.group-section.g1{border-top-color:var(--g1)}
+.group-section.g2{border-top-color:var(--g2)}
+.group-section.g3{border-top-color:var(--g3)}
+.group-section.g4{border-top-color:var(--g4)}
+.group-section.g5{border-top-color:var(--g5)}
+.group-section.g6{border-top-color:var(--g6)}
+.group-section::before{
+  content:'';position:absolute;top:0;right:0;
+  width:200px;height:200px;
+  background:radial-gradient(circle at 100% 0%, var(--g1-pale) 0%, transparent 70%);
+  pointer-events:none;opacity:0.6;
+}
+.group-section.g2::before{background:radial-gradient(circle at 100% 0%, var(--g2-pale) 0%, transparent 70%)}
+.group-section.g3::before{background:radial-gradient(circle at 100% 0%, var(--g3-pale) 0%, transparent 70%)}
+.group-section.g4::before{background:radial-gradient(circle at 100% 0%, var(--g4-pale) 0%, transparent 70%)}
+.group-section.g5::before{background:radial-gradient(circle at 100% 0%, var(--g5-pale) 0%, transparent 70%)}
+.group-section.g6::before{background:radial-gradient(circle at 100% 0%, var(--g6-pale) 0%, transparent 70%)}
+.group-inner{position:relative;z-index:2}
+.group-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;
+  padding-bottom:1rem;border-bottom:1px dashed var(--parchment-dark);
+}
+.group-tag{
+  font-family:'DM Mono',monospace;font-size:0.75rem;
+  font-weight:500;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--g1);margin-bottom:0.3rem;display:block;
+}
+.group-section.g1 .group-tag{color:var(--g1)}
+.group-section.g2 .group-tag{color:var(--g2)}
+.group-section.g3 .group-tag{color:var(--g3)}
+.group-section.g4 .group-tag{color:var(--g4)}
+.group-section.g5 .group-tag{color:var(--g5)}
+.group-section.g6 .group-tag{color:var(--g6)}
+.group-title-main{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(1.3rem,2.2vw,1.7rem);
+  color:var(--ink);line-height:1.2;margin-bottom:0.3rem;
+}
+.group-motto{
+  font-family:'Playfair Display',serif;font-style:italic;
+  color:var(--ink-soft);font-size:1.02rem;
+}
+.group-time-badge{
+  font-family:'DM Mono',monospace;font-size:0.7rem;
+  padding:0.35rem 0.75rem;
+  background:var(--g1);color:white;border-radius:2px;
+  letter-spacing:0.08em;white-space:nowrap;
+}
+.group-section.g1 .group-time-badge{background:var(--g1)}
+.group-section.g2 .group-time-badge{background:var(--g2)}
+.group-section.g3 .group-time-badge{background:var(--g3)}
+.group-section.g4 .group-time-badge{background:var(--g4)}
+.group-section.g5 .group-time-badge{background:var(--g5)}
+.group-section.g6 .group-time-badge{background:var(--g6)}
+
+.group-body{
+  display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;
+}
+@media(max-width:900px){.group-body{grid-template-columns:1fr}}
+.group-col-main{}
+.group-col-side{}
+.gg-block{margin-bottom:1.3rem}
+.gg-block h4{
+  font-family:'DM Mono',monospace;font-size:0.75rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--amber-dark);margin-bottom:0.6rem;
+  padding-bottom:0.3rem;border-bottom:1px dotted var(--parchment-dark);
+}
+.gg-block ul{list-style:none}
+.gg-block li{
+  padding-left:1.3rem;position:relative;
+  margin-bottom:0.45rem;color:var(--ink-soft);
+  line-height:1.5;font-size:0.93rem;
+}
+.gg-block li::before{
+  content:'▸';position:absolute;left:0;
+  color:var(--g1);font-weight:700;
+}
+.group-section.g1 .gg-block li::before{color:var(--g1)}
+.group-section.g2 .gg-block li::before{color:var(--g2)}
+.group-section.g3 .gg-block li::before{color:var(--g3)}
+.group-section.g4 .gg-block li::before{color:var(--g4)}
+.group-section.g5 .gg-block li::before{color:var(--g5)}
+.group-section.g6 .gg-block li::before{color:var(--g6)}
+.gg-block li strong{color:var(--ink)}
+
+.refs-box{
+  background:var(--parchment);padding:1rem;
+  border-radius:3px;font-size:0.85rem;
+  border-left:3px solid var(--amber);
+}
+.refs-box h5{
+  font-family:'DM Mono',monospace;font-size:0.7rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--amber-dark);margin-bottom:0.5rem;
+}
+.refs-box p{color:var(--ink-soft);line-height:1.5;margin-bottom:0.35rem}
+.refs-box em{color:var(--ink)}
+
+.optom-pearl{
+  background:var(--lymph-pale);
+  padding:1rem 1.1rem;border-radius:3px;
+  border-left:3px solid var(--lymph);
+  margin-top:1rem;font-size:0.9rem;
+  color:var(--lymph-dark);
+}
+.group-section.g2 .optom-pearl{background:var(--g2-pale);border-color:var(--g2);color:var(--g2)}
+.group-section.g3 .optom-pearl{background:var(--g3-pale);border-color:var(--g3);color:var(--amber-dark)}
+.group-section.g4 .optom-pearl{background:var(--g4-pale);border-color:var(--g4);color:var(--g4)}
+.group-section.g5 .optom-pearl{background:var(--g5-pale);border-color:var(--g5);color:var(--g5)}
+.group-section.g6 .optom-pearl{background:var(--g6-pale);border-color:var(--g6);color:var(--g6)}
+.optom-pearl strong{display:block;margin-bottom:0.3rem;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'DM Mono',monospace}
+
+/* ── QUESTIONS ACCORDION ─────────── */
+.question-item{
+  background:var(--parchment);
+  padding:0.85rem 1rem;margin-bottom:0.5rem;
+  border-radius:3px;border-left:3px solid var(--amber);
+  cursor:pointer;transition:all 0.2s;
+}
+.question-item:hover{background:#f8edd1}
+.question-item .q-text{
+  font-weight:500;color:var(--ink);font-size:0.9rem;
+  line-height:1.45;
+}
+.question-item .q-text::before{
+  content:'? ';color:var(--amber-dark);
+  font-family:'DM Mono',monospace;font-weight:700;
+}
+.question-item .q-hint{
+  max-height:0;overflow:hidden;transition:max-height 0.3s ease;
+  font-size:0.85rem;color:var(--ink-light);
+}
+.question-item.open .q-hint{max-height:200px;margin-top:0.5rem;padding-top:0.5rem;border-top:1px dashed var(--parchment-dark)}
+.question-item .q-hint em{color:var(--lymph-dark)}
+
+/* ── RUBRICA ──────────────────────── */
+.rubrica{
+  background:var(--parchment-light);
+  border:2px solid var(--amber);border-radius:5px;
+  padding:1.5rem;box-shadow:0 3px 10px var(--shadow);
+}
+.table-wrap{overflow-x:auto;margin-top:1rem}
+table.rub{
+  width:100%;border-collapse:collapse;
+  font-size:0.88rem;
+}
+table.rub thead{background:var(--lymph);color:var(--parchment-light)}
+table.rub th,table.rub td{
+  padding:0.7rem 0.8rem;text-align:left;
+  border-bottom:1px solid var(--parchment-dark);
+  vertical-align:top;
+}
+table.rub th{
+  font-family:'DM Mono',monospace;font-size:0.7rem;
+  font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+}
+table.rub tbody tr:nth-child(even){background:var(--parchment)}
+table.rub td.crit{font-weight:600;color:var(--lymph-dark)}
+
+/* ── TIPS ─────────────────────────── */
+.tips-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+}
+.tip{
+  background:var(--parchment-light);padding:1.1rem;
+  border-radius:3px;border-top:3px solid var(--lymph-light);
+  box-shadow:0 2px 5px var(--shadow);
+}
+.tip-icon{
+  font-family:'Playfair Display',serif;font-size:1.6rem;
+  color:var(--amber);font-weight:900;line-height:1;
+}
+.tip h4{
+  font-family:'Playfair Display',serif;font-size:1rem;
+  color:var(--ink);margin:0.4rem 0;
+}
+.tip p{font-size:0.87rem;color:var(--ink-soft)}
+
+/* ── GLOSSARY ─────────────────────── */
+.glossary{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:0.8rem;
+}
+.term{
+  background:var(--parchment-light);padding:0.9rem 1rem;
+  border-radius:3px;border-left:3px solid var(--lymph);
+  font-size:0.88rem;
+}
+.term strong{
+  display:block;color:var(--lymph-dark);font-weight:700;
+  font-family:'Playfair Display',serif;font-size:1rem;
+  margin-bottom:0.3rem;
+}
+.term em{color:var(--ink-light);font-style:italic}
+
+/* ── PRE-CLASS CHECKLIST ──────────── */
+.checklist{
+  background:var(--parchment-light);padding:1.5rem;
+  border-radius:4px;border:1px solid var(--parchment-dark);
+  box-shadow:0 2px 8px var(--shadow);
+}
+.check-item{
+  display:flex;gap:0.8rem;align-items:flex-start;
+  padding:0.7rem 0;border-bottom:1px dashed var(--parchment-dark);
+  cursor:pointer;transition:background 0.15s;
+}
+.check-item:last-child{border:none}
+.check-item:hover{background:var(--parchment)}
+.check-box{
+  width:20px;height:20px;border:2px solid var(--lymph);
+  border-radius:3px;flex-shrink:0;margin-top:2px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.check-item.done .check-box{
+  background:var(--lymph);
+}
+.check-item.done .check-box::after{
+  content:'✓';color:white;font-weight:700;font-size:0.9rem;
+}
+.check-label{font-size:0.93rem;color:var(--ink-soft);flex:1}
+.check-item.done .check-label{color:var(--ink-light);text-decoration:line-through}
+
+/* ── FOOTER ───────────────────────── */
+footer{
+  max-width:1200px;margin:3rem auto 1.5rem;
+  padding:1.5rem 2rem;border-top:2px double var(--amber);
+  text-align:center;
+  font-family:'DM Mono',monospace;font-size:0.75rem;
+  color:var(--ink-light);letter-spacing:0.08em;
+}
+footer em{font-style:italic;color:var(--lymph-dark)}
+
+@media print{
+  nav.sticky{display:none}
+  .question-item .q-hint{max-height:none !important;margin-top:0.5rem;padding-top:0.5rem}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">◈ Guía del Estudiante · Trabajo por grupos</span>
+    <h1>Sistema <em>Linfático</em> e Inmunidad Básica<br>— <em>tú</em> expones esta clase</h1>
+    <p class="hero-sub">Seis grupos, dos sesiones, una misión: entender por qué el ganglio preauricular que palpas en un ojo rojo es la puerta de entrada de toda la inmunología ocular.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-label">Grupos</span><span class="stat-val">06 equipos</span></div>
+      <div class="stat"><span class="stat-label">Duración</span><span class="stat-val">4 h (2 + 2)</span></div>
+      <div class="stat"><span class="stat-label">Exposición</span><span class="stat-val">10′ + 5′ preguntas</span></div>
+      <div class="stat"><span class="stat-label">Fechas</span><span class="stat-val">29–30 Abril 2026</span></div>
+      <div class="stat"><span class="stat-label">Evaluación</span><span class="stat-val">Rúbrica + Kahoot</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky">
+  <div class="nav-inner">
+    <a href="#bienvenida">Bienvenida</a>
+    <a href="#como-trabajar">Cómo trabajar</a>
+    <a href="#g1" class="g1">Grupo 1</a>
+    <a href="#g2" class="g2">Grupo 2</a>
+    <a href="#g3" class="g3">Grupo 3</a>
+    <a href="#g4" class="g4">Grupo 4</a>
+    <a href="#g5" class="g5">Grupo 5</a>
+    <a href="#g6" class="g6">Grupo 6</a>
+    <a href="#rubrica">Rúbrica</a>
+    <a href="#glosario">Glosario</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═════════ WELCOME ═════════ -->
+<section id="bienvenida">
+  <div class="sec-head">
+    <span class="sec-num">§01</span>
+    <h2>Bienvenida & <em>misión</em> de la clase</h2>
+  </div>
+  <div class="welcome">
+    <div class="welcome-inner">
+      <p>Durante estas <strong>dos sesiones de dos horas</strong>, cada uno de ustedes será <strong>docente de la clase</strong>. En lugar de escuchar una exposición magistral, van a estudiar, preparar y enseñar a sus compañeros una pieza del sistema linfático con enfoque clínico optométrico.</p>
+      <p>Entre los seis grupos construirán un mapa completo: desde el <strong>capilar linfático con sus <em>button junctions</em></strong> hasta el <strong>privilegio inmune corneal</strong> que permite trasplantar una córnea sin tipificar HLA — pasando por el ganglio preauricular que ustedes palparán en consulta cada semana del resto de su carrera.</p>
+      <span class="deadline">◆ Preparación previa obligatoria · antes del miércoles 29 Abril</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ CÓMO TRABAJAR ═════════ -->
+<section id="como-trabajar">
+  <div class="sec-head">
+    <span class="sec-num">§02</span>
+    <h2>Cómo <em>trabajar</em> este material</h2>
+  </div>
+
+  <div class="instructions">
+    <div class="instr-card">
+      <div class="instr-num">1</div>
+      <h4>Lean en equipo</h4>
+      <p>Cada grupo lee los capítulos indicados <strong>antes</strong> de la clase. No repitan de memoria: comprendan la lógica clínica detrás de cada estructura.</p>
+    </div>
+    <div class="instr-card">
+      <div class="instr-num">2</div>
+      <h4>Preparen un soporte visual</h4>
+      <p>PPT, Canva, esquema en cartulina, infografía... <strong>obligatorio usar al menos un dibujo o esquema propio</strong>, no solo imágenes copiadas de internet.</p>
+    </div>
+    <div class="instr-card">
+      <div class="instr-num">3</div>
+      <h4>Respondan las preguntas guía</h4>
+      <p>Cada grupo tiene <strong>preguntas orientadoras</strong> que deben ser abordadas en la exposición. Respondan cada una explícitamente durante la presentación.</p>
+    </div>
+    <div class="instr-card">
+      <div class="instr-num">4</div>
+      <h4>Conecten con la clínica</h4>
+      <p>Cada tema debe incluir al menos <strong>una aplicación optométrica real</strong> — qué hace el optómetra con esa estructura en la consulta.</p>
+    </div>
+    <div class="instr-card">
+      <div class="instr-num">5</div>
+      <h4>Presenten 10 + 5</h4>
+      <p><strong>10 minutos de exposición</strong> (todos los integrantes participan) + <strong>5 minutos de preguntas</strong> (del docente y de compañeros).</p>
+    </div>
+    <div class="instr-card">
+      <div class="instr-num">6</div>
+      <h4>Citen sus fuentes</h4>
+      <p>Al final, <strong>diapositiva de referencias</strong> con los capítulos leídos (Moore / Tortora / Latarjet) y al menos un artículo científico.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ GRUPO 1 ════════════ -->
+<section id="g1">
+  <div class="group-section g1">
+    <div class="group-inner">
+      <div class="group-header">
+        <div>
+          <span class="group-tag">◆ Grupo 01 · Miércoles 29 Abril · 25–40 min</span>
+          <h3 class="group-title-main">Organización general · vasos · conductos</h3>
+          <p class="group-motto"><em>"Sin bomba, sin retorno venoso, hay edema"</em></p>
+        </div>
+        <span class="group-time-badge">Sesión 1 · 15 min</span>
+      </div>
+
+      <div class="group-body">
+        <div class="group-col-main">
+
+          <div class="gg-block">
+            <h4>Objetivos de aprendizaje</h4>
+            <ul>
+              <li>Explicar las <strong>tres funciones fisiológicas</strong> del sistema linfático con sus cifras clave (drenaje ~3 L/día, transporte lipídico vía quilo, vigilancia inmune)</li>
+              <li>Diferenciar los <strong>capilares linfáticos</strong> con uniones en botón (<em>button junctions</em>) de los capilares sanguíneos</li>
+              <li>Describir el <strong>linfangión</strong> como unidad contráctil y sus mecanismos de propulsión</li>
+              <li>Ubicar los <strong>cinco pares de troncos</strong> y el tronco intestinal impar</li>
+              <li>Trazar el recorrido del <strong>conducto torácico</strong>: cisterna de Pecquet (L1–L2) → hiato aórtico (T12) → cruce T5 → ángulo de Pirogoff izquierdo</li>
+              <li>Delimitar el territorio del <strong>conducto linfático derecho</strong>: cuadrante superior derecho</li>
+            </ul>
+          </div>
+
+          <div class="gg-block">
+            <h4>Preguntas orientadoras — respondan cada una</h4>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Por qué se dice que el sistema linfático es "abierto en su origen"?</div>
+              <div class="q-hint"><em>Pista:</em> piensen en cómo el líquido intersticial entra al capilar linfático vs cómo circula la sangre en un capilar continuo cerrado.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">Si no hay una bomba central, ¿qué cuatro mecanismos mueven la linfa?</div>
+              <div class="q-hint"><em>Pista:</em> contracción intrínseca, musculatura esquelética, pulsación arterial adyacente, respiración.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué ocurriría en 24 horas si se bloqueara todo el retorno linfático?</div>
+              <div class="q-hint"><em>Pista:</em> edema masivo, shock hipovolémico. Relacionen con la ecuación de Starling y el filtrado neto diario.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué es el quilo? ¿Qué distingue a un quilotórax de un hemotórax en el laboratorio?</div>
+              <div class="q-hint"><em>Pista:</em> triglicéridos &gt;110 mg/dL, aspecto lechoso, quilomicrones, linfocitosis.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué factor de transcripción inicia el desarrollo embrionario del endotelio linfático?</div>
+              <div class="q-hint"><em>Pista:</em> PROX1 (Srinivasan 2007). A partir del endotelio venoso cardinal, en la 5ª semana.</div>
+            </div>
+          </div>
+
+          <div class="optom-pearl">
+            <strong>Perla optométrica</strong>
+            "La lesión del conducto torácico en cirugía cervical izquierda produce <strong>quilotórax</strong>; no es un tema ocular, pero conocer el trayecto del conducto es parte de la anatomía clínica obligatoria que diferencia al optómetra profesional del técnico."
+          </div>
+        </div>
+
+        <div class="group-col-side">
+          <div class="refs-box">
+            <h5>Lecturas asignadas</h5>
+            <p><strong>Moore 8ª ed.</strong> — Capítulo cabeza/cuello, sección de sistema linfático; Capítulo tórax, sección del conducto torácico.</p>
+            <p><strong>Tortora 15ª ed.</strong> — Capítulo 22, "Sistema linfático e inmunidad", secciones introductorias.</p>
+            <p><strong>Latarjet-Ruiz Liard 5ª ed. · T2</strong> — Conducto torácico y grandes conductos.</p>
+            <p><em>Artículo complementario:</em> Plutecki D et al. <em>J Clin Med</em> 2024;13:4285 — sobre la cisterna del quilo (55% de presencia anatómica).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ GRUPO 2 ════════════ -->
+<section id="g2">
+  <div class="group-section g2">
+    <div class="group-inner">
+      <div class="group-header">
+        <div>
+          <span class="group-tag">◆ Grupo 02 · Miércoles 29 Abril · 40–55 min</span>
+          <h3 class="group-title-main">Ganglio linfático · estructura, función y criterios clínicos</h3>
+          <p class="group-motto"><em>"La corteza filtra, la paracorteza decide, la médula produce anticuerpos"</em></p>
+        </div>
+        <span class="group-time-badge">Sesión 1 · 15 min</span>
+      </div>
+
+      <div class="group-body">
+        <div class="group-col-main">
+
+          <div class="gg-block">
+            <h4>Objetivos de aprendizaje</h4>
+            <ul>
+              <li>Describir la <strong>arquitectura del ganglio</strong>: cápsula, trabéculas, hilio</li>
+              <li>Identificar las tres zonas funcionales: <strong>corteza (folículos B)</strong>, <strong>paracorteza (T, HEV)</strong>, <strong>médula (cordones con plasmocitos)</strong></li>
+              <li>Explicar por qué el número de <strong>vasos aferentes es mayor que el eferente</strong> y qué implicación funcional tiene</li>
+              <li>Diferenciar <strong>folículo primario</strong> (B naïve) de <strong>folículo secundario</strong> (con centro germinal)</li>
+              <li>Definir con precisión <strong>adenopatía · adenitis · linfangitis</strong></li>
+              <li>Enumerar los <strong>criterios de adenopatía sospechosa</strong> de malignidad</li>
+              <li>Reconocer el <strong>nódulo de Virchow-Troisier</strong> y su implicación clínica</li>
+            </ul>
+          </div>
+
+          <div class="gg-block">
+            <h4>Preguntas orientadoras</h4>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Por qué entra la linfa por 4–8 vasos aferentes y sale por uno solo?</div>
+              <div class="q-hint"><em>Pista:</em> el enlentecimiento del flujo permite un contacto máximo entre antígeno e inmunocito — la arquitectura sirve a la función de vigilancia.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué son las HEV y por qué son cruciales para la respuesta inmune?</div>
+              <div class="q-hint"><em>Pista:</em> Vénulas de Endotelio Alto en paracorteza. Son la puerta de entrada de linfocitos desde sangre al ganglio (Girard & Springer 1995). Expresan adresinas PNAd/MAdCAM-1.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">Un paciente tiene un ganglio de 3 cm en cuello, duro, fijo, indoloro, desde hace 3 meses, con pérdida de 8 kg. ¿Qué signos de alarma reconocen?</div>
+              <div class="q-hint"><em>Pista:</em> &gt;2 cm, consistencia dura/pétrea, fijeza, &gt;6 semanas, síntomas B. Sospecha de malignidad. Remisión urgente.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué ocurre en el centro germinal cuando funciona correctamente?</div>
+              <div class="q-hint"><em>Pista:</em> hipermutación somática, cambio de clase (switching), selección por afinidad — tres procesos que mejoran los anticuerpos.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Por qué el nódulo de Virchow-Troisier izquierdo puede ser signo de malignidad abdominal oculta?</div>
+              <div class="q-hint"><em>Pista:</em> el conducto torácico drena toda la linfa abdominal e infradiafragmática al ángulo venoso izquierdo. Un tumor gástrico puede dar metástasis a ese ganglio supraclavicular.</div>
+            </div>
+          </div>
+
+          <div class="optom-pearl">
+            <strong>Perla optométrica</strong>
+            "En el examen externo de la consulta optométrica, <strong>palpar preauricular, submandibular y cervical anterior es obligatorio</strong>. Un ganglio &gt;1 cm en adulto, persistente &gt;6 semanas, duro o fijo, no es 'normal': es motivo de remisión a medicina general o cirugía de cabeza y cuello."
+          </div>
+        </div>
+
+        <div class="group-col-side">
+          <div class="refs-box">
+            <h5>Lecturas asignadas</h5>
+            <p><strong>Moore 8ª ed.</strong> — Características generales del ganglio linfático.</p>
+            <p><strong>Tortora 15ª ed.</strong> — Capítulo 22: estructura histológica del ganglio.</p>
+            <p><strong>Latarjet-Ruiz Liard 5ª ed. · T2</strong> — Ganglios linfáticos.</p>
+            <p><em>Artículo clave:</em> Willard-Mack CL. <em>Toxicol Pathol</em> 2006;34:409 — arquitectura funcional del ganglio.</p>
+            <p><em>Complementario:</em> Phan TG et al. <em>Nat Immunol</em> 2007;8:992 — macrófagos subcapsulares CD169⁺.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ GRUPO 3 ════════════ -->
+<section id="g3">
+  <div class="group-section g3">
+    <div class="group-inner">
+      <div class="group-header">
+        <div>
+          <span class="group-tag">◆ Grupo 03 · Miércoles 29 Abril · 55–70 min</span>
+          <h3 class="group-title-main">Drenaje cervicofacial y ocular · niveles de Robbins</h3>
+          <p class="group-motto"><em>"Temporal → trago; nasal → mandíbula"</em></p>
+        </div>
+        <span class="group-time-badge">Sesión 1 · 15 min</span>
+      </div>
+
+      <div class="group-body">
+        <div class="group-col-main">
+
+          <div class="gg-block">
+            <h4>Objetivos de aprendizaje</h4>
+            <ul>
+              <li>Describir el <strong>anillo pericervical de Cunéo y Poirier</strong> — el collar linfático superficial</li>
+              <li>Localizar los <strong>ganglios preauricular</strong> (anteriores al trago) y <strong>submandibular</strong> — palpables en consulta</li>
+              <li>Nombrar los <strong>ganglios cervicales profundos</strong> clave: yugulodigástrico (de Küttner), yuguloomohioideo (de Poirier)</li>
+              <li>Dominar la <strong>clasificación de Robbins I–VI</strong> con sus subdivisiones (IA/IB, IIA/IIB, VA/VB) — tabla completa</li>
+              <li>Trazar el <strong>mapa operacional del drenaje palpebral y conjuntival</strong> (regla temporal/lateral → preauricular vs nasal/medial → submandibular)</li>
+              <li>Integrar el <strong>matiz SLNB moderno</strong> de Nijhawan 2010: 100% de los tumores palpebrales drenan predominantemente al lecho preauricular/parotídeo</li>
+              <li>Entender por qué la <strong>córnea normal es alinfática</strong> y cuándo aparecen linfáticos patológicos</li>
+            </ul>
+          </div>
+
+          <div class="gg-block">
+            <h4>Preguntas orientadoras</h4>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">Un paciente con chalazión medial en el párpado inferior izquierdo consulta con un ganglio palpable submandibular izquierdo. ¿Esa adenopatía es compatible con el drenaje anatómico?</div>
+              <div class="q-hint"><em>Pista:</em> sí — la regla clásica "nasal/medial → mandíbula" coloca el drenaje medial en el submandibular.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Cómo explicar a un paciente, en lenguaje sencillo, dónde queda su ganglio preauricular y por qué se lo están palpando?</div>
+              <div class="q-hint"><em>Pista:</em> "Es un pequeño nodo linfático justo delante de su oreja. Es como el 'guardia' del ojo del mismo lado. Si se inflama, puede indicarnos qué tipo de infección tiene."</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué nivel de Robbins corresponde al ganglio submandibular? ¿Por qué importa para un optómetra?</div>
+              <div class="q-hint"><em>Pista:</em> Nivel I-B. Importa porque es el primer relevo del párpado medial, conjuntiva medial, carúncula y saco lagrimal.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">Dos estudios de SLNB (Nijhawan 2010, Ashton 2020) desafían el modelo clásico del drenaje palpebral. ¿Cuál es el hallazgo y cómo lo integramos?</div>
+              <div class="q-hint"><em>Pista:</em> el 100% de los tumores palpebrales drena predominantemente al preauricular/parotídeo, incluso los mediales. Se mantiene el modelo clásico pedagógico + matiz clínico moderno.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Por qué la córnea normal no tiene vasos linfáticos y qué significa clínicamente que "aparezcan"?</div>
+              <div class="q-hint"><em>Pista:</em> condición del privilegio inmune corneal. Linfangiogénesis por VEGF-C/D → riesgo aumentado de rechazo de queratoplastia.</div>
+            </div>
+          </div>
+
+          <div class="optom-pearl">
+            <strong>Perla optométrica</strong>
+            "Una <strong>paciente con conjuntivitis folicular aguda y ganglio preauricular palpable ipsilateral</strong> tiene una conjuntivitis viral (adenovirus) hasta demostrar lo contrario. Este dato cambia el manejo: no corticoide, no antibiótico agresivo, medidas de contacto. El ganglio que palpaste es un dato diagnóstico."
+          </div>
+        </div>
+
+        <div class="group-col-side">
+          <div class="refs-box">
+            <h5>Lecturas asignadas</h5>
+            <p><strong>Moore 8ª ed.</strong> — Capítulo cabeza/cuello: ganglios superficiales y cadenas profundas.</p>
+            <p><strong>AAO BCSC Sección 7</strong> — Órbita, párpados y aparato lagrimal (drenaje linfático).</p>
+            <p><em>Artículo clave:</em> Robbins KT et al. <em>Arch Otolaryngol Head Neck Surg</em> 2002;128:751 (actualización 2008;134:536).</p>
+            <p><em>Complementarios:</em> Nijhawan N et al. <em>Ophthal Plast Reconstr Surg</em> 2010;26:281. · Cursiefen C et al. <em>IOVS</em> 2002;43:2127 (linfangiogénesis corneal).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ GRUPO 4 ════════════ -->
+<section id="g4">
+  <div class="group-section g4">
+    <div class="group-inner">
+      <div class="group-header">
+        <div>
+          <span class="group-tag">◆ Grupo 04 · Jueves 30 Abril · 10–25 min</span>
+          <h3 class="group-title-main">Órganos linfoides · primarios & secundarios</h3>
+          <p class="group-motto"><em>"Donde los linfocitos nacen, maduran y encuentran al enemigo"</em></p>
+        </div>
+        <span class="group-time-badge">Sesión 2 · 15 min</span>
+      </div>
+
+      <div class="group-body">
+        <div class="group-col-main">
+
+          <div class="gg-block">
+            <h4>Objetivos de aprendizaje</h4>
+            <ul>
+              <li>Diferenciar órganos linfoides <strong>primarios</strong> (médula ósea + timo) de <strong>secundarios</strong> (bazo, ganglios, anillo de Waldeyer, MALT)</li>
+              <li>Describir la <strong>médula ósea</strong> como sitio de hematopoyesis y linfopoyesis B</li>
+              <li>Explicar la estructura del <strong>timo</strong>: corteza · médula · cuerpos de Hassall · barrera hematotímica</li>
+              <li>Entender los procesos de <strong>selección positiva y negativa</strong> de linfocitos T en el timo</li>
+              <li>Describir el <strong>bazo</strong>: pulpa roja (hemocatéresis) vs pulpa blanca (PALS T, folículos B, zona marginal)</li>
+              <li>Ubicar el <strong>anillo de Waldeyer</strong>: tonsilas palatina, faríngea (adenoides), lingual, tubárica</li>
+              <li>Explicar la <strong>involución tímica</strong> y su relación con la inmunosenescencia</li>
+            </ul>
+          </div>
+
+          <div class="gg-block">
+            <h4>Preguntas orientadoras</h4>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Por qué el timo se considera "primario" aunque en la edad adulta esté casi involucionado?</div>
+              <div class="q-hint"><em>Pista:</em> porque es donde ocurre la maduración y selección del repertorio T durante la infancia. Las células T maduras de por vida circulan habiendo pasado por timo.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">En selección positiva y negativa, ¿qué decide si un timocito vive o muere?</div>
+              <div class="q-hint"><em>Pista:</em> afinidad por MHC propio. Demasiado baja (no reconoce) → muere. Adecuada → sobrevive. Demasiado alta por péptido propio (autorreactividad) → muere (elimina autorreactividad).</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué función tiene la zona marginal del bazo?</div>
+              <div class="q-hint"><em>Pista:</em> frontera inmunológica donde se captan antígenos sanguíneos (especialmente polisacáridos bacterianos). Los linfocitos B de la zona marginal responden rápidamente a bacterias encapsuladas.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">Un paciente esplenectomizado tiene riesgo aumentado de qué tipo de infecciones, ¿y por qué?</div>
+              <div class="q-hint"><em>Pista:</em> bacterias encapsuladas (neumococo, meningococo, Hib) — porque la zona marginal del bazo era su principal filtro.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Por qué los pacientes con miastenia gravis necesitan TAC/RM de mediastino?</div>
+              <div class="q-hint"><em>Pista:</em> asociación tímica: hiperplasia folicular ~65%, timoma 10–15%. La timectomía mejora los síntomas.</div>
+            </div>
+          </div>
+
+          <div class="optom-pearl">
+            <strong>Perla optométrica</strong>
+            "Una <strong>joven con ptosis fluctuante y diplopía variable sin afectación pupilar</strong> puede tener miastenia ocular. Pedir TAC/RM de mediastino no es exceso — el timo patológico está detrás en hasta el 75% de casos y cambia el manejo: timectomía es parte del tratamiento."
+          </div>
+        </div>
+
+        <div class="group-col-side">
+          <div class="refs-box">
+            <h5>Lecturas asignadas</h5>
+            <p><strong>Tortora 15ª ed.</strong> — Capítulo 22: órganos linfoides primarios y secundarios en detalle.</p>
+            <p><strong>Moore 8ª ed.</strong> — Capítulo tórax (timo) y abdomen (bazo).</p>
+            <p><strong>Latarjet-Ruiz Liard T2</strong> — Timo y bazo.</p>
+            <p><em>Artículo clave:</em> Wolfe GI et al. <em>NEJM</em> 2016;375:511 (MGTX trial — rol de la timectomía en miastenia).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ GRUPO 5 ════════════ -->
+<section id="g5">
+  <div class="group-section g5">
+    <div class="group-inner">
+      <div class="group-header">
+        <div>
+          <span class="group-tag">◆ Grupo 05 · Jueves 30 Abril · 25–40 min</span>
+          <h3 class="group-title-main">MALT · CALT · EALT · LDALT</h3>
+          <p class="group-motto"><em>"La superficie ocular también es una mucosa inmune"</em></p>
+        </div>
+        <span class="group-time-badge">Sesión 2 · 15 min</span>
+      </div>
+
+      <div class="group-body">
+        <div class="group-col-main">
+
+          <div class="gg-block">
+            <h4>Objetivos de aprendizaje</h4>
+            <ul>
+              <li>Definir <strong>MALT</strong> (Mucosa-Associated Lymphoid Tissue) y sus variantes por territorio: GALT (intestino), BALT (bronquios), NALT (nasofaringe), <strong>CALT (conjuntiva)</strong></li>
+              <li>Describir las <strong>placas de Peyer</strong> en íleon: células M, folículos linfoides, centro germinal, plasmocitos IgA⁺</li>
+              <li>Explicar el <strong>CALT</strong>: folículos tarsales y bulbares con centro germinal (Knop 2000–2005)</li>
+              <li>Integrar el concepto de <strong>EALT</strong> (Eye-Associated Lymphoid Tissue) como sistema único: conjuntiva + vía lagrimal + glándula lagrimal</li>
+              <li>Ubicar el <strong>LDALT</strong> en el conducto lagrimonasal</li>
+              <li>Explicar la producción de <strong>IgA secretora</strong>: forma dimérica, componente secretor, resistencia a proteasas, rol en la lágrima</li>
+              <li>Establecer el <strong>paralelismo visual</strong> entre una placa de Peyer y un folículo conjuntival</li>
+            </ul>
+          </div>
+
+          <div class="gg-block">
+            <h4>Preguntas orientadoras</h4>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Por qué decimos que la superficie ocular es una "mucosa"? ¿Qué la diferencia, por ejemplo, de la piel?</div>
+              <div class="q-hint"><em>Pista:</em> epitelio no queratinizado húmedo + película de moco + tejido linfoide asociado + IgA secretora. La piel tiene un perfil inmune distinto (Langerhans, IgG).</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué son las células M y por qué son cruciales en placas de Peyer y CALT?</div>
+              <div class="q-hint"><em>Pista:</em> son células epiteliales especializadas que <em>muestrean</em> antígenos de la luz y los presentan al tejido linfoide subyacente. Son la "puerta controlada" del antígeno al sistema inmune mucoso.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Cuál es la inmunoglobulina predominante en la lágrima y qué la hace especial?</div>
+              <div class="q-hint"><em>Pista:</em> IgA secretora dimérica con componente secretor — resiste proteólisis y cumple <em>inmunidad sin inflamación</em> (no activa complemento vía clásica con eficacia, es neutralizante).</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">Describan al público el paralelismo entre una placa de Peyer intestinal y un folículo conjuntival.</div>
+              <div class="q-hint"><em>Pista:</em> ambos tienen epitelio especializado con células M, folículos B con centro germinal, T en paracorteza, plasmocitos IgA en la periferia. <strong>Es el mismo plan estructural en tejidos distintos.</strong></div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">Un linfoma MALT conjuntival — ¿qué tejido "se transformó"? ¿Cómo se presenta típicamente?</div>
+              <div class="q-hint"><em>Pista:</em> linfocitos B del CALT → clonalidad por estímulo antigénico crónico (Chlamydia psittaci, H. pylori). Lesión "salmón rosado" en fórnix, plana, móvil, indolora, en &gt;50 años.</div>
+            </div>
+          </div>
+
+          <div class="optom-pearl">
+            <strong>Perla optométrica</strong>
+            "Toda <strong>lesión conjuntival rosada ('salmón'), indolora, de crecimiento lento en un paciente &gt;50 años debe biopsiarse</strong>. La eversión palpebral completa y la exploración de los fórnices es parte esencial del examen externo que puede detectar un OAML."
+          </div>
+        </div>
+
+        <div class="group-col-side">
+          <div class="refs-box">
+            <h5>Lecturas asignadas</h5>
+            <p><strong>Tortora 15ª ed.</strong> — Capítulo 22: MALT como grupo.</p>
+            <p><strong>Moore 8ª ed.</strong> — Tejido linfoide asociado a mucosas en cabeza y cuello.</p>
+            <p><em>Artículos clave (Knop):</em> Knop N & Knop E. <em>IOVS</em> 2000;41:1270. · Knop E & Knop N. <em>J Anat</em> 2005;206:271 (EALT como sistema integrado).</p>
+            <p><em>Complementario:</em> St. Leger AJ, Caspi RR. <em>Mucosal Immunol</em> 2022.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ GRUPO 6 ════════════ -->
+<section id="g6">
+  <div class="group-section g6">
+    <div class="group-inner">
+      <div class="group-header">
+        <div>
+          <span class="group-tag">◆ Grupo 06 · Jueves 30 Abril · 40–55 min</span>
+          <h3 class="group-title-main">Privilegio inmune ocular · sistema glinfático & meníngeo</h3>
+          <p class="group-motto"><em>"Por qué la córnea se trasplanta sin tipificar HLA"</em></p>
+        </div>
+        <span class="group-time-badge">Sesión 2 · 15 min</span>
+      </div>
+
+      <div class="group-body">
+        <div class="group-col-main">
+
+          <div class="gg-block">
+            <h4>Objetivos de aprendizaje</h4>
+            <ul>
+              <li>Enumerar los <strong>cuatro pilares del privilegio inmune corneal</strong>: avascularidad · alinfaticidad · FasL en endotelio · ACAID</li>
+              <li>Explicar por qué los <strong>queratocitos expresan poco MHC-II</strong> y su relevancia</li>
+              <li>Definir <strong>ACAID</strong> (Anterior Chamber-Associated Immune Deviation) — tolerancia sistémica mediada por Treg</li>
+              <li>Describir la <strong>linfangiogénesis patológica</strong> de la córnea: eje VEGF-C/D/VEGFR-3</li>
+              <li>Explicar el <strong>sistema glinfático</strong> (Iliff 2012) — drenaje paravascular del SNC vía acuaporina-4</li>
+              <li>Describir los <strong>vasos linfáticos meníngeos</strong> (Louveau 2015) — paralelos a senos durales, drenan a ganglio cervical profundo</li>
+              <li>Integrar las <strong>implicaciones en glaucoma</strong>: drenaje úveo-linfático del humor acuoso; drenaje glinfático del nervio óptico</li>
+            </ul>
+          </div>
+
+          <div class="gg-block">
+            <h4>Preguntas orientadoras</h4>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Por qué la córnea es el tejido más trasplantado del cuerpo humano sin necesidad de tipificación HLA?</div>
+              <div class="q-hint"><em>Pista:</em> cuatro mecanismos: sin vasos sanguíneos, sin linfáticos, FasL que induce apoptosis de linfocitos invasores, y ACAID (tolerancia sistémica). Esta es <strong>la frase nuclear de la clase</strong>.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué es ACAID en términos simples? ¿Qué rol tiene el bazo?</div>
+              <div class="q-hint"><em>Pista:</em> antígenos introducidos en cámara anterior producen tolerancia sistémica en lugar de respuesta inflamatoria, mediada por Treg educadas en bazo. Streilein lo describió como "desviación inmune".</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Qué significa clínicamente que aparezcan linfáticos en una córnea que normalmente no los tiene?</div>
+              <div class="q-hint"><em>Pista:</em> se pierde el privilegio inmune. La córnea se conecta a ganglios cervicales, el tráfico de células dendríticas aumenta, y el <strong>rechazo de queratoplastia se dispara</strong>. Antiangiogénicos pre-trasplante son una estrategia emergente.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">El SNC supuestamente "no tiene linfáticos". ¿Qué descubrieron Louveau (2015) y qué implicaciones tiene?</div>
+              <div class="q-hint"><em>Pista:</em> vasos linfáticos meníngeos paralelos a los senos durales que drenan a ganglio cervical profundo. Cambió el paradigma: el SNC sí comunica con el sistema inmune periférico. Implicaciones en esclerosis múltiple, Alzheimer, y recientemente en glaucoma.</div>
+            </div>
+            <div class="question-item" onclick="this.classList.toggle('open')">
+              <div class="q-text">¿Cómo puede el sistema glinfático cambiar nuestro entendimiento del glaucoma?</div>
+              <div class="q-hint"><em>Pista:</em> el nervio óptico drena parcialmente por rutas paravasculares glinfáticas. Alteraciones en el drenaje pueden contribuir a daño axonal en glaucoma. Wang 2020 y Yin 2024 lo exploran.</div>
+            </div>
+          </div>
+
+          <div class="optom-pearl">
+            <strong>Perla optométrica · frase nuclear de la clase</strong>
+            "El éxito del trasplante de córnea sin tipificación HLA es la <strong>prueba clínica diaria del privilegio inmune ocular</strong>. Cada vez que un paciente camina con una córnea donada funcionando, esta clase de anatomía se está validando en su vida."
+          </div>
+        </div>
+
+        <div class="group-col-side">
+          <div class="refs-box">
+            <h5>Lecturas asignadas</h5>
+            <p><strong>Artículo nuclear:</strong> Streilein JW. <em>Nat Rev Immunol</em> 2003;3:879 — privilegio inmune ocular.</p>
+            <p><strong>Linfangiogénesis corneal:</strong> Cursiefen C et al. <em>IOVS</em> 2002;43:2127.</p>
+            <p><strong>Glinfático:</strong> Iliff JJ et al. <em>Sci Transl Med</em> 2012;4:147ra111.</p>
+            <p><strong>Linfáticos meníngeos:</strong> Louveau A et al. <em>Nature</em> 2015;523:337.</p>
+            <p><strong>Ocular reciente:</strong> Wang X et al. <em>Sci Transl Med</em> 2020;12:eaaw3210. · Yin X et al. <em>Nature</em> 2024;628:204.</p>
+            <p><em>Apoyo docente:</em> AAO BCSC Sección 9 (uveítis) y Sección 8 (córnea externa).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ RÚBRICA ════════════ -->
+<section id="rubrica">
+  <div class="sec-head">
+    <span class="sec-num">§09</span>
+    <h2>Rúbrica de <em>evaluación</em></h2>
+  </div>
+
+  <div class="rubrica">
+    <p style="margin-bottom:1rem;font-size:0.95rem;color:var(--ink-soft)">Cada grupo será evaluado sobre <strong>100 puntos</strong>. La calificación es <strong>grupal</strong>, pero todos los integrantes deben participar activamente. No participar resta puntos individuales.</p>
+
+    <div class="table-wrap">
+      <table class="rub">
+        <thead>
+          <tr>
+            <th style="width:22%">Criterio</th>
+            <th style="width:20%">Excelente (100%)</th>
+            <th style="width:20%">Bueno (75%)</th>
+            <th style="width:20%">Aceptable (50%)</th>
+            <th style="width:18%">Insuficiente (25%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="crit">Rigor anatómico (25 pts)</td>
+            <td>Terminología precisa (TA 2019), estructuras descritas con exactitud, sin errores.</td>
+            <td>Minor imprecisiones que no alteran el sentido clínico.</td>
+            <td>Errores terminológicos que generan confusión.</td>
+            <td>Errores anatómicos graves o uso incorrecto de nomenclatura.</td>
+          </tr>
+          <tr>
+            <td class="crit">Relevancia optométrica (20 pts)</td>
+            <td>Al menos 2 aplicaciones clínicas reales, bien conectadas con la anatomía expuesta.</td>
+            <td>1 aplicación clínica relevante y bien explicada.</td>
+            <td>Referencia clínica superficial o genérica.</td>
+            <td>Sin aplicación clínica o desconectada del tema.</td>
+          </tr>
+          <tr>
+            <td class="crit">Material visual propio (15 pts)</td>
+            <td>Esquemas dibujados o infografía original de calidad profesional.</td>
+            <td>Al menos un esquema propio + imágenes citadas adecuadamente.</td>
+            <td>Usa solo imágenes descargadas; adaptaciones mínimas.</td>
+            <td>Diapositivas solo con texto o imágenes copiadas sin créditos.</td>
+          </tr>
+          <tr>
+            <td class="crit">Preguntas orientadoras (15 pts)</td>
+            <td>Todas las preguntas guía son respondidas explícita y correctamente.</td>
+            <td>4–5 de las preguntas son respondidas con claridad.</td>
+            <td>2–3 preguntas abordadas; las demás omitidas o mal respondidas.</td>
+            <td>Menos de 2 preguntas abordadas.</td>
+          </tr>
+          <tr>
+            <td class="crit">Participación y tiempo (10 pts)</td>
+            <td>Todos los integrantes hablan; 10 min exactos; fluidez.</td>
+            <td>Todos participan; tiempo ±1 min.</td>
+            <td>Uno o dos integrantes dominan; tiempo desviado &gt;2 min.</td>
+            <td>Un solo expositor o tiempo muy fuera de rango.</td>
+          </tr>
+          <tr>
+            <td class="crit">Manejo de preguntas (10 pts)</td>
+            <td>Respuestas precisas y con confianza; admiten si no saben algo.</td>
+            <td>Respuestas correctas, con vacilación ocasional.</td>
+            <td>Respuestas parciales o con errores menores.</td>
+            <td>No pueden responder preguntas básicas de su propio tema.</td>
+          </tr>
+          <tr>
+            <td class="crit">Referencias bibliográficas (5 pts)</td>
+            <td>Diapositiva final con libros + al menos 1 artículo científico bien citado.</td>
+            <td>Libros citados adecuadamente.</td>
+            <td>Referencias incompletas o mal formateadas.</td>
+            <td>Sin diapositiva de referencias.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TIPS ════════════ -->
+<section id="tips">
+  <div class="sec-head">
+    <span class="sec-num">§10</span>
+    <h2>Consejos para una <em>buena exposición</em></h2>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip">
+      <div class="tip-icon">1</div>
+      <h4>Cuenten una historia clínica</h4>
+      <p>Empiecen con un caso real (el que les toque o uno propio). La anatomía desconectada se olvida; la anatomía dentro de una historia se aprende.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">2</div>
+      <h4>Un concepto nuclear por bloque</h4>
+      <p>No saturen de datos. Identifiquen <strong>la idea que queremos que se lleve el público</strong> y constrúyanla con dos o tres ejemplos.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">3</div>
+      <h4>Dibujen en vivo</h4>
+      <p>Un dibujo en el tablero o pizarra digital, hecho por ustedes mientras explican, genera más recordación que veinte slides bien decoradas.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">4</div>
+      <h4>Practiquen el tiempo</h4>
+      <p>Hagan un simulacro cronometrado antes de clase. 10 minutos son más cortos de lo que parecen — el guion debe caber sin atropellamiento.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">5</div>
+      <h4>Preparen 2 preguntas retadoras</h4>
+      <p>Al final, hagan ustedes 2 preguntas al público. Esto fuerza participación y cierra mejor que un "gracias".</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">6</div>
+      <h4>No lean el slide</h4>
+      <p>El slide es ayuda visual, no guion. Si todo lo que dicen está escrito, el público deja de escuchar y solo lee.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ GLOSARIO ════════════ -->
+<section id="glosario">
+  <div class="sec-head">
+    <span class="sec-num">§11</span>
+    <h2>Glosario <em>mínimo</em> — términos que deben dominar</h2>
+  </div>
+
+  <div class="glossary">
+    <div class="term"><strong>Linfangión</strong> <em>(unidad funcional)</em> Segmento contráctil entre dos válvulas linfáticas consecutivas; se comporta como "ventrículo en miniatura".</div>
+    <div class="term"><strong>Quilo</strong> <em>(chylus)</em> Linfa lechosa rica en quilomicrones del territorio intestinal; diagnóstico del quilotórax requiere triglicéridos &gt;110 mg/dL.</div>
+    <div class="term"><strong>Button junctions</strong> <em>(capilar inicial)</em> Uniones intermitentes en capilares linfáticos iniciales que actúan como válvulas primarias y permiten la entrada de líquido intersticial.</div>
+    <div class="term"><strong>Zipper junctions</strong> <em>(colectores)</em> Uniones continuas en vasos colectores, impiden fuga de linfa hacia el intersticio.</div>
+    <div class="term"><strong>HEV</strong> <em>(High Endothelial Venules)</em> Vénulas de endotelio alto en paracorteza ganglionar; puerta de entrada de linfocitos desde sangre.</div>
+    <div class="term"><strong>Adenopatía</strong> Aumento de tamaño o alteración ganglionar, sin implicar causa específica.</div>
+    <div class="term"><strong>Adenitis</strong> Inflamación ganglionar con signos clásicos (rubor, calor, tumor, dolor).</div>
+    <div class="term"><strong>Linfangitis</strong> Inflamación de vasos linfáticos; clínicamente visible como líneas rojas dolorosas.</div>
+    <div class="term"><strong>Virchow-Troisier</strong> Nódulo supraclavicular izquierdo palpable; marcador clásico de malignidad abdominal oculta (drenaje del conducto torácico).</div>
+    <div class="term"><strong>Niveles de Robbins I–VI</strong> Clasificación clínico-quirúrgica de los ganglios cervicales; lenguaje estándar en oncología de cabeza y cuello.</div>
+    <div class="term"><strong>MALT</strong> Mucosa-Associated Lymphoid Tissue. Variantes: GALT (intestino), BALT (bronquios), NALT (nasofaringe), <strong>CALT (conjuntiva)</strong>.</div>
+    <div class="term"><strong>EALT</strong> Eye-Associated Lymphoid Tissue (Knop 2005); sistema integrado: CALT + LDALT + glándula lagrimal.</div>
+    <div class="term"><strong>LDALT</strong> Lacrimal Drainage-Associated Lymphoid Tissue; tejido linfoide del conducto lagrimonasal.</div>
+    <div class="term"><strong>IgA secretora</strong> Inmunoglobulina dimérica con componente secretor; predomina en lágrima y otras secreciones mucosas.</div>
+    <div class="term"><strong>ACAID</strong> Anterior Chamber-Associated Immune Deviation; tolerancia sistémica inducida por antígenos introducidos en cámara anterior (Streilein 2003).</div>
+    <div class="term"><strong>Privilegio inmune</strong> Condición de ciertos tejidos (córnea, cámara anterior) donde las respuestas inmunes inflamatorias están restringidas para proteger la función.</div>
+    <div class="term"><strong>Sistema glinfático</strong> Drenaje paravascular del SNC vía acuaporina-4 (Iliff 2012); análogo al linfático para el cerebro.</div>
+    <div class="term"><strong>Vasos linfáticos meníngeos</strong> Vasos descritos por Louveau (2015) paralelos a senos durales; drenan LCR y antígenos del SNC a ganglio cervical profundo.</div>
+    <div class="term"><strong>Linfangiogénesis</strong> Formación de nuevos vasos linfáticos; patológica en córnea por VEGF-C/D/VEGFR-3 → riesgo de rechazo de queratoplastia.</div>
+    <div class="term"><strong>Conducto de Pirogoff</strong> (ángulo) Unión de vena yugular interna izquierda y vena subclavia izquierda; allí desemboca el conducto torácico.</div>
+  </div>
+</section>
+
+<!-- ════════════ CHECKLIST ════════════ -->
+<section id="checklist">
+  <div class="sec-head">
+    <span class="sec-num">§12</span>
+    <h2>Checklist <em>antes de exponer</em></h2>
+  </div>
+
+  <p style="margin-bottom:1rem;color:var(--ink-soft);font-size:0.93rem">Haz clic en cada ítem para marcarlo como hecho. No se guarda, es solo para tu uso durante la preparación.</p>
+
+  <div class="checklist" id="cklst">
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label"><strong>Lectura completa</strong> de los capítulos/artículos asignados a mi grupo</div>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label"><strong>Reunión grupal</strong> para dividir subtemas entre integrantes</div>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label"><strong>Respuestas escritas</strong> a las 5 preguntas orientadoras de mi grupo</div>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label"><strong>Soporte visual</strong> (PPT/Canva/cartulina) con al menos un dibujo propio</div>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label"><strong>Caso clínico o perla optométrica</strong> integrado en la exposición</div>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label"><strong>Diapositiva final de referencias</strong> con libros + 1 artículo científico</div>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label"><strong>Simulacro cronometrado</strong> en 10 minutos</div>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label"><strong>2 preguntas retadoras</strong> para lanzar al público al cierre</div>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label"><strong>Equipo, cable HDMI/USB-C</strong> y backup del archivo en USB o drive</div>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <div class="check-label">Todos los integrantes <strong>conocen el contenido completo</strong> (no solo su parte)</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Morfología General · <em>Sistema linfático e inmunidad básica</em> · Guía del Estudiante<br>
+  Optometría · Universidad de La Salle · Bogotá · 2026-I<br>
+  Dr. Jorge Bogoya · 29–30 Abril 2026
+</footer>
+
+</body>
+</html>
