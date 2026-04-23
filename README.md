@@ -1,11 +1,12 @@
-# Morfología General 2026-I
-### Universidad de La Salle · Programa de Optometría · Sede Chapinero
-**Dr. Jorge Bogoya** · Aulas 402P y 403OPT
+# 🩺 Morfología General · Optometría · 2026-I
 
-> **Universidad de La Salle** · Facultad de Ciencias de la Salud · Programa de Optometría
-> Docente: **Dr. Jorge Bogoya** · 📧 `jbogoya@unisalle.edu.co`
+> **Universidad de La Salle** · Facultad de Ciencias de la Salud · Programa de Optometría · Sede Chapinero
+> Docente: **Dr. Jorge Bogoya** · 📧 `jboglop@unisalle.edu.co` · Aulas 402P y 403OPT
+> Miércoles y Jueves · 07:00 – 09:00
 
 Repositorio oficial de **materiales interactivos HTML5** del curso. Todos los recursos están diseñados con enfoque **clínico-optométrico** y se basan en las referencias principales del syllabus: *Moore — Anatomía con orientación clínica*, *Tortora — Principios de Anatomía y Fisiología* y *Latarjet & Ruiz Liard — Anatomía Humana*.
+
+🔗 **Versión publicada:** [jboglop.github.io/Morfologia_unisalle](https://jboglop.github.io/Morfologia_unisalle/)
 
 ---
 
@@ -31,6 +32,7 @@ Repositorio oficial de **materiales interactivos HTML5** del curso. Todos los re
 **Objetivo optométrico:** comprender la organización del músculo esquelético como base para el estudio posterior de los músculos extraoculares, orbiculares y de la mímica facial — todos ellos implicados en ptosis, parálisis faciales, lagoftalmos y en la evaluación clínica del paciente.
 
 ### 📄 Recurso principal
+
 - [`01_sistema_muscular_facial.html`](./01_sistema_muscular_facial.html) — **Sistema Muscular: Fibras, Contracción y Músculos Faciales**
   - Tipos de fibras (I, IIa, IIx) y su relevancia en músculos oculares
   - Unidad contráctil: sarcómero, filamentos, teoría del deslizamiento
@@ -45,15 +47,18 @@ Repositorio oficial de **materiales interactivos HTML5** del curso. Todos los re
 
 **Objetivo optométrico:** dominar la organización macroscópica del SNC y los pares craneales con énfasis en los **nervios de la vía visual y la motilidad ocular** (NC II, III, IV, V₁, VI, VII), base para la interpretación de reflejos pupilares, motilidad extraocular, sensibilidad corneal y defectos campimétricos.
 
-### 📄 Clase puente y materiales integradores
+### 📘 Clase puente y materiales integradores
+
 | Archivo | Descripción |
 |:---|:---|
 | [`1_clase_puente.html`](./1_clase_puente.html) | **Clase Puente: Del Músculo al Nervio** — introducción general *"Sin nervio no hay músculo"* |
 | [`clase_puente_grupos.html`](./clase_puente_grupos.html) | Índice y navegación de la sesión colaborativa |
 | [`2_pares_craneales_casos_clinicos.html`](./2_pares_craneales_casos_clinicos.html) | Tabla de los 12 pares craneales con **casos clínicos optométricos** |
 | [`3_NC_II_nervio_optico_via_visual.html`](./3_NC_II_nervio_optico_via_visual.html) | Animación de la **vía visual** — de la retina a la corteza occipital |
+| [`02_quiz_final_v3.html`](./02_quiz_final_v3.html) | **Quiz integrador** de cierre del ciclo — estilo Saber Pro |
 
 ### 👥 Trabajo colaborativo — 6 grupos
+
 | Grupo | Tema | Archivo |
 |:---:|:---|:---|
 | 1 | Unión Neuromuscular | [`2_grupo1_union_neuromuscular.html`](./2_grupo1_union_neuromuscular.html) |
@@ -72,22 +77,24 @@ Repositorio oficial de **materiales interactivos HTML5** del curso. Todos los re
 **Objetivo optométrico:** integrar la anatomía cardíaca y vascular con la **irrigación ocular** (arteria oftálmica, arteria central de la retina, arterias ciliares). Fundamento para comprender oclusión arterial/venosa retiniana, retinopatía hipertensiva, embolia paradójica y autorregulación del flujo retiniano.
 
 ### 📄 Material principal
+
 - [`03_Sistema_Circulatorio.html`](./03_Sistema_Circulatorio.html) — **Sistema Circulatorio · Morfología General 2026-I**
   - Anatomía cardíaca completa, ciclo cardíaco, grandes vasos
   - Circulación pulmonar, sistémica y fetal
   - **Irrigación ocular** y su correlato clínico
 
 ### 👥 Actividad colaborativa — "Del Corazón a la Retina" · 6 grupos
-📎 [`03_Actividad_SC_grupos.html`](./03_Actividad_SC_grupos.html)
 
-| Grupo | Tema |
-|:---:|:---|
-| 1 | Tórax + Pericardio + Morfología Externa |
-| 2 | Pared Cardíaca, Cámaras y Válvulas |
-| 3 | Conducción, Coronarias e Inervación |
-| 4 | Grandes Vasos + Ciclo Cardíaco |
-| 5 | Circulaciones Pulmonar y Sistémica |
-| 6 | Regulación CV + Clínica Ocular + Embriología |
+📎 Índice general: [`03_Actividad_SC_grupos.html`](./03_Actividad_SC_grupos.html)
+
+| Grupo | Tema | Archivo |
+|:---:|:---|:---|
+| 1 | Tórax + Pericardio + Morfología Externa | [`03_Torax_Pericardio.html`](./03_Torax_Pericardio.html) |
+| 2 | Pared Cardíaca, Cámaras y Válvulas | [`03_Camaras_Valvulas.html`](./03_Camaras_Valvulas.html) |
+| 3 | Conducción, Coronarias e Inervación | [`03_Conduccion_Coronarias.html`](./03_Conduccion_Coronarias.html) |
+| 4 | Grandes Vasos + Ciclo Cardíaco | [`03_Vasos_Ciclo.html`](./03_Vasos_Ciclo.html) |
+| 5 | Circulaciones Pulmonar y Sistémica | [`03_Circulaciones.html`](./03_Circulaciones.html) |
+| 6 | Regulación CV + Clínica Ocular + Embriología | [`03_Regulacion_Clinica.html`](./03_Regulacion_Clinica.html) |
 
 ---
 
@@ -99,9 +106,10 @@ Repositorio oficial de **materiales interactivos HTML5** del curso. Todos los re
 **Objetivo optométrico:** comprender el drenaje linfático cervicofacial y ocular, el tejido linfoide asociado a mucosas (MALT / CALT / EALT / LDALT), el privilegio inmune del ojo y el sistema glinfático meníngeo. Base anatómica para la evaluación de adenopatías, conjuntivitis foliculares y procesos inflamatorios orbitarios.
 
 ### 📄 Material de preparación
+
 - [`estudiantes_sistema_linfatico.html`](./estudiantes_sistema_linfatico.html) — **Guía del Estudiante · Sistema Linfático**
 
-### 👥 Distribución por grupos (*misma organización del Sistema Circulatorio*)
+### 👥 Distribución por grupos *(misma organización del Sistema Circulatorio)*
 
 | Grupo | Tema asignado |
 |:---:|:---|
@@ -113,10 +121,21 @@ Repositorio oficial de **materiales interactivos HTML5** del curso. Todos los re
 | **6** | Privilegio inmune ocular · sistema glinfático & meníngeo |
 
 ### ✅ Qué traer preparado a clase
+
 1. Lectura previa de la guía del estudiante.
 2. Revisión del tema asignado al grupo en **Moore cap. 1** (introducción al sistema linfático) y **Tortora cap. 22**.
 3. Síntesis gráfica del tema (mapa conceptual o esquema) lista para socializar.
 4. **Una pregunta tipo Saber Pro** elaborada por el grupo sobre su tema.
+
+---
+
+## 🧰 Recursos generales del curso
+
+| Archivo | Descripción |
+|:---|:---|
+| [`1_Generalidades.html`](./1_Generalidades.html) | Generalidades de Anatomía Humana — planos, ejes, posiciones anatómicas |
+| [`movimientos.html`](./movimientos.html) | Visor interactivo de movimientos articulares (SVG/Canvas) |
+| [`0_Asistencia.html`](./0_Asistencia.html) | Sistema de registro de asistencia por grupo |
 
 ---
 
