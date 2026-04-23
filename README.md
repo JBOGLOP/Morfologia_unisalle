@@ -31,7 +31,7 @@ Repositorio oficial de **materiales interactivos HTML5** del curso. Todos los re
 **Objetivo optométrico:** comprender la organización del músculo esquelético como base para el estudio posterior de los músculos extraoculares, orbiculares y de la mímica facial — todos ellos implicados en ptosis, parálisis faciales, lagoftalmos y en la evaluación clínica del paciente.
 
 ### 📄 Recurso principal
-- [`sistema_muscular_facial.html`](./sistema_muscular_facial.html) — **Sistema Muscular: Fibras, Contracción y Músculos Faciales**
+- [`01_sistema_muscular_facial.html`](./01_sistema_muscular_facial.html) — **Sistema Muscular: Fibras, Contracción y Músculos Faciales**
   - Tipos de fibras (I, IIa, IIx) y su relevancia en músculos oculares
   - Unidad contráctil: sarcómero, filamentos, teoría del deslizamiento
   - Músculos faciales clave para el optómetra (orbicular del ojo, elevador del párpado superior, frontal)
